@@ -33,7 +33,7 @@ final class Configuration implements Configurable
         return $this;
     }
 
-    public function getApiPartnerId(): string
+    public function getApiPartnerId(): ?string
     {
         return $this->api_partner_id;
     }
@@ -51,7 +51,7 @@ final class Configuration implements Configurable
         return $this;
     }
 
-    public function getHost(): string
+    public function getHost(): ?string
     {
         return $this->host;
     }
@@ -62,7 +62,7 @@ final class Configuration implements Configurable
         return $this;
     }
 
-    public function getAccessToken(): string
+    public function getAccessToken(): ?string
     {
         return $this->access_token;
     }
