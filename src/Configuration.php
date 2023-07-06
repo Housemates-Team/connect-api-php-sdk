@@ -11,11 +11,16 @@ final class Configuration implements Configurable
 {
     protected ?ClientInterface $client = null;
 
-    protected string $access_token;
+    protected ?string $access_token = null;
 
-    protected string $host;
+    protected ?string $host = null;
 
-    protected string $api_partner_id;
+    protected ?string $api_partner_id = null;
+
+    public static function make(): Configuration
+    {
+        return new self();
+    }
 
     public function getClient(): ClientInterface
     {
