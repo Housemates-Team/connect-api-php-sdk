@@ -5,10 +5,11 @@ namespace Housemates\ConnectApi;
 
 use GuzzleHttp\ClientInterface;
 use Housemates\ConnectApi\Contracts\Configurable;
+use GuzzleHttp\Client as GuzzleClient;
 
 final class Configuration implements Configurable
 {
-    protected ClientInterface $client;
+    protected ?ClientInterface $client = null;
 
     protected string $access_token;
 
@@ -18,7 +19,7 @@ final class Configuration implements Configurable
 
     public function getClient(): ClientInterface
     {
-        return $this->client;
+        return $this->client ?? new GuzzleClient();
     }
 
     public function setClient(ClientInterface $client): Configuration
