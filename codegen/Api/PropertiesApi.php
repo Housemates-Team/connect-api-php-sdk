@@ -133,6 +133,7 @@ class PropertiesApi
      *
      * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
      * @param  string $filter_city Name of the city to filter by. List of cities can be retrieved from the /api/v1/cities endpoint. (optional)
+     * @param  string $filter_slug Slug of the property to filter by. (optional)
      * @param  string $filter_amenities Amenities to filter by. List of amenities can be retrieved from the /api/amenities?type&#x3D;property endpoint. (optional)
      * @param  int $per_page Number of results to retrieve per page (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getProperties'] to see the possible values for this operation
@@ -141,9 +142,9 @@ class PropertiesApi
      * @throws \InvalidArgumentException
      * @return \OpenAPI\Client\Model\GetProperties200Response|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse
      */
-    public function getProperties($x_api_partner_id, $filter_city = null, $filter_amenities = null, $per_page = null, string $contentType = self::contentTypes['getProperties'][0])
+    public function getProperties($x_api_partner_id, $filter_city = null, $filter_slug = null, $filter_amenities = null, $per_page = null, string $contentType = self::contentTypes['getProperties'][0])
     {
-        list($response) = $this->getPropertiesWithHttpInfo($x_api_partner_id, $filter_city, $filter_amenities, $per_page, $contentType);
+        list($response) = $this->getPropertiesWithHttpInfo($x_api_partner_id, $filter_city, $filter_slug, $filter_amenities, $per_page, $contentType);
         return $response;
     }
 
@@ -154,6 +155,7 @@ class PropertiesApi
      *
      * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
      * @param  string $filter_city Name of the city to filter by. List of cities can be retrieved from the /api/v1/cities endpoint. (optional)
+     * @param  string $filter_slug Slug of the property to filter by. (optional)
      * @param  string $filter_amenities Amenities to filter by. List of amenities can be retrieved from the /api/amenities?type&#x3D;property endpoint. (optional)
      * @param  int $per_page Number of results to retrieve per page (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getProperties'] to see the possible values for this operation
@@ -162,9 +164,9 @@ class PropertiesApi
      * @throws \InvalidArgumentException
      * @return array of \OpenAPI\Client\Model\GetProperties200Response|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getPropertiesWithHttpInfo($x_api_partner_id, $filter_city = null, $filter_amenities = null, $per_page = null, string $contentType = self::contentTypes['getProperties'][0])
+    public function getPropertiesWithHttpInfo($x_api_partner_id, $filter_city = null, $filter_slug = null, $filter_amenities = null, $per_page = null, string $contentType = self::contentTypes['getProperties'][0])
     {
-        $request = $this->getPropertiesRequest($x_api_partner_id, $filter_city, $filter_amenities, $per_page, $contentType);
+        $request = $this->getPropertiesRequest($x_api_partner_id, $filter_city, $filter_slug, $filter_amenities, $per_page, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -372,6 +374,7 @@ class PropertiesApi
      *
      * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
      * @param  string $filter_city Name of the city to filter by. List of cities can be retrieved from the /api/v1/cities endpoint. (optional)
+     * @param  string $filter_slug Slug of the property to filter by. (optional)
      * @param  string $filter_amenities Amenities to filter by. List of amenities can be retrieved from the /api/amenities?type&#x3D;property endpoint. (optional)
      * @param  int $per_page Number of results to retrieve per page (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getProperties'] to see the possible values for this operation
@@ -379,9 +382,9 @@ class PropertiesApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getPropertiesAsync($x_api_partner_id, $filter_city = null, $filter_amenities = null, $per_page = null, string $contentType = self::contentTypes['getProperties'][0])
+    public function getPropertiesAsync($x_api_partner_id, $filter_city = null, $filter_slug = null, $filter_amenities = null, $per_page = null, string $contentType = self::contentTypes['getProperties'][0])
     {
-        return $this->getPropertiesAsyncWithHttpInfo($x_api_partner_id, $filter_city, $filter_amenities, $per_page, $contentType)
+        return $this->getPropertiesAsyncWithHttpInfo($x_api_partner_id, $filter_city, $filter_slug, $filter_amenities, $per_page, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -396,6 +399,7 @@ class PropertiesApi
      *
      * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
      * @param  string $filter_city Name of the city to filter by. List of cities can be retrieved from the /api/v1/cities endpoint. (optional)
+     * @param  string $filter_slug Slug of the property to filter by. (optional)
      * @param  string $filter_amenities Amenities to filter by. List of amenities can be retrieved from the /api/amenities?type&#x3D;property endpoint. (optional)
      * @param  int $per_page Number of results to retrieve per page (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getProperties'] to see the possible values for this operation
@@ -403,10 +407,10 @@ class PropertiesApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getPropertiesAsyncWithHttpInfo($x_api_partner_id, $filter_city = null, $filter_amenities = null, $per_page = null, string $contentType = self::contentTypes['getProperties'][0])
+    public function getPropertiesAsyncWithHttpInfo($x_api_partner_id, $filter_city = null, $filter_slug = null, $filter_amenities = null, $per_page = null, string $contentType = self::contentTypes['getProperties'][0])
     {
         $returnType = '\OpenAPI\Client\Model\GetProperties200Response';
-        $request = $this->getPropertiesRequest($x_api_partner_id, $filter_city, $filter_amenities, $per_page, $contentType);
+        $request = $this->getPropertiesRequest($x_api_partner_id, $filter_city, $filter_slug, $filter_amenities, $per_page, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -449,6 +453,7 @@ class PropertiesApi
      *
      * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
      * @param  string $filter_city Name of the city to filter by. List of cities can be retrieved from the /api/v1/cities endpoint. (optional)
+     * @param  string $filter_slug Slug of the property to filter by. (optional)
      * @param  string $filter_amenities Amenities to filter by. List of amenities can be retrieved from the /api/amenities?type&#x3D;property endpoint. (optional)
      * @param  int $per_page Number of results to retrieve per page (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getProperties'] to see the possible values for this operation
@@ -456,7 +461,7 @@ class PropertiesApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function getPropertiesRequest($x_api_partner_id, $filter_city = null, $filter_amenities = null, $per_page = null, string $contentType = self::contentTypes['getProperties'][0])
+    public function getPropertiesRequest($x_api_partner_id, $filter_city = null, $filter_slug = null, $filter_amenities = null, $per_page = null, string $contentType = self::contentTypes['getProperties'][0])
     {
 
         // verify the required parameter 'x_api_partner_id' is set
@@ -465,6 +470,7 @@ class PropertiesApi
                 'Missing the required parameter $x_api_partner_id when calling getProperties'
             );
         }
+
 
 
 
@@ -481,6 +487,15 @@ class PropertiesApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $filter_city,
             'filter[city]', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $filter_slug,
+            'filter[slug]', // param base name
             'string', // openApiType
             'form', // style
             true, // explode
