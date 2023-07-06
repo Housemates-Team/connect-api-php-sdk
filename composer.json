@@ -1,0 +1,43 @@
+{
+    "name": "housemates/connect-api",
+    "description": "Housemate connect API php client",
+    "keywords": [
+        "housemates",
+        "connect-api"
+    ],
+    "homepage": "https://github.com/housemates/connect-api",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Muhammad Ali Shah",
+            "email": "muhammad@housemates.io",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.4|^8.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Housemates\\ConnectApi\\": "src",
+            "OpenAPI\\Client\\" : "codegen/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Housemates\\ConnectApi\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
