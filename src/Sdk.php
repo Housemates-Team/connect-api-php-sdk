@@ -6,7 +6,7 @@ use Housemates\ConnectApi\Filters\PropertyFilter;
 use OpenAPI\Client\Api\PropertiesApi;
 use OpenAPI\Client\ApiException;
 
-class ConnectApi
+class Sdk
 {
 
     protected Configuration $config;
