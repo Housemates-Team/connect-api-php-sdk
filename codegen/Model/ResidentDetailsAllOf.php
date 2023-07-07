@@ -29,8 +29,8 @@
 
 namespace OpenAPI\Client\Model;
 
-use \ArrayAccess;
-use \OpenAPI\Client\ObjectSerializer;
+use ArrayAccess;
+use OpenAPI\Client\ObjectSerializer;
 
 /**
  * ResidentDetailsAllOf Class Doc Comment
@@ -46,17 +46,17 @@ class ResidentDetailsAllOf implements ModelInterface, ArrayAccess, \JsonSerializ
     public const DISCRIMINATOR = null;
 
     /**
-      * The original name of the model.
-      *
-      * @var string
-      */
+     * The original name of the model.
+     *
+     * @var string
+     */
     protected static $openAPIModelName = 'ResidentDetails_allOf';
 
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $openAPITypes = [
         'first_name' => 'string',
         'last_name' => 'string',
@@ -68,12 +68,12 @@ class ResidentDetailsAllOf implements ModelInterface, ArrayAccess, \JsonSerializ
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      * @phpstan-var array<string, string|null>
-      * @psalm-var array<string, string|null>
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     * @phpstan-var array<string, string|null>
+     * @psalm-var array<string, string|null>
+     */
     protected static $openAPIFormats = [
         'first_name' => null,
         'last_name' => null,
@@ -85,26 +85,131 @@ class ResidentDetailsAllOf implements ModelInterface, ArrayAccess, \JsonSerializ
     ];
 
     /**
-      * Array of nullable properties. Used for (de)serialization
-      *
-      * @var boolean[]
-      */
+     * Array of nullable properties. Used for (de)serialization
+     *
+     * @var boolean[]
+     */
     protected static array $openAPINullables = [
         'first_name' => false,
-		'last_name' => false,
-		'gender' => false,
-		'nationality' => false,
-		'email' => false,
-		'date_of_birth' => false,
-		'contact_number' => false
+        'last_name' => false,
+        'gender' => false,
+        'nationality' => false,
+        'email' => false,
+        'date_of_birth' => false,
+        'contact_number' => false
     ];
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @var string[]
+     */
+    protected static $attributeMap = [
+        'first_name' => 'first_name',
+        'last_name' => 'last_name',
+        'gender' => 'gender',
+        'nationality' => 'nationality',
+        'email' => 'email',
+        'date_of_birth' => 'date_of_birth',
+        'contact_number' => 'contact_number'
+    ];
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @var string[]
+     */
+    protected static $setters = [
+        'first_name' => 'setFirstName',
+        'last_name' => 'setLastName',
+        'gender' => 'setGender',
+        'nationality' => 'setNationality',
+        'email' => 'setEmail',
+        'date_of_birth' => 'setDateOfBirth',
+        'contact_number' => 'setContactNumber'
+    ];
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @var string[]
+     */
+    protected static $getters = [
+        'first_name' => 'getFirstName',
+        'last_name' => 'getLastName',
+        'gender' => 'getGender',
+        'nationality' => 'getNationality',
+        'email' => 'getEmail',
+        'date_of_birth' => 'getDateOfBirth',
+        'contact_number' => 'getContactNumber'
+    ];
+    /**
+     * If a nullable field gets set to null, insert it here
+     *
+     * @var boolean[]
+     */
+    protected array $openAPINullablesSetToNull = [];
+    /**
+     * Associative array for storing property values
+     *
+     * @var mixed[]
+     */
+    protected $container = [];
 
     /**
-      * If a nullable field gets set to null, insert it here
-      *
-      * @var boolean[]
-      */
-    protected array $openAPINullablesSetToNull = [];
+     * Constructor
+     *
+     * @param  mixed[]  $data  Associated array of property values
+     *                      initializing the model
+     */
+    public function __construct(array $data = null)
+    {
+        $this->setIfExists('first_name', $data ?? [], null);
+        $this->setIfExists('last_name', $data ?? [], null);
+        $this->setIfExists('gender', $data ?? [], null);
+        $this->setIfExists('nationality', $data ?? [], null);
+        $this->setIfExists('email', $data ?? [], null);
+        $this->setIfExists('date_of_birth', $data ?? [], null);
+        $this->setIfExists('contact_number', $data ?? [], null);
+    }
+
+    /**
+     * Sets $this->container[$variableName] to the given data or to the given default Value; if $variableName
+     * is nullable and its value is set to null in the $fields array, then mark it as "set to null" in the
+     * $this->openAPINullablesSetToNull array
+     *
+     * @param  string  $variableName
+     * @param  array  $fields
+     * @param  mixed  $defaultValue
+     */
+    private function setIfExists(string $variableName, array $fields, $defaultValue): void
+    {
+        if (self::isNullable($variableName) && array_key_exists($variableName,
+                $fields) && is_null($fields[$variableName])) {
+            $this->openAPINullablesSetToNull[] = $variableName;
+        }
+
+        $this->container[$variableName] = $fields[$variableName] ?? $defaultValue;
+    }
+
+    /**
+     * Checks if a property is nullable
+     *
+     * @param  string  $property
+     * @return bool
+     */
+    public static function isNullable(string $property): bool
+    {
+        return self::openAPINullables()[$property] ?? false;
+    }
+
+    /**
+     * Array of nullable properties
+     *
+     * @return array
+     */
+    protected static function openAPINullables(): array
+    {
+        return self::$openAPINullables;
+    }
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -125,104 +230,6 @@ class ResidentDetailsAllOf implements ModelInterface, ArrayAccess, \JsonSerializ
     {
         return self::$openAPIFormats;
     }
-
-    /**
-     * Array of nullable properties
-     *
-     * @return array
-     */
-    protected static function openAPINullables(): array
-    {
-        return self::$openAPINullables;
-    }
-
-    /**
-     * Array of nullable field names deliberately set to null
-     *
-     * @return boolean[]
-     */
-    private function getOpenAPINullablesSetToNull(): array
-    {
-        return $this->openAPINullablesSetToNull;
-    }
-
-    /**
-     * Setter - Array of nullable field names deliberately set to null
-     *
-     * @param boolean[] $openAPINullablesSetToNull
-     */
-    private function setOpenAPINullablesSetToNull(array $openAPINullablesSetToNull): void
-    {
-        $this->openAPINullablesSetToNull = $openAPINullablesSetToNull;
-    }
-
-    /**
-     * Checks if a property is nullable
-     *
-     * @param string $property
-     * @return bool
-     */
-    public static function isNullable(string $property): bool
-    {
-        return self::openAPINullables()[$property] ?? false;
-    }
-
-    /**
-     * Checks if a nullable property is set to null.
-     *
-     * @param string $property
-     * @return bool
-     */
-    public function isNullableSetToNull(string $property): bool
-    {
-        return in_array($property, $this->getOpenAPINullablesSetToNull(), true);
-    }
-
-    /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @var string[]
-     */
-    protected static $attributeMap = [
-        'first_name' => 'first_name',
-        'last_name' => 'last_name',
-        'gender' => 'gender',
-        'nationality' => 'nationality',
-        'email' => 'email',
-        'date_of_birth' => 'date_of_birth',
-        'contact_number' => 'contact_number'
-    ];
-
-    /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     *
-     * @var string[]
-     */
-    protected static $setters = [
-        'first_name' => 'setFirstName',
-        'last_name' => 'setLastName',
-        'gender' => 'setGender',
-        'nationality' => 'setNationality',
-        'email' => 'setEmail',
-        'date_of_birth' => 'setDateOfBirth',
-        'contact_number' => 'setContactNumber'
-    ];
-
-    /**
-     * Array of attributes to getter functions (for serialization of requests)
-     *
-     * @var string[]
-     */
-    protected static $getters = [
-        'first_name' => 'getFirstName',
-        'last_name' => 'getLastName',
-        'gender' => 'getGender',
-        'nationality' => 'getNationality',
-        'email' => 'getEmail',
-        'date_of_birth' => 'getDateOfBirth',
-        'contact_number' => 'getContactNumber'
-    ];
 
     /**
      * Array of attributes where the key is the local name,
@@ -256,6 +263,27 @@ class ResidentDetailsAllOf implements ModelInterface, ArrayAccess, \JsonSerializ
     }
 
     /**
+     * Checks if a nullable property is set to null.
+     *
+     * @param  string  $property
+     * @return bool
+     */
+    public function isNullableSetToNull(string $property): bool
+    {
+        return in_array($property, $this->getOpenAPINullablesSetToNull(), true);
+    }
+
+    /**
+     * Array of nullable field names deliberately set to null
+     *
+     * @return boolean[]
+     */
+    private function getOpenAPINullablesSetToNull(): array
+    {
+        return $this->openAPINullablesSetToNull;
+    }
+
+    /**
      * The original name of the model.
      *
      * @return string
@@ -265,47 +293,15 @@ class ResidentDetailsAllOf implements ModelInterface, ArrayAccess, \JsonSerializ
         return self::$openAPIModelName;
     }
 
-
     /**
-     * Associative array for storing property values
+     * Validate all the properties in the model
+     * return true if all passed
      *
-     * @var mixed[]
+     * @return bool True if all properties are valid
      */
-    protected $container = [];
-
-    /**
-     * Constructor
-     *
-     * @param mixed[] $data Associated array of property values
-     *                      initializing the model
-     */
-    public function __construct(array $data = null)
+    public function valid()
     {
-        $this->setIfExists('first_name', $data ?? [], null);
-        $this->setIfExists('last_name', $data ?? [], null);
-        $this->setIfExists('gender', $data ?? [], null);
-        $this->setIfExists('nationality', $data ?? [], null);
-        $this->setIfExists('email', $data ?? [], null);
-        $this->setIfExists('date_of_birth', $data ?? [], null);
-        $this->setIfExists('contact_number', $data ?? [], null);
-    }
-
-    /**
-    * Sets $this->container[$variableName] to the given data or to the given default Value; if $variableName
-    * is nullable and its value is set to null in the $fields array, then mark it as "set to null" in the
-    * $this->openAPINullablesSetToNull array
-    *
-    * @param string $variableName
-    * @param array  $fields
-    * @param mixed  $defaultValue
-    */
-    private function setIfExists(string $variableName, array $fields, $defaultValue): void
-    {
-        if (self::isNullable($variableName) && array_key_exists($variableName, $fields) && is_null($fields[$variableName])) {
-            $this->openAPINullablesSetToNull[] = $variableName;
-        }
-
-        $this->container[$variableName] = $fields[$variableName] ?? $defaultValue;
+        return count($this->listInvalidProperties()) === 0;
     }
 
     /**
@@ -321,18 +317,6 @@ class ResidentDetailsAllOf implements ModelInterface, ArrayAccess, \JsonSerializ
     }
 
     /**
-     * Validate all the properties in the model
-     * return true if all passed
-     *
-     * @return bool True if all properties are valid
-     */
-    public function valid()
-    {
-        return count($this->listInvalidProperties()) === 0;
-    }
-
-
-    /**
      * Gets first_name
      *
      * @return string|null
@@ -345,7 +329,7 @@ class ResidentDetailsAllOf implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Sets first_name
      *
-     * @param string|null $first_name first_name
+     * @param  string|null  $first_name  first_name
      *
      * @return self
      */
@@ -372,7 +356,7 @@ class ResidentDetailsAllOf implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Sets last_name
      *
-     * @param string|null $last_name last_name
+     * @param  string|null  $last_name  last_name
      *
      * @return self
      */
@@ -399,7 +383,7 @@ class ResidentDetailsAllOf implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Sets gender
      *
-     * @param string|null $gender gender
+     * @param  string|null  $gender  gender
      *
      * @return self
      */
@@ -426,7 +410,7 @@ class ResidentDetailsAllOf implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Sets nationality
      *
-     * @param string|null $nationality alpha-2 country code
+     * @param  string|null  $nationality  alpha-2 country code
      *
      * @return self
      */
@@ -453,7 +437,7 @@ class ResidentDetailsAllOf implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Sets email
      *
-     * @param string|null $email email
+     * @param  string|null  $email  email
      *
      * @return self
      */
@@ -480,7 +464,7 @@ class ResidentDetailsAllOf implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Sets date_of_birth
      *
-     * @param string|null $date_of_birth date_of_birth
+     * @param  string|null  $date_of_birth  date_of_birth
      *
      * @return self
      */
@@ -507,7 +491,7 @@ class ResidentDetailsAllOf implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Sets contact_number
      *
-     * @param string|null $contact_number contact_number
+     * @param  string|null  $contact_number  contact_number
      *
      * @return self
      */
@@ -520,10 +504,11 @@ class ResidentDetailsAllOf implements ModelInterface, ArrayAccess, \JsonSerializ
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param  integer  $offset  Offset
      *
      * @return boolean
      */
@@ -535,7 +520,7 @@ class ResidentDetailsAllOf implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param  integer  $offset  Offset
      *
      * @return mixed|null
      */
@@ -548,8 +533,8 @@ class ResidentDetailsAllOf implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Sets value based on offset.
      *
-     * @param int|null $offset Offset
-     * @param mixed    $value  Value to be set
+     * @param  int|null  $offset  Offset
+     * @param  mixed  $value  Value to be set
      *
      * @return void
      */
@@ -565,7 +550,7 @@ class ResidentDetailsAllOf implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param  integer  $offset  Offset
      *
      * @return void
      */
@@ -584,7 +569,7 @@ class ResidentDetailsAllOf implements ModelInterface, ArrayAccess, \JsonSerializ
     #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -608,6 +593,16 @@ class ResidentDetailsAllOf implements ModelInterface, ArrayAccess, \JsonSerializ
     public function toHeaderValue()
     {
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
+    }
+
+    /**
+     * Setter - Array of nullable field names deliberately set to null
+     *
+     * @param  boolean[]  $openAPINullablesSetToNull
+     */
+    private function setOpenAPINullablesSetToNull(array $openAPINullablesSetToNull): void
+    {
+        $this->openAPINullablesSetToNull = $openAPINullablesSetToNull;
     }
 }
 

@@ -50,27 +50,7 @@ use OpenAPI\Client\ObjectSerializer;
  */
 class RoomsApi
 {
-    /**
-     * @var ClientInterface
-     */
-    protected $client;
-
-    /**
-     * @var Configuration
-     */
-    protected $config;
-
-    /**
-     * @var HeaderSelector
-     */
-    protected $headerSelector;
-
-    /**
-     * @var int Host index
-     */
-    protected $hostIndex;
-
-    /** @var string[] $contentTypes **/
+    /** @var string[] $contentTypes * */
     public const contentTypes = [
         'getRoom' => [
             'application/json',
@@ -82,12 +62,28 @@ class RoomsApi
             'application/json',
         ],
     ];
+    /**
+     * @var ClientInterface
+     */
+    protected $client;
+    /**
+     * @var Configuration
+     */
+    protected $config;
+    /**
+     * @var HeaderSelector
+     */
+    protected $headerSelector;
+    /**
+     * @var int Host index
+     */
+    protected $hostIndex;
 
-/**
-     * @param ClientInterface $client
-     * @param Configuration   $config
-     * @param HeaderSelector  $selector
-     * @param int             $hostIndex (Optional) host index to select the list of hosts if defined in the OpenAPI spec
+    /**
+     * @param  ClientInterface  $client
+     * @param  Configuration  $config
+     * @param  HeaderSelector  $selector
+     * @param  int  $hostIndex  (Optional) host index to select the list of hosts if defined in the OpenAPI spec
      */
     public function __construct(
         ClientInterface $client = null,
@@ -102,16 +98,6 @@ class RoomsApi
     }
 
     /**
-     * Set the host index
-     *
-     * @param int $hostIndex Host index (required)
-     */
-    public function setHostIndex($hostIndex): void
-    {
-        $this->hostIndex = $hostIndex;
-    }
-
-    /**
      * Get the host index
      *
      * @return int Host index
@@ -119,6 +105,16 @@ class RoomsApi
     public function getHostIndex()
     {
         return $this->hostIndex;
+    }
+
+    /**
+     * Set the host index
+     *
+     * @param  int  $hostIndex  Host index (required)
+     */
+    public function setHostIndex($hostIndex): void
+    {
+        $this->hostIndex = $hostIndex;
     }
 
     /**
@@ -134,13 +130,13 @@ class RoomsApi
      *
      * Get a single room
      *
-     * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
-     * @param  string $room_id unique id of the room (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getRoom'] to see the possible values for this operation
+     * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
+     * @param  string  $room_id  unique id of the room (required)
+     * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getRoom'] to see the possible values for this operation
      *
-     * @throws \OpenAPI\Client\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
      * @return \OpenAPI\Client\Model\GetRoom200Response|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse
+     * @throws \InvalidArgumentException
+     * @throws \OpenAPI\Client\ApiException on non-2xx response
      */
     public function getRoom($x_api_partner_id, $room_id, string $contentType = self::contentTypes['getRoom'][0])
     {
@@ -153,16 +149,19 @@ class RoomsApi
      *
      * Get a single room
      *
-     * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
-     * @param  string $room_id unique id of the room (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getRoom'] to see the possible values for this operation
+     * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
+     * @param  string  $room_id  unique id of the room (required)
+     * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getRoom'] to see the possible values for this operation
      *
-     * @throws \OpenAPI\Client\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
      * @return array of \OpenAPI\Client\Model\GetRoom200Response|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
+     * @throws \InvalidArgumentException
+     * @throws \OpenAPI\Client\ApiException on non-2xx response
      */
-    public function getRoomWithHttpInfo($x_api_partner_id, $room_id, string $contentType = self::contentTypes['getRoom'][0])
-    {
+    public function getRoomWithHttpInfo(
+        $x_api_partner_id,
+        $room_id,
+        string $contentType = self::contentTypes['getRoom'][0]
+    ) {
         $request = $this->getRoomRequest($x_api_partner_id, $room_id, $contentType);
 
         try {
@@ -200,7 +199,7 @@ class RoomsApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if ('\OpenAPI\Client\Model\GetRoom200Response' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
@@ -342,16 +341,143 @@ class RoomsApi
     }
 
     /**
+     * Create request for operation 'getRoom'
+     *
+     * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
+     * @param  string  $room_id  unique id of the room (required)
+     * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getRoom'] to see the possible values for this operation
+     *
+     * @return \GuzzleHttp\Psr7\Request
+     * @throws \InvalidArgumentException
+     */
+    public function getRoomRequest($x_api_partner_id, $room_id, string $contentType = self::contentTypes['getRoom'][0])
+    {
+
+        // verify the required parameter 'x_api_partner_id' is set
+        if ($x_api_partner_id === null || (is_array($x_api_partner_id) && count($x_api_partner_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $x_api_partner_id when calling getRoom'
+            );
+        }
+
+        // verify the required parameter 'room_id' is set
+        if ($room_id === null || (is_array($room_id) && count($room_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $room_id when calling getRoom'
+            );
+        }
+
+
+        $resourcePath = '/api/rooms/{room_id}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+        // header params
+        if ($x_api_partner_id !== null) {
+            $headerParams['X-API-PARTNER-ID'] = ObjectSerializer::toHeaderValue($x_api_partner_id);
+        }
+
+        // path params
+        if ($room_id !== null) {
+            $resourcePath = str_replace(
+                '{'.'room_id'.'}',
+                ObjectSerializer::toPathValue($room_id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json',],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires Bearer (JWT) authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer '.$this->config->getAccessToken();
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost.$resourcePath.($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Create http client option
+     *
+     * @return array of http client options
+     * @throws \RuntimeException on file opening failure
+     */
+    protected function createHttpClientOption()
+    {
+        $options = [];
+        if ($this->config->getDebug()) {
+            $options[RequestOptions::DEBUG] = fopen($this->config->getDebugFile(), 'a');
+            if (!$options[RequestOptions::DEBUG]) {
+                throw new \RuntimeException('Failed to open the debug file: '.$this->config->getDebugFile());
+            }
+        }
+
+        return $options;
+    }
+
+    /**
      * Operation getRoomAsync
      *
      * Get a single room
      *
-     * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
-     * @param  string $room_id unique id of the room (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getRoom'] to see the possible values for this operation
+     * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
+     * @param  string  $room_id  unique id of the room (required)
+     * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getRoom'] to see the possible values for this operation
      *
-     * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
+     * @throws \InvalidArgumentException
      */
     public function getRoomAsync($x_api_partner_id, $room_id, string $contentType = self::contentTypes['getRoom'][0])
     {
@@ -368,15 +494,18 @@ class RoomsApi
      *
      * Get a single room
      *
-     * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
-     * @param  string $room_id unique id of the room (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getRoom'] to see the possible values for this operation
+     * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
+     * @param  string  $room_id  unique id of the room (required)
+     * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getRoom'] to see the possible values for this operation
      *
-     * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
+     * @throws \InvalidArgumentException
      */
-    public function getRoomAsyncWithHttpInfo($x_api_partner_id, $room_id, string $contentType = self::contentTypes['getRoom'][0])
-    {
+    public function getRoomAsyncWithHttpInfo(
+        $x_api_partner_id,
+        $room_id,
+        string $contentType = self::contentTypes['getRoom'][0]
+    ) {
         $returnType = '\OpenAPI\Client\Model\GetRoom200Response';
         $request = $this->getRoomRequest($x_api_partner_id, $room_id, $contentType);
 
@@ -417,128 +546,23 @@ class RoomsApi
     }
 
     /**
-     * Create request for operation 'getRoom'
-     *
-     * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
-     * @param  string $room_id unique id of the room (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getRoom'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
-     */
-    public function getRoomRequest($x_api_partner_id, $room_id, string $contentType = self::contentTypes['getRoom'][0])
-    {
-
-        // verify the required parameter 'x_api_partner_id' is set
-        if ($x_api_partner_id === null || (is_array($x_api_partner_id) && count($x_api_partner_id) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $x_api_partner_id when calling getRoom'
-            );
-        }
-
-        // verify the required parameter 'room_id' is set
-        if ($room_id === null || (is_array($room_id) && count($room_id) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $room_id when calling getRoom'
-            );
-        }
-
-
-        $resourcePath = '/api/rooms/{room_id}';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
-
-
-        // header params
-        if ($x_api_partner_id !== null) {
-            $headerParams['X-API-PARTNER-ID'] = ObjectSerializer::toHeaderValue($x_api_partner_id);
-        }
-
-        // path params
-        if ($room_id !== null) {
-            $resourcePath = str_replace(
-                '{' . 'room_id' . '}',
-                ObjectSerializer::toPathValue($room_id),
-                $resourcePath
-            );
-        }
-
-
-        $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
-            $contentType,
-            $multipart
-        );
-
-        // for model (json/xml)
-        if (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
-                    foreach ($formParamValueItems as $formParamValueItem) {
-                        $multipartContents[] = [
-                            'name' => $formParamName,
-                            'contents' => $formParamValueItem
-                        ];
-                    }
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
-            } else {
-                // for HTTP post (form)
-                $httpBody = ObjectSerializer::buildQuery($formParams);
-            }
-        }
-
-        // this endpoint requires Bearer (JWT) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
-        }
-
-        $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $headers
-        );
-
-        $operationHost = $this->config->getHost();
-        $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            'GET',
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
-    }
-
-    /**
      * Operation getRoomBookingPeriods
      *
      * List of available booking periods
      *
-     * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
-     * @param  string $room_id unique id of the room (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getRoomBookingPeriods'] to see the possible values for this operation
+     * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
+     * @param  string  $room_id  unique id of the room (required)
+     * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getRoomBookingPeriods'] to see the possible values for this operation
      *
-     * @throws \OpenAPI\Client\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
      * @return \OpenAPI\Client\Model\GetRoomBookingPeriods200Response|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse
+     * @throws \InvalidArgumentException
+     * @throws \OpenAPI\Client\ApiException on non-2xx response
      */
-    public function getRoomBookingPeriods($x_api_partner_id, $room_id, string $contentType = self::contentTypes['getRoomBookingPeriods'][0])
-    {
+    public function getRoomBookingPeriods(
+        $x_api_partner_id,
+        $room_id,
+        string $contentType = self::contentTypes['getRoomBookingPeriods'][0]
+    ) {
         list($response) = $this->getRoomBookingPeriodsWithHttpInfo($x_api_partner_id, $room_id, $contentType);
         return $response;
     }
@@ -548,16 +572,19 @@ class RoomsApi
      *
      * List of available booking periods
      *
-     * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
-     * @param  string $room_id unique id of the room (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getRoomBookingPeriods'] to see the possible values for this operation
+     * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
+     * @param  string  $room_id  unique id of the room (required)
+     * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getRoomBookingPeriods'] to see the possible values for this operation
      *
-     * @throws \OpenAPI\Client\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
      * @return array of \OpenAPI\Client\Model\GetRoomBookingPeriods200Response|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
+     * @throws \InvalidArgumentException
+     * @throws \OpenAPI\Client\ApiException on non-2xx response
      */
-    public function getRoomBookingPeriodsWithHttpInfo($x_api_partner_id, $room_id, string $contentType = self::contentTypes['getRoomBookingPeriods'][0])
-    {
+    public function getRoomBookingPeriodsWithHttpInfo(
+        $x_api_partner_id,
+        $room_id,
+        string $contentType = self::contentTypes['getRoomBookingPeriods'][0]
+    ) {
         $request = $this->getRoomBookingPeriodsRequest($x_api_partner_id, $room_id, $contentType);
 
         try {
@@ -595,7 +622,7 @@ class RoomsApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if ('\OpenAPI\Client\Model\GetRoomBookingPeriods200Response' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
@@ -607,7 +634,8 @@ class RoomsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\GetRoomBookingPeriods200Response', []),
+                        ObjectSerializer::deserialize($content,
+                            '\OpenAPI\Client\Model\GetRoomBookingPeriods200Response', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -737,19 +765,133 @@ class RoomsApi
     }
 
     /**
+     * Create request for operation 'getRoomBookingPeriods'
+     *
+     * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
+     * @param  string  $room_id  unique id of the room (required)
+     * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getRoomBookingPeriods'] to see the possible values for this operation
+     *
+     * @return \GuzzleHttp\Psr7\Request
+     * @throws \InvalidArgumentException
+     */
+    public function getRoomBookingPeriodsRequest(
+        $x_api_partner_id,
+        $room_id,
+        string $contentType = self::contentTypes['getRoomBookingPeriods'][0]
+    ) {
+
+        // verify the required parameter 'x_api_partner_id' is set
+        if ($x_api_partner_id === null || (is_array($x_api_partner_id) && count($x_api_partner_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $x_api_partner_id when calling getRoomBookingPeriods'
+            );
+        }
+
+        // verify the required parameter 'room_id' is set
+        if ($room_id === null || (is_array($room_id) && count($room_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $room_id when calling getRoomBookingPeriods'
+            );
+        }
+
+
+        $resourcePath = '/api/rooms/{room_id}/booking-periods';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+        // header params
+        if ($x_api_partner_id !== null) {
+            $headerParams['X-API-PARTNER-ID'] = ObjectSerializer::toHeaderValue($x_api_partner_id);
+        }
+
+        // path params
+        if ($room_id !== null) {
+            $resourcePath = str_replace(
+                '{'.'room_id'.'}',
+                ObjectSerializer::toPathValue($room_id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json',],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires Bearer (JWT) authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer '.$this->config->getAccessToken();
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost.$resourcePath.($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation getRoomBookingPeriodsAsync
      *
      * List of available booking periods
      *
-     * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
-     * @param  string $room_id unique id of the room (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getRoomBookingPeriods'] to see the possible values for this operation
+     * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
+     * @param  string  $room_id  unique id of the room (required)
+     * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getRoomBookingPeriods'] to see the possible values for this operation
      *
-     * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
+     * @throws \InvalidArgumentException
      */
-    public function getRoomBookingPeriodsAsync($x_api_partner_id, $room_id, string $contentType = self::contentTypes['getRoomBookingPeriods'][0])
-    {
+    public function getRoomBookingPeriodsAsync(
+        $x_api_partner_id,
+        $room_id,
+        string $contentType = self::contentTypes['getRoomBookingPeriods'][0]
+    ) {
         return $this->getRoomBookingPeriodsAsyncWithHttpInfo($x_api_partner_id, $room_id, $contentType)
             ->then(
                 function ($response) {
@@ -763,15 +905,18 @@ class RoomsApi
      *
      * List of available booking periods
      *
-     * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
-     * @param  string $room_id unique id of the room (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getRoomBookingPeriods'] to see the possible values for this operation
+     * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
+     * @param  string  $room_id  unique id of the room (required)
+     * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getRoomBookingPeriods'] to see the possible values for this operation
      *
-     * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
+     * @throws \InvalidArgumentException
      */
-    public function getRoomBookingPeriodsAsyncWithHttpInfo($x_api_partner_id, $room_id, string $contentType = self::contentTypes['getRoomBookingPeriods'][0])
-    {
+    public function getRoomBookingPeriodsAsyncWithHttpInfo(
+        $x_api_partner_id,
+        $room_id,
+        string $contentType = self::contentTypes['getRoomBookingPeriods'][0]
+    ) {
         $returnType = '\OpenAPI\Client\Model\GetRoomBookingPeriods200Response';
         $request = $this->getRoomBookingPeriodsRequest($x_api_partner_id, $room_id, $contentType);
 
@@ -812,136 +957,40 @@ class RoomsApi
     }
 
     /**
-     * Create request for operation 'getRoomBookingPeriods'
-     *
-     * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
-     * @param  string $room_id unique id of the room (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getRoomBookingPeriods'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
-     */
-    public function getRoomBookingPeriodsRequest($x_api_partner_id, $room_id, string $contentType = self::contentTypes['getRoomBookingPeriods'][0])
-    {
-
-        // verify the required parameter 'x_api_partner_id' is set
-        if ($x_api_partner_id === null || (is_array($x_api_partner_id) && count($x_api_partner_id) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $x_api_partner_id when calling getRoomBookingPeriods'
-            );
-        }
-
-        // verify the required parameter 'room_id' is set
-        if ($room_id === null || (is_array($room_id) && count($room_id) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $room_id when calling getRoomBookingPeriods'
-            );
-        }
-
-
-        $resourcePath = '/api/rooms/{room_id}/booking-periods';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
-
-
-        // header params
-        if ($x_api_partner_id !== null) {
-            $headerParams['X-API-PARTNER-ID'] = ObjectSerializer::toHeaderValue($x_api_partner_id);
-        }
-
-        // path params
-        if ($room_id !== null) {
-            $resourcePath = str_replace(
-                '{' . 'room_id' . '}',
-                ObjectSerializer::toPathValue($room_id),
-                $resourcePath
-            );
-        }
-
-
-        $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
-            $contentType,
-            $multipart
-        );
-
-        // for model (json/xml)
-        if (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
-                    foreach ($formParamValueItems as $formParamValueItem) {
-                        $multipartContents[] = [
-                            'name' => $formParamName,
-                            'contents' => $formParamValueItem
-                        ];
-                    }
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
-            } else {
-                // for HTTP post (form)
-                $httpBody = ObjectSerializer::buildQuery($formParams);
-            }
-        }
-
-        // this endpoint requires Bearer (JWT) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
-        }
-
-        $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $headers
-        );
-
-        $operationHost = $this->config->getHost();
-        $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            'GET',
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
-    }
-
-    /**
      * Operation getRooms
      *
      * Get list of rooms
      *
-     * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
-     * @param  int $per_page Number of rooms per page (optional)
-     * @param  string $filter_move_in_date Move-in date to filter by in the format \&quot;MM-YYYY\&quot;. (optional)
-     * @param  string $filter_geo_fence Geographical coordinates and radius for filtering rooms. (optional)
-     * @param  string $filter_price_range Price range for filtering rooms. (optional)
-     * @param  string $filter_amenities Amenities to filter by. List of amenities can be retrieved from the /api/amenities?type&#x3D;room endpoint. (optional)
-     * @param  string $sort_price sort rooms by price (optional)
-     * @param  string $sort_max_rooms_left sort rooms by maximum rooms left (optional)
-     * @param  string $sort_is_available sort rooms by price (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getRooms'] to see the possible values for this operation
+     * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
+     * @param  int  $per_page  Number of rooms per page (optional)
+     * @param  string  $filter_move_in_date  Move-in date to filter by in the format \&quot;MM-YYYY\&quot;. (optional)
+     * @param  string  $filter_geo_fence  Geographical coordinates and radius for filtering rooms. (optional)
+     * @param  string  $filter_price_range  Price range for filtering rooms. (optional)
+     * @param  string  $filter_amenities  Amenities to filter by. List of amenities can be retrieved from the /api/amenities?type&#x3D;room endpoint. (optional)
+     * @param  string  $sort_price  sort rooms by price (optional)
+     * @param  string  $sort_max_rooms_left  sort rooms by maximum rooms left (optional)
+     * @param  string  $sort_is_available  sort rooms by price (optional)
+     * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getRooms'] to see the possible values for this operation
      *
+     * @return \OpenAPI\Client\Model\GetRooms200Response|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse
      * @throws \OpenAPI\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \OpenAPI\Client\Model\GetRooms200Response|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse
      */
-    public function getRooms($x_api_partner_id, $per_page = null, $filter_move_in_date = null, $filter_geo_fence = null, $filter_price_range = null, $filter_amenities = null, $sort_price = null, $sort_max_rooms_left = null, $sort_is_available = null, string $contentType = self::contentTypes['getRooms'][0])
-    {
-        list($response) = $this->getRoomsWithHttpInfo($x_api_partner_id, $per_page, $filter_move_in_date, $filter_geo_fence, $filter_price_range, $filter_amenities, $sort_price, $sort_max_rooms_left, $sort_is_available, $contentType);
+    public function getRooms(
+        $x_api_partner_id,
+        $per_page = null,
+        $filter_move_in_date = null,
+        $filter_geo_fence = null,
+        $filter_price_range = null,
+        $filter_amenities = null,
+        $sort_price = null,
+        $sort_max_rooms_left = null,
+        $sort_is_available = null,
+        string $contentType = self::contentTypes['getRooms'][0]
+    ) {
+        list($response) = $this->getRoomsWithHttpInfo($x_api_partner_id, $per_page, $filter_move_in_date,
+            $filter_geo_fence, $filter_price_range, $filter_amenities, $sort_price, $sort_max_rooms_left,
+            $sort_is_available, $contentType);
         return $response;
     }
 
@@ -950,24 +999,36 @@ class RoomsApi
      *
      * Get list of rooms
      *
-     * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
-     * @param  int $per_page Number of rooms per page (optional)
-     * @param  string $filter_move_in_date Move-in date to filter by in the format \&quot;MM-YYYY\&quot;. (optional)
-     * @param  string $filter_geo_fence Geographical coordinates and radius for filtering rooms. (optional)
-     * @param  string $filter_price_range Price range for filtering rooms. (optional)
-     * @param  string $filter_amenities Amenities to filter by. List of amenities can be retrieved from the /api/amenities?type&#x3D;room endpoint. (optional)
-     * @param  string $sort_price sort rooms by price (optional)
-     * @param  string $sort_max_rooms_left sort rooms by maximum rooms left (optional)
-     * @param  string $sort_is_available sort rooms by price (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getRooms'] to see the possible values for this operation
+     * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
+     * @param  int  $per_page  Number of rooms per page (optional)
+     * @param  string  $filter_move_in_date  Move-in date to filter by in the format \&quot;MM-YYYY\&quot;. (optional)
+     * @param  string  $filter_geo_fence  Geographical coordinates and radius for filtering rooms. (optional)
+     * @param  string  $filter_price_range  Price range for filtering rooms. (optional)
+     * @param  string  $filter_amenities  Amenities to filter by. List of amenities can be retrieved from the /api/amenities?type&#x3D;room endpoint. (optional)
+     * @param  string  $sort_price  sort rooms by price (optional)
+     * @param  string  $sort_max_rooms_left  sort rooms by maximum rooms left (optional)
+     * @param  string  $sort_is_available  sort rooms by price (optional)
+     * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getRooms'] to see the possible values for this operation
      *
+     * @return array of \OpenAPI\Client\Model\GetRooms200Response|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
      * @throws \OpenAPI\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \OpenAPI\Client\Model\GetRooms200Response|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getRoomsWithHttpInfo($x_api_partner_id, $per_page = null, $filter_move_in_date = null, $filter_geo_fence = null, $filter_price_range = null, $filter_amenities = null, $sort_price = null, $sort_max_rooms_left = null, $sort_is_available = null, string $contentType = self::contentTypes['getRooms'][0])
-    {
-        $request = $this->getRoomsRequest($x_api_partner_id, $per_page, $filter_move_in_date, $filter_geo_fence, $filter_price_range, $filter_amenities, $sort_price, $sort_max_rooms_left, $sort_is_available, $contentType);
+    public function getRoomsWithHttpInfo(
+        $x_api_partner_id,
+        $per_page = null,
+        $filter_move_in_date = null,
+        $filter_geo_fence = null,
+        $filter_price_range = null,
+        $filter_amenities = null,
+        $sort_price = null,
+        $sort_max_rooms_left = null,
+        $sort_is_available = null,
+        string $contentType = self::contentTypes['getRooms'][0]
+    ) {
+        $request = $this->getRoomsRequest($x_api_partner_id, $per_page, $filter_move_in_date, $filter_geo_fence,
+            $filter_price_range, $filter_amenities, $sort_price, $sort_max_rooms_left, $sort_is_available,
+            $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1004,7 +1065,7 @@ class RoomsApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if ('\OpenAPI\Client\Model\GetRooms200Response' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
@@ -1146,113 +1207,34 @@ class RoomsApi
     }
 
     /**
-     * Operation getRoomsAsync
-     *
-     * Get list of rooms
-     *
-     * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
-     * @param  int $per_page Number of rooms per page (optional)
-     * @param  string $filter_move_in_date Move-in date to filter by in the format \&quot;MM-YYYY\&quot;. (optional)
-     * @param  string $filter_geo_fence Geographical coordinates and radius for filtering rooms. (optional)
-     * @param  string $filter_price_range Price range for filtering rooms. (optional)
-     * @param  string $filter_amenities Amenities to filter by. List of amenities can be retrieved from the /api/amenities?type&#x3D;room endpoint. (optional)
-     * @param  string $sort_price sort rooms by price (optional)
-     * @param  string $sort_max_rooms_left sort rooms by maximum rooms left (optional)
-     * @param  string $sort_is_available sort rooms by price (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getRooms'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function getRoomsAsync($x_api_partner_id, $per_page = null, $filter_move_in_date = null, $filter_geo_fence = null, $filter_price_range = null, $filter_amenities = null, $sort_price = null, $sort_max_rooms_left = null, $sort_is_available = null, string $contentType = self::contentTypes['getRooms'][0])
-    {
-        return $this->getRoomsAsyncWithHttpInfo($x_api_partner_id, $per_page, $filter_move_in_date, $filter_geo_fence, $filter_price_range, $filter_amenities, $sort_price, $sort_max_rooms_left, $sort_is_available, $contentType)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /**
-     * Operation getRoomsAsyncWithHttpInfo
-     *
-     * Get list of rooms
-     *
-     * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
-     * @param  int $per_page Number of rooms per page (optional)
-     * @param  string $filter_move_in_date Move-in date to filter by in the format \&quot;MM-YYYY\&quot;. (optional)
-     * @param  string $filter_geo_fence Geographical coordinates and radius for filtering rooms. (optional)
-     * @param  string $filter_price_range Price range for filtering rooms. (optional)
-     * @param  string $filter_amenities Amenities to filter by. List of amenities can be retrieved from the /api/amenities?type&#x3D;room endpoint. (optional)
-     * @param  string $sort_price sort rooms by price (optional)
-     * @param  string $sort_max_rooms_left sort rooms by maximum rooms left (optional)
-     * @param  string $sort_is_available sort rooms by price (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getRooms'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function getRoomsAsyncWithHttpInfo($x_api_partner_id, $per_page = null, $filter_move_in_date = null, $filter_geo_fence = null, $filter_price_range = null, $filter_amenities = null, $sort_price = null, $sort_max_rooms_left = null, $sort_is_available = null, string $contentType = self::contentTypes['getRooms'][0])
-    {
-        $returnType = '\OpenAPI\Client\Model\GetRooms200Response';
-        $request = $this->getRoomsRequest($x_api_partner_id, $per_page, $filter_move_in_date, $filter_geo_fence, $filter_price_range, $filter_amenities, $sort_price, $sort_max_rooms_left, $sort_is_available, $contentType);
-
-        return $this->client
-            ->sendAsync($request, $this->createHttpClientOption())
-            ->then(
-                function ($response) use ($returnType) {
-                    if ($returnType === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ($returnType !== 'string') {
-                            $content = json_decode($content);
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                },
-                function ($exception) {
-                    $response = $exception->getResponse();
-                    $statusCode = $response->getStatusCode();
-                    throw new ApiException(
-                        sprintf(
-                            '[%d] Error connecting to the API (%s)',
-                            $statusCode,
-                            $exception->getRequest()->getUri()
-                        ),
-                        $statusCode,
-                        $response->getHeaders(),
-                        (string) $response->getBody()
-                    );
-                }
-            );
-    }
-
-    /**
      * Create request for operation 'getRooms'
      *
-     * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
-     * @param  int $per_page Number of rooms per page (optional)
-     * @param  string $filter_move_in_date Move-in date to filter by in the format \&quot;MM-YYYY\&quot;. (optional)
-     * @param  string $filter_geo_fence Geographical coordinates and radius for filtering rooms. (optional)
-     * @param  string $filter_price_range Price range for filtering rooms. (optional)
-     * @param  string $filter_amenities Amenities to filter by. List of amenities can be retrieved from the /api/amenities?type&#x3D;room endpoint. (optional)
-     * @param  string $sort_price sort rooms by price (optional)
-     * @param  string $sort_max_rooms_left sort rooms by maximum rooms left (optional)
-     * @param  string $sort_is_available sort rooms by price (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getRooms'] to see the possible values for this operation
+     * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
+     * @param  int  $per_page  Number of rooms per page (optional)
+     * @param  string  $filter_move_in_date  Move-in date to filter by in the format \&quot;MM-YYYY\&quot;. (optional)
+     * @param  string  $filter_geo_fence  Geographical coordinates and radius for filtering rooms. (optional)
+     * @param  string  $filter_price_range  Price range for filtering rooms. (optional)
+     * @param  string  $filter_amenities  Amenities to filter by. List of amenities can be retrieved from the /api/amenities?type&#x3D;room endpoint. (optional)
+     * @param  string  $sort_price  sort rooms by price (optional)
+     * @param  string  $sort_max_rooms_left  sort rooms by maximum rooms left (optional)
+     * @param  string  $sort_is_available  sort rooms by price (optional)
+     * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getRooms'] to see the possible values for this operation
      *
-     * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
+     * @throws \InvalidArgumentException
      */
-    public function getRoomsRequest($x_api_partner_id, $per_page = null, $filter_move_in_date = null, $filter_geo_fence = null, $filter_price_range = null, $filter_amenities = null, $sort_price = null, $sort_max_rooms_left = null, $sort_is_available = null, string $contentType = self::contentTypes['getRooms'][0])
-    {
+    public function getRoomsRequest(
+        $x_api_partner_id,
+        $per_page = null,
+        $filter_move_in_date = null,
+        $filter_geo_fence = null,
+        $filter_price_range = null,
+        $filter_amenities = null,
+        $sort_price = null,
+        $sort_max_rooms_left = null,
+        $sort_is_available = null,
+        string $contentType = self::contentTypes['getRooms'][0]
+    ) {
 
         // verify the required parameter 'x_api_partner_id' is set
         if ($x_api_partner_id === null || (is_array($x_api_partner_id) && count($x_api_partner_id) === 0)) {
@@ -1262,15 +1244,10 @@ class RoomsApi
         }
 
 
-        if ($filter_move_in_date !== null && !preg_match("/^(0[1-9]|1[0-2])-(20[2-9][0-9]|30[0-9][0-9]|31[0-2][0-9])$/", $filter_move_in_date)) {
+        if ($filter_move_in_date !== null && !preg_match("/^(0[1-9]|1[0-2])-(20[2-9][0-9]|30[0-9][0-9]|31[0-2][0-9])$/",
+                $filter_move_in_date)) {
             throw new \InvalidArgumentException("invalid value for \"filter_move_in_date\" when calling RoomsApi.getRooms, must conform to the pattern /^(0[1-9]|1[0-2])-(20[2-9][0-9]|30[0-9][0-9]|31[0-2][0-9])$/.");
         }
-        
-
-
-
-
-
 
 
         $resourcePath = '/api/rooms';
@@ -1359,9 +1336,8 @@ class RoomsApi
         }
 
 
-
         $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
+            ['application/json',],
             $contentType,
             $multipart
         );
@@ -1393,7 +1369,7 @@ class RoomsApi
 
         // this endpoint requires Bearer (JWT) authentication (access token)
         if (!empty($this->config->getAccessToken())) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+            $headers['Authorization'] = 'Bearer '.$this->config->getAccessToken();
         }
 
         $defaultHeaders = [];
@@ -1411,28 +1387,121 @@ class RoomsApi
         $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $operationHost.$resourcePath.($query ? "?{$query}" : ''),
             $headers,
             $httpBody
         );
     }
 
     /**
-     * Create http client option
+     * Operation getRoomsAsync
      *
-     * @throws \RuntimeException on file opening failure
-     * @return array of http client options
+     * Get list of rooms
+     *
+     * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
+     * @param  int  $per_page  Number of rooms per page (optional)
+     * @param  string  $filter_move_in_date  Move-in date to filter by in the format \&quot;MM-YYYY\&quot;. (optional)
+     * @param  string  $filter_geo_fence  Geographical coordinates and radius for filtering rooms. (optional)
+     * @param  string  $filter_price_range  Price range for filtering rooms. (optional)
+     * @param  string  $filter_amenities  Amenities to filter by. List of amenities can be retrieved from the /api/amenities?type&#x3D;room endpoint. (optional)
+     * @param  string  $sort_price  sort rooms by price (optional)
+     * @param  string  $sort_max_rooms_left  sort rooms by maximum rooms left (optional)
+     * @param  string  $sort_is_available  sort rooms by price (optional)
+     * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getRooms'] to see the possible values for this operation
+     *
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     * @throws \InvalidArgumentException
      */
-    protected function createHttpClientOption()
-    {
-        $options = [];
-        if ($this->config->getDebug()) {
-            $options[RequestOptions::DEBUG] = fopen($this->config->getDebugFile(), 'a');
-            if (!$options[RequestOptions::DEBUG]) {
-                throw new \RuntimeException('Failed to open the debug file: ' . $this->config->getDebugFile());
-            }
-        }
+    public function getRoomsAsync(
+        $x_api_partner_id,
+        $per_page = null,
+        $filter_move_in_date = null,
+        $filter_geo_fence = null,
+        $filter_price_range = null,
+        $filter_amenities = null,
+        $sort_price = null,
+        $sort_max_rooms_left = null,
+        $sort_is_available = null,
+        string $contentType = self::contentTypes['getRooms'][0]
+    ) {
+        return $this->getRoomsAsyncWithHttpInfo($x_api_partner_id, $per_page, $filter_move_in_date, $filter_geo_fence,
+            $filter_price_range, $filter_amenities, $sort_price, $sort_max_rooms_left, $sort_is_available, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
 
-        return $options;
+    /**
+     * Operation getRoomsAsyncWithHttpInfo
+     *
+     * Get list of rooms
+     *
+     * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
+     * @param  int  $per_page  Number of rooms per page (optional)
+     * @param  string  $filter_move_in_date  Move-in date to filter by in the format \&quot;MM-YYYY\&quot;. (optional)
+     * @param  string  $filter_geo_fence  Geographical coordinates and radius for filtering rooms. (optional)
+     * @param  string  $filter_price_range  Price range for filtering rooms. (optional)
+     * @param  string  $filter_amenities  Amenities to filter by. List of amenities can be retrieved from the /api/amenities?type&#x3D;room endpoint. (optional)
+     * @param  string  $sort_price  sort rooms by price (optional)
+     * @param  string  $sort_max_rooms_left  sort rooms by maximum rooms left (optional)
+     * @param  string  $sort_is_available  sort rooms by price (optional)
+     * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getRooms'] to see the possible values for this operation
+     *
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     * @throws \InvalidArgumentException
+     */
+    public function getRoomsAsyncWithHttpInfo(
+        $x_api_partner_id,
+        $per_page = null,
+        $filter_move_in_date = null,
+        $filter_geo_fence = null,
+        $filter_price_range = null,
+        $filter_amenities = null,
+        $sort_price = null,
+        $sort_max_rooms_left = null,
+        $sort_is_available = null,
+        string $contentType = self::contentTypes['getRooms'][0]
+    ) {
+        $returnType = '\OpenAPI\Client\Model\GetRooms200Response';
+        $request = $this->getRoomsRequest($x_api_partner_id, $per_page, $filter_move_in_date, $filter_geo_fence,
+            $filter_price_range, $filter_amenities, $sort_price, $sort_max_rooms_left, $sort_is_available,
+            $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
     }
 }

@@ -38,13 +38,6 @@ namespace OpenAPI\Client\Model;
 interface ModelInterface
 {
     /**
-     * The original name of the model.
-     *
-     * @return string
-     */
-    public function getModelName();
-
-    /**
      * Array of property to type mappings. Used for (de)serialization
      *
      * @return array
@@ -80,6 +73,21 @@ interface ModelInterface
     public static function getters();
 
     /**
+     * Checks if a property is nullable
+     *
+     * @param  string  $property
+     * @return bool
+     */
+    public static function isNullable(string $property): bool;
+
+    /**
+     * The original name of the model.
+     *
+     * @return string
+     */
+    public function getModelName();
+
+    /**
      * Show all the invalid properties with reasons.
      *
      * @return array
@@ -95,17 +103,9 @@ interface ModelInterface
     public function valid();
 
     /**
-     * Checks if a property is nullable
-     *
-     * @param string $property
-     * @return bool
-     */
-    public static function isNullable(string $property): bool;
-
-    /**
      * Checks if a nullable property is set to null.
      *
-     * @param string $property
+     * @param  string  $property
      * @return bool
      */
     public function isNullableSetToNull(string $property): bool;

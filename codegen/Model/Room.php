@@ -29,8 +29,8 @@
 
 namespace OpenAPI\Client\Model;
 
-use \ArrayAccess;
-use \OpenAPI\Client\ObjectSerializer;
+use ArrayAccess;
+use OpenAPI\Client\ObjectSerializer;
 
 /**
  * Room Class Doc Comment
@@ -46,17 +46,17 @@ class Room implements ModelInterface, ArrayAccess, \JsonSerializable
     public const DISCRIMINATOR = null;
 
     /**
-      * The original name of the model.
-      *
-      * @var string
-      */
+     * The original name of the model.
+     *
+     * @var string
+     */
     protected static $openAPIModelName = 'Room';
 
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $openAPITypes = [
         'id' => 'string',
         'provider_id' => 'string',
@@ -80,12 +80,12 @@ class Room implements ModelInterface, ArrayAccess, \JsonSerializable
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      * @phpstan-var array<string, string|null>
-      * @psalm-var array<string, string|null>
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     * @phpstan-var array<string, string|null>
+     * @psalm-var array<string, string|null>
+     */
     protected static $openAPIFormats = [
         'id' => null,
         'provider_id' => null,
@@ -109,111 +109,31 @@ class Room implements ModelInterface, ArrayAccess, \JsonSerializable
     ];
 
     /**
-      * Array of nullable properties. Used for (de)serialization
-      *
-      * @var boolean[]
-      */
+     * Array of nullable properties. Used for (de)serialization
+     *
+     * @var boolean[]
+     */
     protected static array $openAPINullables = [
         'id' => false,
-		'provider_id' => false,
-		'name' => false,
-		'max_rooms_left' => false,
-		'is_available' => false,
-		'price' => false,
-		'is_estimated_price' => false,
-		'cancellation' => false,
-		'price_range' => false,
-		'coordinates' => false,
-		'address' => false,
-		'summary' => false,
-		'description' => false,
-		'rich_description' => false,
-		'amenities' => false,
-		'currency' => false,
-		'images' => false,
-		'booking_periods' => false,
-		'_links' => false
+        'provider_id' => false,
+        'name' => false,
+        'max_rooms_left' => false,
+        'is_available' => false,
+        'price' => false,
+        'is_estimated_price' => false,
+        'cancellation' => false,
+        'price_range' => false,
+        'coordinates' => false,
+        'address' => false,
+        'summary' => false,
+        'description' => false,
+        'rich_description' => false,
+        'amenities' => false,
+        'currency' => false,
+        'images' => false,
+        'booking_periods' => false,
+        '_links' => false
     ];
-
-    /**
-      * If a nullable field gets set to null, insert it here
-      *
-      * @var boolean[]
-      */
-    protected array $openAPINullablesSetToNull = [];
-
-    /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function openAPITypes()
-    {
-        return self::$openAPITypes;
-    }
-
-    /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function openAPIFormats()
-    {
-        return self::$openAPIFormats;
-    }
-
-    /**
-     * Array of nullable properties
-     *
-     * @return array
-     */
-    protected static function openAPINullables(): array
-    {
-        return self::$openAPINullables;
-    }
-
-    /**
-     * Array of nullable field names deliberately set to null
-     *
-     * @return boolean[]
-     */
-    private function getOpenAPINullablesSetToNull(): array
-    {
-        return $this->openAPINullablesSetToNull;
-    }
-
-    /**
-     * Setter - Array of nullable field names deliberately set to null
-     *
-     * @param boolean[] $openAPINullablesSetToNull
-     */
-    private function setOpenAPINullablesSetToNull(array $openAPINullablesSetToNull): void
-    {
-        $this->openAPINullablesSetToNull = $openAPINullablesSetToNull;
-    }
-
-    /**
-     * Checks if a property is nullable
-     *
-     * @param string $property
-     * @return bool
-     */
-    public static function isNullable(string $property): bool
-    {
-        return self::openAPINullables()[$property] ?? false;
-    }
-
-    /**
-     * Checks if a nullable property is set to null.
-     *
-     * @param string $property
-     * @return bool
-     */
-    public function isNullableSetToNull(string $property): bool
-    {
-        return in_array($property, $this->getOpenAPINullablesSetToNull(), true);
-    }
-
     /**
      * Array of attributes where the key is the local name,
      * and the value is the original name
@@ -241,7 +161,6 @@ class Room implements ModelInterface, ArrayAccess, \JsonSerializable
         'booking_periods' => 'booking_periods',
         '_links' => '_links'
     ];
-
     /**
      * Array of attributes to setter functions (for deserialization of responses)
      *
@@ -268,7 +187,6 @@ class Room implements ModelInterface, ArrayAccess, \JsonSerializable
         'booking_periods' => 'setBookingPeriods',
         '_links' => 'setLinks'
     ];
-
     /**
      * Array of attributes to getter functions (for serialization of requests)
      *
@@ -295,6 +213,107 @@ class Room implements ModelInterface, ArrayAccess, \JsonSerializable
         'booking_periods' => 'getBookingPeriods',
         '_links' => 'getLinks'
     ];
+    /**
+     * If a nullable field gets set to null, insert it here
+     *
+     * @var boolean[]
+     */
+    protected array $openAPINullablesSetToNull = [];
+    /**
+     * Associative array for storing property values
+     *
+     * @var mixed[]
+     */
+    protected $container = [];
+
+    /**
+     * Constructor
+     *
+     * @param  mixed[]  $data  Associated array of property values
+     *                      initializing the model
+     */
+    public function __construct(array $data = null)
+    {
+        $this->setIfExists('id', $data ?? [], null);
+        $this->setIfExists('provider_id', $data ?? [], null);
+        $this->setIfExists('name', $data ?? [], null);
+        $this->setIfExists('max_rooms_left', $data ?? [], null);
+        $this->setIfExists('is_available', $data ?? [], null);
+        $this->setIfExists('price', $data ?? [], null);
+        $this->setIfExists('is_estimated_price', $data ?? [], null);
+        $this->setIfExists('cancellation', $data ?? [], null);
+        $this->setIfExists('price_range', $data ?? [], null);
+        $this->setIfExists('coordinates', $data ?? [], null);
+        $this->setIfExists('address', $data ?? [], null);
+        $this->setIfExists('summary', $data ?? [], null);
+        $this->setIfExists('description', $data ?? [], null);
+        $this->setIfExists('rich_description', $data ?? [], null);
+        $this->setIfExists('amenities', $data ?? [], null);
+        $this->setIfExists('currency', $data ?? [], null);
+        $this->setIfExists('images', $data ?? [], null);
+        $this->setIfExists('booking_periods', $data ?? [], null);
+        $this->setIfExists('_links', $data ?? [], null);
+    }
+
+    /**
+     * Sets $this->container[$variableName] to the given data or to the given default Value; if $variableName
+     * is nullable and its value is set to null in the $fields array, then mark it as "set to null" in the
+     * $this->openAPINullablesSetToNull array
+     *
+     * @param  string  $variableName
+     * @param  array  $fields
+     * @param  mixed  $defaultValue
+     */
+    private function setIfExists(string $variableName, array $fields, $defaultValue): void
+    {
+        if (self::isNullable($variableName) && array_key_exists($variableName,
+                $fields) && is_null($fields[$variableName])) {
+            $this->openAPINullablesSetToNull[] = $variableName;
+        }
+
+        $this->container[$variableName] = $fields[$variableName] ?? $defaultValue;
+    }
+
+    /**
+     * Checks if a property is nullable
+     *
+     * @param  string  $property
+     * @return bool
+     */
+    public static function isNullable(string $property): bool
+    {
+        return self::openAPINullables()[$property] ?? false;
+    }
+
+    /**
+     * Array of nullable properties
+     *
+     * @return array
+     */
+    protected static function openAPINullables(): array
+    {
+        return self::$openAPINullables;
+    }
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function openAPITypes()
+    {
+        return self::$openAPITypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function openAPIFormats()
+    {
+        return self::$openAPIFormats;
+    }
 
     /**
      * Array of attributes where the key is the local name,
@@ -328,6 +347,27 @@ class Room implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
+     * Checks if a nullable property is set to null.
+     *
+     * @param  string  $property
+     * @return bool
+     */
+    public function isNullableSetToNull(string $property): bool
+    {
+        return in_array($property, $this->getOpenAPINullablesSetToNull(), true);
+    }
+
+    /**
+     * Array of nullable field names deliberately set to null
+     *
+     * @return boolean[]
+     */
+    private function getOpenAPINullablesSetToNull(): array
+    {
+        return $this->openAPINullablesSetToNull;
+    }
+
+    /**
      * The original name of the model.
      *
      * @return string
@@ -337,59 +377,15 @@ class Room implements ModelInterface, ArrayAccess, \JsonSerializable
         return self::$openAPIModelName;
     }
 
-
     /**
-     * Associative array for storing property values
+     * Validate all the properties in the model
+     * return true if all passed
      *
-     * @var mixed[]
+     * @return bool True if all properties are valid
      */
-    protected $container = [];
-
-    /**
-     * Constructor
-     *
-     * @param mixed[] $data Associated array of property values
-     *                      initializing the model
-     */
-    public function __construct(array $data = null)
+    public function valid()
     {
-        $this->setIfExists('id', $data ?? [], null);
-        $this->setIfExists('provider_id', $data ?? [], null);
-        $this->setIfExists('name', $data ?? [], null);
-        $this->setIfExists('max_rooms_left', $data ?? [], null);
-        $this->setIfExists('is_available', $data ?? [], null);
-        $this->setIfExists('price', $data ?? [], null);
-        $this->setIfExists('is_estimated_price', $data ?? [], null);
-        $this->setIfExists('cancellation', $data ?? [], null);
-        $this->setIfExists('price_range', $data ?? [], null);
-        $this->setIfExists('coordinates', $data ?? [], null);
-        $this->setIfExists('address', $data ?? [], null);
-        $this->setIfExists('summary', $data ?? [], null);
-        $this->setIfExists('description', $data ?? [], null);
-        $this->setIfExists('rich_description', $data ?? [], null);
-        $this->setIfExists('amenities', $data ?? [], null);
-        $this->setIfExists('currency', $data ?? [], null);
-        $this->setIfExists('images', $data ?? [], null);
-        $this->setIfExists('booking_periods', $data ?? [], null);
-        $this->setIfExists('_links', $data ?? [], null);
-    }
-
-    /**
-    * Sets $this->container[$variableName] to the given data or to the given default Value; if $variableName
-    * is nullable and its value is set to null in the $fields array, then mark it as "set to null" in the
-    * $this->openAPINullablesSetToNull array
-    *
-    * @param string $variableName
-    * @param array  $fields
-    * @param mixed  $defaultValue
-    */
-    private function setIfExists(string $variableName, array $fields, $defaultValue): void
-    {
-        if (self::isNullable($variableName) && array_key_exists($variableName, $fields) && is_null($fields[$variableName])) {
-            $this->openAPINullablesSetToNull[] = $variableName;
-        }
-
-        $this->container[$variableName] = $fields[$variableName] ?? $defaultValue;
+        return count($this->listInvalidProperties()) === 0;
     }
 
     /**
@@ -405,18 +401,6 @@ class Room implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Validate all the properties in the model
-     * return true if all passed
-     *
-     * @return bool True if all properties are valid
-     */
-    public function valid()
-    {
-        return count($this->listInvalidProperties()) === 0;
-    }
-
-
-    /**
      * Gets id
      *
      * @return string|null
@@ -429,7 +413,7 @@ class Room implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets id
      *
-     * @param string|null $id id
+     * @param  string|null  $id  id
      *
      * @return self
      */
@@ -456,7 +440,7 @@ class Room implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets provider_id
      *
-     * @param string|null $provider_id provider_id
+     * @param  string|null  $provider_id  provider_id
      *
      * @return self
      */
@@ -483,7 +467,7 @@ class Room implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets name
      *
-     * @param string|null $name name
+     * @param  string|null  $name  name
      *
      * @return self
      */
@@ -510,7 +494,7 @@ class Room implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets max_rooms_left
      *
-     * @param int|null $max_rooms_left max_rooms_left
+     * @param  int|null  $max_rooms_left  max_rooms_left
      *
      * @return self
      */
@@ -537,7 +521,7 @@ class Room implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets is_available
      *
-     * @param bool|null $is_available is_available
+     * @param  bool|null  $is_available  is_available
      *
      * @return self
      */
@@ -564,7 +548,7 @@ class Room implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets price
      *
-     * @param string|null $price price
+     * @param  string|null  $price  price
      *
      * @return self
      */
@@ -591,7 +575,7 @@ class Room implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets is_estimated_price
      *
-     * @param bool|null $is_estimated_price is_estimated_price
+     * @param  bool|null  $is_estimated_price  is_estimated_price
      *
      * @return self
      */
@@ -618,7 +602,7 @@ class Room implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets cancellation
      *
-     * @param \OpenAPI\Client\Model\RoomCancellation|null $cancellation cancellation
+     * @param  \OpenAPI\Client\Model\RoomCancellation|null  $cancellation  cancellation
      *
      * @return self
      */
@@ -645,7 +629,7 @@ class Room implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets price_range
      *
-     * @param \OpenAPI\Client\Model\RoomPriceRange|null $price_range price_range
+     * @param  \OpenAPI\Client\Model\RoomPriceRange|null  $price_range  price_range
      *
      * @return self
      */
@@ -672,7 +656,7 @@ class Room implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets coordinates
      *
-     * @param \OpenAPI\Client\Model\RoomCoordinates|null $coordinates coordinates
+     * @param  \OpenAPI\Client\Model\RoomCoordinates|null  $coordinates  coordinates
      *
      * @return self
      */
@@ -699,7 +683,7 @@ class Room implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets address
      *
-     * @param \OpenAPI\Client\Model\PropertyAddress|null $address address
+     * @param  \OpenAPI\Client\Model\PropertyAddress|null  $address  address
      *
      * @return self
      */
@@ -726,7 +710,7 @@ class Room implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets summary
      *
-     * @param string|null $summary summary
+     * @param  string|null  $summary  summary
      *
      * @return self
      */
@@ -753,7 +737,7 @@ class Room implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets description
      *
-     * @param string|null $description description
+     * @param  string|null  $description  description
      *
      * @return self
      */
@@ -780,7 +764,7 @@ class Room implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets rich_description
      *
-     * @param string|null $rich_description rich_description
+     * @param  string|null  $rich_description  rich_description
      *
      * @return self
      */
@@ -807,7 +791,7 @@ class Room implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets amenities
      *
-     * @param \OpenAPI\Client\Model\RoomAmenities|null $amenities amenities
+     * @param  \OpenAPI\Client\Model\RoomAmenities|null  $amenities  amenities
      *
      * @return self
      */
@@ -834,7 +818,7 @@ class Room implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets currency
      *
-     * @param string|null $currency currency
+     * @param  string|null  $currency  currency
      *
      * @return self
      */
@@ -861,7 +845,7 @@ class Room implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets images
      *
-     * @param \OpenAPI\Client\Model\RoomImages[]|null $images images
+     * @param  \OpenAPI\Client\Model\RoomImages[]|null  $images  images
      *
      * @return self
      */
@@ -888,7 +872,7 @@ class Room implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets booking_periods
      *
-     * @param \OpenAPI\Client\Model\BookingPeriod[]|null $booking_periods booking_periods
+     * @param  \OpenAPI\Client\Model\BookingPeriod[]|null  $booking_periods  booking_periods
      *
      * @return self
      */
@@ -915,7 +899,7 @@ class Room implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets _links
      *
-     * @param \OpenAPI\Client\Model\HateoasLink[]|null $_links _links
+     * @param  \OpenAPI\Client\Model\HateoasLink[]|null  $_links  _links
      *
      * @return self
      */
@@ -928,10 +912,11 @@ class Room implements ModelInterface, ArrayAccess, \JsonSerializable
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param  integer  $offset  Offset
      *
      * @return boolean
      */
@@ -943,7 +928,7 @@ class Room implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param  integer  $offset  Offset
      *
      * @return mixed|null
      */
@@ -956,8 +941,8 @@ class Room implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets value based on offset.
      *
-     * @param int|null $offset Offset
-     * @param mixed    $value  Value to be set
+     * @param  int|null  $offset  Offset
+     * @param  mixed  $value  Value to be set
      *
      * @return void
      */
@@ -973,7 +958,7 @@ class Room implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param  integer  $offset  Offset
      *
      * @return void
      */
@@ -992,7 +977,7 @@ class Room implements ModelInterface, ArrayAccess, \JsonSerializable
     #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -1016,6 +1001,16 @@ class Room implements ModelInterface, ArrayAccess, \JsonSerializable
     public function toHeaderValue()
     {
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
+    }
+
+    /**
+     * Setter - Array of nullable field names deliberately set to null
+     *
+     * @param  boolean[]  $openAPINullablesSetToNull
+     */
+    private function setOpenAPINullablesSetToNull(array $openAPINullablesSetToNull): void
+    {
+        $this->openAPINullablesSetToNull = $openAPINullablesSetToNull;
     }
 }
 

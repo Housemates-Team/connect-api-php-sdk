@@ -3,9 +3,9 @@
 namespace Housemates\ConnectApi;
 
 
+use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\ClientInterface;
 use Housemates\ConnectApi\Contracts\Configurable;
-use GuzzleHttp\Client as GuzzleClient;
 
 final class Configuration implements Configurable
 {
@@ -44,6 +44,10 @@ final class Configuration implements Configurable
         return $this;
     }
 
+    public function getHost(): ?string
+    {
+        return $this->host;
+    }
 
     public function setHost(string $host): Configuration
     {
@@ -51,19 +55,14 @@ final class Configuration implements Configurable
         return $this;
     }
 
-    public function getHost(): ?string
+    public function getAccessToken(): ?string
     {
-        return $this->host;
+        return $this->access_token;
     }
 
     public function setAccessToken(string $accessToken): Configuration
     {
         $this->access_token = $accessToken;
         return $this;
-    }
-
-    public function getAccessToken(): ?string
-    {
-        return $this->access_token;
     }
 }

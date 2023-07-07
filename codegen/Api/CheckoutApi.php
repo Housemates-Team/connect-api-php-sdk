@@ -50,27 +50,7 @@ use OpenAPI\Client\ObjectSerializer;
  */
 class CheckoutApi
 {
-    /**
-     * @var ClientInterface
-     */
-    protected $client;
-
-    /**
-     * @var Configuration
-     */
-    protected $config;
-
-    /**
-     * @var HeaderSelector
-     */
-    protected $headerSelector;
-
-    /**
-     * @var int Host index
-     */
-    protected $hostIndex;
-
-    /** @var string[] $contentTypes **/
+    /** @var string[] $contentTypes * */
     public const contentTypes = [
         'checkoutComplete' => [
             'application/json',
@@ -79,12 +59,28 @@ class CheckoutApi
             'application/json',
         ],
     ];
+    /**
+     * @var ClientInterface
+     */
+    protected $client;
+    /**
+     * @var Configuration
+     */
+    protected $config;
+    /**
+     * @var HeaderSelector
+     */
+    protected $headerSelector;
+    /**
+     * @var int Host index
+     */
+    protected $hostIndex;
 
-/**
-     * @param ClientInterface $client
-     * @param Configuration   $config
-     * @param HeaderSelector  $selector
-     * @param int             $hostIndex (Optional) host index to select the list of hosts if defined in the OpenAPI spec
+    /**
+     * @param  ClientInterface  $client
+     * @param  Configuration  $config
+     * @param  HeaderSelector  $selector
+     * @param  int  $hostIndex  (Optional) host index to select the list of hosts if defined in the OpenAPI spec
      */
     public function __construct(
         ClientInterface $client = null,
@@ -99,16 +95,6 @@ class CheckoutApi
     }
 
     /**
-     * Set the host index
-     *
-     * @param int $hostIndex Host index (required)
-     */
-    public function setHostIndex($hostIndex): void
-    {
-        $this->hostIndex = $hostIndex;
-    }
-
-    /**
      * Get the host index
      *
      * @return int Host index
@@ -116,6 +102,16 @@ class CheckoutApi
     public function getHostIndex()
     {
         return $this->hostIndex;
+    }
+
+    /**
+     * Set the host index
+     *
+     * @param  int  $hostIndex  Host index (required)
+     */
+    public function setHostIndex($hostIndex): void
+    {
+        $this->hostIndex = $hostIndex;
     }
 
     /**
@@ -131,18 +127,23 @@ class CheckoutApi
      *
      * Complete checkout
      *
-     * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
-     * @param  string $room_id unique id of the room (required)
-     * @param  \OpenAPI\Client\Model\CheckoutCompleteRequest $checkout_complete checkout_complete (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['checkoutComplete'] to see the possible values for this operation
+     * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
+     * @param  string  $room_id  unique id of the room (required)
+     * @param  \OpenAPI\Client\Model\CheckoutCompleteRequest  $checkout_complete  checkout_complete (required)
+     * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['checkoutComplete'] to see the possible values for this operation
      *
-     * @throws \OpenAPI\Client\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
      * @return \OpenAPI\Client\Model\CheckoutComplete201Response|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\UnauthenticatedErrorResponse|\OpenAPI\Client\Model\ErrorResponse
+     * @throws \InvalidArgumentException
+     * @throws \OpenAPI\Client\ApiException on non-2xx response
      */
-    public function checkoutComplete($x_api_partner_id, $room_id, $checkout_complete, string $contentType = self::contentTypes['checkoutComplete'][0])
-    {
-        list($response) = $this->checkoutCompleteWithHttpInfo($x_api_partner_id, $room_id, $checkout_complete, $contentType);
+    public function checkoutComplete(
+        $x_api_partner_id,
+        $room_id,
+        $checkout_complete,
+        string $contentType = self::contentTypes['checkoutComplete'][0]
+    ) {
+        list($response) = $this->checkoutCompleteWithHttpInfo($x_api_partner_id, $room_id, $checkout_complete,
+            $contentType);
         return $response;
     }
 
@@ -151,17 +152,21 @@ class CheckoutApi
      *
      * Complete checkout
      *
-     * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
-     * @param  string $room_id unique id of the room (required)
-     * @param  \OpenAPI\Client\Model\CheckoutCompleteRequest $checkout_complete (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['checkoutComplete'] to see the possible values for this operation
+     * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
+     * @param  string  $room_id  unique id of the room (required)
+     * @param  \OpenAPI\Client\Model\CheckoutCompleteRequest  $checkout_complete  (required)
+     * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['checkoutComplete'] to see the possible values for this operation
      *
-     * @throws \OpenAPI\Client\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
      * @return array of \OpenAPI\Client\Model\CheckoutComplete201Response|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\UnauthenticatedErrorResponse|\OpenAPI\Client\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
+     * @throws \InvalidArgumentException
+     * @throws \OpenAPI\Client\ApiException on non-2xx response
      */
-    public function checkoutCompleteWithHttpInfo($x_api_partner_id, $room_id, $checkout_complete, string $contentType = self::contentTypes['checkoutComplete'][0])
-    {
+    public function checkoutCompleteWithHttpInfo(
+        $x_api_partner_id,
+        $room_id,
+        $checkout_complete,
+        string $contentType = self::contentTypes['checkoutComplete'][0]
+    ) {
         $request = $this->checkoutCompleteRequest($x_api_partner_id, $room_id, $checkout_complete, $contentType);
 
         try {
@@ -199,7 +204,7 @@ class CheckoutApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 201:
                     if ('\OpenAPI\Client\Model\CheckoutComplete201Response' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
@@ -211,7 +216,8 @@ class CheckoutApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\CheckoutComplete201Response', []),
+                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\CheckoutComplete201Response',
+                            []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -286,7 +292,8 @@ class CheckoutApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\UnauthenticatedErrorResponse', []),
+                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\UnauthenticatedErrorResponse',
+                            []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -387,20 +394,170 @@ class CheckoutApi
     }
 
     /**
+     * Create request for operation 'checkoutComplete'
+     *
+     * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
+     * @param  string  $room_id  unique id of the room (required)
+     * @param  \OpenAPI\Client\Model\CheckoutCompleteRequest  $checkout_complete  (required)
+     * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['checkoutComplete'] to see the possible values for this operation
+     *
+     * @return \GuzzleHttp\Psr7\Request
+     * @throws \InvalidArgumentException
+     */
+    public function checkoutCompleteRequest(
+        $x_api_partner_id,
+        $room_id,
+        $checkout_complete,
+        string $contentType = self::contentTypes['checkoutComplete'][0]
+    ) {
+
+        // verify the required parameter 'x_api_partner_id' is set
+        if ($x_api_partner_id === null || (is_array($x_api_partner_id) && count($x_api_partner_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $x_api_partner_id when calling checkoutComplete'
+            );
+        }
+
+        // verify the required parameter 'room_id' is set
+        if ($room_id === null || (is_array($room_id) && count($room_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $room_id when calling checkoutComplete'
+            );
+        }
+
+        // verify the required parameter 'checkout_complete' is set
+        if ($checkout_complete === null || (is_array($checkout_complete) && count($checkout_complete) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $checkout_complete when calling checkoutComplete'
+            );
+        }
+
+
+        $resourcePath = '/api/rooms/{room_id}/checkout/complete';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+        // header params
+        if ($x_api_partner_id !== null) {
+            $headerParams['X-API-PARTNER-ID'] = ObjectSerializer::toHeaderValue($x_api_partner_id);
+        }
+
+        // path params
+        if ($room_id !== null) {
+            $resourcePath = str_replace(
+                '{'.'room_id'.'}',
+                ObjectSerializer::toPathValue($room_id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json',],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (isset($checkout_complete)) {
+            if (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the body
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($checkout_complete));
+            } else {
+                $httpBody = $checkout_complete;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires Bearer (JWT) authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer '.$this->config->getAccessToken();
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'POST',
+            $operationHost.$resourcePath.($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Create http client option
+     *
+     * @return array of http client options
+     * @throws \RuntimeException on file opening failure
+     */
+    protected function createHttpClientOption()
+    {
+        $options = [];
+        if ($this->config->getDebug()) {
+            $options[RequestOptions::DEBUG] = fopen($this->config->getDebugFile(), 'a');
+            if (!$options[RequestOptions::DEBUG]) {
+                throw new \RuntimeException('Failed to open the debug file: '.$this->config->getDebugFile());
+            }
+        }
+
+        return $options;
+    }
+
+    /**
      * Operation checkoutCompleteAsync
      *
      * Complete checkout
      *
-     * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
-     * @param  string $room_id unique id of the room (required)
-     * @param  \OpenAPI\Client\Model\CheckoutCompleteRequest $checkout_complete (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['checkoutComplete'] to see the possible values for this operation
+     * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
+     * @param  string  $room_id  unique id of the room (required)
+     * @param  \OpenAPI\Client\Model\CheckoutCompleteRequest  $checkout_complete  (required)
+     * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['checkoutComplete'] to see the possible values for this operation
      *
-     * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
+     * @throws \InvalidArgumentException
      */
-    public function checkoutCompleteAsync($x_api_partner_id, $room_id, $checkout_complete, string $contentType = self::contentTypes['checkoutComplete'][0])
-    {
+    public function checkoutCompleteAsync(
+        $x_api_partner_id,
+        $room_id,
+        $checkout_complete,
+        string $contentType = self::contentTypes['checkoutComplete'][0]
+    ) {
         return $this->checkoutCompleteAsyncWithHttpInfo($x_api_partner_id, $room_id, $checkout_complete, $contentType)
             ->then(
                 function ($response) {
@@ -414,16 +571,20 @@ class CheckoutApi
      *
      * Complete checkout
      *
-     * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
-     * @param  string $room_id unique id of the room (required)
-     * @param  \OpenAPI\Client\Model\CheckoutCompleteRequest $checkout_complete (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['checkoutComplete'] to see the possible values for this operation
+     * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
+     * @param  string  $room_id  unique id of the room (required)
+     * @param  \OpenAPI\Client\Model\CheckoutCompleteRequest  $checkout_complete  (required)
+     * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['checkoutComplete'] to see the possible values for this operation
      *
-     * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
+     * @throws \InvalidArgumentException
      */
-    public function checkoutCompleteAsyncWithHttpInfo($x_api_partner_id, $room_id, $checkout_complete, string $contentType = self::contentTypes['checkoutComplete'][0])
-    {
+    public function checkoutCompleteAsyncWithHttpInfo(
+        $x_api_partner_id,
+        $room_id,
+        $checkout_complete,
+        string $contentType = self::contentTypes['checkoutComplete'][0]
+    ) {
         $returnType = '\OpenAPI\Client\Model\CheckoutComplete201Response';
         $request = $this->checkoutCompleteRequest($x_api_partner_id, $room_id, $checkout_complete, $contentType);
 
@@ -464,144 +625,25 @@ class CheckoutApi
     }
 
     /**
-     * Create request for operation 'checkoutComplete'
-     *
-     * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
-     * @param  string $room_id unique id of the room (required)
-     * @param  \OpenAPI\Client\Model\CheckoutCompleteRequest $checkout_complete (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['checkoutComplete'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
-     */
-    public function checkoutCompleteRequest($x_api_partner_id, $room_id, $checkout_complete, string $contentType = self::contentTypes['checkoutComplete'][0])
-    {
-
-        // verify the required parameter 'x_api_partner_id' is set
-        if ($x_api_partner_id === null || (is_array($x_api_partner_id) && count($x_api_partner_id) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $x_api_partner_id when calling checkoutComplete'
-            );
-        }
-
-        // verify the required parameter 'room_id' is set
-        if ($room_id === null || (is_array($room_id) && count($room_id) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $room_id when calling checkoutComplete'
-            );
-        }
-
-        // verify the required parameter 'checkout_complete' is set
-        if ($checkout_complete === null || (is_array($checkout_complete) && count($checkout_complete) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $checkout_complete when calling checkoutComplete'
-            );
-        }
-
-
-        $resourcePath = '/api/rooms/{room_id}/checkout/complete';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
-
-
-        // header params
-        if ($x_api_partner_id !== null) {
-            $headerParams['X-API-PARTNER-ID'] = ObjectSerializer::toHeaderValue($x_api_partner_id);
-        }
-
-        // path params
-        if ($room_id !== null) {
-            $resourcePath = str_replace(
-                '{' . 'room_id' . '}',
-                ObjectSerializer::toPathValue($room_id),
-                $resourcePath
-            );
-        }
-
-
-        $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
-            $contentType,
-            $multipart
-        );
-
-        // for model (json/xml)
-        if (isset($checkout_complete)) {
-            if (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($checkout_complete));
-            } else {
-                $httpBody = $checkout_complete;
-            }
-        } elseif (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
-                    foreach ($formParamValueItems as $formParamValueItem) {
-                        $multipartContents[] = [
-                            'name' => $formParamName,
-                            'contents' => $formParamValueItem
-                        ];
-                    }
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
-            } else {
-                // for HTTP post (form)
-                $httpBody = ObjectSerializer::buildQuery($formParams);
-            }
-        }
-
-        // this endpoint requires Bearer (JWT) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
-        }
-
-        $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $headers
-        );
-
-        $operationHost = $this->config->getHost();
-        $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            'POST',
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
-    }
-
-    /**
      * Operation checkoutStart
      *
      * Checkout start process
      *
-     * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
-     * @param  string $room_id unique id of the room (required)
-     * @param  \OpenAPI\Client\Model\CheckoutStartRequest $checkout_start checkout_start (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['checkoutStart'] to see the possible values for this operation
+     * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
+     * @param  string  $room_id  unique id of the room (required)
+     * @param  \OpenAPI\Client\Model\CheckoutStartRequest  $checkout_start  checkout_start (required)
+     * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['checkoutStart'] to see the possible values for this operation
      *
-     * @throws \OpenAPI\Client\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
      * @return \OpenAPI\Client\Model\CheckoutStart201Response|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\UnauthenticatedErrorResponse
+     * @throws \InvalidArgumentException
+     * @throws \OpenAPI\Client\ApiException on non-2xx response
      */
-    public function checkoutStart($x_api_partner_id, $room_id, $checkout_start, string $contentType = self::contentTypes['checkoutStart'][0])
-    {
+    public function checkoutStart(
+        $x_api_partner_id,
+        $room_id,
+        $checkout_start,
+        string $contentType = self::contentTypes['checkoutStart'][0]
+    ) {
         list($response) = $this->checkoutStartWithHttpInfo($x_api_partner_id, $room_id, $checkout_start, $contentType);
         return $response;
     }
@@ -611,17 +653,21 @@ class CheckoutApi
      *
      * Checkout start process
      *
-     * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
-     * @param  string $room_id unique id of the room (required)
-     * @param  \OpenAPI\Client\Model\CheckoutStartRequest $checkout_start (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['checkoutStart'] to see the possible values for this operation
+     * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
+     * @param  string  $room_id  unique id of the room (required)
+     * @param  \OpenAPI\Client\Model\CheckoutStartRequest  $checkout_start  (required)
+     * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['checkoutStart'] to see the possible values for this operation
      *
-     * @throws \OpenAPI\Client\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
      * @return array of \OpenAPI\Client\Model\CheckoutStart201Response|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\UnauthenticatedErrorResponse, HTTP status code, HTTP response headers (array of strings)
+     * @throws \InvalidArgumentException
+     * @throws \OpenAPI\Client\ApiException on non-2xx response
      */
-    public function checkoutStartWithHttpInfo($x_api_partner_id, $room_id, $checkout_start, string $contentType = self::contentTypes['checkoutStart'][0])
-    {
+    public function checkoutStartWithHttpInfo(
+        $x_api_partner_id,
+        $room_id,
+        $checkout_start,
+        string $contentType = self::contentTypes['checkoutStart'][0]
+    ) {
         $request = $this->checkoutStartRequest($x_api_partner_id, $room_id, $checkout_start, $contentType);
 
         try {
@@ -659,7 +705,7 @@ class CheckoutApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 201:
                     if ('\OpenAPI\Client\Model\CheckoutStart201Response' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
@@ -746,7 +792,8 @@ class CheckoutApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\UnauthenticatedErrorResponse', []),
+                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\UnauthenticatedErrorResponse',
+                            []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -824,95 +871,22 @@ class CheckoutApi
     }
 
     /**
-     * Operation checkoutStartAsync
-     *
-     * Checkout start process
-     *
-     * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
-     * @param  string $room_id unique id of the room (required)
-     * @param  \OpenAPI\Client\Model\CheckoutStartRequest $checkout_start (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['checkoutStart'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function checkoutStartAsync($x_api_partner_id, $room_id, $checkout_start, string $contentType = self::contentTypes['checkoutStart'][0])
-    {
-        return $this->checkoutStartAsyncWithHttpInfo($x_api_partner_id, $room_id, $checkout_start, $contentType)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /**
-     * Operation checkoutStartAsyncWithHttpInfo
-     *
-     * Checkout start process
-     *
-     * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
-     * @param  string $room_id unique id of the room (required)
-     * @param  \OpenAPI\Client\Model\CheckoutStartRequest $checkout_start (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['checkoutStart'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function checkoutStartAsyncWithHttpInfo($x_api_partner_id, $room_id, $checkout_start, string $contentType = self::contentTypes['checkoutStart'][0])
-    {
-        $returnType = '\OpenAPI\Client\Model\CheckoutStart201Response';
-        $request = $this->checkoutStartRequest($x_api_partner_id, $room_id, $checkout_start, $contentType);
-
-        return $this->client
-            ->sendAsync($request, $this->createHttpClientOption())
-            ->then(
-                function ($response) use ($returnType) {
-                    if ($returnType === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ($returnType !== 'string') {
-                            $content = json_decode($content);
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                },
-                function ($exception) {
-                    $response = $exception->getResponse();
-                    $statusCode = $response->getStatusCode();
-                    throw new ApiException(
-                        sprintf(
-                            '[%d] Error connecting to the API (%s)',
-                            $statusCode,
-                            $exception->getRequest()->getUri()
-                        ),
-                        $statusCode,
-                        $response->getHeaders(),
-                        (string) $response->getBody()
-                    );
-                }
-            );
-    }
-
-    /**
      * Create request for operation 'checkoutStart'
      *
-     * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
-     * @param  string $room_id unique id of the room (required)
-     * @param  \OpenAPI\Client\Model\CheckoutStartRequest $checkout_start (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['checkoutStart'] to see the possible values for this operation
+     * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
+     * @param  string  $room_id  unique id of the room (required)
+     * @param  \OpenAPI\Client\Model\CheckoutStartRequest  $checkout_start  (required)
+     * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['checkoutStart'] to see the possible values for this operation
      *
-     * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
+     * @throws \InvalidArgumentException
      */
-    public function checkoutStartRequest($x_api_partner_id, $room_id, $checkout_start, string $contentType = self::contentTypes['checkoutStart'][0])
-    {
+    public function checkoutStartRequest(
+        $x_api_partner_id,
+        $room_id,
+        $checkout_start,
+        string $contentType = self::contentTypes['checkoutStart'][0]
+    ) {
 
         // verify the required parameter 'x_api_partner_id' is set
         if ($x_api_partner_id === null || (is_array($x_api_partner_id) && count($x_api_partner_id) === 0)) {
@@ -952,7 +926,7 @@ class CheckoutApi
         // path params
         if ($room_id !== null) {
             $resourcePath = str_replace(
-                '{' . 'room_id' . '}',
+                '{'.'room_id'.'}',
                 ObjectSerializer::toPathValue($room_id),
                 $resourcePath
             );
@@ -960,7 +934,7 @@ class CheckoutApi
 
 
         $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
+            ['application/json',],
             $contentType,
             $multipart
         );
@@ -999,7 +973,7 @@ class CheckoutApi
 
         // this endpoint requires Bearer (JWT) authentication (access token)
         if (!empty($this->config->getAccessToken())) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+            $headers['Authorization'] = 'Bearer '.$this->config->getAccessToken();
         }
 
         $defaultHeaders = [];
@@ -1017,28 +991,94 @@ class CheckoutApi
         $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'POST',
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $operationHost.$resourcePath.($query ? "?{$query}" : ''),
             $headers,
             $httpBody
         );
     }
 
     /**
-     * Create http client option
+     * Operation checkoutStartAsync
      *
-     * @throws \RuntimeException on file opening failure
-     * @return array of http client options
+     * Checkout start process
+     *
+     * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
+     * @param  string  $room_id  unique id of the room (required)
+     * @param  \OpenAPI\Client\Model\CheckoutStartRequest  $checkout_start  (required)
+     * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['checkoutStart'] to see the possible values for this operation
+     *
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     * @throws \InvalidArgumentException
      */
-    protected function createHttpClientOption()
-    {
-        $options = [];
-        if ($this->config->getDebug()) {
-            $options[RequestOptions::DEBUG] = fopen($this->config->getDebugFile(), 'a');
-            if (!$options[RequestOptions::DEBUG]) {
-                throw new \RuntimeException('Failed to open the debug file: ' . $this->config->getDebugFile());
-            }
-        }
+    public function checkoutStartAsync(
+        $x_api_partner_id,
+        $room_id,
+        $checkout_start,
+        string $contentType = self::contentTypes['checkoutStart'][0]
+    ) {
+        return $this->checkoutStartAsyncWithHttpInfo($x_api_partner_id, $room_id, $checkout_start, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
 
-        return $options;
+    /**
+     * Operation checkoutStartAsyncWithHttpInfo
+     *
+     * Checkout start process
+     *
+     * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
+     * @param  string  $room_id  unique id of the room (required)
+     * @param  \OpenAPI\Client\Model\CheckoutStartRequest  $checkout_start  (required)
+     * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['checkoutStart'] to see the possible values for this operation
+     *
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     * @throws \InvalidArgumentException
+     */
+    public function checkoutStartAsyncWithHttpInfo(
+        $x_api_partner_id,
+        $room_id,
+        $checkout_start,
+        string $contentType = self::contentTypes['checkoutStart'][0]
+    ) {
+        $returnType = '\OpenAPI\Client\Model\CheckoutStart201Response';
+        $request = $this->checkoutStartRequest($x_api_partner_id, $room_id, $checkout_start, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
     }
 }

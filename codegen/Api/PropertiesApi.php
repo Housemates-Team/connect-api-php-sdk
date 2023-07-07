@@ -50,27 +50,7 @@ use OpenAPI\Client\ObjectSerializer;
  */
 class PropertiesApi
 {
-    /**
-     * @var ClientInterface
-     */
-    protected $client;
-
-    /**
-     * @var Configuration
-     */
-    protected $config;
-
-    /**
-     * @var HeaderSelector
-     */
-    protected $headerSelector;
-
-    /**
-     * @var int Host index
-     */
-    protected $hostIndex;
-
-    /** @var string[] $contentTypes **/
+    /** @var string[] $contentTypes * */
     public const contentTypes = [
         'getProperties' => [
             'application/json',
@@ -79,12 +59,28 @@ class PropertiesApi
             'application/json',
         ],
     ];
+    /**
+     * @var ClientInterface
+     */
+    protected $client;
+    /**
+     * @var Configuration
+     */
+    protected $config;
+    /**
+     * @var HeaderSelector
+     */
+    protected $headerSelector;
+    /**
+     * @var int Host index
+     */
+    protected $hostIndex;
 
-/**
-     * @param ClientInterface $client
-     * @param Configuration   $config
-     * @param HeaderSelector  $selector
-     * @param int             $hostIndex (Optional) host index to select the list of hosts if defined in the OpenAPI spec
+    /**
+     * @param  ClientInterface  $client
+     * @param  Configuration  $config
+     * @param  HeaderSelector  $selector
+     * @param  int  $hostIndex  (Optional) host index to select the list of hosts if defined in the OpenAPI spec
      */
     public function __construct(
         ClientInterface $client = null,
@@ -99,16 +95,6 @@ class PropertiesApi
     }
 
     /**
-     * Set the host index
-     *
-     * @param int $hostIndex Host index (required)
-     */
-    public function setHostIndex($hostIndex): void
-    {
-        $this->hostIndex = $hostIndex;
-    }
-
-    /**
      * Get the host index
      *
      * @return int Host index
@@ -116,6 +102,16 @@ class PropertiesApi
     public function getHostIndex()
     {
         return $this->hostIndex;
+    }
+
+    /**
+     * Set the host index
+     *
+     * @param  int  $hostIndex  Host index (required)
+     */
+    public function setHostIndex($hostIndex): void
+    {
+        $this->hostIndex = $hostIndex;
     }
 
     /**
@@ -131,20 +127,27 @@ class PropertiesApi
      *
      * Get list of properties.
      *
-     * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
-     * @param  string $filter_city Name of the city to filter by. List of cities can be retrieved from the /api/v1/cities endpoint. (optional)
-     * @param  string $filter_slug Slug of the property to filter by. (optional)
-     * @param  string $filter_amenities Amenities to filter by. List of amenities can be retrieved from the /api/amenities?type&#x3D;property endpoint. (optional)
-     * @param  int $per_page Number of results to retrieve per page (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getProperties'] to see the possible values for this operation
+     * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
+     * @param  string  $filter_city  Name of the city to filter by. List of cities can be retrieved from the /api/v1/cities endpoint. (optional)
+     * @param  string  $filter_slug  Slug of the property to filter by. (optional)
+     * @param  string  $filter_amenities  Amenities to filter by. List of amenities can be retrieved from the /api/amenities?type&#x3D;property endpoint. (optional)
+     * @param  int  $per_page  Number of results to retrieve per page (optional)
+     * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getProperties'] to see the possible values for this operation
      *
-     * @throws \OpenAPI\Client\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
      * @return \OpenAPI\Client\Model\GetProperties200Response|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse
+     * @throws \InvalidArgumentException
+     * @throws \OpenAPI\Client\ApiException on non-2xx response
      */
-    public function getProperties($x_api_partner_id, $filter_city = null, $filter_slug = null, $filter_amenities = null, $per_page = null, string $contentType = self::contentTypes['getProperties'][0])
-    {
-        list($response) = $this->getPropertiesWithHttpInfo($x_api_partner_id, $filter_city, $filter_slug, $filter_amenities, $per_page, $contentType);
+    public function getProperties(
+        $x_api_partner_id,
+        $filter_city = null,
+        $filter_slug = null,
+        $filter_amenities = null,
+        $per_page = null,
+        string $contentType = self::contentTypes['getProperties'][0]
+    ) {
+        list($response) = $this->getPropertiesWithHttpInfo($x_api_partner_id, $filter_city, $filter_slug,
+            $filter_amenities, $per_page, $contentType);
         return $response;
     }
 
@@ -153,20 +156,27 @@ class PropertiesApi
      *
      * Get list of properties.
      *
-     * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
-     * @param  string $filter_city Name of the city to filter by. List of cities can be retrieved from the /api/v1/cities endpoint. (optional)
-     * @param  string $filter_slug Slug of the property to filter by. (optional)
-     * @param  string $filter_amenities Amenities to filter by. List of amenities can be retrieved from the /api/amenities?type&#x3D;property endpoint. (optional)
-     * @param  int $per_page Number of results to retrieve per page (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getProperties'] to see the possible values for this operation
+     * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
+     * @param  string  $filter_city  Name of the city to filter by. List of cities can be retrieved from the /api/v1/cities endpoint. (optional)
+     * @param  string  $filter_slug  Slug of the property to filter by. (optional)
+     * @param  string  $filter_amenities  Amenities to filter by. List of amenities can be retrieved from the /api/amenities?type&#x3D;property endpoint. (optional)
+     * @param  int  $per_page  Number of results to retrieve per page (optional)
+     * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getProperties'] to see the possible values for this operation
      *
-     * @throws \OpenAPI\Client\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
      * @return array of \OpenAPI\Client\Model\GetProperties200Response|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
+     * @throws \InvalidArgumentException
+     * @throws \OpenAPI\Client\ApiException on non-2xx response
      */
-    public function getPropertiesWithHttpInfo($x_api_partner_id, $filter_city = null, $filter_slug = null, $filter_amenities = null, $per_page = null, string $contentType = self::contentTypes['getProperties'][0])
-    {
-        $request = $this->getPropertiesRequest($x_api_partner_id, $filter_city, $filter_slug, $filter_amenities, $per_page, $contentType);
+    public function getPropertiesWithHttpInfo(
+        $x_api_partner_id,
+        $filter_city = null,
+        $filter_slug = null,
+        $filter_amenities = null,
+        $per_page = null,
+        string $contentType = self::contentTypes['getProperties'][0]
+    ) {
+        $request = $this->getPropertiesRequest($x_api_partner_id, $filter_city, $filter_slug, $filter_amenities,
+            $per_page, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -203,7 +213,7 @@ class PropertiesApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if ('\OpenAPI\Client\Model\GetProperties200Response' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
@@ -345,101 +355,26 @@ class PropertiesApi
     }
 
     /**
-     * Operation getPropertiesAsync
-     *
-     * Get list of properties.
-     *
-     * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
-     * @param  string $filter_city Name of the city to filter by. List of cities can be retrieved from the /api/v1/cities endpoint. (optional)
-     * @param  string $filter_slug Slug of the property to filter by. (optional)
-     * @param  string $filter_amenities Amenities to filter by. List of amenities can be retrieved from the /api/amenities?type&#x3D;property endpoint. (optional)
-     * @param  int $per_page Number of results to retrieve per page (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getProperties'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function getPropertiesAsync($x_api_partner_id, $filter_city = null, $filter_slug = null, $filter_amenities = null, $per_page = null, string $contentType = self::contentTypes['getProperties'][0])
-    {
-        return $this->getPropertiesAsyncWithHttpInfo($x_api_partner_id, $filter_city, $filter_slug, $filter_amenities, $per_page, $contentType)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /**
-     * Operation getPropertiesAsyncWithHttpInfo
-     *
-     * Get list of properties.
-     *
-     * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
-     * @param  string $filter_city Name of the city to filter by. List of cities can be retrieved from the /api/v1/cities endpoint. (optional)
-     * @param  string $filter_slug Slug of the property to filter by. (optional)
-     * @param  string $filter_amenities Amenities to filter by. List of amenities can be retrieved from the /api/amenities?type&#x3D;property endpoint. (optional)
-     * @param  int $per_page Number of results to retrieve per page (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getProperties'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function getPropertiesAsyncWithHttpInfo($x_api_partner_id, $filter_city = null, $filter_slug = null, $filter_amenities = null, $per_page = null, string $contentType = self::contentTypes['getProperties'][0])
-    {
-        $returnType = '\OpenAPI\Client\Model\GetProperties200Response';
-        $request = $this->getPropertiesRequest($x_api_partner_id, $filter_city, $filter_slug, $filter_amenities, $per_page, $contentType);
-
-        return $this->client
-            ->sendAsync($request, $this->createHttpClientOption())
-            ->then(
-                function ($response) use ($returnType) {
-                    if ($returnType === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ($returnType !== 'string') {
-                            $content = json_decode($content);
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                },
-                function ($exception) {
-                    $response = $exception->getResponse();
-                    $statusCode = $response->getStatusCode();
-                    throw new ApiException(
-                        sprintf(
-                            '[%d] Error connecting to the API (%s)',
-                            $statusCode,
-                            $exception->getRequest()->getUri()
-                        ),
-                        $statusCode,
-                        $response->getHeaders(),
-                        (string) $response->getBody()
-                    );
-                }
-            );
-    }
-
-    /**
      * Create request for operation 'getProperties'
      *
-     * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
-     * @param  string $filter_city Name of the city to filter by. List of cities can be retrieved from the /api/v1/cities endpoint. (optional)
-     * @param  string $filter_slug Slug of the property to filter by. (optional)
-     * @param  string $filter_amenities Amenities to filter by. List of amenities can be retrieved from the /api/amenities?type&#x3D;property endpoint. (optional)
-     * @param  int $per_page Number of results to retrieve per page (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getProperties'] to see the possible values for this operation
+     * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
+     * @param  string  $filter_city  Name of the city to filter by. List of cities can be retrieved from the /api/v1/cities endpoint. (optional)
+     * @param  string  $filter_slug  Slug of the property to filter by. (optional)
+     * @param  string  $filter_amenities  Amenities to filter by. List of amenities can be retrieved from the /api/amenities?type&#x3D;property endpoint. (optional)
+     * @param  int  $per_page  Number of results to retrieve per page (optional)
+     * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getProperties'] to see the possible values for this operation
      *
-     * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
+     * @throws \InvalidArgumentException
      */
-    public function getPropertiesRequest($x_api_partner_id, $filter_city = null, $filter_slug = null, $filter_amenities = null, $per_page = null, string $contentType = self::contentTypes['getProperties'][0])
-    {
+    public function getPropertiesRequest(
+        $x_api_partner_id,
+        $filter_city = null,
+        $filter_slug = null,
+        $filter_amenities = null,
+        $per_page = null,
+        string $contentType = self::contentTypes['getProperties'][0]
+    ) {
 
         // verify the required parameter 'x_api_partner_id' is set
         if ($x_api_partner_id === null || (is_array($x_api_partner_id) && count($x_api_partner_id) === 0)) {
@@ -447,10 +382,6 @@ class PropertiesApi
                 'Missing the required parameter $x_api_partner_id when calling getProperties'
             );
         }
-
-
-
-
 
 
         $resourcePath = '/api/properties';
@@ -503,9 +434,8 @@ class PropertiesApi
         }
 
 
-
         $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
+            ['application/json',],
             $contentType,
             $multipart
         );
@@ -537,7 +467,7 @@ class PropertiesApi
 
         // this endpoint requires Bearer (JWT) authentication (access token)
         if (!empty($this->config->getAccessToken())) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+            $headers['Authorization'] = 'Bearer '.$this->config->getAccessToken();
         }
 
         $defaultHeaders = [];
@@ -555,10 +485,124 @@ class PropertiesApi
         $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $operationHost.$resourcePath.($query ? "?{$query}" : ''),
             $headers,
             $httpBody
         );
+    }
+
+    /**
+     * Create http client option
+     *
+     * @return array of http client options
+     * @throws \RuntimeException on file opening failure
+     */
+    protected function createHttpClientOption()
+    {
+        $options = [];
+        if ($this->config->getDebug()) {
+            $options[RequestOptions::DEBUG] = fopen($this->config->getDebugFile(), 'a');
+            if (!$options[RequestOptions::DEBUG]) {
+                throw new \RuntimeException('Failed to open the debug file: '.$this->config->getDebugFile());
+            }
+        }
+
+        return $options;
+    }
+
+    /**
+     * Operation getPropertiesAsync
+     *
+     * Get list of properties.
+     *
+     * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
+     * @param  string  $filter_city  Name of the city to filter by. List of cities can be retrieved from the /api/v1/cities endpoint. (optional)
+     * @param  string  $filter_slug  Slug of the property to filter by. (optional)
+     * @param  string  $filter_amenities  Amenities to filter by. List of amenities can be retrieved from the /api/amenities?type&#x3D;property endpoint. (optional)
+     * @param  int  $per_page  Number of results to retrieve per page (optional)
+     * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getProperties'] to see the possible values for this operation
+     *
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     * @throws \InvalidArgumentException
+     */
+    public function getPropertiesAsync(
+        $x_api_partner_id,
+        $filter_city = null,
+        $filter_slug = null,
+        $filter_amenities = null,
+        $per_page = null,
+        string $contentType = self::contentTypes['getProperties'][0]
+    ) {
+        return $this->getPropertiesAsyncWithHttpInfo($x_api_partner_id, $filter_city, $filter_slug, $filter_amenities,
+            $per_page, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getPropertiesAsyncWithHttpInfo
+     *
+     * Get list of properties.
+     *
+     * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
+     * @param  string  $filter_city  Name of the city to filter by. List of cities can be retrieved from the /api/v1/cities endpoint. (optional)
+     * @param  string  $filter_slug  Slug of the property to filter by. (optional)
+     * @param  string  $filter_amenities  Amenities to filter by. List of amenities can be retrieved from the /api/amenities?type&#x3D;property endpoint. (optional)
+     * @param  int  $per_page  Number of results to retrieve per page (optional)
+     * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getProperties'] to see the possible values for this operation
+     *
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     * @throws \InvalidArgumentException
+     */
+    public function getPropertiesAsyncWithHttpInfo(
+        $x_api_partner_id,
+        $filter_city = null,
+        $filter_slug = null,
+        $filter_amenities = null,
+        $per_page = null,
+        string $contentType = self::contentTypes['getProperties'][0]
+    ) {
+        $returnType = '\OpenAPI\Client\Model\GetProperties200Response';
+        $request = $this->getPropertiesRequest($x_api_partner_id, $filter_city, $filter_slug, $filter_amenities,
+            $per_page, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
     }
 
     /**
@@ -566,16 +610,19 @@ class PropertiesApi
      *
      * Returns a single property.
      *
-     * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
-     * @param  string $property_id Unique property ID (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getProperty'] to see the possible values for this operation
+     * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
+     * @param  string  $property_id  Unique property ID (required)
+     * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getProperty'] to see the possible values for this operation
      *
-     * @throws \OpenAPI\Client\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
      * @return \OpenAPI\Client\Model\GetProperty200Response|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse
+     * @throws \InvalidArgumentException
+     * @throws \OpenAPI\Client\ApiException on non-2xx response
      */
-    public function getProperty($x_api_partner_id, $property_id, string $contentType = self::contentTypes['getProperty'][0])
-    {
+    public function getProperty(
+        $x_api_partner_id,
+        $property_id,
+        string $contentType = self::contentTypes['getProperty'][0]
+    ) {
         list($response) = $this->getPropertyWithHttpInfo($x_api_partner_id, $property_id, $contentType);
         return $response;
     }
@@ -585,16 +632,19 @@ class PropertiesApi
      *
      * Returns a single property.
      *
-     * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
-     * @param  string $property_id Unique property ID (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getProperty'] to see the possible values for this operation
+     * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
+     * @param  string  $property_id  Unique property ID (required)
+     * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getProperty'] to see the possible values for this operation
      *
-     * @throws \OpenAPI\Client\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
      * @return array of \OpenAPI\Client\Model\GetProperty200Response|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
+     * @throws \InvalidArgumentException
+     * @throws \OpenAPI\Client\ApiException on non-2xx response
      */
-    public function getPropertyWithHttpInfo($x_api_partner_id, $property_id, string $contentType = self::contentTypes['getProperty'][0])
-    {
+    public function getPropertyWithHttpInfo(
+        $x_api_partner_id,
+        $property_id,
+        string $contentType = self::contentTypes['getProperty'][0]
+    ) {
         $request = $this->getPropertyRequest($x_api_partner_id, $property_id, $contentType);
 
         try {
@@ -632,7 +682,7 @@ class PropertiesApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if ('\OpenAPI\Client\Model\GetProperty200Response' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
@@ -774,19 +824,133 @@ class PropertiesApi
     }
 
     /**
+     * Create request for operation 'getProperty'
+     *
+     * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
+     * @param  string  $property_id  Unique property ID (required)
+     * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getProperty'] to see the possible values for this operation
+     *
+     * @return \GuzzleHttp\Psr7\Request
+     * @throws \InvalidArgumentException
+     */
+    public function getPropertyRequest(
+        $x_api_partner_id,
+        $property_id,
+        string $contentType = self::contentTypes['getProperty'][0]
+    ) {
+
+        // verify the required parameter 'x_api_partner_id' is set
+        if ($x_api_partner_id === null || (is_array($x_api_partner_id) && count($x_api_partner_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $x_api_partner_id when calling getProperty'
+            );
+        }
+
+        // verify the required parameter 'property_id' is set
+        if ($property_id === null || (is_array($property_id) && count($property_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $property_id when calling getProperty'
+            );
+        }
+
+
+        $resourcePath = '/api/properties/{property_id}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+        // header params
+        if ($x_api_partner_id !== null) {
+            $headerParams['X-API-PARTNER-ID'] = ObjectSerializer::toHeaderValue($x_api_partner_id);
+        }
+
+        // path params
+        if ($property_id !== null) {
+            $resourcePath = str_replace(
+                '{'.'property_id'.'}',
+                ObjectSerializer::toPathValue($property_id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json',],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires Bearer (JWT) authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer '.$this->config->getAccessToken();
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost.$resourcePath.($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation getPropertyAsync
      *
      * Returns a single property.
      *
-     * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
-     * @param  string $property_id Unique property ID (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getProperty'] to see the possible values for this operation
+     * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
+     * @param  string  $property_id  Unique property ID (required)
+     * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getProperty'] to see the possible values for this operation
      *
-     * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
+     * @throws \InvalidArgumentException
      */
-    public function getPropertyAsync($x_api_partner_id, $property_id, string $contentType = self::contentTypes['getProperty'][0])
-    {
+    public function getPropertyAsync(
+        $x_api_partner_id,
+        $property_id,
+        string $contentType = self::contentTypes['getProperty'][0]
+    ) {
         return $this->getPropertyAsyncWithHttpInfo($x_api_partner_id, $property_id, $contentType)
             ->then(
                 function ($response) {
@@ -800,15 +964,18 @@ class PropertiesApi
      *
      * Returns a single property.
      *
-     * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
-     * @param  string $property_id Unique property ID (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getProperty'] to see the possible values for this operation
+     * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
+     * @param  string  $property_id  Unique property ID (required)
+     * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getProperty'] to see the possible values for this operation
      *
-     * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
+     * @throws \InvalidArgumentException
      */
-    public function getPropertyAsyncWithHttpInfo($x_api_partner_id, $property_id, string $contentType = self::contentTypes['getProperty'][0])
-    {
+    public function getPropertyAsyncWithHttpInfo(
+        $x_api_partner_id,
+        $property_id,
+        string $contentType = self::contentTypes['getProperty'][0]
+    ) {
         $returnType = '\OpenAPI\Client\Model\GetProperty200Response';
         $request = $this->getPropertyRequest($x_api_partner_id, $property_id, $contentType);
 
@@ -846,132 +1013,5 @@ class PropertiesApi
                     );
                 }
             );
-    }
-
-    /**
-     * Create request for operation 'getProperty'
-     *
-     * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
-     * @param  string $property_id Unique property ID (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getProperty'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
-     */
-    public function getPropertyRequest($x_api_partner_id, $property_id, string $contentType = self::contentTypes['getProperty'][0])
-    {
-
-        // verify the required parameter 'x_api_partner_id' is set
-        if ($x_api_partner_id === null || (is_array($x_api_partner_id) && count($x_api_partner_id) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $x_api_partner_id when calling getProperty'
-            );
-        }
-
-        // verify the required parameter 'property_id' is set
-        if ($property_id === null || (is_array($property_id) && count($property_id) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $property_id when calling getProperty'
-            );
-        }
-
-
-        $resourcePath = '/api/properties/{property_id}';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
-
-
-        // header params
-        if ($x_api_partner_id !== null) {
-            $headerParams['X-API-PARTNER-ID'] = ObjectSerializer::toHeaderValue($x_api_partner_id);
-        }
-
-        // path params
-        if ($property_id !== null) {
-            $resourcePath = str_replace(
-                '{' . 'property_id' . '}',
-                ObjectSerializer::toPathValue($property_id),
-                $resourcePath
-            );
-        }
-
-
-        $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
-            $contentType,
-            $multipart
-        );
-
-        // for model (json/xml)
-        if (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
-                    foreach ($formParamValueItems as $formParamValueItem) {
-                        $multipartContents[] = [
-                            'name' => $formParamName,
-                            'contents' => $formParamValueItem
-                        ];
-                    }
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
-            } else {
-                // for HTTP post (form)
-                $httpBody = ObjectSerializer::buildQuery($formParams);
-            }
-        }
-
-        // this endpoint requires Bearer (JWT) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
-        }
-
-        $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $headers
-        );
-
-        $operationHost = $this->config->getHost();
-        $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            'GET',
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
-    }
-
-    /**
-     * Create http client option
-     *
-     * @throws \RuntimeException on file opening failure
-     * @return array of http client options
-     */
-    protected function createHttpClientOption()
-    {
-        $options = [];
-        if ($this->config->getDebug()) {
-            $options[RequestOptions::DEBUG] = fopen($this->config->getDebugFile(), 'a');
-            if (!$options[RequestOptions::DEBUG]) {
-                throw new \RuntimeException('Failed to open the debug file: ' . $this->config->getDebugFile());
-            }
-        }
-
-        return $options;
     }
 }

@@ -2,10 +2,10 @@
 
 namespace Housemates\ConnectApi;
 
+use Housemates\ConnectApi\Api\PropertyApi;
+use Housemates\ConnectApi\Exceptions\ApiException as HousematesApiException;
 use Housemates\ConnectApi\Exceptions\ConfigurationException;
 use Housemates\ConnectApi\Filters\PropertyFilter;
-use OpenAPI\Client\Api\PropertiesApi;
-use OpenAPI\Client\ApiException;
 use OpenAPI\Client\Configuration as OpenApiConfig;
 
 class ApiClient
@@ -33,6 +33,18 @@ class ApiClient
     }
 
     /**
+     * @throws HousematesApiException
+     */
+    public function getProperties(
+        PropertyFilter $filters = null
+    ) {
+        return PropertyApi::make(
+            $this->config,
+            $this->openApiConfig
+        )->getProperties($filters);
+    }
+
+    /**
      * @throws ConfigurationException
      */
     public static function make(Configuration $config): self
@@ -41,41 +53,13 @@ class ApiClient
     }
 
     /**
-     * @throws ApiException
+     * @throws HousematesApiException
      */
-    public function getProperties(
-        PropertyFilter $filters = null
-    ) {
-
-        $apiInstance = new PropertiesApi(
-            $this->config->getClient(), $this->openApiConfig
-        );
-
-        if (null === $filters) {
-            try {
-                return $apiInstance->getProperties(
-                    $this->config->getApiPartnerId(),
-                );
-            } catch (ApiException $e) {
-                throw $e->getResponseObject();
-            } catch (\Exception $e) {
-                throw $e;
-            }
-
-        }
-
-        try {
-            return $apiInstance->getProperties(
-                $this->config->getApiPartnerId(),
-                $filters->getCityFilter(),
-                $filters->getSlugFilter(),
-                $filters->getAmenitiesFilter(),
-                $filters->getPerPage(),
-            );
-        } catch (ApiException $e) {
-            throw $e->getResponseObject();
-        } catch (\Exception $e) {
-            throw $e;
-        }
+    public function getProperty(string $propertyId)
+    {
+        return PropertyApi::make(
+            $this->config,
+            $this->openApiConfig
+        )->getProperty($propertyId);
     }
 }

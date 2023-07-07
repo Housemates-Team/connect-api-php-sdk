@@ -29,8 +29,8 @@
 
 namespace OpenAPI\Client\Model;
 
-use \ArrayAccess;
-use \OpenAPI\Client\ObjectSerializer;
+use ArrayAccess;
+use OpenAPI\Client\ObjectSerializer;
 
 /**
  * SupportingContactDetails Class Doc Comment
@@ -46,17 +46,17 @@ class SupportingContactDetails implements ModelInterface, ArrayAccess, \JsonSeri
     public const DISCRIMINATOR = null;
 
     /**
-      * The original name of the model.
-      *
-      * @var string
-      */
+     * The original name of the model.
+     *
+     * @var string
+     */
     protected static $openAPIModelName = 'SupportingContactDetails';
 
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $openAPITypes = [
         'first_line' => 'string',
         'second_line' => 'string',
@@ -73,12 +73,12 @@ class SupportingContactDetails implements ModelInterface, ArrayAccess, \JsonSeri
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      * @phpstan-var array<string, string|null>
-      * @psalm-var array<string, string|null>
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     * @phpstan-var array<string, string|null>
+     * @psalm-var array<string, string|null>
+     */
     protected static $openAPIFormats = [
         'first_line' => null,
         'second_line' => null,
@@ -95,104 +95,24 @@ class SupportingContactDetails implements ModelInterface, ArrayAccess, \JsonSeri
     ];
 
     /**
-      * Array of nullable properties. Used for (de)serialization
-      *
-      * @var boolean[]
-      */
+     * Array of nullable properties. Used for (de)serialization
+     *
+     * @var boolean[]
+     */
     protected static array $openAPINullables = [
         'first_line' => false,
-		'second_line' => true,
-		'city' => false,
-		'region' => true,
-		'postcode' => false,
-		'country' => false,
-		'first_name' => false,
-		'last_name' => false,
-		'relationship' => false,
-		'email' => false,
-		'date_of_birth' => false,
-		'contact_number' => false
+        'second_line' => true,
+        'city' => false,
+        'region' => true,
+        'postcode' => false,
+        'country' => false,
+        'first_name' => false,
+        'last_name' => false,
+        'relationship' => false,
+        'email' => false,
+        'date_of_birth' => false,
+        'contact_number' => false
     ];
-
-    /**
-      * If a nullable field gets set to null, insert it here
-      *
-      * @var boolean[]
-      */
-    protected array $openAPINullablesSetToNull = [];
-
-    /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function openAPITypes()
-    {
-        return self::$openAPITypes;
-    }
-
-    /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function openAPIFormats()
-    {
-        return self::$openAPIFormats;
-    }
-
-    /**
-     * Array of nullable properties
-     *
-     * @return array
-     */
-    protected static function openAPINullables(): array
-    {
-        return self::$openAPINullables;
-    }
-
-    /**
-     * Array of nullable field names deliberately set to null
-     *
-     * @return boolean[]
-     */
-    private function getOpenAPINullablesSetToNull(): array
-    {
-        return $this->openAPINullablesSetToNull;
-    }
-
-    /**
-     * Setter - Array of nullable field names deliberately set to null
-     *
-     * @param boolean[] $openAPINullablesSetToNull
-     */
-    private function setOpenAPINullablesSetToNull(array $openAPINullablesSetToNull): void
-    {
-        $this->openAPINullablesSetToNull = $openAPINullablesSetToNull;
-    }
-
-    /**
-     * Checks if a property is nullable
-     *
-     * @param string $property
-     * @return bool
-     */
-    public static function isNullable(string $property): bool
-    {
-        return self::openAPINullables()[$property] ?? false;
-    }
-
-    /**
-     * Checks if a nullable property is set to null.
-     *
-     * @param string $property
-     * @return bool
-     */
-    public function isNullableSetToNull(string $property): bool
-    {
-        return in_array($property, $this->getOpenAPINullablesSetToNull(), true);
-    }
-
     /**
      * Array of attributes where the key is the local name,
      * and the value is the original name
@@ -213,7 +133,6 @@ class SupportingContactDetails implements ModelInterface, ArrayAccess, \JsonSeri
         'date_of_birth' => 'date_of_birth',
         'contact_number' => 'contact_number'
     ];
-
     /**
      * Array of attributes to setter functions (for deserialization of responses)
      *
@@ -233,7 +152,6 @@ class SupportingContactDetails implements ModelInterface, ArrayAccess, \JsonSeri
         'date_of_birth' => 'setDateOfBirth',
         'contact_number' => 'setContactNumber'
     ];
-
     /**
      * Array of attributes to getter functions (for serialization of requests)
      *
@@ -253,6 +171,100 @@ class SupportingContactDetails implements ModelInterface, ArrayAccess, \JsonSeri
         'date_of_birth' => 'getDateOfBirth',
         'contact_number' => 'getContactNumber'
     ];
+    /**
+     * If a nullable field gets set to null, insert it here
+     *
+     * @var boolean[]
+     */
+    protected array $openAPINullablesSetToNull = [];
+    /**
+     * Associative array for storing property values
+     *
+     * @var mixed[]
+     */
+    protected $container = [];
+
+    /**
+     * Constructor
+     *
+     * @param  mixed[]  $data  Associated array of property values
+     *                      initializing the model
+     */
+    public function __construct(array $data = null)
+    {
+        $this->setIfExists('first_line', $data ?? [], null);
+        $this->setIfExists('second_line', $data ?? [], null);
+        $this->setIfExists('city', $data ?? [], null);
+        $this->setIfExists('region', $data ?? [], null);
+        $this->setIfExists('postcode', $data ?? [], null);
+        $this->setIfExists('country', $data ?? [], null);
+        $this->setIfExists('first_name', $data ?? [], null);
+        $this->setIfExists('last_name', $data ?? [], null);
+        $this->setIfExists('relationship', $data ?? [], null);
+        $this->setIfExists('email', $data ?? [], null);
+        $this->setIfExists('date_of_birth', $data ?? [], null);
+        $this->setIfExists('contact_number', $data ?? [], null);
+    }
+
+    /**
+     * Sets $this->container[$variableName] to the given data or to the given default Value; if $variableName
+     * is nullable and its value is set to null in the $fields array, then mark it as "set to null" in the
+     * $this->openAPINullablesSetToNull array
+     *
+     * @param  string  $variableName
+     * @param  array  $fields
+     * @param  mixed  $defaultValue
+     */
+    private function setIfExists(string $variableName, array $fields, $defaultValue): void
+    {
+        if (self::isNullable($variableName) && array_key_exists($variableName,
+                $fields) && is_null($fields[$variableName])) {
+            $this->openAPINullablesSetToNull[] = $variableName;
+        }
+
+        $this->container[$variableName] = $fields[$variableName] ?? $defaultValue;
+    }
+
+    /**
+     * Checks if a property is nullable
+     *
+     * @param  string  $property
+     * @return bool
+     */
+    public static function isNullable(string $property): bool
+    {
+        return self::openAPINullables()[$property] ?? false;
+    }
+
+    /**
+     * Array of nullable properties
+     *
+     * @return array
+     */
+    protected static function openAPINullables(): array
+    {
+        return self::$openAPINullables;
+    }
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function openAPITypes()
+    {
+        return self::$openAPITypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function openAPIFormats()
+    {
+        return self::$openAPIFormats;
+    }
 
     /**
      * Array of attributes where the key is the local name,
@@ -286,6 +298,27 @@ class SupportingContactDetails implements ModelInterface, ArrayAccess, \JsonSeri
     }
 
     /**
+     * Checks if a nullable property is set to null.
+     *
+     * @param  string  $property
+     * @return bool
+     */
+    public function isNullableSetToNull(string $property): bool
+    {
+        return in_array($property, $this->getOpenAPINullablesSetToNull(), true);
+    }
+
+    /**
+     * Array of nullable field names deliberately set to null
+     *
+     * @return boolean[]
+     */
+    private function getOpenAPINullablesSetToNull(): array
+    {
+        return $this->openAPINullablesSetToNull;
+    }
+
+    /**
      * The original name of the model.
      *
      * @return string
@@ -295,52 +328,15 @@ class SupportingContactDetails implements ModelInterface, ArrayAccess, \JsonSeri
         return self::$openAPIModelName;
     }
 
-
     /**
-     * Associative array for storing property values
+     * Validate all the properties in the model
+     * return true if all passed
      *
-     * @var mixed[]
+     * @return bool True if all properties are valid
      */
-    protected $container = [];
-
-    /**
-     * Constructor
-     *
-     * @param mixed[] $data Associated array of property values
-     *                      initializing the model
-     */
-    public function __construct(array $data = null)
+    public function valid()
     {
-        $this->setIfExists('first_line', $data ?? [], null);
-        $this->setIfExists('second_line', $data ?? [], null);
-        $this->setIfExists('city', $data ?? [], null);
-        $this->setIfExists('region', $data ?? [], null);
-        $this->setIfExists('postcode', $data ?? [], null);
-        $this->setIfExists('country', $data ?? [], null);
-        $this->setIfExists('first_name', $data ?? [], null);
-        $this->setIfExists('last_name', $data ?? [], null);
-        $this->setIfExists('relationship', $data ?? [], null);
-        $this->setIfExists('email', $data ?? [], null);
-        $this->setIfExists('date_of_birth', $data ?? [], null);
-        $this->setIfExists('contact_number', $data ?? [], null);
-    }
-
-    /**
-    * Sets $this->container[$variableName] to the given data or to the given default Value; if $variableName
-    * is nullable and its value is set to null in the $fields array, then mark it as "set to null" in the
-    * $this->openAPINullablesSetToNull array
-    *
-    * @param string $variableName
-    * @param array  $fields
-    * @param mixed  $defaultValue
-    */
-    private function setIfExists(string $variableName, array $fields, $defaultValue): void
-    {
-        if (self::isNullable($variableName) && array_key_exists($variableName, $fields) && is_null($fields[$variableName])) {
-            $this->openAPINullablesSetToNull[] = $variableName;
-        }
-
-        $this->container[$variableName] = $fields[$variableName] ?? $defaultValue;
+        return count($this->listInvalidProperties()) === 0;
     }
 
     /**
@@ -356,18 +352,6 @@ class SupportingContactDetails implements ModelInterface, ArrayAccess, \JsonSeri
     }
 
     /**
-     * Validate all the properties in the model
-     * return true if all passed
-     *
-     * @return bool True if all properties are valid
-     */
-    public function valid()
-    {
-        return count($this->listInvalidProperties()) === 0;
-    }
-
-
-    /**
      * Gets first_line
      *
      * @return string|null
@@ -380,7 +364,7 @@ class SupportingContactDetails implements ModelInterface, ArrayAccess, \JsonSeri
     /**
      * Sets first_line
      *
-     * @param string|null $first_line first_line
+     * @param  string|null  $first_line  first_line
      *
      * @return self
      */
@@ -407,7 +391,7 @@ class SupportingContactDetails implements ModelInterface, ArrayAccess, \JsonSeri
     /**
      * Sets second_line
      *
-     * @param string|null $second_line second_line
+     * @param  string|null  $second_line  second_line
      *
      * @return self
      */
@@ -418,7 +402,7 @@ class SupportingContactDetails implements ModelInterface, ArrayAccess, \JsonSeri
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
             $index = array_search('second_line', $nullablesSetToNull);
-            if ($index !== FALSE) {
+            if ($index !== false) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
@@ -426,6 +410,16 @@ class SupportingContactDetails implements ModelInterface, ArrayAccess, \JsonSeri
         $this->container['second_line'] = $second_line;
 
         return $this;
+    }
+
+    /**
+     * Setter - Array of nullable field names deliberately set to null
+     *
+     * @param  boolean[]  $openAPINullablesSetToNull
+     */
+    private function setOpenAPINullablesSetToNull(array $openAPINullablesSetToNull): void
+    {
+        $this->openAPINullablesSetToNull = $openAPINullablesSetToNull;
     }
 
     /**
@@ -441,7 +435,7 @@ class SupportingContactDetails implements ModelInterface, ArrayAccess, \JsonSeri
     /**
      * Sets city
      *
-     * @param string|null $city city
+     * @param  string|null  $city  city
      *
      * @return self
      */
@@ -468,7 +462,7 @@ class SupportingContactDetails implements ModelInterface, ArrayAccess, \JsonSeri
     /**
      * Sets region
      *
-     * @param string|null $region region
+     * @param  string|null  $region  region
      *
      * @return self
      */
@@ -479,7 +473,7 @@ class SupportingContactDetails implements ModelInterface, ArrayAccess, \JsonSeri
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
             $index = array_search('region', $nullablesSetToNull);
-            if ($index !== FALSE) {
+            if ($index !== false) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
@@ -502,7 +496,7 @@ class SupportingContactDetails implements ModelInterface, ArrayAccess, \JsonSeri
     /**
      * Sets postcode
      *
-     * @param string|null $postcode postcode
+     * @param  string|null  $postcode  postcode
      *
      * @return self
      */
@@ -529,7 +523,7 @@ class SupportingContactDetails implements ModelInterface, ArrayAccess, \JsonSeri
     /**
      * Sets country
      *
-     * @param string|null $country alpha-2 country code
+     * @param  string|null  $country  alpha-2 country code
      *
      * @return self
      */
@@ -556,7 +550,7 @@ class SupportingContactDetails implements ModelInterface, ArrayAccess, \JsonSeri
     /**
      * Sets first_name
      *
-     * @param string|null $first_name first_name
+     * @param  string|null  $first_name  first_name
      *
      * @return self
      */
@@ -583,7 +577,7 @@ class SupportingContactDetails implements ModelInterface, ArrayAccess, \JsonSeri
     /**
      * Sets last_name
      *
-     * @param string|null $last_name last_name
+     * @param  string|null  $last_name  last_name
      *
      * @return self
      */
@@ -610,7 +604,7 @@ class SupportingContactDetails implements ModelInterface, ArrayAccess, \JsonSeri
     /**
      * Sets relationship
      *
-     * @param string|null $relationship relationship
+     * @param  string|null  $relationship  relationship
      *
      * @return self
      */
@@ -637,7 +631,7 @@ class SupportingContactDetails implements ModelInterface, ArrayAccess, \JsonSeri
     /**
      * Sets email
      *
-     * @param string|null $email email
+     * @param  string|null  $email  email
      *
      * @return self
      */
@@ -664,7 +658,7 @@ class SupportingContactDetails implements ModelInterface, ArrayAccess, \JsonSeri
     /**
      * Sets date_of_birth
      *
-     * @param string|null $date_of_birth date_of_birth
+     * @param  string|null  $date_of_birth  date_of_birth
      *
      * @return self
      */
@@ -691,7 +685,7 @@ class SupportingContactDetails implements ModelInterface, ArrayAccess, \JsonSeri
     /**
      * Sets contact_number
      *
-     * @param string|null $contact_number contact_number
+     * @param  string|null  $contact_number  contact_number
      *
      * @return self
      */
@@ -704,10 +698,11 @@ class SupportingContactDetails implements ModelInterface, ArrayAccess, \JsonSeri
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param  integer  $offset  Offset
      *
      * @return boolean
      */
@@ -719,7 +714,7 @@ class SupportingContactDetails implements ModelInterface, ArrayAccess, \JsonSeri
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param  integer  $offset  Offset
      *
      * @return mixed|null
      */
@@ -732,8 +727,8 @@ class SupportingContactDetails implements ModelInterface, ArrayAccess, \JsonSeri
     /**
      * Sets value based on offset.
      *
-     * @param int|null $offset Offset
-     * @param mixed    $value  Value to be set
+     * @param  int|null  $offset  Offset
+     * @param  mixed  $value  Value to be set
      *
      * @return void
      */
@@ -749,7 +744,7 @@ class SupportingContactDetails implements ModelInterface, ArrayAccess, \JsonSeri
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param  integer  $offset  Offset
      *
      * @return void
      */
@@ -768,7 +763,7 @@ class SupportingContactDetails implements ModelInterface, ArrayAccess, \JsonSeri
     #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
