@@ -3,9 +3,12 @@
 namespace Housemates\ConnectApi;
 
 use Housemates\ConnectApi\Api\PropertyApi;
+use Housemates\ConnectApi\Api\RoomApi;
 use Housemates\ConnectApi\Exceptions\ApiException as HousematesApiException;
 use Housemates\ConnectApi\Exceptions\ConfigurationException;
 use Housemates\ConnectApi\Filters\PropertyFilter;
+use Housemates\ConnectApi\Filters\RoomFilter;
+use Housemates\ConnectApi\Sorts\RoomSort;
 use OpenAPI\Client\Configuration as OpenApiConfig;
 
 class ApiClient
@@ -61,5 +64,31 @@ class ApiClient
             $this->config,
             $this->openApiConfig
         )->getProperty($propertyId);
+    }
+
+    public function getRooms(
+        RoomFilter $filters = null,
+        RoomSort $sort = null
+    ) {
+        return RoomApi::make(
+            $this->config,
+            $this->openApiConfig
+        )->getRooms($filters, $sort);
+    }
+
+    public function getRoom(string $roomId)
+    {
+        return RoomApi::make(
+            $this->config,
+            $this->openApiConfig
+        )->getRoom($roomId);
+    }
+
+    public function getRoomBookingPeriods(string $roomId)
+    {
+        return RoomApi::make(
+            $this->config,
+            $this->openApiConfig
+        )->getRoomBookingPeriods($roomId);
     }
 }

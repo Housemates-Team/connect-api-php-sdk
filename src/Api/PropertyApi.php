@@ -14,47 +14,29 @@ class PropertyApi extends BaseApi
         PropertyFilter $filters = null
     ) {
 
-        if (null === $filters) {
-            try {
-                return $this->getApiInstance()->getProperties(
-                    $this->config->getApiPartnerId(),
-                );
-            } catch (ApiException $e) {
-                throw HousematesApiException::because(
-                    sprintf(
-                        'ApiException: %s %s',
-                        $e->getCode(),
-                        $e->getMessage()
-                    ),
-                );
-            } catch (Exception $e) {
-                throw HousematesApiException::because(
-                    $e->getMessage()
-                );
+        try {
+            $apiInstance = $this->getApiInstance();
+            $apiPartnerId = $this->config->getApiPartnerId();
+
+            if (null === $filters) {
+                return $apiInstance->getProperties($apiPartnerId);
             }
 
-        }
-
-        try {
-            return $this->getApiInstance()->getProperties(
-                $this->config->getApiPartnerId(),
+            $args = [
+                $apiPartnerId,
                 $filters->getCityFilter(),
                 $filters->getSlugFilter(),
                 $filters->getAmenitiesFilter(),
                 $filters->getPerPage(),
-            );
+            ];
+
+            return $apiInstance->getProperties(...$args);
         } catch (ApiException $e) {
             throw HousematesApiException::because(
-                sprintf(
-                    'ApiException: %s %s',
-                    $e->getCode(),
-                    $e->getMessage()
-                ),
+                sprintf('ApiException: %s %s', $e->getCode(), $e->getMessage())
             );
         } catch (Exception $e) {
-            throw HousematesApiException::because(
-                $e->getMessage()
-            );
+            throw HousematesApiException::because($e->getMessage());
         }
 
     }
@@ -68,12 +50,8 @@ class PropertyApi extends BaseApi
 
     public function getProperty(string $propertyId)
     {
-        $apiInstance = new PropertiesApi(
-            $this->config->getClient(), $this->openApiConfig
-        );
-
         try {
-            return $apiInstance->getProperty(
+            return $this->getApiInstance()->getProperty(
                 $this->config->getApiPartnerId(),
                 $propertyId,
             );
