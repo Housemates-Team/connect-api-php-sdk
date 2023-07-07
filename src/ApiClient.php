@@ -8,7 +8,7 @@ use OpenAPI\Client\Api\PropertiesApi;
 use OpenAPI\Client\ApiException;
 use OpenAPI\Client\Configuration as OpenApiConfig;
 
-class Sdk
+class ApiClient
 {
     protected Configuration $config;
 
@@ -35,7 +35,7 @@ class Sdk
     /**
      * @throws ConfigurationException
      */
-    public static function make(Configuration $config): Sdk
+    public static function make(Configuration $config): self
     {
         return new self($config);
     }
@@ -52,17 +52,30 @@ class Sdk
         );
 
         if (null === $filters) {
-            return $apiInstance->getProperties(
-                $this->config->getApiPartnerId(),
-            );
+            try {
+                return $apiInstance->getProperties(
+                    $this->config->getApiPartnerId(),
+                );
+            } catch (ApiException $e) {
+                throw $e->getResponseObject();
+            } catch (\Exception $e) {
+                throw $e;
+            }
+
         }
 
-        return $apiInstance->getProperties(
-            $this->config->getApiPartnerId(),
-            $filters->getCityFilter(),
-            $filters->getSlugFilter(),
-            $filters->getAmenitiesFilter(),
-            $filters->getPerPage(),
-        );
+        try {
+            return $apiInstance->getProperties(
+                $this->config->getApiPartnerId(),
+                $filters->getCityFilter(),
+                $filters->getSlugFilter(),
+                $filters->getAmenitiesFilter(),
+                $filters->getPerPage(),
+            );
+        } catch (ApiException $e) {
+            throw $e->getResponseObject();
+        } catch (\Exception $e) {
+            throw $e;
+        }
     }
 }
