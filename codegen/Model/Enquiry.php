@@ -59,7 +59,7 @@ class Enquiry implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $openAPITypes = [
         'id' => 'string',
-        'provider_id' => 'string',
+        'operator_id' => 'string',
         'property_id' => 'string',
         'room_id' => 'string',
         'property_name' => 'string',
@@ -79,7 +79,7 @@ class Enquiry implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $openAPIFormats = [
         'id' => null,
-        'provider_id' => null,
+        'operator_id' => null,
         'property_id' => null,
         'room_id' => null,
         'property_name' => null,
@@ -97,7 +97,7 @@ class Enquiry implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static array $openAPINullables = [
         'id' => false,
-        'provider_id' => false,
+        'operator_id' => false,
         'property_id' => false,
         'room_id' => false,
         'property_name' => false,
@@ -115,7 +115,7 @@ class Enquiry implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $attributeMap = [
         'id' => 'id',
-        'provider_id' => 'provider_id',
+        'operator_id' => 'operator_id',
         'property_id' => 'property_id',
         'room_id' => 'room_id',
         'property_name' => 'property_name',
@@ -132,7 +132,7 @@ class Enquiry implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $setters = [
         'id' => 'setId',
-        'provider_id' => 'setProviderId',
+        'operator_id' => 'setOperatorId',
         'property_id' => 'setPropertyId',
         'room_id' => 'setRoomId',
         'property_name' => 'setPropertyName',
@@ -149,7 +149,7 @@ class Enquiry implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $getters = [
         'id' => 'getId',
-        'provider_id' => 'getProviderId',
+        'operator_id' => 'getOperatorId',
         'property_id' => 'getPropertyId',
         'room_id' => 'getRoomId',
         'property_name' => 'getPropertyName',
@@ -181,7 +181,7 @@ class Enquiry implements ModelInterface, ArrayAccess, \JsonSerializable
     public function __construct(array $data = null)
     {
         $this->setIfExists('id', $data ?? [], null);
-        $this->setIfExists('provider_id', $data ?? [], null);
+        $this->setIfExists('operator_id', $data ?? [], null);
         $this->setIfExists('property_id', $data ?? [], null);
         $this->setIfExists('room_id', $data ?? [], null);
         $this->setIfExists('property_name', $data ?? [], null);
@@ -365,28 +365,28 @@ class Enquiry implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets provider_id
+     * Gets operator_id
      *
      * @return string|null
      */
-    public function getProviderId()
+    public function getOperatorId()
     {
-        return $this->container['provider_id'];
+        return $this->container['operator_id'];
     }
 
     /**
-     * Sets provider_id
+     * Sets operator_id
      *
-     * @param  string|null  $provider_id  provider_id
+     * @param  string|null  $operator_id  operator_id
      *
      * @return self
      */
-    public function setProviderId($provider_id)
+    public function setOperatorId($operator_id)
     {
-        if (is_null($provider_id)) {
-            throw new \InvalidArgumentException('non-nullable provider_id cannot be null');
+        if (is_null($operator_id)) {
+            throw new \InvalidArgumentException('non-nullable operator_id cannot be null');
         }
-        $this->container['provider_id'] = $provider_id;
+        $this->container['operator_id'] = $operator_id;
 
         return $this;
     }

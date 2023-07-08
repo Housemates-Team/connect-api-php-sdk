@@ -4,7 +4,8 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/housemates/connect-api.svg?style=flat-square)](https://packagist.org/packages/housemates/connect-api)
 ![GitHub Actions](https://github.com/housemates/connect-api/actions/workflows/main.yml/badge.svg)
 
-This is where your description should go. Try and limit it to a paragraph or two, and maybe throw in a mention of what PSRs you support to avoid any confusion with users and contributors.
+This is where your description should go. Try and limit it to a paragraph or two, and maybe throw in a mention of what
+PSRs you support to avoid any confusion with users and contributors.
 
 ## Installation
 
@@ -40,8 +41,8 @@ If you discover any security related issues, please email muhammad@housemates.io
 
 ## Credits
 
--   [Muhammad Ali Shah](https://github.com/housemates)
--   [All Contributors](../../contributors)
+- [Muhammad Ali Shah](https://github.com/housemates)
+- [All Contributors](../../contributors)
 
 ## License
 
@@ -49,4 +50,5 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 
 ## PHP Package Boilerplate
 
-This package was generated using the [PHP Package Boilerplate](https://laravelpackageboilerplate.com) by [Beyond Code](http://beyondco.de/).
+This package was generated using the [PHP Package Boilerplate](https://laravelpackageboilerplate.com)
+by [Beyond Code](http://beyondco.de/).

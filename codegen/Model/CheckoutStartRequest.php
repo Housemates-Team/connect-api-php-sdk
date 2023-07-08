@@ -59,7 +59,7 @@ class CheckoutStartRequest implements ModelInterface, ArrayAccess, \JsonSerializ
      */
     protected static $openAPITypes = [
         'booking_period_id' => 'string',
-        'provider_id' => 'string'
+        'operator_id' => 'string'
     ];
 
     /**
@@ -71,7 +71,7 @@ class CheckoutStartRequest implements ModelInterface, ArrayAccess, \JsonSerializ
      */
     protected static $openAPIFormats = [
         'booking_period_id' => null,
-        'provider_id' => null
+        'operator_id' => null
     ];
 
     /**
@@ -81,7 +81,7 @@ class CheckoutStartRequest implements ModelInterface, ArrayAccess, \JsonSerializ
      */
     protected static array $openAPINullables = [
         'booking_period_id' => false,
-        'provider_id' => false
+        'operator_id' => false
     ];
     /**
      * Array of attributes where the key is the local name,
@@ -91,7 +91,7 @@ class CheckoutStartRequest implements ModelInterface, ArrayAccess, \JsonSerializ
      */
     protected static $attributeMap = [
         'booking_period_id' => 'booking_period_id',
-        'provider_id' => 'provider_id'
+        'operator_id' => 'operator_id'
     ];
     /**
      * Array of attributes to setter functions (for deserialization of responses)
@@ -100,7 +100,7 @@ class CheckoutStartRequest implements ModelInterface, ArrayAccess, \JsonSerializ
      */
     protected static $setters = [
         'booking_period_id' => 'setBookingPeriodId',
-        'provider_id' => 'setProviderId'
+        'operator_id' => 'setOperatorId'
     ];
     /**
      * Array of attributes to getter functions (for serialization of requests)
@@ -109,7 +109,7 @@ class CheckoutStartRequest implements ModelInterface, ArrayAccess, \JsonSerializ
      */
     protected static $getters = [
         'booking_period_id' => 'getBookingPeriodId',
-        'provider_id' => 'getProviderId'
+        'operator_id' => 'getOperatorId'
     ];
     /**
      * If a nullable field gets set to null, insert it here
@@ -133,7 +133,7 @@ class CheckoutStartRequest implements ModelInterface, ArrayAccess, \JsonSerializ
     public function __construct(array $data = null)
     {
         $this->setIfExists('booking_period_id', $data ?? [], null);
-        $this->setIfExists('provider_id', $data ?? [], null);
+        $this->setIfExists('operator_id', $data ?? [], null);
     }
 
     /**
@@ -281,8 +281,8 @@ class CheckoutStartRequest implements ModelInterface, ArrayAccess, \JsonSerializ
         if ($this->container['booking_period_id'] === null) {
             $invalidProperties[] = "'booking_period_id' can't be null";
         }
-        if ($this->container['provider_id'] === null) {
-            $invalidProperties[] = "'provider_id' can't be null";
+        if ($this->container['operator_id'] === null) {
+            $invalidProperties[] = "'operator_id' can't be null";
         }
         return $invalidProperties;
     }
@@ -315,28 +315,28 @@ class CheckoutStartRequest implements ModelInterface, ArrayAccess, \JsonSerializ
     }
 
     /**
-     * Gets provider_id
+     * Gets operator_id
      *
      * @return string
      */
-    public function getProviderId()
+    public function getOperatorId()
     {
-        return $this->container['provider_id'];
+        return $this->container['operator_id'];
     }
 
     /**
-     * Sets provider_id
+     * Sets operator_id
      *
-     * @param  string  $provider_id  provider_id
+     * @param  string  $operator_id  operator_id
      *
      * @return self
      */
-    public function setProviderId($provider_id)
+    public function setOperatorId($operator_id)
     {
-        if (is_null($provider_id)) {
-            throw new \InvalidArgumentException('non-nullable provider_id cannot be null');
+        if (is_null($operator_id)) {
+            throw new \InvalidArgumentException('non-nullable operator_id cannot be null');
         }
-        $this->container['provider_id'] = $provider_id;
+        $this->container['operator_id'] = $operator_id;
 
         return $this;
     }

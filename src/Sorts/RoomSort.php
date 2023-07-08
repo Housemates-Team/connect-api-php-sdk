@@ -1,6 +1,8 @@
 <?php
 
-namespace Housemates\ConnectApi\Filters;
+namespace Housemates\ConnectApi\Sorts;
+
+use Housemates\ConnectApi\Exceptions\SortException;
 
 class RoomSort
 {
@@ -15,10 +17,18 @@ class RoomSort
     ];
 
 
+    /**
+     * @throws SortException
+     */
     public function setSortBy(string $field, string $direction = 'desc'): self
     {
+        if (!in_array($field, $this->allowed_sorts)) {
+            throw SortException::because("{$field} is not a valid sort field");
+        }
+
         $prefix = ($direction === 'desc') ? '-' : '';
-        $this->sorts[$field] = $prefix . $field;
+        $this->sorts[$field] = $prefix.$field;
+
         return $this;
     }
 
@@ -26,6 +36,5 @@ class RoomSort
     {
         return $this->sorts;
     }
-
 
 }

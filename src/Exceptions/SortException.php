@@ -2,7 +2,12 @@
 
 namespace Housemates\ConnectApi\Exceptions;
 
-class SortException
-{
+use Exception;
 
+class SortException extends Exception
+{
+    public static function because(string $message): self
+    {
+        return new static($message);
+    }
 }

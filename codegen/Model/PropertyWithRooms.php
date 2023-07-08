@@ -59,7 +59,7 @@ class PropertyWithRooms implements ModelInterface, ArrayAccess, \JsonSerializabl
      */
     protected static $openAPITypes = [
         'id' => 'string',
-        'provider_id' => 'string',
+        'operator_id' => 'string',
         'name' => 'string',
         'slug' => 'string',
         'price_range' => '\OpenAPI\Client\Model\PropertyPriceRange',
@@ -88,7 +88,7 @@ class PropertyWithRooms implements ModelInterface, ArrayAccess, \JsonSerializabl
      */
     protected static $openAPIFormats = [
         'id' => null,
-        'provider_id' => null,
+        'operator_id' => null,
         'name' => null,
         'slug' => null,
         'price_range' => null,
@@ -115,7 +115,7 @@ class PropertyWithRooms implements ModelInterface, ArrayAccess, \JsonSerializabl
      */
     protected static array $openAPINullables = [
         'id' => false,
-        'provider_id' => false,
+        'operator_id' => false,
         'name' => false,
         'slug' => false,
         'price_range' => false,
@@ -142,7 +142,7 @@ class PropertyWithRooms implements ModelInterface, ArrayAccess, \JsonSerializabl
      */
     protected static $attributeMap = [
         'id' => 'id',
-        'provider_id' => 'provider_id',
+        'operator_id' => 'operator_id',
         'name' => 'name',
         'slug' => 'slug',
         'price_range' => 'price_range',
@@ -168,7 +168,7 @@ class PropertyWithRooms implements ModelInterface, ArrayAccess, \JsonSerializabl
      */
     protected static $setters = [
         'id' => 'setId',
-        'provider_id' => 'setProviderId',
+        'operator_id' => 'setOperatorId',
         'name' => 'setName',
         'slug' => 'setSlug',
         'price_range' => 'setPriceRange',
@@ -194,7 +194,7 @@ class PropertyWithRooms implements ModelInterface, ArrayAccess, \JsonSerializabl
      */
     protected static $getters = [
         'id' => 'getId',
-        'provider_id' => 'getProviderId',
+        'operator_id' => 'getOperatorId',
         'name' => 'getName',
         'slug' => 'getSlug',
         'price_range' => 'getPriceRange',
@@ -235,7 +235,7 @@ class PropertyWithRooms implements ModelInterface, ArrayAccess, \JsonSerializabl
     public function __construct(array $data = null)
     {
         $this->setIfExists('id', $data ?? [], null);
-        $this->setIfExists('provider_id', $data ?? [], null);
+        $this->setIfExists('operator_id', $data ?? [], null);
         $this->setIfExists('name', $data ?? [], null);
         $this->setIfExists('slug', $data ?? [], null);
         $this->setIfExists('price_range', $data ?? [], null);
@@ -428,28 +428,28 @@ class PropertyWithRooms implements ModelInterface, ArrayAccess, \JsonSerializabl
     }
 
     /**
-     * Gets provider_id
+     * Gets operator_id
      *
      * @return string|null
      */
-    public function getProviderId()
+    public function getOperatorId()
     {
-        return $this->container['provider_id'];
+        return $this->container['operator_id'];
     }
 
     /**
-     * Sets provider_id
+     * Sets operator_id
      *
-     * @param  string|null  $provider_id  provider_id
+     * @param  string|null  $operator_id  operator_id
      *
      * @return self
      */
-    public function setProviderId($provider_id)
+    public function setOperatorId($operator_id)
     {
-        if (is_null($provider_id)) {
-            throw new \InvalidArgumentException('non-nullable provider_id cannot be null');
+        if (is_null($operator_id)) {
+            throw new \InvalidArgumentException('non-nullable operator_id cannot be null');
         }
-        $this->container['provider_id'] = $provider_id;
+        $this->container['operator_id'] = $operator_id;
 
         return $this;
     }

@@ -53,10 +53,11 @@ class CheckoutApi
     /** @var string[] $contentTypes * */
     public const contentTypes = [
         'checkoutComplete' => [
-            'application/json',
+            'multipart/form-data',
         ],
         'checkoutStart' => [
             'application/json',
+            'application/x-www-form-urlencoded',
         ],
     ];
     /**
@@ -129,21 +130,36 @@ class CheckoutApi
      *
      * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
      * @param  string  $room_id  unique id of the room (required)
-     * @param  \OpenAPI\Client\Model\CheckoutCompleteRequest  $checkout_complete  checkout_complete (required)
+     * @param  string  $session_token  session_token (required)
+     * @param  bool  $paying_in_instalments  paying_in_instalments (required)
+     * @param  bool  $has_uk_based_guarantor  has_uk_based_guarantor (required)
+     * @param  bool  $is_using_housing_hand  is_using_housing_hand (required)
+     * @param  \OpenAPI\Client\Model\ResidentDetails  $resident_details  resident_details (required)
+     * @param  \OpenAPI\Client\Model\CourseDetails  $course_details  course_details (required)
+     * @param  \OpenAPI\Client\Model\SupportingContactDetails  $supporing_contact_details  supporing_contact_details (optional)
+     * @param  string  $special_request  special_request (optional)
      * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['checkoutComplete'] to see the possible values for this operation
      *
      * @return \OpenAPI\Client\Model\CheckoutComplete201Response|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\UnauthenticatedErrorResponse|\OpenAPI\Client\Model\ErrorResponse
-     * @throws \InvalidArgumentException
      * @throws \OpenAPI\Client\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
      */
     public function checkoutComplete(
         $x_api_partner_id,
         $room_id,
-        $checkout_complete,
+        $session_token,
+        $paying_in_instalments,
+        $has_uk_based_guarantor,
+        $is_using_housing_hand,
+        $resident_details,
+        $course_details,
+        $supporing_contact_details = null,
+        $special_request = null,
         string $contentType = self::contentTypes['checkoutComplete'][0]
     ) {
-        list($response) = $this->checkoutCompleteWithHttpInfo($x_api_partner_id, $room_id, $checkout_complete,
-            $contentType);
+        list($response) = $this->checkoutCompleteWithHttpInfo($x_api_partner_id, $room_id, $session_token,
+            $paying_in_instalments, $has_uk_based_guarantor, $is_using_housing_hand, $resident_details, $course_details,
+            $supporing_contact_details, $special_request, $contentType);
         return $response;
     }
 
@@ -154,20 +170,36 @@ class CheckoutApi
      *
      * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
      * @param  string  $room_id  unique id of the room (required)
-     * @param  \OpenAPI\Client\Model\CheckoutCompleteRequest  $checkout_complete  (required)
+     * @param  string  $session_token  (required)
+     * @param  bool  $paying_in_instalments  (required)
+     * @param  bool  $has_uk_based_guarantor  (required)
+     * @param  bool  $is_using_housing_hand  (required)
+     * @param  \OpenAPI\Client\Model\ResidentDetails  $resident_details  (required)
+     * @param  \OpenAPI\Client\Model\CourseDetails  $course_details  (required)
+     * @param  \OpenAPI\Client\Model\SupportingContactDetails  $supporing_contact_details  (optional)
+     * @param  string  $special_request  (optional)
      * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['checkoutComplete'] to see the possible values for this operation
      *
      * @return array of \OpenAPI\Client\Model\CheckoutComplete201Response|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\UnauthenticatedErrorResponse|\OpenAPI\Client\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
-     * @throws \InvalidArgumentException
      * @throws \OpenAPI\Client\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
      */
     public function checkoutCompleteWithHttpInfo(
         $x_api_partner_id,
         $room_id,
-        $checkout_complete,
+        $session_token,
+        $paying_in_instalments,
+        $has_uk_based_guarantor,
+        $is_using_housing_hand,
+        $resident_details,
+        $course_details,
+        $supporing_contact_details = null,
+        $special_request = null,
         string $contentType = self::contentTypes['checkoutComplete'][0]
     ) {
-        $request = $this->checkoutCompleteRequest($x_api_partner_id, $room_id, $checkout_complete, $contentType);
+        $request = $this->checkoutCompleteRequest($x_api_partner_id, $room_id, $session_token, $paying_in_instalments,
+            $has_uk_based_guarantor, $is_using_housing_hand, $resident_details, $course_details,
+            $supporing_contact_details, $special_request, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -398,7 +430,14 @@ class CheckoutApi
      *
      * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
      * @param  string  $room_id  unique id of the room (required)
-     * @param  \OpenAPI\Client\Model\CheckoutCompleteRequest  $checkout_complete  (required)
+     * @param  string  $session_token  (required)
+     * @param  bool  $paying_in_instalments  (required)
+     * @param  bool  $has_uk_based_guarantor  (required)
+     * @param  bool  $is_using_housing_hand  (required)
+     * @param  \OpenAPI\Client\Model\ResidentDetails  $resident_details  (required)
+     * @param  \OpenAPI\Client\Model\CourseDetails  $course_details  (required)
+     * @param  \OpenAPI\Client\Model\SupportingContactDetails  $supporing_contact_details  (optional)
+     * @param  string  $special_request  (optional)
      * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['checkoutComplete'] to see the possible values for this operation
      *
      * @return \GuzzleHttp\Psr7\Request
@@ -407,7 +446,14 @@ class CheckoutApi
     public function checkoutCompleteRequest(
         $x_api_partner_id,
         $room_id,
-        $checkout_complete,
+        $session_token,
+        $paying_in_instalments,
+        $has_uk_based_guarantor,
+        $is_using_housing_hand,
+        $resident_details,
+        $course_details,
+        $supporing_contact_details = null,
+        $special_request = null,
         string $contentType = self::contentTypes['checkoutComplete'][0]
     ) {
 
@@ -425,10 +471,45 @@ class CheckoutApi
             );
         }
 
-        // verify the required parameter 'checkout_complete' is set
-        if ($checkout_complete === null || (is_array($checkout_complete) && count($checkout_complete) === 0)) {
+        // verify the required parameter 'session_token' is set
+        if ($session_token === null || (is_array($session_token) && count($session_token) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $checkout_complete when calling checkoutComplete'
+                'Missing the required parameter $session_token when calling checkoutComplete'
+            );
+        }
+
+        // verify the required parameter 'paying_in_instalments' is set
+        if ($paying_in_instalments === null || (is_array($paying_in_instalments) && count($paying_in_instalments) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $paying_in_instalments when calling checkoutComplete'
+            );
+        }
+
+        // verify the required parameter 'has_uk_based_guarantor' is set
+        if ($has_uk_based_guarantor === null || (is_array($has_uk_based_guarantor) && count($has_uk_based_guarantor) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $has_uk_based_guarantor when calling checkoutComplete'
+            );
+        }
+
+        // verify the required parameter 'is_using_housing_hand' is set
+        if ($is_using_housing_hand === null || (is_array($is_using_housing_hand) && count($is_using_housing_hand) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $is_using_housing_hand when calling checkoutComplete'
+            );
+        }
+
+        // verify the required parameter 'resident_details' is set
+        if ($resident_details === null || (is_array($resident_details) && count($resident_details) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $resident_details when calling checkoutComplete'
+            );
+        }
+
+        // verify the required parameter 'course_details' is set
+        if ($course_details === null || (is_array($course_details) && count($course_details) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $course_details when calling checkoutComplete'
             );
         }
 
@@ -455,6 +536,38 @@ class CheckoutApi
             );
         }
 
+        // form params
+        if ($session_token !== null) {
+            $formParams['session_token'] = ObjectSerializer::toFormValue($session_token);
+        }
+        // form params
+        if ($paying_in_instalments !== null) {
+            $formParams['paying_in_instalments'] = ObjectSerializer::toFormValue($paying_in_instalments);
+        }
+        // form params
+        if ($has_uk_based_guarantor !== null) {
+            $formParams['has_uk_based_guarantor'] = ObjectSerializer::toFormValue($has_uk_based_guarantor);
+        }
+        // form params
+        if ($is_using_housing_hand !== null) {
+            $formParams['is_using_housing_hand'] = ObjectSerializer::toFormValue($is_using_housing_hand);
+        }
+        // form params
+        if ($resident_details !== null) {
+            $formParams['resident_details'] = ObjectSerializer::toFormValue($resident_details);
+        }
+        // form params
+        if ($supporing_contact_details !== null) {
+            $formParams['supporing_contact_details'] = ObjectSerializer::toFormValue($supporing_contact_details);
+        }
+        // form params
+        if ($course_details !== null) {
+            $formParams['course_details'] = ObjectSerializer::toFormValue($course_details);
+        }
+        // form params
+        if ($special_request !== null) {
+            $formParams['special_request'] = ObjectSerializer::toFormValue($special_request);
+        }
 
         $headers = $this->headerSelector->selectHeaders(
             ['application/json',],
@@ -463,14 +576,7 @@ class CheckoutApi
         );
 
         // for model (json/xml)
-        if (isset($checkout_complete)) {
-            if (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($checkout_complete));
-            } else {
-                $httpBody = $checkout_complete;
-            }
-        } elseif (count($formParams) > 0) {
+        if (count($formParams) > 0) {
             if ($multipart) {
                 $multipartContents = [];
                 foreach ($formParams as $formParamName => $formParamValue) {
@@ -546,7 +652,14 @@ class CheckoutApi
      *
      * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
      * @param  string  $room_id  unique id of the room (required)
-     * @param  \OpenAPI\Client\Model\CheckoutCompleteRequest  $checkout_complete  (required)
+     * @param  string  $session_token  (required)
+     * @param  bool  $paying_in_instalments  (required)
+     * @param  bool  $has_uk_based_guarantor  (required)
+     * @param  bool  $is_using_housing_hand  (required)
+     * @param  \OpenAPI\Client\Model\ResidentDetails  $resident_details  (required)
+     * @param  \OpenAPI\Client\Model\CourseDetails  $course_details  (required)
+     * @param  \OpenAPI\Client\Model\SupportingContactDetails  $supporing_contact_details  (optional)
+     * @param  string  $special_request  (optional)
      * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['checkoutComplete'] to see the possible values for this operation
      *
      * @return \GuzzleHttp\Promise\PromiseInterface
@@ -555,10 +668,19 @@ class CheckoutApi
     public function checkoutCompleteAsync(
         $x_api_partner_id,
         $room_id,
-        $checkout_complete,
+        $session_token,
+        $paying_in_instalments,
+        $has_uk_based_guarantor,
+        $is_using_housing_hand,
+        $resident_details,
+        $course_details,
+        $supporing_contact_details = null,
+        $special_request = null,
         string $contentType = self::contentTypes['checkoutComplete'][0]
     ) {
-        return $this->checkoutCompleteAsyncWithHttpInfo($x_api_partner_id, $room_id, $checkout_complete, $contentType)
+        return $this->checkoutCompleteAsyncWithHttpInfo($x_api_partner_id, $room_id, $session_token,
+            $paying_in_instalments, $has_uk_based_guarantor, $is_using_housing_hand, $resident_details, $course_details,
+            $supporing_contact_details, $special_request, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -573,7 +695,14 @@ class CheckoutApi
      *
      * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
      * @param  string  $room_id  unique id of the room (required)
-     * @param  \OpenAPI\Client\Model\CheckoutCompleteRequest  $checkout_complete  (required)
+     * @param  string  $session_token  (required)
+     * @param  bool  $paying_in_instalments  (required)
+     * @param  bool  $has_uk_based_guarantor  (required)
+     * @param  bool  $is_using_housing_hand  (required)
+     * @param  \OpenAPI\Client\Model\ResidentDetails  $resident_details  (required)
+     * @param  \OpenAPI\Client\Model\CourseDetails  $course_details  (required)
+     * @param  \OpenAPI\Client\Model\SupportingContactDetails  $supporing_contact_details  (optional)
+     * @param  string  $special_request  (optional)
      * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['checkoutComplete'] to see the possible values for this operation
      *
      * @return \GuzzleHttp\Promise\PromiseInterface
@@ -582,11 +711,20 @@ class CheckoutApi
     public function checkoutCompleteAsyncWithHttpInfo(
         $x_api_partner_id,
         $room_id,
-        $checkout_complete,
+        $session_token,
+        $paying_in_instalments,
+        $has_uk_based_guarantor,
+        $is_using_housing_hand,
+        $resident_details,
+        $course_details,
+        $supporing_contact_details = null,
+        $special_request = null,
         string $contentType = self::contentTypes['checkoutComplete'][0]
     ) {
         $returnType = '\OpenAPI\Client\Model\CheckoutComplete201Response';
-        $request = $this->checkoutCompleteRequest($x_api_partner_id, $room_id, $checkout_complete, $contentType);
+        $request = $this->checkoutCompleteRequest($x_api_partner_id, $room_id, $session_token, $paying_in_instalments,
+            $has_uk_based_guarantor, $is_using_housing_hand, $resident_details, $course_details,
+            $supporing_contact_details, $special_request, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())

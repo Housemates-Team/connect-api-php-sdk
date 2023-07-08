@@ -1385,7 +1385,6 @@ class RoomsApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
-
         return new Request(
             'GET',
             $operationHost.$resourcePath.($query ? "?{$query}" : ''),
