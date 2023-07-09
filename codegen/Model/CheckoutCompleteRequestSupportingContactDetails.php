@@ -1,6 +1,6 @@
 <?php
 /**
- * AddressParams
+ * CheckoutCompleteRequestSupportingContactDetails
  *
  * PHP version 7.4
  *
@@ -30,18 +30,21 @@
 namespace OpenAPI\Client\Model;
 
 use ArrayAccess;
+use InvalidArgumentException;
+use JsonSerializable;
 use OpenAPI\Client\ObjectSerializer;
+use ReturnTypeWillChange;
 
 /**
- * AddressParams Class Doc Comment
+ * CheckoutCompleteRequestSupportingContactDetails Class Doc Comment
  *
  * @category Class
  * @package  OpenAPI\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
- * @implements \ArrayAccess<string, mixed>
+ * @implements ArrayAccess<string, mixed>
  */
-class AddressParams implements ModelInterface, ArrayAccess, \JsonSerializable
+class CheckoutCompleteRequestSupportingContactDetails implements ModelInterface, ArrayAccess, JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +53,7 @@ class AddressParams implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @var string
      */
-    protected static $openAPIModelName = 'AddressParams';
+    protected static $openAPIModelName = 'checkoutComplete_request_supporting_contact_details';
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -63,7 +66,13 @@ class AddressParams implements ModelInterface, ArrayAccess, \JsonSerializable
         'city' => 'string',
         'region' => 'string',
         'postcode' => 'string',
-        'country' => 'string'
+        'country' => 'string',
+        'first_name' => 'string',
+        'last_name' => 'string',
+        'relationship' => 'string',
+        'email' => 'string',
+        'date_of_birth' => 'string',
+        'contact_number' => 'string'
     ];
 
     /**
@@ -79,7 +88,13 @@ class AddressParams implements ModelInterface, ArrayAccess, \JsonSerializable
         'city' => null,
         'region' => null,
         'postcode' => null,
-        'country' => null
+        'country' => null,
+        'first_name' => null,
+        'last_name' => null,
+        'relationship' => null,
+        'email' => null,
+        'date_of_birth' => null,
+        'contact_number' => null
     ];
 
     /**
@@ -93,7 +108,13 @@ class AddressParams implements ModelInterface, ArrayAccess, \JsonSerializable
         'city' => false,
         'region' => true,
         'postcode' => false,
-        'country' => false
+        'country' => false,
+        'first_name' => false,
+        'last_name' => false,
+        'relationship' => false,
+        'email' => false,
+        'date_of_birth' => false,
+        'contact_number' => false
     ];
     /**
      * Array of attributes where the key is the local name,
@@ -107,7 +128,13 @@ class AddressParams implements ModelInterface, ArrayAccess, \JsonSerializable
         'city' => 'city',
         'region' => 'region',
         'postcode' => 'postcode',
-        'country' => 'country'
+        'country' => 'country',
+        'first_name' => 'first_name',
+        'last_name' => 'last_name',
+        'relationship' => 'relationship',
+        'email' => 'email',
+        'date_of_birth' => 'date_of_birth',
+        'contact_number' => 'contact_number'
     ];
     /**
      * Array of attributes to setter functions (for deserialization of responses)
@@ -120,7 +147,13 @@ class AddressParams implements ModelInterface, ArrayAccess, \JsonSerializable
         'city' => 'setCity',
         'region' => 'setRegion',
         'postcode' => 'setPostcode',
-        'country' => 'setCountry'
+        'country' => 'setCountry',
+        'first_name' => 'setFirstName',
+        'last_name' => 'setLastName',
+        'relationship' => 'setRelationship',
+        'email' => 'setEmail',
+        'date_of_birth' => 'setDateOfBirth',
+        'contact_number' => 'setContactNumber'
     ];
     /**
      * Array of attributes to getter functions (for serialization of requests)
@@ -133,7 +166,13 @@ class AddressParams implements ModelInterface, ArrayAccess, \JsonSerializable
         'city' => 'getCity',
         'region' => 'getRegion',
         'postcode' => 'getPostcode',
-        'country' => 'getCountry'
+        'country' => 'getCountry',
+        'first_name' => 'getFirstName',
+        'last_name' => 'getLastName',
+        'relationship' => 'getRelationship',
+        'email' => 'getEmail',
+        'date_of_birth' => 'getDateOfBirth',
+        'contact_number' => 'getContactNumber'
     ];
     /**
      * If a nullable field gets set to null, insert it here
@@ -162,6 +201,12 @@ class AddressParams implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('region', $data ?? [], null);
         $this->setIfExists('postcode', $data ?? [], null);
         $this->setIfExists('country', $data ?? [], null);
+        $this->setIfExists('first_name', $data ?? [], null);
+        $this->setIfExists('last_name', $data ?? [], null);
+        $this->setIfExists('relationship', $data ?? [], null);
+        $this->setIfExists('email', $data ?? [], null);
+        $this->setIfExists('date_of_birth', $data ?? [], null);
+        $this->setIfExists('contact_number', $data ?? [], null);
     }
 
     /**
@@ -329,7 +374,7 @@ class AddressParams implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setFirstLine($first_line)
     {
         if (is_null($first_line)) {
-            throw new \InvalidArgumentException('non-nullable first_line cannot be null');
+            throw new InvalidArgumentException('non-nullable first_line cannot be null');
         }
         $this->container['first_line'] = $first_line;
 
@@ -400,7 +445,7 @@ class AddressParams implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setCity($city)
     {
         if (is_null($city)) {
-            throw new \InvalidArgumentException('non-nullable city cannot be null');
+            throw new InvalidArgumentException('non-nullable city cannot be null');
         }
         $this->container['city'] = $city;
 
@@ -461,7 +506,7 @@ class AddressParams implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setPostcode($postcode)
     {
         if (is_null($postcode)) {
-            throw new \InvalidArgumentException('non-nullable postcode cannot be null');
+            throw new InvalidArgumentException('non-nullable postcode cannot be null');
         }
         $this->container['postcode'] = $postcode;
 
@@ -488,9 +533,171 @@ class AddressParams implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setCountry($country)
     {
         if (is_null($country)) {
-            throw new \InvalidArgumentException('non-nullable country cannot be null');
+            throw new InvalidArgumentException('non-nullable country cannot be null');
         }
         $this->container['country'] = $country;
+
+        return $this;
+    }
+
+    /**
+     * Gets first_name
+     *
+     * @return string|null
+     */
+    public function getFirstName()
+    {
+        return $this->container['first_name'];
+    }
+
+    /**
+     * Sets first_name
+     *
+     * @param  string|null  $first_name  first_name
+     *
+     * @return self
+     */
+    public function setFirstName($first_name)
+    {
+        if (is_null($first_name)) {
+            throw new InvalidArgumentException('non-nullable first_name cannot be null');
+        }
+        $this->container['first_name'] = $first_name;
+
+        return $this;
+    }
+
+    /**
+     * Gets last_name
+     *
+     * @return string|null
+     */
+    public function getLastName()
+    {
+        return $this->container['last_name'];
+    }
+
+    /**
+     * Sets last_name
+     *
+     * @param  string|null  $last_name  last_name
+     *
+     * @return self
+     */
+    public function setLastName($last_name)
+    {
+        if (is_null($last_name)) {
+            throw new InvalidArgumentException('non-nullable last_name cannot be null');
+        }
+        $this->container['last_name'] = $last_name;
+
+        return $this;
+    }
+
+    /**
+     * Gets relationship
+     *
+     * @return string|null
+     */
+    public function getRelationship()
+    {
+        return $this->container['relationship'];
+    }
+
+    /**
+     * Sets relationship
+     *
+     * @param  string|null  $relationship  relationship
+     *
+     * @return self
+     */
+    public function setRelationship($relationship)
+    {
+        if (is_null($relationship)) {
+            throw new InvalidArgumentException('non-nullable relationship cannot be null');
+        }
+        $this->container['relationship'] = $relationship;
+
+        return $this;
+    }
+
+    /**
+     * Gets email
+     *
+     * @return string|null
+     */
+    public function getEmail()
+    {
+        return $this->container['email'];
+    }
+
+    /**
+     * Sets email
+     *
+     * @param  string|null  $email  email
+     *
+     * @return self
+     */
+    public function setEmail($email)
+    {
+        if (is_null($email)) {
+            throw new InvalidArgumentException('non-nullable email cannot be null');
+        }
+        $this->container['email'] = $email;
+
+        return $this;
+    }
+
+    /**
+     * Gets date_of_birth
+     *
+     * @return string|null
+     */
+    public function getDateOfBirth()
+    {
+        return $this->container['date_of_birth'];
+    }
+
+    /**
+     * Sets date_of_birth
+     *
+     * @param  string|null  $date_of_birth  date_of_birth
+     *
+     * @return self
+     */
+    public function setDateOfBirth($date_of_birth)
+    {
+        if (is_null($date_of_birth)) {
+            throw new InvalidArgumentException('non-nullable date_of_birth cannot be null');
+        }
+        $this->container['date_of_birth'] = $date_of_birth;
+
+        return $this;
+    }
+
+    /**
+     * Gets contact_number
+     *
+     * @return string|null
+     */
+    public function getContactNumber()
+    {
+        return $this->container['contact_number'];
+    }
+
+    /**
+     * Sets contact_number
+     *
+     * @param  string|null  $contact_number  contact_number
+     *
+     * @return self
+     */
+    public function setContactNumber($contact_number)
+    {
+        if (is_null($contact_number)) {
+            throw new InvalidArgumentException('non-nullable contact_number cannot be null');
+        }
+        $this->container['contact_number'] = $contact_number;
 
         return $this;
     }
@@ -514,7 +721,7 @@ class AddressParams implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @return mixed|null
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->container[$offset] ?? null;
@@ -556,7 +763,7 @@ class AddressParams implements ModelInterface, ArrayAccess, \JsonSerializable
      * @return mixed Returns data which can be serialized by json_encode(), which is a value
      * of any type other than a resource.
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return ObjectSerializer::sanitizeForSerialization($this);

@@ -30,7 +30,10 @@
 namespace OpenAPI\Client\Model;
 
 use ArrayAccess;
+use InvalidArgumentException;
+use JsonSerializable;
 use OpenAPI\Client\ObjectSerializer;
+use ReturnTypeWillChange;
 
 /**
  * RoomCancellation Class Doc Comment
@@ -40,9 +43,9 @@ use OpenAPI\Client\ObjectSerializer;
  * @package  OpenAPI\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
- * @implements \ArrayAccess<string, mixed>
+ * @implements ArrayAccess<string, mixed>
  */
-class RoomCancellation implements ModelInterface, ArrayAccess, \JsonSerializable
+class RoomCancellation implements ModelInterface, ArrayAccess, JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -302,7 +305,7 @@ class RoomCancellation implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setVisaCancellation($visa_cancellation)
     {
         if (is_null($visa_cancellation)) {
-            throw new \InvalidArgumentException('non-nullable visa_cancellation cannot be null');
+            throw new InvalidArgumentException('non-nullable visa_cancellation cannot be null');
         }
         $this->container['visa_cancellation'] = $visa_cancellation;
 
@@ -329,7 +332,7 @@ class RoomCancellation implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setUniPlaceCancellation($uni_place_cancellation)
     {
         if (is_null($uni_place_cancellation)) {
-            throw new \InvalidArgumentException('non-nullable uni_place_cancellation cannot be null');
+            throw new InvalidArgumentException('non-nullable uni_place_cancellation cannot be null');
         }
         $this->container['uni_place_cancellation'] = $uni_place_cancellation;
 
@@ -355,7 +358,7 @@ class RoomCancellation implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @return mixed|null
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->container[$offset] ?? null;
@@ -397,7 +400,7 @@ class RoomCancellation implements ModelInterface, ArrayAccess, \JsonSerializable
      * @return mixed Returns data which can be serialized by json_encode(), which is a value
      * of any type other than a resource.
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return ObjectSerializer::sanitizeForSerialization($this);

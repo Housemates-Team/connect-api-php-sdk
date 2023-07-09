@@ -32,13 +32,21 @@ use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Promise\PromiseInterface;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
+use GuzzleHttp\Utils;
+use InvalidArgumentException;
 use OpenAPI\Client\ApiException;
 use OpenAPI\Client\Configuration;
 use OpenAPI\Client\HeaderSelector;
+use OpenAPI\Client\Model\ErrorResponse;
+use OpenAPI\Client\Model\GetRoom200Response;
+use OpenAPI\Client\Model\GetRoomBookingPeriods200Response;
+use OpenAPI\Client\Model\GetRooms200Response;
 use OpenAPI\Client\ObjectSerializer;
+use RuntimeException;
 
 /**
  * RoomsApi Class Doc Comment
@@ -134,9 +142,9 @@ class RoomsApi
      * @param  string  $room_id  unique id of the room (required)
      * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getRoom'] to see the possible values for this operation
      *
-     * @return \OpenAPI\Client\Model\GetRoom200Response|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse
-     * @throws \InvalidArgumentException
-     * @throws \OpenAPI\Client\ApiException on non-2xx response
+     * @return GetRoom200Response|ErrorResponse|ErrorResponse|ErrorResponse|ErrorResponse
+     * @throws InvalidArgumentException
+     * @throws ApiException on non-2xx response
      */
     public function getRoom($x_api_partner_id, $room_id, string $contentType = self::contentTypes['getRoom'][0])
     {
@@ -154,8 +162,8 @@ class RoomsApi
      * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getRoom'] to see the possible values for this operation
      *
      * @return array of \OpenAPI\Client\Model\GetRoom200Response|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
-     * @throws \InvalidArgumentException
-     * @throws \OpenAPI\Client\ApiException on non-2xx response
+     * @throws InvalidArgumentException
+     * @throws ApiException on non-2xx response
      */
     public function getRoomWithHttpInfo(
         $x_api_partner_id,
@@ -347,22 +355,22 @@ class RoomsApi
      * @param  string  $room_id  unique id of the room (required)
      * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getRoom'] to see the possible values for this operation
      *
-     * @return \GuzzleHttp\Psr7\Request
-     * @throws \InvalidArgumentException
+     * @return Request
+     * @throws InvalidArgumentException
      */
     public function getRoomRequest($x_api_partner_id, $room_id, string $contentType = self::contentTypes['getRoom'][0])
     {
 
         // verify the required parameter 'x_api_partner_id' is set
         if ($x_api_partner_id === null || (is_array($x_api_partner_id) && count($x_api_partner_id) === 0)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 'Missing the required parameter $x_api_partner_id when calling getRoom'
             );
         }
 
         // verify the required parameter 'room_id' is set
         if ($room_id === null || (is_array($room_id) && count($room_id) === 0)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 'Missing the required parameter $room_id when calling getRoom'
             );
         }
@@ -415,7 +423,7 @@ class RoomsApi
 
             } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+                $httpBody = Utils::jsonEncode($formParams);
             } else {
                 // for HTTP post (form)
                 $httpBody = ObjectSerializer::buildQuery($formParams);
@@ -452,7 +460,7 @@ class RoomsApi
      * Create http client option
      *
      * @return array of http client options
-     * @throws \RuntimeException on file opening failure
+     * @throws RuntimeException on file opening failure
      */
     protected function createHttpClientOption()
     {
@@ -460,7 +468,7 @@ class RoomsApi
         if ($this->config->getDebug()) {
             $options[RequestOptions::DEBUG] = fopen($this->config->getDebugFile(), 'a');
             if (!$options[RequestOptions::DEBUG]) {
-                throw new \RuntimeException('Failed to open the debug file: '.$this->config->getDebugFile());
+                throw new RuntimeException('Failed to open the debug file: '.$this->config->getDebugFile());
             }
         }
 
@@ -476,8 +484,8 @@ class RoomsApi
      * @param  string  $room_id  unique id of the room (required)
      * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getRoom'] to see the possible values for this operation
      *
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     * @throws \InvalidArgumentException
+     * @return PromiseInterface
+     * @throws InvalidArgumentException
      */
     public function getRoomAsync($x_api_partner_id, $room_id, string $contentType = self::contentTypes['getRoom'][0])
     {
@@ -498,8 +506,8 @@ class RoomsApi
      * @param  string  $room_id  unique id of the room (required)
      * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getRoom'] to see the possible values for this operation
      *
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     * @throws \InvalidArgumentException
+     * @return PromiseInterface
+     * @throws InvalidArgumentException
      */
     public function getRoomAsyncWithHttpInfo(
         $x_api_partner_id,
@@ -554,9 +562,9 @@ class RoomsApi
      * @param  string  $room_id  unique id of the room (required)
      * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getRoomBookingPeriods'] to see the possible values for this operation
      *
-     * @return \OpenAPI\Client\Model\GetRoomBookingPeriods200Response|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse
-     * @throws \InvalidArgumentException
-     * @throws \OpenAPI\Client\ApiException on non-2xx response
+     * @return GetRoomBookingPeriods200Response|ErrorResponse|ErrorResponse|ErrorResponse|ErrorResponse
+     * @throws InvalidArgumentException
+     * @throws ApiException on non-2xx response
      */
     public function getRoomBookingPeriods(
         $x_api_partner_id,
@@ -577,8 +585,8 @@ class RoomsApi
      * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getRoomBookingPeriods'] to see the possible values for this operation
      *
      * @return array of \OpenAPI\Client\Model\GetRoomBookingPeriods200Response|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
-     * @throws \InvalidArgumentException
-     * @throws \OpenAPI\Client\ApiException on non-2xx response
+     * @throws InvalidArgumentException
+     * @throws ApiException on non-2xx response
      */
     public function getRoomBookingPeriodsWithHttpInfo(
         $x_api_partner_id,
@@ -771,8 +779,8 @@ class RoomsApi
      * @param  string  $room_id  unique id of the room (required)
      * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getRoomBookingPeriods'] to see the possible values for this operation
      *
-     * @return \GuzzleHttp\Psr7\Request
-     * @throws \InvalidArgumentException
+     * @return Request
+     * @throws InvalidArgumentException
      */
     public function getRoomBookingPeriodsRequest(
         $x_api_partner_id,
@@ -782,14 +790,14 @@ class RoomsApi
 
         // verify the required parameter 'x_api_partner_id' is set
         if ($x_api_partner_id === null || (is_array($x_api_partner_id) && count($x_api_partner_id) === 0)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 'Missing the required parameter $x_api_partner_id when calling getRoomBookingPeriods'
             );
         }
 
         // verify the required parameter 'room_id' is set
         if ($room_id === null || (is_array($room_id) && count($room_id) === 0)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 'Missing the required parameter $room_id when calling getRoomBookingPeriods'
             );
         }
@@ -842,7 +850,7 @@ class RoomsApi
 
             } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+                $httpBody = Utils::jsonEncode($formParams);
             } else {
                 // for HTTP post (form)
                 $httpBody = ObjectSerializer::buildQuery($formParams);
@@ -884,8 +892,8 @@ class RoomsApi
      * @param  string  $room_id  unique id of the room (required)
      * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getRoomBookingPeriods'] to see the possible values for this operation
      *
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     * @throws \InvalidArgumentException
+     * @return PromiseInterface
+     * @throws InvalidArgumentException
      */
     public function getRoomBookingPeriodsAsync(
         $x_api_partner_id,
@@ -909,8 +917,8 @@ class RoomsApi
      * @param  string  $room_id  unique id of the room (required)
      * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getRoomBookingPeriods'] to see the possible values for this operation
      *
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     * @throws \InvalidArgumentException
+     * @return PromiseInterface
+     * @throws InvalidArgumentException
      */
     public function getRoomBookingPeriodsAsyncWithHttpInfo(
         $x_api_partner_id,
@@ -972,9 +980,9 @@ class RoomsApi
      * @param  string  $sort_is_available  sort rooms by price (optional)
      * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getRooms'] to see the possible values for this operation
      *
-     * @return \OpenAPI\Client\Model\GetRooms200Response|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse
-     * @throws \OpenAPI\Client\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
+     * @return GetRooms200Response|ErrorResponse|ErrorResponse|ErrorResponse|ErrorResponse
+     * @throws ApiException on non-2xx response
+     * @throws InvalidArgumentException
      */
     public function getRooms(
         $x_api_partner_id,
@@ -1011,8 +1019,8 @@ class RoomsApi
      * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getRooms'] to see the possible values for this operation
      *
      * @return array of \OpenAPI\Client\Model\GetRooms200Response|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
-     * @throws \OpenAPI\Client\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
+     * @throws ApiException on non-2xx response
+     * @throws InvalidArgumentException
      */
     public function getRoomsWithHttpInfo(
         $x_api_partner_id,
@@ -1220,8 +1228,8 @@ class RoomsApi
      * @param  string  $sort_is_available  sort rooms by price (optional)
      * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getRooms'] to see the possible values for this operation
      *
-     * @return \GuzzleHttp\Psr7\Request
-     * @throws \InvalidArgumentException
+     * @return Request
+     * @throws InvalidArgumentException
      */
     public function getRoomsRequest(
         $x_api_partner_id,
@@ -1238,7 +1246,7 @@ class RoomsApi
 
         // verify the required parameter 'x_api_partner_id' is set
         if ($x_api_partner_id === null || (is_array($x_api_partner_id) && count($x_api_partner_id) === 0)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 'Missing the required parameter $x_api_partner_id when calling getRooms'
             );
         }
@@ -1246,7 +1254,7 @@ class RoomsApi
 
         if ($filter_move_in_date !== null && !preg_match("/^(0[1-9]|1[0-2])-(20[2-9][0-9]|30[0-9][0-9]|31[0-2][0-9])$/",
                 $filter_move_in_date)) {
-            throw new \InvalidArgumentException("invalid value for \"filter_move_in_date\" when calling RoomsApi.getRooms, must conform to the pattern /^(0[1-9]|1[0-2])-(20[2-9][0-9]|30[0-9][0-9]|31[0-2][0-9])$/.");
+            throw new InvalidArgumentException("invalid value for \"filter_move_in_date\" when calling RoomsApi.getRooms, must conform to the pattern /^(0[1-9]|1[0-2])-(20[2-9][0-9]|30[0-9][0-9]|31[0-2][0-9])$/.");
         }
 
 
@@ -1360,7 +1368,7 @@ class RoomsApi
 
             } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+                $httpBody = Utils::jsonEncode($formParams);
             } else {
                 // for HTTP post (form)
                 $httpBody = ObjectSerializer::buildQuery($formParams);
@@ -1409,8 +1417,8 @@ class RoomsApi
      * @param  string  $sort_is_available  sort rooms by price (optional)
      * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getRooms'] to see the possible values for this operation
      *
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     * @throws \InvalidArgumentException
+     * @return PromiseInterface
+     * @throws InvalidArgumentException
      */
     public function getRoomsAsync(
         $x_api_partner_id,
@@ -1449,8 +1457,8 @@ class RoomsApi
      * @param  string  $sort_is_available  sort rooms by price (optional)
      * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getRooms'] to see the possible values for this operation
      *
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     * @throws \InvalidArgumentException
+     * @return PromiseInterface
+     * @throws InvalidArgumentException
      */
     public function getRoomsAsyncWithHttpInfo(
         $x_api_partner_id,

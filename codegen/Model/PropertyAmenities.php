@@ -30,7 +30,10 @@
 namespace OpenAPI\Client\Model;
 
 use ArrayAccess;
+use InvalidArgumentException;
+use JsonSerializable;
 use OpenAPI\Client\ObjectSerializer;
+use ReturnTypeWillChange;
 
 /**
  * PropertyAmenities Class Doc Comment
@@ -39,9 +42,9 @@ use OpenAPI\Client\ObjectSerializer;
  * @package  OpenAPI\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
- * @implements \ArrayAccess<string, mixed>
+ * @implements ArrayAccess<string, mixed>
  */
-class PropertyAmenities implements ModelInterface, ArrayAccess, \JsonSerializable
+class PropertyAmenities implements ModelInterface, ArrayAccess, JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -291,7 +294,7 @@ class PropertyAmenities implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Gets general
      *
-     * @return \OpenAPI\Client\Model\EntityAmenities[]|null
+     * @return EntityAmenities[]|null
      */
     public function getGeneral()
     {
@@ -301,14 +304,14 @@ class PropertyAmenities implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Sets general
      *
-     * @param  \OpenAPI\Client\Model\EntityAmenities[]|null  $general  general
+     * @param  EntityAmenities[]|null  $general  general
      *
      * @return self
      */
     public function setGeneral($general)
     {
         if (is_null($general)) {
-            throw new \InvalidArgumentException('non-nullable general cannot be null');
+            throw new InvalidArgumentException('non-nullable general cannot be null');
         }
         $this->container['general'] = $general;
 
@@ -318,7 +321,7 @@ class PropertyAmenities implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Gets kitchen
      *
-     * @return \OpenAPI\Client\Model\EntityAmenities[]|null
+     * @return EntityAmenities[]|null
      */
     public function getKitchen()
     {
@@ -328,14 +331,14 @@ class PropertyAmenities implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Sets kitchen
      *
-     * @param  \OpenAPI\Client\Model\EntityAmenities[]|null  $kitchen  kitchen
+     * @param  EntityAmenities[]|null  $kitchen  kitchen
      *
      * @return self
      */
     public function setKitchen($kitchen)
     {
         if (is_null($kitchen)) {
-            throw new \InvalidArgumentException('non-nullable kitchen cannot be null');
+            throw new InvalidArgumentException('non-nullable kitchen cannot be null');
         }
         $this->container['kitchen'] = $kitchen;
 
@@ -345,7 +348,7 @@ class PropertyAmenities implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Gets services
      *
-     * @return \OpenAPI\Client\Model\EntityAmenities[]|null
+     * @return EntityAmenities[]|null
      */
     public function getServices()
     {
@@ -355,14 +358,14 @@ class PropertyAmenities implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Sets services
      *
-     * @param  \OpenAPI\Client\Model\EntityAmenities[]|null  $services  services
+     * @param  EntityAmenities[]|null  $services  services
      *
      * @return self
      */
     public function setServices($services)
     {
         if (is_null($services)) {
-            throw new \InvalidArgumentException('non-nullable services cannot be null');
+            throw new InvalidArgumentException('non-nullable services cannot be null');
         }
         $this->container['services'] = $services;
 
@@ -388,7 +391,7 @@ class PropertyAmenities implements ModelInterface, ArrayAccess, \JsonSerializabl
      *
      * @return mixed|null
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->container[$offset] ?? null;
@@ -430,7 +433,7 @@ class PropertyAmenities implements ModelInterface, ArrayAccess, \JsonSerializabl
      * @return mixed Returns data which can be serialized by json_encode(), which is a value
      * of any type other than a resource.
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return ObjectSerializer::sanitizeForSerialization($this);

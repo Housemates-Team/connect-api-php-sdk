@@ -18,3 +18,29 @@ if (!function_exists('optional')) {
         return new Optional($value);
     }
 }
+
+if (!function_exists('array_get')) {
+    /**
+     * Get an item from an array or object using "dot" notation.
+     *
+     * @param  mixed  $array
+     * @param  string|int  $key
+     * @param  mixed|null  $default
+     *
+     * @return mixed
+     */
+    function array_get($array, $key, $default = null)
+    {
+        $keys = explode('.', $key);
+
+        foreach ($keys as $key) {
+            if (is_array($array) && array_key_exists($key, $array)) {
+                $array = $array[$key];
+            } else {
+                return $default;
+            }
+        }
+
+        return $array;
+    }
+}

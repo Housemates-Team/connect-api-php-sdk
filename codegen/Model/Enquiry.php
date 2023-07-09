@@ -30,7 +30,10 @@
 namespace OpenAPI\Client\Model;
 
 use ArrayAccess;
+use InvalidArgumentException;
+use JsonSerializable;
 use OpenAPI\Client\ObjectSerializer;
+use ReturnTypeWillChange;
 
 /**
  * Enquiry Class Doc Comment
@@ -39,9 +42,9 @@ use OpenAPI\Client\ObjectSerializer;
  * @package  OpenAPI\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
- * @implements \ArrayAccess<string, mixed>
+ * @implements ArrayAccess<string, mixed>
  */
-class Enquiry implements ModelInterface, ArrayAccess, \JsonSerializable
+class Enquiry implements ModelInterface, ArrayAccess, JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -357,7 +360,7 @@ class Enquiry implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setId($id)
     {
         if (is_null($id)) {
-            throw new \InvalidArgumentException('non-nullable id cannot be null');
+            throw new InvalidArgumentException('non-nullable id cannot be null');
         }
         $this->container['id'] = $id;
 
@@ -384,7 +387,7 @@ class Enquiry implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setOperatorId($operator_id)
     {
         if (is_null($operator_id)) {
-            throw new \InvalidArgumentException('non-nullable operator_id cannot be null');
+            throw new InvalidArgumentException('non-nullable operator_id cannot be null');
         }
         $this->container['operator_id'] = $operator_id;
 
@@ -411,7 +414,7 @@ class Enquiry implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setPropertyId($property_id)
     {
         if (is_null($property_id)) {
-            throw new \InvalidArgumentException('non-nullable property_id cannot be null');
+            throw new InvalidArgumentException('non-nullable property_id cannot be null');
         }
         $this->container['property_id'] = $property_id;
 
@@ -438,7 +441,7 @@ class Enquiry implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setRoomId($room_id)
     {
         if (is_null($room_id)) {
-            throw new \InvalidArgumentException('non-nullable room_id cannot be null');
+            throw new InvalidArgumentException('non-nullable room_id cannot be null');
         }
         $this->container['room_id'] = $room_id;
 
@@ -465,7 +468,7 @@ class Enquiry implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setPropertyName($property_name)
     {
         if (is_null($property_name)) {
-            throw new \InvalidArgumentException('non-nullable property_name cannot be null');
+            throw new InvalidArgumentException('non-nullable property_name cannot be null');
         }
         $this->container['property_name'] = $property_name;
 
@@ -492,7 +495,7 @@ class Enquiry implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setRoomName($room_name)
     {
         if (is_null($room_name)) {
-            throw new \InvalidArgumentException('non-nullable room_name cannot be null');
+            throw new InvalidArgumentException('non-nullable room_name cannot be null');
         }
         $this->container['room_name'] = $room_name;
 
@@ -519,7 +522,7 @@ class Enquiry implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setFirstName($first_name)
     {
         if (is_null($first_name)) {
-            throw new \InvalidArgumentException('non-nullable first_name cannot be null');
+            throw new InvalidArgumentException('non-nullable first_name cannot be null');
         }
         $this->container['first_name'] = $first_name;
 
@@ -546,7 +549,7 @@ class Enquiry implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setLastName($last_name)
     {
         if (is_null($last_name)) {
-            throw new \InvalidArgumentException('non-nullable last_name cannot be null');
+            throw new InvalidArgumentException('non-nullable last_name cannot be null');
         }
         $this->container['last_name'] = $last_name;
 
@@ -573,7 +576,7 @@ class Enquiry implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setEmail($email)
     {
         if (is_null($email)) {
-            throw new \InvalidArgumentException('non-nullable email cannot be null');
+            throw new InvalidArgumentException('non-nullable email cannot be null');
         }
         $this->container['email'] = $email;
 
@@ -600,7 +603,7 @@ class Enquiry implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setStatus($status)
     {
         if (is_null($status)) {
-            throw new \InvalidArgumentException('non-nullable status cannot be null');
+            throw new InvalidArgumentException('non-nullable status cannot be null');
         }
         $this->container['status'] = $status;
 
@@ -626,7 +629,7 @@ class Enquiry implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @return mixed|null
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->container[$offset] ?? null;
@@ -668,7 +671,7 @@ class Enquiry implements ModelInterface, ArrayAccess, \JsonSerializable
      * @return mixed Returns data which can be serialized by json_encode(), which is a value
      * of any type other than a resource.
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return ObjectSerializer::sanitizeForSerialization($this);

@@ -30,7 +30,10 @@
 namespace OpenAPI\Client\Model;
 
 use ArrayAccess;
+use InvalidArgumentException;
+use JsonSerializable;
 use OpenAPI\Client\ObjectSerializer;
+use ReturnTypeWillChange;
 
 /**
  * RoomImages Class Doc Comment
@@ -39,9 +42,9 @@ use OpenAPI\Client\ObjectSerializer;
  * @package  OpenAPI\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
- * @implements \ArrayAccess<string, mixed>
+ * @implements ArrayAccess<string, mixed>
  */
-class RoomImages implements ModelInterface, ArrayAccess, \JsonSerializable
+class RoomImages implements ModelInterface, ArrayAccess, JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -315,7 +318,7 @@ class RoomImages implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setLarge($large)
     {
         if (is_null($large)) {
-            throw new \InvalidArgumentException('non-nullable large cannot be null');
+            throw new InvalidArgumentException('non-nullable large cannot be null');
         }
         $this->container['large'] = $large;
 
@@ -342,7 +345,7 @@ class RoomImages implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setSmall($small)
     {
         if (is_null($small)) {
-            throw new \InvalidArgumentException('non-nullable small cannot be null');
+            throw new InvalidArgumentException('non-nullable small cannot be null');
         }
         $this->container['small'] = $small;
 
@@ -369,7 +372,7 @@ class RoomImages implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setMedium($medium)
     {
         if (is_null($medium)) {
-            throw new \InvalidArgumentException('non-nullable medium cannot be null');
+            throw new InvalidArgumentException('non-nullable medium cannot be null');
         }
         $this->container['medium'] = $medium;
 
@@ -396,7 +399,7 @@ class RoomImages implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setSmallPlus($small_plus)
     {
         if (is_null($small_plus)) {
-            throw new \InvalidArgumentException('non-nullable small_plus cannot be null');
+            throw new InvalidArgumentException('non-nullable small_plus cannot be null');
         }
         $this->container['small_plus'] = $small_plus;
 
@@ -422,7 +425,7 @@ class RoomImages implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @return mixed|null
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->container[$offset] ?? null;
@@ -464,7 +467,7 @@ class RoomImages implements ModelInterface, ArrayAccess, \JsonSerializable
      * @return mixed Returns data which can be serialized by json_encode(), which is a value
      * of any type other than a resource.
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return ObjectSerializer::sanitizeForSerialization($this);

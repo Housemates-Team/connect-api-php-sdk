@@ -30,7 +30,10 @@
 namespace OpenAPI\Client\Model;
 
 use ArrayAccess;
+use InvalidArgumentException;
+use JsonSerializable;
 use OpenAPI\Client\ObjectSerializer;
+use ReturnTypeWillChange;
 
 /**
  * CreateEnquiryRequest Class Doc Comment
@@ -39,9 +42,9 @@ use OpenAPI\Client\ObjectSerializer;
  * @package  OpenAPI\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
- * @implements \ArrayAccess<string, mixed>
+ * @implements ArrayAccess<string, mixed>
  */
-class CreateEnquiryRequest implements ModelInterface, ArrayAccess, \JsonSerializable
+class CreateEnquiryRequest implements ModelInterface, ArrayAccess, JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -361,7 +364,7 @@ class CreateEnquiryRequest implements ModelInterface, ArrayAccess, \JsonSerializ
     public function setOperatorId($operator_id)
     {
         if (is_null($operator_id)) {
-            throw new \InvalidArgumentException('non-nullable operator_id cannot be null');
+            throw new InvalidArgumentException('non-nullable operator_id cannot be null');
         }
         $this->container['operator_id'] = $operator_id;
 
@@ -388,7 +391,7 @@ class CreateEnquiryRequest implements ModelInterface, ArrayAccess, \JsonSerializ
     public function setPropertyId($property_id)
     {
         if (is_null($property_id)) {
-            throw new \InvalidArgumentException('non-nullable property_id cannot be null');
+            throw new InvalidArgumentException('non-nullable property_id cannot be null');
         }
         $this->container['property_id'] = $property_id;
 
@@ -415,7 +418,7 @@ class CreateEnquiryRequest implements ModelInterface, ArrayAccess, \JsonSerializ
     public function setRoomId($room_id)
     {
         if (is_null($room_id)) {
-            throw new \InvalidArgumentException('non-nullable room_id cannot be null');
+            throw new InvalidArgumentException('non-nullable room_id cannot be null');
         }
         $this->container['room_id'] = $room_id;
 
@@ -442,7 +445,7 @@ class CreateEnquiryRequest implements ModelInterface, ArrayAccess, \JsonSerializ
     public function setFirstName($first_name)
     {
         if (is_null($first_name)) {
-            throw new \InvalidArgumentException('non-nullable first_name cannot be null');
+            throw new InvalidArgumentException('non-nullable first_name cannot be null');
         }
         $this->container['first_name'] = $first_name;
 
@@ -469,7 +472,7 @@ class CreateEnquiryRequest implements ModelInterface, ArrayAccess, \JsonSerializ
     public function setLastName($last_name)
     {
         if (is_null($last_name)) {
-            throw new \InvalidArgumentException('non-nullable last_name cannot be null');
+            throw new InvalidArgumentException('non-nullable last_name cannot be null');
         }
         $this->container['last_name'] = $last_name;
 
@@ -496,7 +499,7 @@ class CreateEnquiryRequest implements ModelInterface, ArrayAccess, \JsonSerializ
     public function setEmail($email)
     {
         if (is_null($email)) {
-            throw new \InvalidArgumentException('non-nullable email cannot be null');
+            throw new InvalidArgumentException('non-nullable email cannot be null');
         }
         $this->container['email'] = $email;
 
@@ -523,7 +526,7 @@ class CreateEnquiryRequest implements ModelInterface, ArrayAccess, \JsonSerializ
     public function setContactNumber($contact_number)
     {
         if (is_null($contact_number)) {
-            throw new \InvalidArgumentException('non-nullable contact_number cannot be null');
+            throw new InvalidArgumentException('non-nullable contact_number cannot be null');
         }
         $this->container['contact_number'] = $contact_number;
 
@@ -550,7 +553,7 @@ class CreateEnquiryRequest implements ModelInterface, ArrayAccess, \JsonSerializ
     public function setMessage($message)
     {
         if (is_null($message)) {
-            throw new \InvalidArgumentException('non-nullable message cannot be null');
+            throw new InvalidArgumentException('non-nullable message cannot be null');
         }
         $this->container['message'] = $message;
 
@@ -576,7 +579,7 @@ class CreateEnquiryRequest implements ModelInterface, ArrayAccess, \JsonSerializ
      *
      * @return mixed|null
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->container[$offset] ?? null;
@@ -618,7 +621,7 @@ class CreateEnquiryRequest implements ModelInterface, ArrayAccess, \JsonSerializ
      * @return mixed Returns data which can be serialized by json_encode(), which is a value
      * of any type other than a resource.
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return ObjectSerializer::sanitizeForSerialization($this);

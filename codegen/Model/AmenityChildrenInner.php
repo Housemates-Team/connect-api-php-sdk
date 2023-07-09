@@ -30,7 +30,10 @@
 namespace OpenAPI\Client\Model;
 
 use ArrayAccess;
+use InvalidArgumentException;
+use JsonSerializable;
 use OpenAPI\Client\ObjectSerializer;
+use ReturnTypeWillChange;
 
 /**
  * AmenityChildrenInner Class Doc Comment
@@ -39,9 +42,9 @@ use OpenAPI\Client\ObjectSerializer;
  * @package  OpenAPI\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
- * @implements \ArrayAccess<string, mixed>
+ * @implements ArrayAccess<string, mixed>
  */
-class AmenityChildrenInner implements ModelInterface, ArrayAccess, \JsonSerializable
+class AmenityChildrenInner implements ModelInterface, ArrayAccess, JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -315,7 +318,7 @@ class AmenityChildrenInner implements ModelInterface, ArrayAccess, \JsonSerializ
     public function setLabel($label)
     {
         if (is_null($label)) {
-            throw new \InvalidArgumentException('non-nullable label cannot be null');
+            throw new InvalidArgumentException('non-nullable label cannot be null');
         }
         $this->container['label'] = $label;
 
@@ -342,7 +345,7 @@ class AmenityChildrenInner implements ModelInterface, ArrayAccess, \JsonSerializ
     public function setName($name)
     {
         if (is_null($name)) {
-            throw new \InvalidArgumentException('non-nullable name cannot be null');
+            throw new InvalidArgumentException('non-nullable name cannot be null');
         }
         $this->container['name'] = $name;
 
@@ -369,7 +372,7 @@ class AmenityChildrenInner implements ModelInterface, ArrayAccess, \JsonSerializ
     public function setType($type)
     {
         if (is_null($type)) {
-            throw new \InvalidArgumentException('non-nullable type cannot be null');
+            throw new InvalidArgumentException('non-nullable type cannot be null');
         }
         $this->container['type'] = $type;
 
@@ -396,7 +399,7 @@ class AmenityChildrenInner implements ModelInterface, ArrayAccess, \JsonSerializ
     public function setAsFilter($as_filter)
     {
         if (is_null($as_filter)) {
-            throw new \InvalidArgumentException('non-nullable as_filter cannot be null');
+            throw new InvalidArgumentException('non-nullable as_filter cannot be null');
         }
         $this->container['as_filter'] = $as_filter;
 
@@ -422,7 +425,7 @@ class AmenityChildrenInner implements ModelInterface, ArrayAccess, \JsonSerializ
      *
      * @return mixed|null
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->container[$offset] ?? null;
@@ -464,7 +467,7 @@ class AmenityChildrenInner implements ModelInterface, ArrayAccess, \JsonSerializ
      * @return mixed Returns data which can be serialized by json_encode(), which is a value
      * of any type other than a resource.
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return ObjectSerializer::sanitizeForSerialization($this);

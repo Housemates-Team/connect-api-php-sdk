@@ -30,7 +30,10 @@
 namespace OpenAPI\Client\Model;
 
 use ArrayAccess;
+use InvalidArgumentException;
+use JsonSerializable;
 use OpenAPI\Client\ObjectSerializer;
+use ReturnTypeWillChange;
 
 /**
  * CheckoutStart201ResponseAllOfDataStripe Class Doc Comment
@@ -39,9 +42,9 @@ use OpenAPI\Client\ObjectSerializer;
  * @package  OpenAPI\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
- * @implements \ArrayAccess<string, mixed>
+ * @implements ArrayAccess<string, mixed>
  */
-class CheckoutStart201ResponseAllOfDataStripe implements ModelInterface, ArrayAccess, \JsonSerializable
+class CheckoutStart201ResponseAllOfDataStripe implements ModelInterface, ArrayAccess, JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -301,7 +304,7 @@ class CheckoutStart201ResponseAllOfDataStripe implements ModelInterface, ArrayAc
     public function setPublicKey($public_key)
     {
         if (is_null($public_key)) {
-            throw new \InvalidArgumentException('non-nullable public_key cannot be null');
+            throw new InvalidArgumentException('non-nullable public_key cannot be null');
         }
         $this->container['public_key'] = $public_key;
 
@@ -328,7 +331,7 @@ class CheckoutStart201ResponseAllOfDataStripe implements ModelInterface, ArrayAc
     public function setClientSecret($client_secret)
     {
         if (is_null($client_secret)) {
-            throw new \InvalidArgumentException('non-nullable client_secret cannot be null');
+            throw new InvalidArgumentException('non-nullable client_secret cannot be null');
         }
         $this->container['client_secret'] = $client_secret;
 
@@ -354,7 +357,7 @@ class CheckoutStart201ResponseAllOfDataStripe implements ModelInterface, ArrayAc
      *
      * @return mixed|null
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->container[$offset] ?? null;
@@ -396,7 +399,7 @@ class CheckoutStart201ResponseAllOfDataStripe implements ModelInterface, ArrayAc
      * @return mixed Returns data which can be serialized by json_encode(), which is a value
      * of any type other than a resource.
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return ObjectSerializer::sanitizeForSerialization($this);

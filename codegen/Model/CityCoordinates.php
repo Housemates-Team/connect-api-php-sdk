@@ -30,7 +30,10 @@
 namespace OpenAPI\Client\Model;
 
 use ArrayAccess;
+use InvalidArgumentException;
+use JsonSerializable;
 use OpenAPI\Client\ObjectSerializer;
+use ReturnTypeWillChange;
 
 /**
  * CityCoordinates Class Doc Comment
@@ -39,9 +42,9 @@ use OpenAPI\Client\ObjectSerializer;
  * @package  OpenAPI\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
- * @implements \ArrayAccess<string, mixed>
+ * @implements ArrayAccess<string, mixed>
  */
-class CityCoordinates implements ModelInterface, ArrayAccess, \JsonSerializable
+class CityCoordinates implements ModelInterface, ArrayAccess, JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -301,7 +304,7 @@ class CityCoordinates implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setLat($lat)
     {
         if (is_null($lat)) {
-            throw new \InvalidArgumentException('non-nullable lat cannot be null');
+            throw new InvalidArgumentException('non-nullable lat cannot be null');
         }
         $this->container['lat'] = $lat;
 
@@ -328,7 +331,7 @@ class CityCoordinates implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setLong($long)
     {
         if (is_null($long)) {
-            throw new \InvalidArgumentException('non-nullable long cannot be null');
+            throw new InvalidArgumentException('non-nullable long cannot be null');
         }
         $this->container['long'] = $long;
 
@@ -354,7 +357,7 @@ class CityCoordinates implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @return mixed|null
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->container[$offset] ?? null;
@@ -396,7 +399,7 @@ class CityCoordinates implements ModelInterface, ArrayAccess, \JsonSerializable
      * @return mixed Returns data which can be serialized by json_encode(), which is a value
      * of any type other than a resource.
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return ObjectSerializer::sanitizeForSerialization($this);

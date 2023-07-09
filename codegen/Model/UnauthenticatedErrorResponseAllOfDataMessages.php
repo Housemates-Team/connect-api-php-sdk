@@ -30,7 +30,10 @@
 namespace OpenAPI\Client\Model;
 
 use ArrayAccess;
+use InvalidArgumentException;
+use JsonSerializable;
 use OpenAPI\Client\ObjectSerializer;
+use ReturnTypeWillChange;
 
 /**
  * UnauthenticatedErrorResponseAllOfDataMessages Class Doc Comment
@@ -39,9 +42,9 @@ use OpenAPI\Client\ObjectSerializer;
  * @package  OpenAPI\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
- * @implements \ArrayAccess<string, mixed>
+ * @implements ArrayAccess<string, mixed>
  */
-class UnauthenticatedErrorResponseAllOfDataMessages implements ModelInterface, ArrayAccess, \JsonSerializable
+class UnauthenticatedErrorResponseAllOfDataMessages implements ModelInterface, ArrayAccess, JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -294,7 +297,7 @@ class UnauthenticatedErrorResponseAllOfDataMessages implements ModelInterface, A
     public function setErrorKey($error_key)
     {
         if (is_null($error_key)) {
-            throw new \InvalidArgumentException('non-nullable error_key cannot be null');
+            throw new InvalidArgumentException('non-nullable error_key cannot be null');
         }
         $this->container['error_key'] = $error_key;
 
@@ -320,7 +323,7 @@ class UnauthenticatedErrorResponseAllOfDataMessages implements ModelInterface, A
      *
      * @return mixed|null
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->container[$offset] ?? null;
@@ -362,7 +365,7 @@ class UnauthenticatedErrorResponseAllOfDataMessages implements ModelInterface, A
      * @return mixed Returns data which can be serialized by json_encode(), which is a value
      * of any type other than a resource.
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return ObjectSerializer::sanitizeForSerialization($this);

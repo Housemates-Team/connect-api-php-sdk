@@ -30,7 +30,10 @@
 namespace OpenAPI\Client\Model;
 
 use ArrayAccess;
+use InvalidArgumentException;
+use JsonSerializable;
 use OpenAPI\Client\ObjectSerializer;
+use ReturnTypeWillChange;
 
 /**
  * CheckoutCompleteRequest Class Doc Comment
@@ -39,9 +42,9 @@ use OpenAPI\Client\ObjectSerializer;
  * @package  OpenAPI\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
- * @implements \ArrayAccess<string, mixed>
+ * @implements ArrayAccess<string, mixed>
  */
-class CheckoutCompleteRequest implements ModelInterface, ArrayAccess, \JsonSerializable
+class CheckoutCompleteRequest implements ModelInterface, ArrayAccess, JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -62,9 +65,9 @@ class CheckoutCompleteRequest implements ModelInterface, ArrayAccess, \JsonSeria
         'paying_in_instalments' => 'bool',
         'has_uk_based_guarantor' => 'bool',
         'is_using_housing_hand' => 'bool',
-        'resident_details' => '\OpenAPI\Client\Model\ResidentDetails',
-        'supporing_contact_details' => '\OpenAPI\Client\Model\SupportingContactDetails',
-        'course_details' => '\OpenAPI\Client\Model\CourseDetails',
+        'resident_details' => '\OpenAPI\Client\Model\CheckoutCompleteRequestResidentDetails',
+        'supporting_contact_details' => '\OpenAPI\Client\Model\CheckoutCompleteRequestSupportingContactDetails',
+        'course_details' => '\OpenAPI\Client\Model\CheckoutCompleteRequestCourseDetails',
         'special_request' => 'string'
     ];
 
@@ -81,7 +84,7 @@ class CheckoutCompleteRequest implements ModelInterface, ArrayAccess, \JsonSeria
         'has_uk_based_guarantor' => null,
         'is_using_housing_hand' => null,
         'resident_details' => null,
-        'supporing_contact_details' => null,
+        'supporting_contact_details' => null,
         'course_details' => null,
         'special_request' => null
     ];
@@ -97,7 +100,7 @@ class CheckoutCompleteRequest implements ModelInterface, ArrayAccess, \JsonSeria
         'has_uk_based_guarantor' => false,
         'is_using_housing_hand' => false,
         'resident_details' => false,
-        'supporing_contact_details' => false,
+        'supporting_contact_details' => false,
         'course_details' => false,
         'special_request' => true
     ];
@@ -113,7 +116,7 @@ class CheckoutCompleteRequest implements ModelInterface, ArrayAccess, \JsonSeria
         'has_uk_based_guarantor' => 'has_uk_based_guarantor',
         'is_using_housing_hand' => 'is_using_housing_hand',
         'resident_details' => 'resident_details',
-        'supporing_contact_details' => 'supporing_contact_details',
+        'supporting_contact_details' => 'supporting_contact_details',
         'course_details' => 'course_details',
         'special_request' => 'special_request'
     ];
@@ -128,7 +131,7 @@ class CheckoutCompleteRequest implements ModelInterface, ArrayAccess, \JsonSeria
         'has_uk_based_guarantor' => 'setHasUkBasedGuarantor',
         'is_using_housing_hand' => 'setIsUsingHousingHand',
         'resident_details' => 'setResidentDetails',
-        'supporing_contact_details' => 'setSupporingContactDetails',
+        'supporting_contact_details' => 'setSupportingContactDetails',
         'course_details' => 'setCourseDetails',
         'special_request' => 'setSpecialRequest'
     ];
@@ -143,7 +146,7 @@ class CheckoutCompleteRequest implements ModelInterface, ArrayAccess, \JsonSeria
         'has_uk_based_guarantor' => 'getHasUkBasedGuarantor',
         'is_using_housing_hand' => 'getIsUsingHousingHand',
         'resident_details' => 'getResidentDetails',
-        'supporing_contact_details' => 'getSupporingContactDetails',
+        'supporting_contact_details' => 'getSupportingContactDetails',
         'course_details' => 'getCourseDetails',
         'special_request' => 'getSpecialRequest'
     ];
@@ -173,7 +176,7 @@ class CheckoutCompleteRequest implements ModelInterface, ArrayAccess, \JsonSeria
         $this->setIfExists('has_uk_based_guarantor', $data ?? [], null);
         $this->setIfExists('is_using_housing_hand', $data ?? [], null);
         $this->setIfExists('resident_details', $data ?? [], null);
-        $this->setIfExists('supporing_contact_details', $data ?? [], null);
+        $this->setIfExists('supporting_contact_details', $data ?? [], null);
         $this->setIfExists('course_details', $data ?? [], null);
         $this->setIfExists('special_request', $data ?? [], null);
     }
@@ -361,7 +364,7 @@ class CheckoutCompleteRequest implements ModelInterface, ArrayAccess, \JsonSeria
     public function setSessionToken($session_token)
     {
         if (is_null($session_token)) {
-            throw new \InvalidArgumentException('non-nullable session_token cannot be null');
+            throw new InvalidArgumentException('non-nullable session_token cannot be null');
         }
         $this->container['session_token'] = $session_token;
 
@@ -388,7 +391,7 @@ class CheckoutCompleteRequest implements ModelInterface, ArrayAccess, \JsonSeria
     public function setPayingInInstalments($paying_in_instalments)
     {
         if (is_null($paying_in_instalments)) {
-            throw new \InvalidArgumentException('non-nullable paying_in_instalments cannot be null');
+            throw new InvalidArgumentException('non-nullable paying_in_instalments cannot be null');
         }
         $this->container['paying_in_instalments'] = $paying_in_instalments;
 
@@ -415,7 +418,7 @@ class CheckoutCompleteRequest implements ModelInterface, ArrayAccess, \JsonSeria
     public function setHasUkBasedGuarantor($has_uk_based_guarantor)
     {
         if (is_null($has_uk_based_guarantor)) {
-            throw new \InvalidArgumentException('non-nullable has_uk_based_guarantor cannot be null');
+            throw new InvalidArgumentException('non-nullable has_uk_based_guarantor cannot be null');
         }
         $this->container['has_uk_based_guarantor'] = $has_uk_based_guarantor;
 
@@ -442,7 +445,7 @@ class CheckoutCompleteRequest implements ModelInterface, ArrayAccess, \JsonSeria
     public function setIsUsingHousingHand($is_using_housing_hand)
     {
         if (is_null($is_using_housing_hand)) {
-            throw new \InvalidArgumentException('non-nullable is_using_housing_hand cannot be null');
+            throw new InvalidArgumentException('non-nullable is_using_housing_hand cannot be null');
         }
         $this->container['is_using_housing_hand'] = $is_using_housing_hand;
 
@@ -452,7 +455,7 @@ class CheckoutCompleteRequest implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Gets resident_details
      *
-     * @return \OpenAPI\Client\Model\ResidentDetails
+     * @return CheckoutCompleteRequestResidentDetails
      */
     public function getResidentDetails()
     {
@@ -462,14 +465,14 @@ class CheckoutCompleteRequest implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Sets resident_details
      *
-     * @param  \OpenAPI\Client\Model\ResidentDetails  $resident_details  resident_details
+     * @param  CheckoutCompleteRequestResidentDetails  $resident_details  resident_details
      *
      * @return self
      */
     public function setResidentDetails($resident_details)
     {
         if (is_null($resident_details)) {
-            throw new \InvalidArgumentException('non-nullable resident_details cannot be null');
+            throw new InvalidArgumentException('non-nullable resident_details cannot be null');
         }
         $this->container['resident_details'] = $resident_details;
 
@@ -477,28 +480,28 @@ class CheckoutCompleteRequest implements ModelInterface, ArrayAccess, \JsonSeria
     }
 
     /**
-     * Gets supporing_contact_details
+     * Gets supporting_contact_details
      *
-     * @return \OpenAPI\Client\Model\SupportingContactDetails|null
+     * @return CheckoutCompleteRequestSupportingContactDetails|null
      */
-    public function getSupporingContactDetails()
+    public function getSupportingContactDetails()
     {
-        return $this->container['supporing_contact_details'];
+        return $this->container['supporting_contact_details'];
     }
 
     /**
-     * Sets supporing_contact_details
+     * Sets supporting_contact_details
      *
-     * @param  \OpenAPI\Client\Model\SupportingContactDetails|null  $supporing_contact_details  supporing_contact_details
+     * @param  CheckoutCompleteRequestSupportingContactDetails|null  $supporting_contact_details  supporting_contact_details
      *
      * @return self
      */
-    public function setSupporingContactDetails($supporing_contact_details)
+    public function setSupportingContactDetails($supporting_contact_details)
     {
-        if (is_null($supporing_contact_details)) {
-            throw new \InvalidArgumentException('non-nullable supporing_contact_details cannot be null');
+        if (is_null($supporting_contact_details)) {
+            throw new InvalidArgumentException('non-nullable supporting_contact_details cannot be null');
         }
-        $this->container['supporing_contact_details'] = $supporing_contact_details;
+        $this->container['supporting_contact_details'] = $supporting_contact_details;
 
         return $this;
     }
@@ -506,7 +509,7 @@ class CheckoutCompleteRequest implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Gets course_details
      *
-     * @return \OpenAPI\Client\Model\CourseDetails
+     * @return CheckoutCompleteRequestCourseDetails
      */
     public function getCourseDetails()
     {
@@ -516,14 +519,14 @@ class CheckoutCompleteRequest implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Sets course_details
      *
-     * @param  \OpenAPI\Client\Model\CourseDetails  $course_details  course_details
+     * @param  CheckoutCompleteRequestCourseDetails  $course_details  course_details
      *
      * @return self
      */
     public function setCourseDetails($course_details)
     {
         if (is_null($course_details)) {
-            throw new \InvalidArgumentException('non-nullable course_details cannot be null');
+            throw new InvalidArgumentException('non-nullable course_details cannot be null');
         }
         $this->container['course_details'] = $course_details;
 
@@ -593,7 +596,7 @@ class CheckoutCompleteRequest implements ModelInterface, ArrayAccess, \JsonSeria
      *
      * @return mixed|null
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->container[$offset] ?? null;
@@ -635,7 +638,7 @@ class CheckoutCompleteRequest implements ModelInterface, ArrayAccess, \JsonSeria
      * @return mixed Returns data which can be serialized by json_encode(), which is a value
      * of any type other than a resource.
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return ObjectSerializer::sanitizeForSerialization($this);

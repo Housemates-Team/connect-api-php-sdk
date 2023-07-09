@@ -1,6 +1,6 @@
 <?php
 /**
- * ResidentDetails
+ * CheckoutCompleteRequestResidentDetails
  *
  * PHP version 7.4
  *
@@ -30,18 +30,21 @@
 namespace OpenAPI\Client\Model;
 
 use ArrayAccess;
+use InvalidArgumentException;
+use JsonSerializable;
 use OpenAPI\Client\ObjectSerializer;
+use ReturnTypeWillChange;
 
 /**
- * ResidentDetails Class Doc Comment
+ * CheckoutCompleteRequestResidentDetails Class Doc Comment
  *
  * @category Class
  * @package  OpenAPI\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
- * @implements \ArrayAccess<string, mixed>
+ * @implements ArrayAccess<string, mixed>
  */
-class ResidentDetails implements ModelInterface, ArrayAccess, \JsonSerializable
+class CheckoutCompleteRequestResidentDetails implements ModelInterface, ArrayAccess, JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +53,7 @@ class ResidentDetails implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @var string
      */
-    protected static $openAPIModelName = 'ResidentDetails';
+    protected static $openAPIModelName = 'checkoutComplete_request_resident_details';
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -378,7 +381,7 @@ class ResidentDetails implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setFirstLine($first_line)
     {
         if (is_null($first_line)) {
-            throw new \InvalidArgumentException('non-nullable first_line cannot be null');
+            throw new InvalidArgumentException('non-nullable first_line cannot be null');
         }
         $this->container['first_line'] = $first_line;
 
@@ -449,7 +452,7 @@ class ResidentDetails implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setCity($city)
     {
         if (is_null($city)) {
-            throw new \InvalidArgumentException('non-nullable city cannot be null');
+            throw new InvalidArgumentException('non-nullable city cannot be null');
         }
         $this->container['city'] = $city;
 
@@ -510,7 +513,7 @@ class ResidentDetails implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setPostcode($postcode)
     {
         if (is_null($postcode)) {
-            throw new \InvalidArgumentException('non-nullable postcode cannot be null');
+            throw new InvalidArgumentException('non-nullable postcode cannot be null');
         }
         $this->container['postcode'] = $postcode;
 
@@ -537,7 +540,7 @@ class ResidentDetails implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setCountry($country)
     {
         if (is_null($country)) {
-            throw new \InvalidArgumentException('non-nullable country cannot be null');
+            throw new InvalidArgumentException('non-nullable country cannot be null');
         }
         $this->container['country'] = $country;
 
@@ -564,7 +567,7 @@ class ResidentDetails implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setFirstName($first_name)
     {
         if (is_null($first_name)) {
-            throw new \InvalidArgumentException('non-nullable first_name cannot be null');
+            throw new InvalidArgumentException('non-nullable first_name cannot be null');
         }
         $this->container['first_name'] = $first_name;
 
@@ -591,7 +594,7 @@ class ResidentDetails implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setLastName($last_name)
     {
         if (is_null($last_name)) {
-            throw new \InvalidArgumentException('non-nullable last_name cannot be null');
+            throw new InvalidArgumentException('non-nullable last_name cannot be null');
         }
         $this->container['last_name'] = $last_name;
 
@@ -618,7 +621,7 @@ class ResidentDetails implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setGender($gender)
     {
         if (is_null($gender)) {
-            throw new \InvalidArgumentException('non-nullable gender cannot be null');
+            throw new InvalidArgumentException('non-nullable gender cannot be null');
         }
         $this->container['gender'] = $gender;
 
@@ -645,7 +648,7 @@ class ResidentDetails implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setNationality($nationality)
     {
         if (is_null($nationality)) {
-            throw new \InvalidArgumentException('non-nullable nationality cannot be null');
+            throw new InvalidArgumentException('non-nullable nationality cannot be null');
         }
         $this->container['nationality'] = $nationality;
 
@@ -672,7 +675,7 @@ class ResidentDetails implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setEmail($email)
     {
         if (is_null($email)) {
-            throw new \InvalidArgumentException('non-nullable email cannot be null');
+            throw new InvalidArgumentException('non-nullable email cannot be null');
         }
         $this->container['email'] = $email;
 
@@ -699,7 +702,7 @@ class ResidentDetails implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setDateOfBirth($date_of_birth)
     {
         if (is_null($date_of_birth)) {
-            throw new \InvalidArgumentException('non-nullable date_of_birth cannot be null');
+            throw new InvalidArgumentException('non-nullable date_of_birth cannot be null');
         }
         $this->container['date_of_birth'] = $date_of_birth;
 
@@ -726,7 +729,7 @@ class ResidentDetails implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setContactNumber($contact_number)
     {
         if (is_null($contact_number)) {
-            throw new \InvalidArgumentException('non-nullable contact_number cannot be null');
+            throw new InvalidArgumentException('non-nullable contact_number cannot be null');
         }
         $this->container['contact_number'] = $contact_number;
 
@@ -752,7 +755,7 @@ class ResidentDetails implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @return mixed|null
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->container[$offset] ?? null;
@@ -794,7 +797,7 @@ class ResidentDetails implements ModelInterface, ArrayAccess, \JsonSerializable
      * @return mixed Returns data which can be serialized by json_encode(), which is a value
      * of any type other than a resource.
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return ObjectSerializer::sanitizeForSerialization($this);

@@ -9,6 +9,7 @@ use Housemates\ConnectApi\Exceptions\ApiException as HousematesApiException;
 use Housemates\ConnectApi\Exceptions\ConfigurationException;
 use Housemates\ConnectApi\Filters\PropertyFilter;
 use Housemates\ConnectApi\Filters\RoomFilter;
+use Housemates\ConnectApi\Requests\CheckoutCompleteRequest;
 use Housemates\ConnectApi\Requests\CheckoutStartRequest;
 use Housemates\ConnectApi\Sorts\RoomSort;
 use OpenAPI\Client\Configuration as OpenApiConfig;
@@ -100,5 +101,13 @@ class ApiClient
             $this->config,
             $this->openApiConfig
         )->start($request);
+    }
+
+    public function completeCheckout(CheckoutCompleteRequest $request)
+    {
+        return CheckoutApi::make(
+            $this->config,
+            $this->openApiConfig
+        )->complete($request);
     }
 }

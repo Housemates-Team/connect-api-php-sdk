@@ -30,7 +30,10 @@
 namespace OpenAPI\Client\Model;
 
 use ArrayAccess;
+use InvalidArgumentException;
+use JsonSerializable;
 use OpenAPI\Client\ObjectSerializer;
+use ReturnTypeWillChange;
 
 /**
  * CheckoutStartRequest Class Doc Comment
@@ -39,9 +42,9 @@ use OpenAPI\Client\ObjectSerializer;
  * @package  OpenAPI\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
- * @implements \ArrayAccess<string, mixed>
+ * @implements ArrayAccess<string, mixed>
  */
-class CheckoutStartRequest implements ModelInterface, ArrayAccess, \JsonSerializable
+class CheckoutStartRequest implements ModelInterface, ArrayAccess, JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -307,7 +310,7 @@ class CheckoutStartRequest implements ModelInterface, ArrayAccess, \JsonSerializ
     public function setBookingPeriodId($booking_period_id)
     {
         if (is_null($booking_period_id)) {
-            throw new \InvalidArgumentException('non-nullable booking_period_id cannot be null');
+            throw new InvalidArgumentException('non-nullable booking_period_id cannot be null');
         }
         $this->container['booking_period_id'] = $booking_period_id;
 
@@ -334,7 +337,7 @@ class CheckoutStartRequest implements ModelInterface, ArrayAccess, \JsonSerializ
     public function setOperatorId($operator_id)
     {
         if (is_null($operator_id)) {
-            throw new \InvalidArgumentException('non-nullable operator_id cannot be null');
+            throw new InvalidArgumentException('non-nullable operator_id cannot be null');
         }
         $this->container['operator_id'] = $operator_id;
 
@@ -360,7 +363,7 @@ class CheckoutStartRequest implements ModelInterface, ArrayAccess, \JsonSerializ
      *
      * @return mixed|null
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->container[$offset] ?? null;
@@ -402,7 +405,7 @@ class CheckoutStartRequest implements ModelInterface, ArrayAccess, \JsonSerializ
      * @return mixed Returns data which can be serialized by json_encode(), which is a value
      * of any type other than a resource.
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return ObjectSerializer::sanitizeForSerialization($this);

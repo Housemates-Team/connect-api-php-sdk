@@ -30,7 +30,10 @@
 namespace OpenAPI\Client\Model;
 
 use ArrayAccess;
+use InvalidArgumentException;
+use JsonSerializable;
 use OpenAPI\Client\ObjectSerializer;
+use ReturnTypeWillChange;
 
 /**
  * ShowRoom Class Doc Comment
@@ -39,9 +42,9 @@ use OpenAPI\Client\ObjectSerializer;
  * @package  OpenAPI\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
- * @implements \ArrayAccess<string, mixed>
+ * @implements ArrayAccess<string, mixed>
  */
-class ShowRoom implements ModelInterface, ArrayAccess, \JsonSerializable
+class ShowRoom implements ModelInterface, ArrayAccess, JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -427,7 +430,7 @@ class ShowRoom implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setId($id)
     {
         if (is_null($id)) {
-            throw new \InvalidArgumentException('non-nullable id cannot be null');
+            throw new InvalidArgumentException('non-nullable id cannot be null');
         }
         $this->container['id'] = $id;
 
@@ -454,7 +457,7 @@ class ShowRoom implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setOperatorId($operator_id)
     {
         if (is_null($operator_id)) {
-            throw new \InvalidArgumentException('non-nullable operator_id cannot be null');
+            throw new InvalidArgumentException('non-nullable operator_id cannot be null');
         }
         $this->container['operator_id'] = $operator_id;
 
@@ -481,7 +484,7 @@ class ShowRoom implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setName($name)
     {
         if (is_null($name)) {
-            throw new \InvalidArgumentException('non-nullable name cannot be null');
+            throw new InvalidArgumentException('non-nullable name cannot be null');
         }
         $this->container['name'] = $name;
 
@@ -508,7 +511,7 @@ class ShowRoom implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setMaxRoomsLeft($max_rooms_left)
     {
         if (is_null($max_rooms_left)) {
-            throw new \InvalidArgumentException('non-nullable max_rooms_left cannot be null');
+            throw new InvalidArgumentException('non-nullable max_rooms_left cannot be null');
         }
         $this->container['max_rooms_left'] = $max_rooms_left;
 
@@ -535,7 +538,7 @@ class ShowRoom implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setIsAvailable($is_available)
     {
         if (is_null($is_available)) {
-            throw new \InvalidArgumentException('non-nullable is_available cannot be null');
+            throw new InvalidArgumentException('non-nullable is_available cannot be null');
         }
         $this->container['is_available'] = $is_available;
 
@@ -562,7 +565,7 @@ class ShowRoom implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setPrice($price)
     {
         if (is_null($price)) {
-            throw new \InvalidArgumentException('non-nullable price cannot be null');
+            throw new InvalidArgumentException('non-nullable price cannot be null');
         }
         $this->container['price'] = $price;
 
@@ -589,7 +592,7 @@ class ShowRoom implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setIsEstimatedPrice($is_estimated_price)
     {
         if (is_null($is_estimated_price)) {
-            throw new \InvalidArgumentException('non-nullable is_estimated_price cannot be null');
+            throw new InvalidArgumentException('non-nullable is_estimated_price cannot be null');
         }
         $this->container['is_estimated_price'] = $is_estimated_price;
 
@@ -599,7 +602,7 @@ class ShowRoom implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets cancellation
      *
-     * @return \OpenAPI\Client\Model\RoomCancellation|null
+     * @return RoomCancellation|null
      */
     public function getCancellation()
     {
@@ -609,14 +612,14 @@ class ShowRoom implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets cancellation
      *
-     * @param  \OpenAPI\Client\Model\RoomCancellation|null  $cancellation  cancellation
+     * @param  RoomCancellation|null  $cancellation  cancellation
      *
      * @return self
      */
     public function setCancellation($cancellation)
     {
         if (is_null($cancellation)) {
-            throw new \InvalidArgumentException('non-nullable cancellation cannot be null');
+            throw new InvalidArgumentException('non-nullable cancellation cannot be null');
         }
         $this->container['cancellation'] = $cancellation;
 
@@ -626,7 +629,7 @@ class ShowRoom implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets price_range
      *
-     * @return \OpenAPI\Client\Model\RoomPriceRange|null
+     * @return RoomPriceRange|null
      */
     public function getPriceRange()
     {
@@ -636,14 +639,14 @@ class ShowRoom implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets price_range
      *
-     * @param  \OpenAPI\Client\Model\RoomPriceRange|null  $price_range  price_range
+     * @param  RoomPriceRange|null  $price_range  price_range
      *
      * @return self
      */
     public function setPriceRange($price_range)
     {
         if (is_null($price_range)) {
-            throw new \InvalidArgumentException('non-nullable price_range cannot be null');
+            throw new InvalidArgumentException('non-nullable price_range cannot be null');
         }
         $this->container['price_range'] = $price_range;
 
@@ -653,7 +656,7 @@ class ShowRoom implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets coordinates
      *
-     * @return \OpenAPI\Client\Model\RoomCoordinates|null
+     * @return RoomCoordinates|null
      */
     public function getCoordinates()
     {
@@ -663,14 +666,14 @@ class ShowRoom implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets coordinates
      *
-     * @param  \OpenAPI\Client\Model\RoomCoordinates|null  $coordinates  coordinates
+     * @param  RoomCoordinates|null  $coordinates  coordinates
      *
      * @return self
      */
     public function setCoordinates($coordinates)
     {
         if (is_null($coordinates)) {
-            throw new \InvalidArgumentException('non-nullable coordinates cannot be null');
+            throw new InvalidArgumentException('non-nullable coordinates cannot be null');
         }
         $this->container['coordinates'] = $coordinates;
 
@@ -680,7 +683,7 @@ class ShowRoom implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets address
      *
-     * @return \OpenAPI\Client\Model\PropertyAddress|null
+     * @return PropertyAddress|null
      */
     public function getAddress()
     {
@@ -690,14 +693,14 @@ class ShowRoom implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets address
      *
-     * @param  \OpenAPI\Client\Model\PropertyAddress|null  $address  address
+     * @param  PropertyAddress|null  $address  address
      *
      * @return self
      */
     public function setAddress($address)
     {
         if (is_null($address)) {
-            throw new \InvalidArgumentException('non-nullable address cannot be null');
+            throw new InvalidArgumentException('non-nullable address cannot be null');
         }
         $this->container['address'] = $address;
 
@@ -724,7 +727,7 @@ class ShowRoom implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setSummary($summary)
     {
         if (is_null($summary)) {
-            throw new \InvalidArgumentException('non-nullable summary cannot be null');
+            throw new InvalidArgumentException('non-nullable summary cannot be null');
         }
         $this->container['summary'] = $summary;
 
@@ -751,7 +754,7 @@ class ShowRoom implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setDescription($description)
     {
         if (is_null($description)) {
-            throw new \InvalidArgumentException('non-nullable description cannot be null');
+            throw new InvalidArgumentException('non-nullable description cannot be null');
         }
         $this->container['description'] = $description;
 
@@ -778,7 +781,7 @@ class ShowRoom implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setRichDescription($rich_description)
     {
         if (is_null($rich_description)) {
-            throw new \InvalidArgumentException('non-nullable rich_description cannot be null');
+            throw new InvalidArgumentException('non-nullable rich_description cannot be null');
         }
         $this->container['rich_description'] = $rich_description;
 
@@ -788,7 +791,7 @@ class ShowRoom implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets amenities
      *
-     * @return \OpenAPI\Client\Model\RoomAmenities|null
+     * @return RoomAmenities|null
      */
     public function getAmenities()
     {
@@ -798,14 +801,14 @@ class ShowRoom implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets amenities
      *
-     * @param  \OpenAPI\Client\Model\RoomAmenities|null  $amenities  amenities
+     * @param  RoomAmenities|null  $amenities  amenities
      *
      * @return self
      */
     public function setAmenities($amenities)
     {
         if (is_null($amenities)) {
-            throw new \InvalidArgumentException('non-nullable amenities cannot be null');
+            throw new InvalidArgumentException('non-nullable amenities cannot be null');
         }
         $this->container['amenities'] = $amenities;
 
@@ -832,7 +835,7 @@ class ShowRoom implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setCurrency($currency)
     {
         if (is_null($currency)) {
-            throw new \InvalidArgumentException('non-nullable currency cannot be null');
+            throw new InvalidArgumentException('non-nullable currency cannot be null');
         }
         $this->container['currency'] = $currency;
 
@@ -842,7 +845,7 @@ class ShowRoom implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets images
      *
-     * @return \OpenAPI\Client\Model\RoomImages[]|null
+     * @return RoomImages[]|null
      */
     public function getImages()
     {
@@ -852,14 +855,14 @@ class ShowRoom implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets images
      *
-     * @param  \OpenAPI\Client\Model\RoomImages[]|null  $images  images
+     * @param  RoomImages[]|null  $images  images
      *
      * @return self
      */
     public function setImages($images)
     {
         if (is_null($images)) {
-            throw new \InvalidArgumentException('non-nullable images cannot be null');
+            throw new InvalidArgumentException('non-nullable images cannot be null');
         }
         $this->container['images'] = $images;
 
@@ -869,7 +872,7 @@ class ShowRoom implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets booking_periods
      *
-     * @return \OpenAPI\Client\Model\BookingPeriod[]|null
+     * @return BookingPeriod[]|null
      */
     public function getBookingPeriods()
     {
@@ -879,14 +882,14 @@ class ShowRoom implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets booking_periods
      *
-     * @param  \OpenAPI\Client\Model\BookingPeriod[]|null  $booking_periods  booking_periods
+     * @param  BookingPeriod[]|null  $booking_periods  booking_periods
      *
      * @return self
      */
     public function setBookingPeriods($booking_periods)
     {
         if (is_null($booking_periods)) {
-            throw new \InvalidArgumentException('non-nullable booking_periods cannot be null');
+            throw new InvalidArgumentException('non-nullable booking_periods cannot be null');
         }
         $this->container['booking_periods'] = $booking_periods;
 
@@ -896,7 +899,7 @@ class ShowRoom implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets _links
      *
-     * @return \OpenAPI\Client\Model\HateoasLink[]|null
+     * @return HateoasLink[]|null
      */
     public function getLinks()
     {
@@ -906,14 +909,14 @@ class ShowRoom implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets _links
      *
-     * @param  \OpenAPI\Client\Model\HateoasLink[]|null  $_links  _links
+     * @param  HateoasLink[]|null  $_links  _links
      *
      * @return self
      */
     public function setLinks($_links)
     {
         if (is_null($_links)) {
-            throw new \InvalidArgumentException('non-nullable _links cannot be null');
+            throw new InvalidArgumentException('non-nullable _links cannot be null');
         }
         $this->container['_links'] = $_links;
 
@@ -923,7 +926,7 @@ class ShowRoom implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets universities
      *
-     * @return \OpenAPI\Client\Model\ShowRoomAllOfUniversities[]|null
+     * @return ShowRoomAllOfUniversities[]|null
      */
     public function getUniversities()
     {
@@ -933,14 +936,14 @@ class ShowRoom implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets universities
      *
-     * @param  \OpenAPI\Client\Model\ShowRoomAllOfUniversities[]|null  $universities  universities
+     * @param  ShowRoomAllOfUniversities[]|null  $universities  universities
      *
      * @return self
      */
     public function setUniversities($universities)
     {
         if (is_null($universities)) {
-            throw new \InvalidArgumentException('non-nullable universities cannot be null');
+            throw new InvalidArgumentException('non-nullable universities cannot be null');
         }
         $this->container['universities'] = $universities;
 
@@ -966,7 +969,7 @@ class ShowRoom implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @return mixed|null
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->container[$offset] ?? null;
@@ -1008,7 +1011,7 @@ class ShowRoom implements ModelInterface, ArrayAccess, \JsonSerializable
      * @return mixed Returns data which can be serialized by json_encode(), which is a value
      * of any type other than a resource.
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return ObjectSerializer::sanitizeForSerialization($this);

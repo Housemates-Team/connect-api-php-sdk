@@ -30,7 +30,10 @@
 namespace OpenAPI\Client\Model;
 
 use ArrayAccess;
+use InvalidArgumentException;
+use JsonSerializable;
 use OpenAPI\Client\ObjectSerializer;
+use ReturnTypeWillChange;
 
 /**
  * PropertyAddress Class Doc Comment
@@ -39,9 +42,9 @@ use OpenAPI\Client\ObjectSerializer;
  * @package  OpenAPI\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
- * @implements \ArrayAccess<string, mixed>
+ * @implements ArrayAccess<string, mixed>
  */
-class PropertyAddress implements ModelInterface, ArrayAccess, \JsonSerializable
+class PropertyAddress implements ModelInterface, ArrayAccess, JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -329,7 +332,7 @@ class PropertyAddress implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setFirstLine($first_line)
     {
         if (is_null($first_line)) {
-            throw new \InvalidArgumentException('non-nullable first_line cannot be null');
+            throw new InvalidArgumentException('non-nullable first_line cannot be null');
         }
         $this->container['first_line'] = $first_line;
 
@@ -400,7 +403,7 @@ class PropertyAddress implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setCity($city)
     {
         if (is_null($city)) {
-            throw new \InvalidArgumentException('non-nullable city cannot be null');
+            throw new InvalidArgumentException('non-nullable city cannot be null');
         }
         $this->container['city'] = $city;
 
@@ -461,7 +464,7 @@ class PropertyAddress implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setPostcode($postcode)
     {
         if (is_null($postcode)) {
-            throw new \InvalidArgumentException('non-nullable postcode cannot be null');
+            throw new InvalidArgumentException('non-nullable postcode cannot be null');
         }
         $this->container['postcode'] = $postcode;
 
@@ -488,7 +491,7 @@ class PropertyAddress implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setCountry($country)
     {
         if (is_null($country)) {
-            throw new \InvalidArgumentException('non-nullable country cannot be null');
+            throw new InvalidArgumentException('non-nullable country cannot be null');
         }
         $this->container['country'] = $country;
 
@@ -514,7 +517,7 @@ class PropertyAddress implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @return mixed|null
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->container[$offset] ?? null;
@@ -556,7 +559,7 @@ class PropertyAddress implements ModelInterface, ArrayAccess, \JsonSerializable
      * @return mixed Returns data which can be serialized by json_encode(), which is a value
      * of any type other than a resource.
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return ObjectSerializer::sanitizeForSerialization($this);

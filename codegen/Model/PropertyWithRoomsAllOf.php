@@ -30,7 +30,10 @@
 namespace OpenAPI\Client\Model;
 
 use ArrayAccess;
+use InvalidArgumentException;
+use JsonSerializable;
 use OpenAPI\Client\ObjectSerializer;
+use ReturnTypeWillChange;
 
 /**
  * PropertyWithRoomsAllOf Class Doc Comment
@@ -39,9 +42,9 @@ use OpenAPI\Client\ObjectSerializer;
  * @package  OpenAPI\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
- * @implements \ArrayAccess<string, mixed>
+ * @implements ArrayAccess<string, mixed>
  */
-class PropertyWithRoomsAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
+class PropertyWithRoomsAllOf implements ModelInterface, ArrayAccess, JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -277,7 +280,7 @@ class PropertyWithRoomsAllOf implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Gets rooms
      *
-     * @return \OpenAPI\Client\Model\PropertyWithRoomsAllOfRooms[]|null
+     * @return PropertyWithRoomsAllOfRooms[]|null
      */
     public function getRooms()
     {
@@ -287,14 +290,14 @@ class PropertyWithRoomsAllOf implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets rooms
      *
-     * @param  \OpenAPI\Client\Model\PropertyWithRoomsAllOfRooms[]|null  $rooms  rooms
+     * @param  PropertyWithRoomsAllOfRooms[]|null  $rooms  rooms
      *
      * @return self
      */
     public function setRooms($rooms)
     {
         if (is_null($rooms)) {
-            throw new \InvalidArgumentException('non-nullable rooms cannot be null');
+            throw new InvalidArgumentException('non-nullable rooms cannot be null');
         }
         $this->container['rooms'] = $rooms;
 
@@ -320,7 +323,7 @@ class PropertyWithRoomsAllOf implements ModelInterface, ArrayAccess, \JsonSerial
      *
      * @return mixed|null
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->container[$offset] ?? null;
@@ -362,7 +365,7 @@ class PropertyWithRoomsAllOf implements ModelInterface, ArrayAccess, \JsonSerial
      * @return mixed Returns data which can be serialized by json_encode(), which is a value
      * of any type other than a resource.
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return ObjectSerializer::sanitizeForSerialization($this);

@@ -30,7 +30,10 @@
 namespace OpenAPI\Client\Model;
 
 use ArrayAccess;
+use InvalidArgumentException;
+use JsonSerializable;
 use OpenAPI\Client\ObjectSerializer;
+use ReturnTypeWillChange;
 
 /**
  * RoomAmenities Class Doc Comment
@@ -39,9 +42,9 @@ use OpenAPI\Client\ObjectSerializer;
  * @package  OpenAPI\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
- * @implements \ArrayAccess<string, mixed>
+ * @implements ArrayAccess<string, mixed>
  */
-class RoomAmenities implements ModelInterface, ArrayAccess, \JsonSerializable
+class RoomAmenities implements ModelInterface, ArrayAccess, JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -277,7 +280,7 @@ class RoomAmenities implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets general
      *
-     * @return \OpenAPI\Client\Model\EntityAmenities[]|null
+     * @return EntityAmenities[]|null
      */
     public function getGeneral()
     {
@@ -287,14 +290,14 @@ class RoomAmenities implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets general
      *
-     * @param  \OpenAPI\Client\Model\EntityAmenities[]|null  $general  general
+     * @param  EntityAmenities[]|null  $general  general
      *
      * @return self
      */
     public function setGeneral($general)
     {
         if (is_null($general)) {
-            throw new \InvalidArgumentException('non-nullable general cannot be null');
+            throw new InvalidArgumentException('non-nullable general cannot be null');
         }
         $this->container['general'] = $general;
 
@@ -320,7 +323,7 @@ class RoomAmenities implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @return mixed|null
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->container[$offset] ?? null;
@@ -362,7 +365,7 @@ class RoomAmenities implements ModelInterface, ArrayAccess, \JsonSerializable
      * @return mixed Returns data which can be serialized by json_encode(), which is a value
      * of any type other than a resource.
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return ObjectSerializer::sanitizeForSerialization($this);

@@ -30,7 +30,10 @@
 namespace OpenAPI\Client\Model;
 
 use ArrayAccess;
+use InvalidArgumentException;
+use JsonSerializable;
 use OpenAPI\Client\ObjectSerializer;
+use ReturnTypeWillChange;
 
 /**
  * PaginationLinks Class Doc Comment
@@ -39,9 +42,9 @@ use OpenAPI\Client\ObjectSerializer;
  * @package  OpenAPI\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
- * @implements \ArrayAccess<string, mixed>
+ * @implements ArrayAccess<string, mixed>
  */
-class PaginationLinks implements ModelInterface, ArrayAccess, \JsonSerializable
+class PaginationLinks implements ModelInterface, ArrayAccess, JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -315,7 +318,7 @@ class PaginationLinks implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setFirst($first)
     {
         if (is_null($first)) {
-            throw new \InvalidArgumentException('non-nullable first cannot be null');
+            throw new InvalidArgumentException('non-nullable first cannot be null');
         }
         $this->container['first'] = $first;
 
@@ -342,7 +345,7 @@ class PaginationLinks implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setLast($last)
     {
         if (is_null($last)) {
-            throw new \InvalidArgumentException('non-nullable last cannot be null');
+            throw new InvalidArgumentException('non-nullable last cannot be null');
         }
         $this->container['last'] = $last;
 
@@ -369,7 +372,7 @@ class PaginationLinks implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setNext($next)
     {
         if (is_null($next)) {
-            throw new \InvalidArgumentException('non-nullable next cannot be null');
+            throw new InvalidArgumentException('non-nullable next cannot be null');
         }
         $this->container['next'] = $next;
 
@@ -396,7 +399,7 @@ class PaginationLinks implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setPrev($prev)
     {
         if (is_null($prev)) {
-            throw new \InvalidArgumentException('non-nullable prev cannot be null');
+            throw new InvalidArgumentException('non-nullable prev cannot be null');
         }
         $this->container['prev'] = $prev;
 
@@ -422,7 +425,7 @@ class PaginationLinks implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @return mixed|null
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->container[$offset] ?? null;
@@ -464,7 +467,7 @@ class PaginationLinks implements ModelInterface, ArrayAccess, \JsonSerializable
      * @return mixed Returns data which can be serialized by json_encode(), which is a value
      * of any type other than a resource.
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return ObjectSerializer::sanitizeForSerialization($this);

@@ -30,7 +30,10 @@
 namespace OpenAPI\Client\Model;
 
 use ArrayAccess;
+use InvalidArgumentException;
+use JsonSerializable;
 use OpenAPI\Client\ObjectSerializer;
+use ReturnTypeWillChange;
 
 /**
  * GetEnquiries200Response Class Doc Comment
@@ -39,9 +42,9 @@ use OpenAPI\Client\ObjectSerializer;
  * @package  OpenAPI\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
- * @implements \ArrayAccess<string, mixed>
+ * @implements ArrayAccess<string, mixed>
  */
-class GetEnquiries200Response implements ModelInterface, ArrayAccess, \JsonSerializable
+class GetEnquiries200Response implements ModelInterface, ArrayAccess, JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -336,7 +339,7 @@ class GetEnquiries200Response implements ModelInterface, ArrayAccess, \JsonSeria
     public function setSuccess($success)
     {
         if (is_null($success)) {
-            throw new \InvalidArgumentException('non-nullable success cannot be null');
+            throw new InvalidArgumentException('non-nullable success cannot be null');
         }
         $this->container['success'] = $success;
 
@@ -363,7 +366,7 @@ class GetEnquiries200Response implements ModelInterface, ArrayAccess, \JsonSeria
     public function setCode($code)
     {
         if (is_null($code)) {
-            throw new \InvalidArgumentException('non-nullable code cannot be null');
+            throw new InvalidArgumentException('non-nullable code cannot be null');
         }
         $this->container['code'] = $code;
 
@@ -390,7 +393,7 @@ class GetEnquiries200Response implements ModelInterface, ArrayAccess, \JsonSeria
     public function setLocale($locale)
     {
         if (is_null($locale)) {
-            throw new \InvalidArgumentException('non-nullable locale cannot be null');
+            throw new InvalidArgumentException('non-nullable locale cannot be null');
         }
         $this->container['locale'] = $locale;
 
@@ -417,7 +420,7 @@ class GetEnquiries200Response implements ModelInterface, ArrayAccess, \JsonSeria
     public function setMessage($message)
     {
         if (is_null($message)) {
-            throw new \InvalidArgumentException('non-nullable message cannot be null');
+            throw new InvalidArgumentException('non-nullable message cannot be null');
         }
         $this->container['message'] = $message;
 
@@ -427,7 +430,7 @@ class GetEnquiries200Response implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Gets data
      *
-     * @return \OpenAPI\Client\Model\GetEnquiries200ResponseAllOfData|null
+     * @return GetEnquiries200ResponseAllOfData|null
      */
     public function getData()
     {
@@ -437,14 +440,14 @@ class GetEnquiries200Response implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Sets data
      *
-     * @param  \OpenAPI\Client\Model\GetEnquiries200ResponseAllOfData|null  $data  data
+     * @param  GetEnquiries200ResponseAllOfData|null  $data  data
      *
      * @return self
      */
     public function setData($data)
     {
         if (is_null($data)) {
-            throw new \InvalidArgumentException('non-nullable data cannot be null');
+            throw new InvalidArgumentException('non-nullable data cannot be null');
         }
         $this->container['data'] = $data;
 
@@ -454,7 +457,7 @@ class GetEnquiries200Response implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Gets meta
      *
-     * @return \OpenAPI\Client\Model\PaginationMeta|null
+     * @return PaginationMeta|null
      */
     public function getMeta()
     {
@@ -464,14 +467,14 @@ class GetEnquiries200Response implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Sets meta
      *
-     * @param  \OpenAPI\Client\Model\PaginationMeta|null  $meta  meta
+     * @param  PaginationMeta|null  $meta  meta
      *
      * @return self
      */
     public function setMeta($meta)
     {
         if (is_null($meta)) {
-            throw new \InvalidArgumentException('non-nullable meta cannot be null');
+            throw new InvalidArgumentException('non-nullable meta cannot be null');
         }
         $this->container['meta'] = $meta;
 
@@ -481,7 +484,7 @@ class GetEnquiries200Response implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Gets links
      *
-     * @return \OpenAPI\Client\Model\PaginationLinks|null
+     * @return PaginationLinks|null
      */
     public function getLinks()
     {
@@ -491,14 +494,14 @@ class GetEnquiries200Response implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Sets links
      *
-     * @param  \OpenAPI\Client\Model\PaginationLinks|null  $links  links
+     * @param  PaginationLinks|null  $links  links
      *
      * @return self
      */
     public function setLinks($links)
     {
         if (is_null($links)) {
-            throw new \InvalidArgumentException('non-nullable links cannot be null');
+            throw new InvalidArgumentException('non-nullable links cannot be null');
         }
         $this->container['links'] = $links;
 
@@ -524,7 +527,7 @@ class GetEnquiries200Response implements ModelInterface, ArrayAccess, \JsonSeria
      *
      * @return mixed|null
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->container[$offset] ?? null;
@@ -566,7 +569,7 @@ class GetEnquiries200Response implements ModelInterface, ArrayAccess, \JsonSeria
      * @return mixed Returns data which can be serialized by json_encode(), which is a value
      * of any type other than a resource.
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return ObjectSerializer::sanitizeForSerialization($this);

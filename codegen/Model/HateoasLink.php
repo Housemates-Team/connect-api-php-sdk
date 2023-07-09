@@ -30,7 +30,10 @@
 namespace OpenAPI\Client\Model;
 
 use ArrayAccess;
+use InvalidArgumentException;
+use JsonSerializable;
 use OpenAPI\Client\ObjectSerializer;
+use ReturnTypeWillChange;
 
 /**
  * HateoasLink Class Doc Comment
@@ -39,9 +42,9 @@ use OpenAPI\Client\ObjectSerializer;
  * @package  OpenAPI\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
- * @implements \ArrayAccess<string, mixed>
+ * @implements ArrayAccess<string, mixed>
  */
-class HateoasLink implements ModelInterface, ArrayAccess, \JsonSerializable
+class HateoasLink implements ModelInterface, ArrayAccess, JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -308,7 +311,7 @@ class HateoasLink implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setRel($rel)
     {
         if (is_null($rel)) {
-            throw new \InvalidArgumentException('non-nullable rel cannot be null');
+            throw new InvalidArgumentException('non-nullable rel cannot be null');
         }
         $this->container['rel'] = $rel;
 
@@ -335,7 +338,7 @@ class HateoasLink implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setType($type)
     {
         if (is_null($type)) {
-            throw new \InvalidArgumentException('non-nullable type cannot be null');
+            throw new InvalidArgumentException('non-nullable type cannot be null');
         }
         $this->container['type'] = $type;
 
@@ -362,7 +365,7 @@ class HateoasLink implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setUrl($url)
     {
         if (is_null($url)) {
-            throw new \InvalidArgumentException('non-nullable url cannot be null');
+            throw new InvalidArgumentException('non-nullable url cannot be null');
         }
         $this->container['url'] = $url;
 
@@ -388,7 +391,7 @@ class HateoasLink implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @return mixed|null
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->container[$offset] ?? null;
@@ -430,7 +433,7 @@ class HateoasLink implements ModelInterface, ArrayAccess, \JsonSerializable
      * @return mixed Returns data which can be serialized by json_encode(), which is a value
      * of any type other than a resource.
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return ObjectSerializer::sanitizeForSerialization($this);

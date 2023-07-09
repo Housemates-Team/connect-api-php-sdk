@@ -32,13 +32,19 @@ use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Promise\PromiseInterface;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
+use GuzzleHttp\Utils;
+use InvalidArgumentException;
 use OpenAPI\Client\ApiException;
 use OpenAPI\Client\Configuration;
 use OpenAPI\Client\HeaderSelector;
+use OpenAPI\Client\Model\ErrorResponse;
+use OpenAPI\Client\Model\GetAmenities200Response;
 use OpenAPI\Client\ObjectSerializer;
+use RuntimeException;
 
 /**
  * AmenitiesApi Class Doc Comment
@@ -128,9 +134,9 @@ class AmenitiesApi
      * @param  string  $filter_type  Filter amenities by type (optional)
      * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getAmenities'] to see the possible values for this operation
      *
-     * @return \OpenAPI\Client\Model\GetAmenities200Response|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse
-     * @throws \InvalidArgumentException
-     * @throws \OpenAPI\Client\ApiException on non-2xx response
+     * @return GetAmenities200Response|ErrorResponse|ErrorResponse|ErrorResponse|ErrorResponse
+     * @throws InvalidArgumentException
+     * @throws ApiException on non-2xx response
      */
     public function getAmenities(
         $x_api_partner_id,
@@ -151,8 +157,8 @@ class AmenitiesApi
      * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getAmenities'] to see the possible values for this operation
      *
      * @return array of \OpenAPI\Client\Model\GetAmenities200Response|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
-     * @throws \InvalidArgumentException
-     * @throws \OpenAPI\Client\ApiException on non-2xx response
+     * @throws InvalidArgumentException
+     * @throws ApiException on non-2xx response
      */
     public function getAmenitiesWithHttpInfo(
         $x_api_partner_id,
@@ -344,8 +350,8 @@ class AmenitiesApi
      * @param  string  $filter_type  Filter amenities by type (optional)
      * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getAmenities'] to see the possible values for this operation
      *
-     * @return \GuzzleHttp\Psr7\Request
-     * @throws \InvalidArgumentException
+     * @return Request
+     * @throws InvalidArgumentException
      */
     public function getAmenitiesRequest(
         $x_api_partner_id,
@@ -355,7 +361,7 @@ class AmenitiesApi
 
         // verify the required parameter 'x_api_partner_id' is set
         if ($x_api_partner_id === null || (is_array($x_api_partner_id) && count($x_api_partner_id) === 0)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 'Missing the required parameter $x_api_partner_id when calling getAmenities'
             );
         }
@@ -408,7 +414,7 @@ class AmenitiesApi
 
             } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+                $httpBody = Utils::jsonEncode($formParams);
             } else {
                 // for HTTP post (form)
                 $httpBody = ObjectSerializer::buildQuery($formParams);
@@ -445,7 +451,7 @@ class AmenitiesApi
      * Create http client option
      *
      * @return array of http client options
-     * @throws \RuntimeException on file opening failure
+     * @throws RuntimeException on file opening failure
      */
     protected function createHttpClientOption()
     {
@@ -453,7 +459,7 @@ class AmenitiesApi
         if ($this->config->getDebug()) {
             $options[RequestOptions::DEBUG] = fopen($this->config->getDebugFile(), 'a');
             if (!$options[RequestOptions::DEBUG]) {
-                throw new \RuntimeException('Failed to open the debug file: '.$this->config->getDebugFile());
+                throw new RuntimeException('Failed to open the debug file: '.$this->config->getDebugFile());
             }
         }
 
@@ -469,8 +475,8 @@ class AmenitiesApi
      * @param  string  $filter_type  Filter amenities by type (optional)
      * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getAmenities'] to see the possible values for this operation
      *
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     * @throws \InvalidArgumentException
+     * @return PromiseInterface
+     * @throws InvalidArgumentException
      */
     public function getAmenitiesAsync(
         $x_api_partner_id,
@@ -494,8 +500,8 @@ class AmenitiesApi
      * @param  string  $filter_type  Filter amenities by type (optional)
      * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getAmenities'] to see the possible values for this operation
      *
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     * @throws \InvalidArgumentException
+     * @return PromiseInterface
+     * @throws InvalidArgumentException
      */
     public function getAmenitiesAsyncWithHttpInfo(
         $x_api_partner_id,

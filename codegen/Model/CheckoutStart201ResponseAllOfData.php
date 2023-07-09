@@ -30,7 +30,10 @@
 namespace OpenAPI\Client\Model;
 
 use ArrayAccess;
+use InvalidArgumentException;
+use JsonSerializable;
 use OpenAPI\Client\ObjectSerializer;
+use ReturnTypeWillChange;
 
 /**
  * CheckoutStart201ResponseAllOfData Class Doc Comment
@@ -39,9 +42,9 @@ use OpenAPI\Client\ObjectSerializer;
  * @package  OpenAPI\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
- * @implements \ArrayAccess<string, mixed>
+ * @implements ArrayAccess<string, mixed>
  */
-class CheckoutStart201ResponseAllOfData implements ModelInterface, ArrayAccess, \JsonSerializable
+class CheckoutStart201ResponseAllOfData implements ModelInterface, ArrayAccess, JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -284,7 +287,7 @@ class CheckoutStart201ResponseAllOfData implements ModelInterface, ArrayAccess, 
     /**
      * Gets stripe
      *
-     * @return \OpenAPI\Client\Model\CheckoutStart201ResponseAllOfDataStripe|null
+     * @return CheckoutStart201ResponseAllOfDataStripe|null
      */
     public function getStripe()
     {
@@ -294,14 +297,14 @@ class CheckoutStart201ResponseAllOfData implements ModelInterface, ArrayAccess, 
     /**
      * Sets stripe
      *
-     * @param  \OpenAPI\Client\Model\CheckoutStart201ResponseAllOfDataStripe|null  $stripe  stripe
+     * @param  CheckoutStart201ResponseAllOfDataStripe|null  $stripe  stripe
      *
      * @return self
      */
     public function setStripe($stripe)
     {
         if (is_null($stripe)) {
-            throw new \InvalidArgumentException('non-nullable stripe cannot be null');
+            throw new InvalidArgumentException('non-nullable stripe cannot be null');
         }
         $this->container['stripe'] = $stripe;
 
@@ -328,7 +331,7 @@ class CheckoutStart201ResponseAllOfData implements ModelInterface, ArrayAccess, 
     public function setSessionToken($session_token)
     {
         if (is_null($session_token)) {
-            throw new \InvalidArgumentException('non-nullable session_token cannot be null');
+            throw new InvalidArgumentException('non-nullable session_token cannot be null');
         }
         $this->container['session_token'] = $session_token;
 
@@ -354,7 +357,7 @@ class CheckoutStart201ResponseAllOfData implements ModelInterface, ArrayAccess, 
      *
      * @return mixed|null
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->container[$offset] ?? null;
@@ -396,7 +399,7 @@ class CheckoutStart201ResponseAllOfData implements ModelInterface, ArrayAccess, 
      * @return mixed Returns data which can be serialized by json_encode(), which is a value
      * of any type other than a resource.
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return ObjectSerializer::sanitizeForSerialization($this);

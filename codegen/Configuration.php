@@ -28,6 +28,8 @@
 
 namespace OpenAPI\Client;
 
+use InvalidArgumentException;
+
 /**
  * Configuration Class Doc Comment
  * PHP version 7.4
@@ -357,12 +359,12 @@ class Configuration
      * @param  string  $userAgent  the user agent of the api client
      *
      * @return $this
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function setUserAgent($userAgent)
     {
         if (!is_string($userAgent)) {
-            throw new \InvalidArgumentException('User-agent must be a string.');
+            throw new InvalidArgumentException('User-agent must be a string.');
         }
 
         $this->userAgent = $userAgent;
@@ -492,7 +494,7 @@ class Configuration
 
         // check array index out of bound
         if ($hostIndex < 0 || $hostIndex >= count($hostsSettings)) {
-            throw new \InvalidArgumentException("Invalid index $hostIndex when selecting the host. Must be less than ".count($hostsSettings));
+            throw new InvalidArgumentException("Invalid index $hostIndex when selecting the host. Must be less than ".count($hostsSettings));
         }
 
         $host = $hostsSettings[$hostIndex];
@@ -505,7 +507,7 @@ class Configuration
                         true)) { // check to see if the value is in the enum
                     $url = str_replace("{".$name."}", $variables[$name], $url);
                 } else {
-                    throw new \InvalidArgumentException("The variable `$name` in the host URL has invalid value ".$variables[$name].". Must be ".join(',',
+                    throw new InvalidArgumentException("The variable `$name` in the host URL has invalid value ".$variables[$name].". Must be ".join(',',
                             $variable["enum_values"]).".");
                 }
             } else {

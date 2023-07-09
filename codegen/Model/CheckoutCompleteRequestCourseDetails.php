@@ -1,6 +1,6 @@
 <?php
 /**
- * AddressParamsAllOf
+ * CheckoutCompleteRequestCourseDetails
  *
  * PHP version 7.4
  *
@@ -30,18 +30,21 @@
 namespace OpenAPI\Client\Model;
 
 use ArrayAccess;
+use InvalidArgumentException;
+use JsonSerializable;
 use OpenAPI\Client\ObjectSerializer;
+use ReturnTypeWillChange;
 
 /**
- * AddressParamsAllOf Class Doc Comment
+ * CheckoutCompleteRequestCourseDetails Class Doc Comment
  *
  * @category Class
  * @package  OpenAPI\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
- * @implements \ArrayAccess<string, mixed>
+ * @implements ArrayAccess<string, mixed>
  */
-class AddressParamsAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
+class CheckoutCompleteRequestCourseDetails implements ModelInterface, ArrayAccess, JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +53,7 @@ class AddressParamsAllOf implements ModelInterface, ArrayAccess, \JsonSerializab
      *
      * @var string
      */
-    protected static $openAPIModelName = 'AddressParams_allOf';
+    protected static $openAPIModelName = 'checkoutComplete_request_course_details';
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -58,7 +61,9 @@ class AddressParamsAllOf implements ModelInterface, ArrayAccess, \JsonSerializab
      * @var string[]
      */
     protected static $openAPITypes = [
-        'country' => 'string'
+        'university' => 'string',
+        'year_of_study' => 'string',
+        'course_title' => 'string'
     ];
 
     /**
@@ -69,7 +74,9 @@ class AddressParamsAllOf implements ModelInterface, ArrayAccess, \JsonSerializab
      * @psalm-var array<string, string|null>
      */
     protected static $openAPIFormats = [
-        'country' => null
+        'university' => null,
+        'year_of_study' => null,
+        'course_title' => null
     ];
 
     /**
@@ -78,7 +85,9 @@ class AddressParamsAllOf implements ModelInterface, ArrayAccess, \JsonSerializab
      * @var boolean[]
      */
     protected static array $openAPINullables = [
-        'country' => false
+        'university' => false,
+        'year_of_study' => false,
+        'course_title' => false
     ];
     /**
      * Array of attributes where the key is the local name,
@@ -87,7 +96,9 @@ class AddressParamsAllOf implements ModelInterface, ArrayAccess, \JsonSerializab
      * @var string[]
      */
     protected static $attributeMap = [
-        'country' => 'country'
+        'university' => 'university',
+        'year_of_study' => 'year_of_study',
+        'course_title' => 'course_title'
     ];
     /**
      * Array of attributes to setter functions (for deserialization of responses)
@@ -95,7 +106,9 @@ class AddressParamsAllOf implements ModelInterface, ArrayAccess, \JsonSerializab
      * @var string[]
      */
     protected static $setters = [
-        'country' => 'setCountry'
+        'university' => 'setUniversity',
+        'year_of_study' => 'setYearOfStudy',
+        'course_title' => 'setCourseTitle'
     ];
     /**
      * Array of attributes to getter functions (for serialization of requests)
@@ -103,7 +116,9 @@ class AddressParamsAllOf implements ModelInterface, ArrayAccess, \JsonSerializab
      * @var string[]
      */
     protected static $getters = [
-        'country' => 'getCountry'
+        'university' => 'getUniversity',
+        'year_of_study' => 'getYearOfStudy',
+        'course_title' => 'getCourseTitle'
     ];
     /**
      * If a nullable field gets set to null, insert it here
@@ -126,7 +141,9 @@ class AddressParamsAllOf implements ModelInterface, ArrayAccess, \JsonSerializab
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('country', $data ?? [], null);
+        $this->setIfExists('university', $data ?? [], null);
+        $this->setIfExists('year_of_study', $data ?? [], null);
+        $this->setIfExists('course_title', $data ?? [], null);
     }
 
     /**
@@ -275,28 +292,82 @@ class AddressParamsAllOf implements ModelInterface, ArrayAccess, \JsonSerializab
     }
 
     /**
-     * Gets country
+     * Gets university
      *
      * @return string|null
      */
-    public function getCountry()
+    public function getUniversity()
     {
-        return $this->container['country'];
+        return $this->container['university'];
     }
 
     /**
-     * Sets country
+     * Sets university
      *
-     * @param  string|null  $country  alpha-2 country code
+     * @param  string|null  $university  university
      *
      * @return self
      */
-    public function setCountry($country)
+    public function setUniversity($university)
     {
-        if (is_null($country)) {
-            throw new \InvalidArgumentException('non-nullable country cannot be null');
+        if (is_null($university)) {
+            throw new InvalidArgumentException('non-nullable university cannot be null');
         }
-        $this->container['country'] = $country;
+        $this->container['university'] = $university;
+
+        return $this;
+    }
+
+    /**
+     * Gets year_of_study
+     *
+     * @return string|null
+     */
+    public function getYearOfStudy()
+    {
+        return $this->container['year_of_study'];
+    }
+
+    /**
+     * Sets year_of_study
+     *
+     * @param  string|null  $year_of_study  year_of_study
+     *
+     * @return self
+     */
+    public function setYearOfStudy($year_of_study)
+    {
+        if (is_null($year_of_study)) {
+            throw new InvalidArgumentException('non-nullable year_of_study cannot be null');
+        }
+        $this->container['year_of_study'] = $year_of_study;
+
+        return $this;
+    }
+
+    /**
+     * Gets course_title
+     *
+     * @return string|null
+     */
+    public function getCourseTitle()
+    {
+        return $this->container['course_title'];
+    }
+
+    /**
+     * Sets course_title
+     *
+     * @param  string|null  $course_title  course_title
+     *
+     * @return self
+     */
+    public function setCourseTitle($course_title)
+    {
+        if (is_null($course_title)) {
+            throw new InvalidArgumentException('non-nullable course_title cannot be null');
+        }
+        $this->container['course_title'] = $course_title;
 
         return $this;
     }
@@ -320,7 +391,7 @@ class AddressParamsAllOf implements ModelInterface, ArrayAccess, \JsonSerializab
      *
      * @return mixed|null
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->container[$offset] ?? null;
@@ -362,7 +433,7 @@ class AddressParamsAllOf implements ModelInterface, ArrayAccess, \JsonSerializab
      * @return mixed Returns data which can be serialized by json_encode(), which is a value
      * of any type other than a resource.
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return ObjectSerializer::sanitizeForSerialization($this);

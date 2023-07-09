@@ -30,7 +30,10 @@
 namespace OpenAPI\Client\Model;
 
 use ArrayAccess;
+use InvalidArgumentException;
+use JsonSerializable;
 use OpenAPI\Client\ObjectSerializer;
+use ReturnTypeWillChange;
 
 /**
  * Property Class Doc Comment
@@ -39,9 +42,9 @@ use OpenAPI\Client\ObjectSerializer;
  * @package  OpenAPI\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
- * @implements \ArrayAccess<string, mixed>
+ * @implements ArrayAccess<string, mixed>
  */
-class Property implements ModelInterface, ArrayAccess, \JsonSerializable
+class Property implements ModelInterface, ArrayAccess, JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -413,7 +416,7 @@ class Property implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setId($id)
     {
         if (is_null($id)) {
-            throw new \InvalidArgumentException('non-nullable id cannot be null');
+            throw new InvalidArgumentException('non-nullable id cannot be null');
         }
         $this->container['id'] = $id;
 
@@ -440,7 +443,7 @@ class Property implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setOperatorId($operator_id)
     {
         if (is_null($operator_id)) {
-            throw new \InvalidArgumentException('non-nullable operator_id cannot be null');
+            throw new InvalidArgumentException('non-nullable operator_id cannot be null');
         }
         $this->container['operator_id'] = $operator_id;
 
@@ -467,7 +470,7 @@ class Property implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setName($name)
     {
         if (is_null($name)) {
-            throw new \InvalidArgumentException('non-nullable name cannot be null');
+            throw new InvalidArgumentException('non-nullable name cannot be null');
         }
         $this->container['name'] = $name;
 
@@ -494,7 +497,7 @@ class Property implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setSlug($slug)
     {
         if (is_null($slug)) {
-            throw new \InvalidArgumentException('non-nullable slug cannot be null');
+            throw new InvalidArgumentException('non-nullable slug cannot be null');
         }
         $this->container['slug'] = $slug;
 
@@ -504,7 +507,7 @@ class Property implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets price_range
      *
-     * @return \OpenAPI\Client\Model\PropertyPriceRange|null
+     * @return PropertyPriceRange|null
      */
     public function getPriceRange()
     {
@@ -514,14 +517,14 @@ class Property implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets price_range
      *
-     * @param  \OpenAPI\Client\Model\PropertyPriceRange|null  $price_range  price_range
+     * @param  PropertyPriceRange|null  $price_range  price_range
      *
      * @return self
      */
     public function setPriceRange($price_range)
     {
         if (is_null($price_range)) {
-            throw new \InvalidArgumentException('non-nullable price_range cannot be null');
+            throw new InvalidArgumentException('non-nullable price_range cannot be null');
         }
         $this->container['price_range'] = $price_range;
 
@@ -548,7 +551,7 @@ class Property implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setDescription($description)
     {
         if (is_null($description)) {
-            throw new \InvalidArgumentException('non-nullable description cannot be null');
+            throw new InvalidArgumentException('non-nullable description cannot be null');
         }
         $this->container['description'] = $description;
 
@@ -575,7 +578,7 @@ class Property implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setRichDescription($rich_description)
     {
         if (is_null($rich_description)) {
-            throw new \InvalidArgumentException('non-nullable rich_description cannot be null');
+            throw new InvalidArgumentException('non-nullable rich_description cannot be null');
         }
         $this->container['rich_description'] = $rich_description;
 
@@ -602,7 +605,7 @@ class Property implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setSummary($summary)
     {
         if (is_null($summary)) {
-            throw new \InvalidArgumentException('non-nullable summary cannot be null');
+            throw new InvalidArgumentException('non-nullable summary cannot be null');
         }
         $this->container['summary'] = $summary;
 
@@ -612,7 +615,7 @@ class Property implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets amenities
      *
-     * @return \OpenAPI\Client\Model\PropertyAmenities|null
+     * @return PropertyAmenities|null
      */
     public function getAmenities()
     {
@@ -622,14 +625,14 @@ class Property implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets amenities
      *
-     * @param  \OpenAPI\Client\Model\PropertyAmenities|null  $amenities  amenities
+     * @param  PropertyAmenities|null  $amenities  amenities
      *
      * @return self
      */
     public function setAmenities($amenities)
     {
         if (is_null($amenities)) {
-            throw new \InvalidArgumentException('non-nullable amenities cannot be null');
+            throw new InvalidArgumentException('non-nullable amenities cannot be null');
         }
         $this->container['amenities'] = $amenities;
 
@@ -639,7 +642,7 @@ class Property implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets _links
      *
-     * @return \OpenAPI\Client\Model\HateoasLink[]|null
+     * @return HateoasLink[]|null
      */
     public function getLinks()
     {
@@ -649,14 +652,14 @@ class Property implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets _links
      *
-     * @param  \OpenAPI\Client\Model\HateoasLink[]|null  $_links  _links
+     * @param  HateoasLink[]|null  $_links  _links
      *
      * @return self
      */
     public function setLinks($_links)
     {
         if (is_null($_links)) {
-            throw new \InvalidArgumentException('non-nullable _links cannot be null');
+            throw new InvalidArgumentException('non-nullable _links cannot be null');
         }
         $this->container['_links'] = $_links;
 
@@ -666,7 +669,7 @@ class Property implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets coordinates
      *
-     * @return \OpenAPI\Client\Model\PropertyCoordinates|null
+     * @return PropertyCoordinates|null
      */
     public function getCoordinates()
     {
@@ -676,14 +679,14 @@ class Property implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets coordinates
      *
-     * @param  \OpenAPI\Client\Model\PropertyCoordinates|null  $coordinates  coordinates
+     * @param  PropertyCoordinates|null  $coordinates  coordinates
      *
      * @return self
      */
     public function setCoordinates($coordinates)
     {
         if (is_null($coordinates)) {
-            throw new \InvalidArgumentException('non-nullable coordinates cannot be null');
+            throw new InvalidArgumentException('non-nullable coordinates cannot be null');
         }
         $this->container['coordinates'] = $coordinates;
 
@@ -693,7 +696,7 @@ class Property implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets address
      *
-     * @return \OpenAPI\Client\Model\PropertyAddress|null
+     * @return PropertyAddress|null
      */
     public function getAddress()
     {
@@ -703,14 +706,14 @@ class Property implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets address
      *
-     * @param  \OpenAPI\Client\Model\PropertyAddress|null  $address  address
+     * @param  PropertyAddress|null  $address  address
      *
      * @return self
      */
     public function setAddress($address)
     {
         if (is_null($address)) {
-            throw new \InvalidArgumentException('non-nullable address cannot be null');
+            throw new InvalidArgumentException('non-nullable address cannot be null');
         }
         $this->container['address'] = $address;
 
@@ -737,7 +740,7 @@ class Property implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setCurrency($currency)
     {
         if (is_null($currency)) {
-            throw new \InvalidArgumentException('non-nullable currency cannot be null');
+            throw new InvalidArgumentException('non-nullable currency cannot be null');
         }
         $this->container['currency'] = $currency;
 
@@ -764,7 +767,7 @@ class Property implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setLocation($location)
     {
         if (is_null($location)) {
-            throw new \InvalidArgumentException('non-nullable location cannot be null');
+            throw new InvalidArgumentException('non-nullable location cannot be null');
         }
         $this->container['location'] = $location;
 
@@ -791,7 +794,7 @@ class Property implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setLocationSlug($location_slug)
     {
         if (is_null($location_slug)) {
-            throw new \InvalidArgumentException('non-nullable location_slug cannot be null');
+            throw new InvalidArgumentException('non-nullable location_slug cannot be null');
         }
         $this->container['location_slug'] = $location_slug;
 
@@ -818,7 +821,7 @@ class Property implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setOfferAmount($offer_amount)
     {
         if (is_null($offer_amount)) {
-            throw new \InvalidArgumentException('non-nullable offer_amount cannot be null');
+            throw new InvalidArgumentException('non-nullable offer_amount cannot be null');
         }
         $this->container['offer_amount'] = $offer_amount;
 
@@ -845,7 +848,7 @@ class Property implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setVirtualTours($virtual_tours)
     {
         if (is_null($virtual_tours)) {
-            throw new \InvalidArgumentException('non-nullable virtual_tours cannot be null');
+            throw new InvalidArgumentException('non-nullable virtual_tours cannot be null');
         }
         $this->container['virtual_tours'] = $virtual_tours;
 
@@ -855,7 +858,7 @@ class Property implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets images
      *
-     * @return \OpenAPI\Client\Model\PropertyImagesInner[]|null
+     * @return PropertyImagesInner[]|null
      */
     public function getImages()
     {
@@ -865,14 +868,14 @@ class Property implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets images
      *
-     * @param  \OpenAPI\Client\Model\PropertyImagesInner[]|null  $images  images
+     * @param  PropertyImagesInner[]|null  $images  images
      *
      * @return self
      */
     public function setImages($images)
     {
         if (is_null($images)) {
-            throw new \InvalidArgumentException('non-nullable images cannot be null');
+            throw new InvalidArgumentException('non-nullable images cannot be null');
         }
         $this->container['images'] = $images;
 
@@ -898,7 +901,7 @@ class Property implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @return mixed|null
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->container[$offset] ?? null;
@@ -940,7 +943,7 @@ class Property implements ModelInterface, ArrayAccess, \JsonSerializable
      * @return mixed Returns data which can be serialized by json_encode(), which is a value
      * of any type other than a resource.
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return ObjectSerializer::sanitizeForSerialization($this);

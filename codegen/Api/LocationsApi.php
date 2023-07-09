@@ -32,13 +32,21 @@ use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Promise\PromiseInterface;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
+use GuzzleHttp\Utils;
+use InvalidArgumentException;
 use OpenAPI\Client\ApiException;
 use OpenAPI\Client\Configuration;
 use OpenAPI\Client\HeaderSelector;
+use OpenAPI\Client\Model\ErrorResponse;
+use OpenAPI\Client\Model\GetCities200Response;
+use OpenAPI\Client\Model\GetCity200Response;
+use OpenAPI\Client\Model\GetUniversities200Response;
 use OpenAPI\Client\ObjectSerializer;
+use RuntimeException;
 
 /**
  * LocationsApi Class Doc Comment
@@ -133,9 +141,9 @@ class LocationsApi
      * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
      * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getCities'] to see the possible values for this operation
      *
-     * @return \OpenAPI\Client\Model\GetCities200Response|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse
-     * @throws \InvalidArgumentException
-     * @throws \OpenAPI\Client\ApiException on non-2xx response
+     * @return GetCities200Response|ErrorResponse|ErrorResponse|ErrorResponse|ErrorResponse
+     * @throws InvalidArgumentException
+     * @throws ApiException on non-2xx response
      */
     public function getCities($x_api_partner_id, string $contentType = self::contentTypes['getCities'][0])
     {
@@ -152,8 +160,8 @@ class LocationsApi
      * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getCities'] to see the possible values for this operation
      *
      * @return array of \OpenAPI\Client\Model\GetCities200Response|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
-     * @throws \InvalidArgumentException
-     * @throws \OpenAPI\Client\ApiException on non-2xx response
+     * @throws InvalidArgumentException
+     * @throws ApiException on non-2xx response
      */
     public function getCitiesWithHttpInfo($x_api_partner_id, string $contentType = self::contentTypes['getCities'][0])
     {
@@ -341,15 +349,15 @@ class LocationsApi
      * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
      * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getCities'] to see the possible values for this operation
      *
-     * @return \GuzzleHttp\Psr7\Request
-     * @throws \InvalidArgumentException
+     * @return Request
+     * @throws InvalidArgumentException
      */
     public function getCitiesRequest($x_api_partner_id, string $contentType = self::contentTypes['getCities'][0])
     {
 
         // verify the required parameter 'x_api_partner_id' is set
         if ($x_api_partner_id === null || (is_array($x_api_partner_id) && count($x_api_partner_id) === 0)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 'Missing the required parameter $x_api_partner_id when calling getCities'
             );
         }
@@ -393,7 +401,7 @@ class LocationsApi
 
             } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+                $httpBody = Utils::jsonEncode($formParams);
             } else {
                 // for HTTP post (form)
                 $httpBody = ObjectSerializer::buildQuery($formParams);
@@ -430,7 +438,7 @@ class LocationsApi
      * Create http client option
      *
      * @return array of http client options
-     * @throws \RuntimeException on file opening failure
+     * @throws RuntimeException on file opening failure
      */
     protected function createHttpClientOption()
     {
@@ -438,7 +446,7 @@ class LocationsApi
         if ($this->config->getDebug()) {
             $options[RequestOptions::DEBUG] = fopen($this->config->getDebugFile(), 'a');
             if (!$options[RequestOptions::DEBUG]) {
-                throw new \RuntimeException('Failed to open the debug file: '.$this->config->getDebugFile());
+                throw new RuntimeException('Failed to open the debug file: '.$this->config->getDebugFile());
             }
         }
 
@@ -453,8 +461,8 @@ class LocationsApi
      * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
      * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getCities'] to see the possible values for this operation
      *
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     * @throws \InvalidArgumentException
+     * @return PromiseInterface
+     * @throws InvalidArgumentException
      */
     public function getCitiesAsync($x_api_partner_id, string $contentType = self::contentTypes['getCities'][0])
     {
@@ -474,8 +482,8 @@ class LocationsApi
      * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
      * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getCities'] to see the possible values for this operation
      *
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     * @throws \InvalidArgumentException
+     * @return PromiseInterface
+     * @throws InvalidArgumentException
      */
     public function getCitiesAsyncWithHttpInfo(
         $x_api_partner_id,
@@ -529,9 +537,9 @@ class LocationsApi
      * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (optional)
      * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getCity'] to see the possible values for this operation
      *
-     * @return \OpenAPI\Client\Model\GetCity200Response|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse
-     * @throws \InvalidArgumentException
-     * @throws \OpenAPI\Client\ApiException on non-2xx response
+     * @return GetCity200Response|ErrorResponse|ErrorResponse|ErrorResponse|ErrorResponse
+     * @throws InvalidArgumentException
+     * @throws ApiException on non-2xx response
      */
     public function getCity(
         $city_slug,
@@ -552,8 +560,8 @@ class LocationsApi
      * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getCity'] to see the possible values for this operation
      *
      * @return array of \OpenAPI\Client\Model\GetCity200Response|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
-     * @throws \InvalidArgumentException
-     * @throws \OpenAPI\Client\ApiException on non-2xx response
+     * @throws InvalidArgumentException
+     * @throws ApiException on non-2xx response
      */
     public function getCityWithHttpInfo(
         $city_slug,
@@ -745,8 +753,8 @@ class LocationsApi
      * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (optional)
      * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getCity'] to see the possible values for this operation
      *
-     * @return \GuzzleHttp\Psr7\Request
-     * @throws \InvalidArgumentException
+     * @return Request
+     * @throws InvalidArgumentException
      */
     public function getCityRequest(
         $city_slug,
@@ -756,7 +764,7 @@ class LocationsApi
 
         // verify the required parameter 'city_slug' is set
         if ($city_slug === null || (is_array($city_slug) && count($city_slug) === 0)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 'Missing the required parameter $city_slug when calling getCity'
             );
         }
@@ -809,7 +817,7 @@ class LocationsApi
 
             } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+                $httpBody = Utils::jsonEncode($formParams);
             } else {
                 // for HTTP post (form)
                 $httpBody = ObjectSerializer::buildQuery($formParams);
@@ -851,8 +859,8 @@ class LocationsApi
      * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (optional)
      * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getCity'] to see the possible values for this operation
      *
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     * @throws \InvalidArgumentException
+     * @return PromiseInterface
+     * @throws InvalidArgumentException
      */
     public function getCityAsync(
         $city_slug,
@@ -876,8 +884,8 @@ class LocationsApi
      * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (optional)
      * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getCity'] to see the possible values for this operation
      *
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     * @throws \InvalidArgumentException
+     * @return PromiseInterface
+     * @throws InvalidArgumentException
      */
     public function getCityAsyncWithHttpInfo(
         $city_slug,
@@ -931,9 +939,9 @@ class LocationsApi
      * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
      * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getUniversities'] to see the possible values for this operation
      *
-     * @return \OpenAPI\Client\Model\GetUniversities200Response|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse
-     * @throws \InvalidArgumentException
-     * @throws \OpenAPI\Client\ApiException on non-2xx response
+     * @return GetUniversities200Response|ErrorResponse|ErrorResponse|ErrorResponse|ErrorResponse
+     * @throws InvalidArgumentException
+     * @throws ApiException on non-2xx response
      */
     public function getUniversities($x_api_partner_id, string $contentType = self::contentTypes['getUniversities'][0])
     {
@@ -950,8 +958,8 @@ class LocationsApi
      * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getUniversities'] to see the possible values for this operation
      *
      * @return array of \OpenAPI\Client\Model\GetUniversities200Response|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
-     * @throws \InvalidArgumentException
-     * @throws \OpenAPI\Client\ApiException on non-2xx response
+     * @throws InvalidArgumentException
+     * @throws ApiException on non-2xx response
      */
     public function getUniversitiesWithHttpInfo(
         $x_api_partner_id,
@@ -1141,8 +1149,8 @@ class LocationsApi
      * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
      * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getUniversities'] to see the possible values for this operation
      *
-     * @return \GuzzleHttp\Psr7\Request
-     * @throws \InvalidArgumentException
+     * @return Request
+     * @throws InvalidArgumentException
      */
     public function getUniversitiesRequest(
         $x_api_partner_id,
@@ -1151,7 +1159,7 @@ class LocationsApi
 
         // verify the required parameter 'x_api_partner_id' is set
         if ($x_api_partner_id === null || (is_array($x_api_partner_id) && count($x_api_partner_id) === 0)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 'Missing the required parameter $x_api_partner_id when calling getUniversities'
             );
         }
@@ -1195,7 +1203,7 @@ class LocationsApi
 
             } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+                $httpBody = Utils::jsonEncode($formParams);
             } else {
                 // for HTTP post (form)
                 $httpBody = ObjectSerializer::buildQuery($formParams);
@@ -1236,8 +1244,8 @@ class LocationsApi
      * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
      * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getUniversities'] to see the possible values for this operation
      *
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     * @throws \InvalidArgumentException
+     * @return PromiseInterface
+     * @throws InvalidArgumentException
      */
     public function getUniversitiesAsync(
         $x_api_partner_id,
@@ -1259,8 +1267,8 @@ class LocationsApi
      * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
      * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getUniversities'] to see the possible values for this operation
      *
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     * @throws \InvalidArgumentException
+     * @return PromiseInterface
+     * @throws InvalidArgumentException
      */
     public function getUniversitiesAsyncWithHttpInfo(
         $x_api_partner_id,

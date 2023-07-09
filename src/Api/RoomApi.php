@@ -5,6 +5,7 @@ namespace Housemates\ConnectApi\Api;
 use Exception;
 use Housemates\ConnectApi\Exceptions\ApiException as HousematesApiException;
 use Housemates\ConnectApi\Filters\RoomFilter;
+use Housemates\ConnectApi\Response\Response;
 use Housemates\ConnectApi\Sorts\RoomSort;
 use OpenAPI\Client\Api\RoomsApi;
 use OpenAPI\Client\ApiException;
@@ -16,7 +17,7 @@ class RoomApi extends BaseApi
     public function getRooms(
         ?RoomFilter $filters,
         ?RoomSort $sort
-    ) {
+    ): Response {
         try {
             $apiInstance = $this->getApiInstance();
             $apiPartnerId = $this->config->getApiPartnerId();
@@ -35,7 +36,7 @@ class RoomApi extends BaseApi
             $args[] = $sorts && array_key_exists('is_available', $sorts) ? $sorts['is_available'] : null;
 
 
-            return $apiInstance->getRooms(...$args);
+            return Response::make($apiInstance->getRooms(...$args));
         } catch (ApiException $e) {
             throw HousematesApiException::because(
                 sprintf('ApiException: %s %s', $e->getCode(), $e->getMessage())
@@ -53,13 +54,13 @@ class RoomApi extends BaseApi
         );
     }
 
-    public function getRoom(string $roomId)
+    public function getRoom(string $roomId): Response
     {
         try {
             $apiInstance = $this->getApiInstance();
             $apiPartnerId = $this->config->getApiPartnerId();
 
-            return $apiInstance->getRoom($apiPartnerId, $roomId);
+            return Response::make($apiInstance->getRoom($apiPartnerId, $roomId));
         } catch (ApiException $e) {
             throw HousematesApiException::because(
                 sprintf('ApiException: %s %s', $e->getCode(), $e->getMessage())
@@ -69,13 +70,13 @@ class RoomApi extends BaseApi
         }
     }
 
-    public function getRoomBookingPeriods(string $roomId)
+    public function getRoomBookingPeriods(string $roomId): Response
     {
         try {
             $apiInstance = $this->getApiInstance();
             $apiPartnerId = $this->config->getApiPartnerId();
 
-            return $apiInstance->getRoomBookingPeriods($apiPartnerId, $roomId);
+            return Response::make($apiInstance->getRoomBookingPeriods($apiPartnerId, $roomId));
         } catch (ApiException $e) {
             throw HousematesApiException::because(
                 sprintf('ApiException: %s %s', $e->getCode(), $e->getMessage())

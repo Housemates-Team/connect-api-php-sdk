@@ -30,7 +30,10 @@
 namespace OpenAPI\Client\Model;
 
 use ArrayAccess;
+use InvalidArgumentException;
+use JsonSerializable;
 use OpenAPI\Client\ObjectSerializer;
+use ReturnTypeWillChange;
 
 /**
  * BaseSuccessResponse Class Doc Comment
@@ -39,9 +42,9 @@ use OpenAPI\Client\ObjectSerializer;
  * @package  OpenAPI\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
- * @implements \ArrayAccess<string, mixed>
+ * @implements ArrayAccess<string, mixed>
  */
-class BaseSuccessResponse implements ModelInterface, ArrayAccess, \JsonSerializable
+class BaseSuccessResponse implements ModelInterface, ArrayAccess, JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -315,7 +318,7 @@ class BaseSuccessResponse implements ModelInterface, ArrayAccess, \JsonSerializa
     public function setSuccess($success)
     {
         if (is_null($success)) {
-            throw new \InvalidArgumentException('non-nullable success cannot be null');
+            throw new InvalidArgumentException('non-nullable success cannot be null');
         }
         $this->container['success'] = $success;
 
@@ -342,7 +345,7 @@ class BaseSuccessResponse implements ModelInterface, ArrayAccess, \JsonSerializa
     public function setCode($code)
     {
         if (is_null($code)) {
-            throw new \InvalidArgumentException('non-nullable code cannot be null');
+            throw new InvalidArgumentException('non-nullable code cannot be null');
         }
         $this->container['code'] = $code;
 
@@ -369,7 +372,7 @@ class BaseSuccessResponse implements ModelInterface, ArrayAccess, \JsonSerializa
     public function setLocale($locale)
     {
         if (is_null($locale)) {
-            throw new \InvalidArgumentException('non-nullable locale cannot be null');
+            throw new InvalidArgumentException('non-nullable locale cannot be null');
         }
         $this->container['locale'] = $locale;
 
@@ -396,7 +399,7 @@ class BaseSuccessResponse implements ModelInterface, ArrayAccess, \JsonSerializa
     public function setMessage($message)
     {
         if (is_null($message)) {
-            throw new \InvalidArgumentException('non-nullable message cannot be null');
+            throw new InvalidArgumentException('non-nullable message cannot be null');
         }
         $this->container['message'] = $message;
 
@@ -422,7 +425,7 @@ class BaseSuccessResponse implements ModelInterface, ArrayAccess, \JsonSerializa
      *
      * @return mixed|null
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->container[$offset] ?? null;
@@ -464,7 +467,7 @@ class BaseSuccessResponse implements ModelInterface, ArrayAccess, \JsonSerializa
      * @return mixed Returns data which can be serialized by json_encode(), which is a value
      * of any type other than a resource.
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return ObjectSerializer::sanitizeForSerialization($this);

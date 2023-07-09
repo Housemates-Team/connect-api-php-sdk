@@ -30,7 +30,10 @@
 namespace OpenAPI\Client\Model;
 
 use ArrayAccess;
+use InvalidArgumentException;
+use JsonSerializable;
 use OpenAPI\Client\ObjectSerializer;
+use ReturnTypeWillChange;
 
 /**
  * GetUniversities200ResponseAllOf Class Doc Comment
@@ -39,9 +42,9 @@ use OpenAPI\Client\ObjectSerializer;
  * @package  OpenAPI\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
- * @implements \ArrayAccess<string, mixed>
+ * @implements ArrayAccess<string, mixed>
  */
-class GetUniversities200ResponseAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
+class GetUniversities200ResponseAllOf implements ModelInterface, ArrayAccess, JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -277,7 +280,7 @@ class GetUniversities200ResponseAllOf implements ModelInterface, ArrayAccess, \J
     /**
      * Gets data
      *
-     * @return \OpenAPI\Client\Model\GetUniversities200ResponseAllOfData|null
+     * @return GetUniversities200ResponseAllOfData|null
      */
     public function getData()
     {
@@ -287,14 +290,14 @@ class GetUniversities200ResponseAllOf implements ModelInterface, ArrayAccess, \J
     /**
      * Sets data
      *
-     * @param  \OpenAPI\Client\Model\GetUniversities200ResponseAllOfData|null  $data  data
+     * @param  GetUniversities200ResponseAllOfData|null  $data  data
      *
      * @return self
      */
     public function setData($data)
     {
         if (is_null($data)) {
-            throw new \InvalidArgumentException('non-nullable data cannot be null');
+            throw new InvalidArgumentException('non-nullable data cannot be null');
         }
         $this->container['data'] = $data;
 
@@ -320,7 +323,7 @@ class GetUniversities200ResponseAllOf implements ModelInterface, ArrayAccess, \J
      *
      * @return mixed|null
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->container[$offset] ?? null;
@@ -362,7 +365,7 @@ class GetUniversities200ResponseAllOf implements ModelInterface, ArrayAccess, \J
      * @return mixed Returns data which can be serialized by json_encode(), which is a value
      * of any type other than a resource.
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return ObjectSerializer::sanitizeForSerialization($this);

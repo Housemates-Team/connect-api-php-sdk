@@ -30,7 +30,10 @@
 namespace OpenAPI\Client\Model;
 
 use ArrayAccess;
+use InvalidArgumentException;
+use JsonSerializable;
 use OpenAPI\Client\ObjectSerializer;
+use ReturnTypeWillChange;
 
 /**
  * PropertyWithRoomsAllOfRooms Class Doc Comment
@@ -39,9 +42,9 @@ use OpenAPI\Client\ObjectSerializer;
  * @package  OpenAPI\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
- * @implements \ArrayAccess<string, mixed>
+ * @implements ArrayAccess<string, mixed>
  */
-class PropertyWithRoomsAllOfRooms implements ModelInterface, ArrayAccess, \JsonSerializable
+class PropertyWithRoomsAllOfRooms implements ModelInterface, ArrayAccess, JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -308,7 +311,7 @@ class PropertyWithRoomsAllOfRooms implements ModelInterface, ArrayAccess, \JsonS
     public function setId($id)
     {
         if (is_null($id)) {
-            throw new \InvalidArgumentException('non-nullable id cannot be null');
+            throw new InvalidArgumentException('non-nullable id cannot be null');
         }
         $this->container['id'] = $id;
 
@@ -335,7 +338,7 @@ class PropertyWithRoomsAllOfRooms implements ModelInterface, ArrayAccess, \JsonS
     public function setName($name)
     {
         if (is_null($name)) {
-            throw new \InvalidArgumentException('non-nullable name cannot be null');
+            throw new InvalidArgumentException('non-nullable name cannot be null');
         }
         $this->container['name'] = $name;
 
@@ -345,7 +348,7 @@ class PropertyWithRoomsAllOfRooms implements ModelInterface, ArrayAccess, \JsonS
     /**
      * Gets _links
      *
-     * @return \OpenAPI\Client\Model\HateoasLink[]|null
+     * @return HateoasLink[]|null
      */
     public function getLinks()
     {
@@ -355,14 +358,14 @@ class PropertyWithRoomsAllOfRooms implements ModelInterface, ArrayAccess, \JsonS
     /**
      * Sets _links
      *
-     * @param  \OpenAPI\Client\Model\HateoasLink[]|null  $_links  _links
+     * @param  HateoasLink[]|null  $_links  _links
      *
      * @return self
      */
     public function setLinks($_links)
     {
         if (is_null($_links)) {
-            throw new \InvalidArgumentException('non-nullable _links cannot be null');
+            throw new InvalidArgumentException('non-nullable _links cannot be null');
         }
         $this->container['_links'] = $_links;
 
@@ -388,7 +391,7 @@ class PropertyWithRoomsAllOfRooms implements ModelInterface, ArrayAccess, \JsonS
      *
      * @return mixed|null
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->container[$offset] ?? null;
@@ -430,7 +433,7 @@ class PropertyWithRoomsAllOfRooms implements ModelInterface, ArrayAccess, \JsonS
      * @return mixed Returns data which can be serialized by json_encode(), which is a value
      * of any type other than a resource.
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return ObjectSerializer::sanitizeForSerialization($this);

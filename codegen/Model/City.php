@@ -30,7 +30,10 @@
 namespace OpenAPI\Client\Model;
 
 use ArrayAccess;
+use InvalidArgumentException;
+use JsonSerializable;
 use OpenAPI\Client\ObjectSerializer;
+use ReturnTypeWillChange;
 
 /**
  * City Class Doc Comment
@@ -39,9 +42,9 @@ use OpenAPI\Client\ObjectSerializer;
  * @package  OpenAPI\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
- * @implements \ArrayAccess<string, mixed>
+ * @implements ArrayAccess<string, mixed>
  */
-class City implements ModelInterface, ArrayAccess, \JsonSerializable
+class City implements ModelInterface, ArrayAccess, JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -308,7 +311,7 @@ class City implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setName($name)
     {
         if (is_null($name)) {
-            throw new \InvalidArgumentException('non-nullable name cannot be null');
+            throw new InvalidArgumentException('non-nullable name cannot be null');
         }
         $this->container['name'] = $name;
 
@@ -335,7 +338,7 @@ class City implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setSlug($slug)
     {
         if (is_null($slug)) {
-            throw new \InvalidArgumentException('non-nullable slug cannot be null');
+            throw new InvalidArgumentException('non-nullable slug cannot be null');
         }
         $this->container['slug'] = $slug;
 
@@ -345,7 +348,7 @@ class City implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets coordinates
      *
-     * @return \OpenAPI\Client\Model\CityCoordinates|null
+     * @return CityCoordinates|null
      */
     public function getCoordinates()
     {
@@ -355,14 +358,14 @@ class City implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets coordinates
      *
-     * @param  \OpenAPI\Client\Model\CityCoordinates|null  $coordinates  coordinates
+     * @param  CityCoordinates|null  $coordinates  coordinates
      *
      * @return self
      */
     public function setCoordinates($coordinates)
     {
         if (is_null($coordinates)) {
-            throw new \InvalidArgumentException('non-nullable coordinates cannot be null');
+            throw new InvalidArgumentException('non-nullable coordinates cannot be null');
         }
         $this->container['coordinates'] = $coordinates;
 
@@ -388,7 +391,7 @@ class City implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @return mixed|null
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->container[$offset] ?? null;
@@ -430,7 +433,7 @@ class City implements ModelInterface, ArrayAccess, \JsonSerializable
      * @return mixed Returns data which can be serialized by json_encode(), which is a value
      * of any type other than a resource.
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return ObjectSerializer::sanitizeForSerialization($this);

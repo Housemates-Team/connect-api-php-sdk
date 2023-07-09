@@ -30,7 +30,10 @@
 namespace OpenAPI\Client\Model;
 
 use ArrayAccess;
+use InvalidArgumentException;
+use JsonSerializable;
 use OpenAPI\Client\ObjectSerializer;
+use ReturnTypeWillChange;
 
 /**
  * GetProperties200ResponseAllOf Class Doc Comment
@@ -39,9 +42,9 @@ use OpenAPI\Client\ObjectSerializer;
  * @package  OpenAPI\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
- * @implements \ArrayAccess<string, mixed>
+ * @implements ArrayAccess<string, mixed>
  */
-class GetProperties200ResponseAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
+class GetProperties200ResponseAllOf implements ModelInterface, ArrayAccess, JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -291,7 +294,7 @@ class GetProperties200ResponseAllOf implements ModelInterface, ArrayAccess, \Jso
     /**
      * Gets data
      *
-     * @return \OpenAPI\Client\Model\PropertyList|null
+     * @return PropertyList|null
      */
     public function getData()
     {
@@ -301,14 +304,14 @@ class GetProperties200ResponseAllOf implements ModelInterface, ArrayAccess, \Jso
     /**
      * Sets data
      *
-     * @param  \OpenAPI\Client\Model\PropertyList|null  $data  data
+     * @param  PropertyList|null  $data  data
      *
      * @return self
      */
     public function setData($data)
     {
         if (is_null($data)) {
-            throw new \InvalidArgumentException('non-nullable data cannot be null');
+            throw new InvalidArgumentException('non-nullable data cannot be null');
         }
         $this->container['data'] = $data;
 
@@ -318,7 +321,7 @@ class GetProperties200ResponseAllOf implements ModelInterface, ArrayAccess, \Jso
     /**
      * Gets meta
      *
-     * @return \OpenAPI\Client\Model\PaginationMeta|null
+     * @return PaginationMeta|null
      */
     public function getMeta()
     {
@@ -328,14 +331,14 @@ class GetProperties200ResponseAllOf implements ModelInterface, ArrayAccess, \Jso
     /**
      * Sets meta
      *
-     * @param  \OpenAPI\Client\Model\PaginationMeta|null  $meta  meta
+     * @param  PaginationMeta|null  $meta  meta
      *
      * @return self
      */
     public function setMeta($meta)
     {
         if (is_null($meta)) {
-            throw new \InvalidArgumentException('non-nullable meta cannot be null');
+            throw new InvalidArgumentException('non-nullable meta cannot be null');
         }
         $this->container['meta'] = $meta;
 
@@ -345,7 +348,7 @@ class GetProperties200ResponseAllOf implements ModelInterface, ArrayAccess, \Jso
     /**
      * Gets links
      *
-     * @return \OpenAPI\Client\Model\PaginationLinks|null
+     * @return PaginationLinks|null
      */
     public function getLinks()
     {
@@ -355,14 +358,14 @@ class GetProperties200ResponseAllOf implements ModelInterface, ArrayAccess, \Jso
     /**
      * Sets links
      *
-     * @param  \OpenAPI\Client\Model\PaginationLinks|null  $links  links
+     * @param  PaginationLinks|null  $links  links
      *
      * @return self
      */
     public function setLinks($links)
     {
         if (is_null($links)) {
-            throw new \InvalidArgumentException('non-nullable links cannot be null');
+            throw new InvalidArgumentException('non-nullable links cannot be null');
         }
         $this->container['links'] = $links;
 
@@ -388,7 +391,7 @@ class GetProperties200ResponseAllOf implements ModelInterface, ArrayAccess, \Jso
      *
      * @return mixed|null
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->container[$offset] ?? null;
@@ -430,7 +433,7 @@ class GetProperties200ResponseAllOf implements ModelInterface, ArrayAccess, \Jso
      * @return mixed Returns data which can be serialized by json_encode(), which is a value
      * of any type other than a resource.
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return ObjectSerializer::sanitizeForSerialization($this);

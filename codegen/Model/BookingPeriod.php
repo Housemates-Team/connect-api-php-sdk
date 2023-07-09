@@ -30,7 +30,10 @@
 namespace OpenAPI\Client\Model;
 
 use ArrayAccess;
+use InvalidArgumentException;
+use JsonSerializable;
 use OpenAPI\Client\ObjectSerializer;
+use ReturnTypeWillChange;
 
 /**
  * BookingPeriod Class Doc Comment
@@ -39,9 +42,9 @@ use OpenAPI\Client\ObjectSerializer;
  * @package  OpenAPI\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
- * @implements \ArrayAccess<string, mixed>
+ * @implements ArrayAccess<string, mixed>
  */
-class BookingPeriod implements ModelInterface, ArrayAccess, \JsonSerializable
+class BookingPeriod implements ModelInterface, ArrayAccess, JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -329,7 +332,7 @@ class BookingPeriod implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setId($id)
     {
         if (is_null($id)) {
-            throw new \InvalidArgumentException('non-nullable id cannot be null');
+            throw new InvalidArgumentException('non-nullable id cannot be null');
         }
         $this->container['id'] = $id;
 
@@ -356,7 +359,7 @@ class BookingPeriod implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setStartDate($start_date)
     {
         if (is_null($start_date)) {
-            throw new \InvalidArgumentException('non-nullable start_date cannot be null');
+            throw new InvalidArgumentException('non-nullable start_date cannot be null');
         }
         $this->container['start_date'] = $start_date;
 
@@ -383,7 +386,7 @@ class BookingPeriod implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setEndDate($end_date)
     {
         if (is_null($end_date)) {
-            throw new \InvalidArgumentException('non-nullable end_date cannot be null');
+            throw new InvalidArgumentException('non-nullable end_date cannot be null');
         }
         $this->container['end_date'] = $end_date;
 
@@ -410,7 +413,7 @@ class BookingPeriod implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setHoldingDeposit($holding_deposit)
     {
         if (is_null($holding_deposit)) {
-            throw new \InvalidArgumentException('non-nullable holding_deposit cannot be null');
+            throw new InvalidArgumentException('non-nullable holding_deposit cannot be null');
         }
         $this->container['holding_deposit'] = $holding_deposit;
 
@@ -437,7 +440,7 @@ class BookingPeriod implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setPricePerWeek($price_per_week)
     {
         if (is_null($price_per_week)) {
-            throw new \InvalidArgumentException('non-nullable price_per_week cannot be null');
+            throw new InvalidArgumentException('non-nullable price_per_week cannot be null');
         }
         $this->container['price_per_week'] = $price_per_week;
 
@@ -464,7 +467,7 @@ class BookingPeriod implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setMaximumBookings($maximum_bookings)
     {
         if (is_null($maximum_bookings)) {
-            throw new \InvalidArgumentException('non-nullable maximum_bookings cannot be null');
+            throw new InvalidArgumentException('non-nullable maximum_bookings cannot be null');
         }
         $this->container['maximum_bookings'] = $maximum_bookings;
 
@@ -490,7 +493,7 @@ class BookingPeriod implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @return mixed|null
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->container[$offset] ?? null;
@@ -532,7 +535,7 @@ class BookingPeriod implements ModelInterface, ArrayAccess, \JsonSerializable
      * @return mixed Returns data which can be serialized by json_encode(), which is a value
      * of any type other than a resource.
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return ObjectSerializer::sanitizeForSerialization($this);

@@ -32,13 +32,25 @@ use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Promise\PromiseInterface;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
+use GuzzleHttp\Utils;
+use InvalidArgumentException;
 use OpenAPI\Client\ApiException;
 use OpenAPI\Client\Configuration;
 use OpenAPI\Client\HeaderSelector;
+use OpenAPI\Client\Model\CheckoutComplete201Response;
+use OpenAPI\Client\Model\CheckoutCompleteRequestCourseDetails;
+use OpenAPI\Client\Model\CheckoutCompleteRequestResidentDetails;
+use OpenAPI\Client\Model\CheckoutCompleteRequestSupportingContactDetails;
+use OpenAPI\Client\Model\CheckoutStart201Response;
+use OpenAPI\Client\Model\CheckoutStartRequest;
+use OpenAPI\Client\Model\ErrorResponse;
+use OpenAPI\Client\Model\UnauthenticatedErrorResponse;
 use OpenAPI\Client\ObjectSerializer;
+use RuntimeException;
 
 /**
  * CheckoutApi Class Doc Comment
@@ -53,7 +65,7 @@ class CheckoutApi
     /** @var string[] $contentTypes * */
     public const contentTypes = [
         'checkoutComplete' => [
-            'multipart/form-data',
+            'application/x-www-form-urlencoded',
         ],
         'checkoutStart' => [
             'application/json',
@@ -134,15 +146,15 @@ class CheckoutApi
      * @param  bool  $paying_in_instalments  paying_in_instalments (required)
      * @param  bool  $has_uk_based_guarantor  has_uk_based_guarantor (required)
      * @param  bool  $is_using_housing_hand  is_using_housing_hand (required)
-     * @param  \OpenAPI\Client\Model\ResidentDetails  $resident_details  resident_details (required)
-     * @param  \OpenAPI\Client\Model\CourseDetails  $course_details  course_details (required)
-     * @param  \OpenAPI\Client\Model\SupportingContactDetails  $supporing_contact_details  supporing_contact_details (optional)
+     * @param  CheckoutCompleteRequestResidentDetails  $resident_details  resident_details (required)
+     * @param  CheckoutCompleteRequestCourseDetails  $course_details  course_details (required)
+     * @param  CheckoutCompleteRequestSupportingContactDetails  $supporting_contact_details  supporting_contact_details (optional)
      * @param  string  $special_request  special_request (optional)
      * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['checkoutComplete'] to see the possible values for this operation
      *
-     * @return \OpenAPI\Client\Model\CheckoutComplete201Response|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\UnauthenticatedErrorResponse|\OpenAPI\Client\Model\ErrorResponse
-     * @throws \OpenAPI\Client\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
+     * @return CheckoutComplete201Response|ErrorResponse|ErrorResponse|ErrorResponse|ErrorResponse|UnauthenticatedErrorResponse|ErrorResponse
+     * @throws ApiException on non-2xx response
+     * @throws InvalidArgumentException
      */
     public function checkoutComplete(
         $x_api_partner_id,
@@ -153,13 +165,13 @@ class CheckoutApi
         $is_using_housing_hand,
         $resident_details,
         $course_details,
-        $supporing_contact_details = null,
+        $supporting_contact_details = null,
         $special_request = null,
         string $contentType = self::contentTypes['checkoutComplete'][0]
     ) {
         list($response) = $this->checkoutCompleteWithHttpInfo($x_api_partner_id, $room_id, $session_token,
             $paying_in_instalments, $has_uk_based_guarantor, $is_using_housing_hand, $resident_details, $course_details,
-            $supporing_contact_details, $special_request, $contentType);
+            $supporting_contact_details, $special_request, $contentType);
         return $response;
     }
 
@@ -174,15 +186,15 @@ class CheckoutApi
      * @param  bool  $paying_in_instalments  (required)
      * @param  bool  $has_uk_based_guarantor  (required)
      * @param  bool  $is_using_housing_hand  (required)
-     * @param  \OpenAPI\Client\Model\ResidentDetails  $resident_details  (required)
-     * @param  \OpenAPI\Client\Model\CourseDetails  $course_details  (required)
-     * @param  \OpenAPI\Client\Model\SupportingContactDetails  $supporing_contact_details  (optional)
+     * @param  CheckoutCompleteRequestResidentDetails  $resident_details  (required)
+     * @param  CheckoutCompleteRequestCourseDetails  $course_details  (required)
+     * @param  CheckoutCompleteRequestSupportingContactDetails  $supporting_contact_details  (optional)
      * @param  string  $special_request  (optional)
      * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['checkoutComplete'] to see the possible values for this operation
      *
      * @return array of \OpenAPI\Client\Model\CheckoutComplete201Response|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\UnauthenticatedErrorResponse|\OpenAPI\Client\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
-     * @throws \OpenAPI\Client\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
+     * @throws ApiException on non-2xx response
+     * @throws InvalidArgumentException
      */
     public function checkoutCompleteWithHttpInfo(
         $x_api_partner_id,
@@ -193,13 +205,13 @@ class CheckoutApi
         $is_using_housing_hand,
         $resident_details,
         $course_details,
-        $supporing_contact_details = null,
+        $supporting_contact_details = null,
         $special_request = null,
         string $contentType = self::contentTypes['checkoutComplete'][0]
     ) {
         $request = $this->checkoutCompleteRequest($x_api_partner_id, $room_id, $session_token, $paying_in_instalments,
             $has_uk_based_guarantor, $is_using_housing_hand, $resident_details, $course_details,
-            $supporing_contact_details, $special_request, $contentType);
+            $supporting_contact_details, $special_request, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -434,14 +446,14 @@ class CheckoutApi
      * @param  bool  $paying_in_instalments  (required)
      * @param  bool  $has_uk_based_guarantor  (required)
      * @param  bool  $is_using_housing_hand  (required)
-     * @param  \OpenAPI\Client\Model\ResidentDetails  $resident_details  (required)
-     * @param  \OpenAPI\Client\Model\CourseDetails  $course_details  (required)
-     * @param  \OpenAPI\Client\Model\SupportingContactDetails  $supporing_contact_details  (optional)
+     * @param  CheckoutCompleteRequestResidentDetails  $resident_details  (required)
+     * @param  CheckoutCompleteRequestCourseDetails  $course_details  (required)
+     * @param  CheckoutCompleteRequestSupportingContactDetails  $supporting_contact_details  (optional)
      * @param  string  $special_request  (optional)
      * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['checkoutComplete'] to see the possible values for this operation
      *
-     * @return \GuzzleHttp\Psr7\Request
-     * @throws \InvalidArgumentException
+     * @return Request
+     * @throws InvalidArgumentException
      */
     public function checkoutCompleteRequest(
         $x_api_partner_id,
@@ -452,69 +464,69 @@ class CheckoutApi
         $is_using_housing_hand,
         $resident_details,
         $course_details,
-        $supporing_contact_details = null,
+        $supporting_contact_details = null,
         $special_request = null,
         string $contentType = self::contentTypes['checkoutComplete'][0]
     ) {
 
         // verify the required parameter 'x_api_partner_id' is set
         if ($x_api_partner_id === null || (is_array($x_api_partner_id) && count($x_api_partner_id) === 0)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 'Missing the required parameter $x_api_partner_id when calling checkoutComplete'
             );
         }
 
         // verify the required parameter 'room_id' is set
         if ($room_id === null || (is_array($room_id) && count($room_id) === 0)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 'Missing the required parameter $room_id when calling checkoutComplete'
             );
         }
 
         // verify the required parameter 'session_token' is set
         if ($session_token === null || (is_array($session_token) && count($session_token) === 0)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 'Missing the required parameter $session_token when calling checkoutComplete'
             );
         }
 
         // verify the required parameter 'paying_in_instalments' is set
         if ($paying_in_instalments === null || (is_array($paying_in_instalments) && count($paying_in_instalments) === 0)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 'Missing the required parameter $paying_in_instalments when calling checkoutComplete'
             );
         }
 
         // verify the required parameter 'has_uk_based_guarantor' is set
         if ($has_uk_based_guarantor === null || (is_array($has_uk_based_guarantor) && count($has_uk_based_guarantor) === 0)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 'Missing the required parameter $has_uk_based_guarantor when calling checkoutComplete'
             );
         }
 
         // verify the required parameter 'is_using_housing_hand' is set
         if ($is_using_housing_hand === null || (is_array($is_using_housing_hand) && count($is_using_housing_hand) === 0)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 'Missing the required parameter $is_using_housing_hand when calling checkoutComplete'
             );
         }
 
         // verify the required parameter 'resident_details' is set
         if ($resident_details === null || (is_array($resident_details) && count($resident_details) === 0)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 'Missing the required parameter $resident_details when calling checkoutComplete'
             );
         }
 
         // verify the required parameter 'course_details' is set
         if ($course_details === null || (is_array($course_details) && count($course_details) === 0)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 'Missing the required parameter $course_details when calling checkoutComplete'
             );
         }
 
 
-        $resourcePath = '/api/rooms/{room_id}/checkout/complete';
+        $resourcePath = '/api/rooms/{room_id}/checkout';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -557,8 +569,8 @@ class CheckoutApi
             $formParams['resident_details'] = ObjectSerializer::toFormValue($resident_details);
         }
         // form params
-        if ($supporing_contact_details !== null) {
-            $formParams['supporing_contact_details'] = ObjectSerializer::toFormValue($supporing_contact_details);
+        if ($supporting_contact_details !== null) {
+            $formParams['supporting_contact_details'] = ObjectSerializer::toFormValue($supporting_contact_details);
         }
         // form params
         if ($course_details !== null) {
@@ -593,7 +605,7 @@ class CheckoutApi
 
             } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+                $httpBody = Utils::jsonEncode($formParams);
             } else {
                 // for HTTP post (form)
                 $httpBody = ObjectSerializer::buildQuery($formParams);
@@ -630,7 +642,7 @@ class CheckoutApi
      * Create http client option
      *
      * @return array of http client options
-     * @throws \RuntimeException on file opening failure
+     * @throws RuntimeException on file opening failure
      */
     protected function createHttpClientOption()
     {
@@ -638,7 +650,7 @@ class CheckoutApi
         if ($this->config->getDebug()) {
             $options[RequestOptions::DEBUG] = fopen($this->config->getDebugFile(), 'a');
             if (!$options[RequestOptions::DEBUG]) {
-                throw new \RuntimeException('Failed to open the debug file: '.$this->config->getDebugFile());
+                throw new RuntimeException('Failed to open the debug file: '.$this->config->getDebugFile());
             }
         }
 
@@ -656,14 +668,14 @@ class CheckoutApi
      * @param  bool  $paying_in_instalments  (required)
      * @param  bool  $has_uk_based_guarantor  (required)
      * @param  bool  $is_using_housing_hand  (required)
-     * @param  \OpenAPI\Client\Model\ResidentDetails  $resident_details  (required)
-     * @param  \OpenAPI\Client\Model\CourseDetails  $course_details  (required)
-     * @param  \OpenAPI\Client\Model\SupportingContactDetails  $supporing_contact_details  (optional)
+     * @param  CheckoutCompleteRequestResidentDetails  $resident_details  (required)
+     * @param  CheckoutCompleteRequestCourseDetails  $course_details  (required)
+     * @param  CheckoutCompleteRequestSupportingContactDetails  $supporting_contact_details  (optional)
      * @param  string  $special_request  (optional)
      * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['checkoutComplete'] to see the possible values for this operation
      *
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     * @throws \InvalidArgumentException
+     * @return PromiseInterface
+     * @throws InvalidArgumentException
      */
     public function checkoutCompleteAsync(
         $x_api_partner_id,
@@ -674,13 +686,13 @@ class CheckoutApi
         $is_using_housing_hand,
         $resident_details,
         $course_details,
-        $supporing_contact_details = null,
+        $supporting_contact_details = null,
         $special_request = null,
         string $contentType = self::contentTypes['checkoutComplete'][0]
     ) {
         return $this->checkoutCompleteAsyncWithHttpInfo($x_api_partner_id, $room_id, $session_token,
             $paying_in_instalments, $has_uk_based_guarantor, $is_using_housing_hand, $resident_details, $course_details,
-            $supporing_contact_details, $special_request, $contentType)
+            $supporting_contact_details, $special_request, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -699,14 +711,14 @@ class CheckoutApi
      * @param  bool  $paying_in_instalments  (required)
      * @param  bool  $has_uk_based_guarantor  (required)
      * @param  bool  $is_using_housing_hand  (required)
-     * @param  \OpenAPI\Client\Model\ResidentDetails  $resident_details  (required)
-     * @param  \OpenAPI\Client\Model\CourseDetails  $course_details  (required)
-     * @param  \OpenAPI\Client\Model\SupportingContactDetails  $supporing_contact_details  (optional)
+     * @param  CheckoutCompleteRequestResidentDetails  $resident_details  (required)
+     * @param  CheckoutCompleteRequestCourseDetails  $course_details  (required)
+     * @param  CheckoutCompleteRequestSupportingContactDetails  $supporting_contact_details  (optional)
      * @param  string  $special_request  (optional)
      * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['checkoutComplete'] to see the possible values for this operation
      *
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     * @throws \InvalidArgumentException
+     * @return PromiseInterface
+     * @throws InvalidArgumentException
      */
     public function checkoutCompleteAsyncWithHttpInfo(
         $x_api_partner_id,
@@ -717,14 +729,14 @@ class CheckoutApi
         $is_using_housing_hand,
         $resident_details,
         $course_details,
-        $supporing_contact_details = null,
+        $supporting_contact_details = null,
         $special_request = null,
         string $contentType = self::contentTypes['checkoutComplete'][0]
     ) {
         $returnType = '\OpenAPI\Client\Model\CheckoutComplete201Response';
         $request = $this->checkoutCompleteRequest($x_api_partner_id, $room_id, $session_token, $paying_in_instalments,
             $has_uk_based_guarantor, $is_using_housing_hand, $resident_details, $course_details,
-            $supporing_contact_details, $special_request, $contentType);
+            $supporting_contact_details, $special_request, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -769,12 +781,12 @@ class CheckoutApi
      *
      * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
      * @param  string  $room_id  unique id of the room (required)
-     * @param  \OpenAPI\Client\Model\CheckoutStartRequest  $checkout_start  checkout_start (required)
+     * @param  CheckoutStartRequest  $checkout_start  checkout_start (required)
      * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['checkoutStart'] to see the possible values for this operation
      *
-     * @return \OpenAPI\Client\Model\CheckoutStart201Response|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\UnauthenticatedErrorResponse
-     * @throws \InvalidArgumentException
-     * @throws \OpenAPI\Client\ApiException on non-2xx response
+     * @return CheckoutStart201Response|ErrorResponse|ErrorResponse|ErrorResponse|ErrorResponse|UnauthenticatedErrorResponse
+     * @throws InvalidArgumentException
+     * @throws ApiException on non-2xx response
      */
     public function checkoutStart(
         $x_api_partner_id,
@@ -793,12 +805,12 @@ class CheckoutApi
      *
      * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
      * @param  string  $room_id  unique id of the room (required)
-     * @param  \OpenAPI\Client\Model\CheckoutStartRequest  $checkout_start  (required)
+     * @param  CheckoutStartRequest  $checkout_start  (required)
      * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['checkoutStart'] to see the possible values for this operation
      *
      * @return array of \OpenAPI\Client\Model\CheckoutStart201Response|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\UnauthenticatedErrorResponse, HTTP status code, HTTP response headers (array of strings)
-     * @throws \InvalidArgumentException
-     * @throws \OpenAPI\Client\ApiException on non-2xx response
+     * @throws InvalidArgumentException
+     * @throws ApiException on non-2xx response
      */
     public function checkoutStartWithHttpInfo(
         $x_api_partner_id,
@@ -1013,11 +1025,11 @@ class CheckoutApi
      *
      * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
      * @param  string  $room_id  unique id of the room (required)
-     * @param  \OpenAPI\Client\Model\CheckoutStartRequest  $checkout_start  (required)
+     * @param  CheckoutStartRequest  $checkout_start  (required)
      * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['checkoutStart'] to see the possible values for this operation
      *
-     * @return \GuzzleHttp\Psr7\Request
-     * @throws \InvalidArgumentException
+     * @return Request
+     * @throws InvalidArgumentException
      */
     public function checkoutStartRequest(
         $x_api_partner_id,
@@ -1028,21 +1040,21 @@ class CheckoutApi
 
         // verify the required parameter 'x_api_partner_id' is set
         if ($x_api_partner_id === null || (is_array($x_api_partner_id) && count($x_api_partner_id) === 0)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 'Missing the required parameter $x_api_partner_id when calling checkoutStart'
             );
         }
 
         // verify the required parameter 'room_id' is set
         if ($room_id === null || (is_array($room_id) && count($room_id) === 0)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 'Missing the required parameter $room_id when calling checkoutStart'
             );
         }
 
         // verify the required parameter 'checkout_start' is set
         if ($checkout_start === null || (is_array($checkout_start) && count($checkout_start) === 0)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 'Missing the required parameter $checkout_start when calling checkoutStart'
             );
         }
@@ -1081,7 +1093,7 @@ class CheckoutApi
         if (isset($checkout_start)) {
             if (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($checkout_start));
+                $httpBody = Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($checkout_start));
             } else {
                 $httpBody = $checkout_start;
             }
@@ -1102,7 +1114,7 @@ class CheckoutApi
 
             } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+                $httpBody = Utils::jsonEncode($formParams);
             } else {
                 // for HTTP post (form)
                 $httpBody = ObjectSerializer::buildQuery($formParams);
@@ -1142,11 +1154,11 @@ class CheckoutApi
      *
      * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
      * @param  string  $room_id  unique id of the room (required)
-     * @param  \OpenAPI\Client\Model\CheckoutStartRequest  $checkout_start  (required)
+     * @param  CheckoutStartRequest  $checkout_start  (required)
      * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['checkoutStart'] to see the possible values for this operation
      *
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     * @throws \InvalidArgumentException
+     * @return PromiseInterface
+     * @throws InvalidArgumentException
      */
     public function checkoutStartAsync(
         $x_api_partner_id,
@@ -1169,11 +1181,11 @@ class CheckoutApi
      *
      * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
      * @param  string  $room_id  unique id of the room (required)
-     * @param  \OpenAPI\Client\Model\CheckoutStartRequest  $checkout_start  (required)
+     * @param  CheckoutStartRequest  $checkout_start  (required)
      * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['checkoutStart'] to see the possible values for this operation
      *
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     * @throws \InvalidArgumentException
+     * @return PromiseInterface
+     * @throws InvalidArgumentException
      */
     public function checkoutStartAsyncWithHttpInfo(
         $x_api_partner_id,
