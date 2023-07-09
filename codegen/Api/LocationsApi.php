@@ -32,21 +32,13 @@ use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\RequestException;
-use GuzzleHttp\Promise\PromiseInterface;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
-use GuzzleHttp\Utils;
-use InvalidArgumentException;
 use OpenAPI\Client\ApiException;
 use OpenAPI\Client\Configuration;
 use OpenAPI\Client\HeaderSelector;
-use OpenAPI\Client\Model\ErrorResponse;
-use OpenAPI\Client\Model\GetCities200Response;
-use OpenAPI\Client\Model\GetCity200Response;
-use OpenAPI\Client\Model\GetUniversities200Response;
 use OpenAPI\Client\ObjectSerializer;
-use RuntimeException;
 
 /**
  * LocationsApi Class Doc Comment
@@ -58,7 +50,27 @@ use RuntimeException;
  */
 class LocationsApi
 {
-    /** @var string[] $contentTypes * */
+    /**
+     * @var ClientInterface
+     */
+    protected $client;
+
+    /**
+     * @var Configuration
+     */
+    protected $config;
+
+    /**
+     * @var HeaderSelector
+     */
+    protected $headerSelector;
+
+    /**
+     * @var int Host index
+     */
+    protected $hostIndex;
+
+    /** @var string[] $contentTypes **/
     public const contentTypes = [
         'getCities' => [
             'application/json',
@@ -70,28 +82,12 @@ class LocationsApi
             'application/json',
         ],
     ];
-    /**
-     * @var ClientInterface
-     */
-    protected $client;
-    /**
-     * @var Configuration
-     */
-    protected $config;
-    /**
-     * @var HeaderSelector
-     */
-    protected $headerSelector;
-    /**
-     * @var int Host index
-     */
-    protected $hostIndex;
 
-    /**
-     * @param  ClientInterface  $client
-     * @param  Configuration  $config
-     * @param  HeaderSelector  $selector
-     * @param  int  $hostIndex  (Optional) host index to select the list of hosts if defined in the OpenAPI spec
+/**
+     * @param ClientInterface $client
+     * @param Configuration   $config
+     * @param HeaderSelector  $selector
+     * @param int             $hostIndex (Optional) host index to select the list of hosts if defined in the OpenAPI spec
      */
     public function __construct(
         ClientInterface $client = null,
@@ -106,6 +102,16 @@ class LocationsApi
     }
 
     /**
+     * Set the host index
+     *
+     * @param int $hostIndex Host index (required)
+     */
+    public function setHostIndex($hostIndex): void
+    {
+        $this->hostIndex = $hostIndex;
+    }
+
+    /**
      * Get the host index
      *
      * @return int Host index
@@ -113,16 +119,6 @@ class LocationsApi
     public function getHostIndex()
     {
         return $this->hostIndex;
-    }
-
-    /**
-     * Set the host index
-     *
-     * @param  int  $hostIndex  Host index (required)
-     */
-    public function setHostIndex($hostIndex): void
-    {
-        $this->hostIndex = $hostIndex;
     }
 
     /**
@@ -138,12 +134,12 @@ class LocationsApi
      *
      * List of cities
      *
-     * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
-     * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getCities'] to see the possible values for this operation
+     * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getCities'] to see the possible values for this operation
      *
-     * @return GetCities200Response|ErrorResponse|ErrorResponse|ErrorResponse|ErrorResponse
-     * @throws InvalidArgumentException
-     * @throws ApiException on non-2xx response
+     * @throws \OpenAPI\Client\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \OpenAPI\Client\Model\GetCities200Response|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse
      */
     public function getCities($x_api_partner_id, string $contentType = self::contentTypes['getCities'][0])
     {
@@ -156,12 +152,12 @@ class LocationsApi
      *
      * List of cities
      *
-     * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
-     * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getCities'] to see the possible values for this operation
+     * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getCities'] to see the possible values for this operation
      *
+     * @throws \OpenAPI\Client\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
      * @return array of \OpenAPI\Client\Model\GetCities200Response|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
-     * @throws InvalidArgumentException
-     * @throws ApiException on non-2xx response
      */
     public function getCitiesWithHttpInfo($x_api_partner_id, string $contentType = self::contentTypes['getCities'][0])
     {
@@ -202,7 +198,7 @@ class LocationsApi
                 );
             }
 
-            switch ($statusCode) {
+            switch($statusCode) {
                 case 200:
                     if ('\OpenAPI\Client\Model\GetCities200Response' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
@@ -344,125 +340,15 @@ class LocationsApi
     }
 
     /**
-     * Create request for operation 'getCities'
-     *
-     * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
-     * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getCities'] to see the possible values for this operation
-     *
-     * @return Request
-     * @throws InvalidArgumentException
-     */
-    public function getCitiesRequest($x_api_partner_id, string $contentType = self::contentTypes['getCities'][0])
-    {
-
-        // verify the required parameter 'x_api_partner_id' is set
-        if ($x_api_partner_id === null || (is_array($x_api_partner_id) && count($x_api_partner_id) === 0)) {
-            throw new InvalidArgumentException(
-                'Missing the required parameter $x_api_partner_id when calling getCities'
-            );
-        }
-
-
-        $resourcePath = '/api/cities';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
-
-
-        // header params
-        if ($x_api_partner_id !== null) {
-            $headerParams['X-API-PARTNER-ID'] = ObjectSerializer::toHeaderValue($x_api_partner_id);
-        }
-
-
-        $headers = $this->headerSelector->selectHeaders(
-            ['application/json',],
-            $contentType,
-            $multipart
-        );
-
-        // for model (json/xml)
-        if (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
-                    foreach ($formParamValueItems as $formParamValueItem) {
-                        $multipartContents[] = [
-                            'name' => $formParamName,
-                            'contents' => $formParamValueItem
-                        ];
-                    }
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = Utils::jsonEncode($formParams);
-            } else {
-                // for HTTP post (form)
-                $httpBody = ObjectSerializer::buildQuery($formParams);
-            }
-        }
-
-        // this endpoint requires Bearer (JWT) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
-            $headers['Authorization'] = 'Bearer '.$this->config->getAccessToken();
-        }
-
-        $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $headers
-        );
-
-        $operationHost = $this->config->getHost();
-        $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            'GET',
-            $operationHost.$resourcePath.($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
-    }
-
-    /**
-     * Create http client option
-     *
-     * @return array of http client options
-     * @throws RuntimeException on file opening failure
-     */
-    protected function createHttpClientOption()
-    {
-        $options = [];
-        if ($this->config->getDebug()) {
-            $options[RequestOptions::DEBUG] = fopen($this->config->getDebugFile(), 'a');
-            if (!$options[RequestOptions::DEBUG]) {
-                throw new RuntimeException('Failed to open the debug file: '.$this->config->getDebugFile());
-            }
-        }
-
-        return $options;
-    }
-
-    /**
      * Operation getCitiesAsync
      *
      * List of cities
      *
-     * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
-     * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getCities'] to see the possible values for this operation
+     * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getCities'] to see the possible values for this operation
      *
-     * @return PromiseInterface
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
      */
     public function getCitiesAsync($x_api_partner_id, string $contentType = self::contentTypes['getCities'][0])
     {
@@ -479,16 +365,14 @@ class LocationsApi
      *
      * List of cities
      *
-     * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
-     * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getCities'] to see the possible values for this operation
+     * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getCities'] to see the possible values for this operation
      *
-     * @return PromiseInterface
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getCitiesAsyncWithHttpInfo(
-        $x_api_partner_id,
-        string $contentType = self::contentTypes['getCities'][0]
-    ) {
+    public function getCitiesAsyncWithHttpInfo($x_api_partner_id, string $contentType = self::contentTypes['getCities'][0])
+    {
         $returnType = '\OpenAPI\Client\Model\GetCities200Response';
         $request = $this->getCitiesRequest($x_api_partner_id, $contentType);
 
@@ -529,23 +413,112 @@ class LocationsApi
     }
 
     /**
+     * Create request for operation 'getCities'
+     *
+     * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getCities'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function getCitiesRequest($x_api_partner_id, string $contentType = self::contentTypes['getCities'][0])
+    {
+
+        // verify the required parameter 'x_api_partner_id' is set
+        if ($x_api_partner_id === null || (is_array($x_api_partner_id) && count($x_api_partner_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $x_api_partner_id when calling getCities'
+            );
+        }
+
+
+        $resourcePath = '/api/cities';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+        // header params
+        if ($x_api_partner_id !== null) {
+            $headerParams['X-API-PARTNER-ID'] = ObjectSerializer::toHeaderValue($x_api_partner_id);
+        }
+
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires Bearer (JWT) authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation getCity
      *
      * Get a specific city along with universities
      *
-     * @param  string  $city_slug  city_slug (required)
-     * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (optional)
-     * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getCity'] to see the possible values for this operation
+     * @param  string $city_slug city_slug (required)
+     * @param  string $x_api_partner_id Unique partner ID provided by Housemates (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getCity'] to see the possible values for this operation
      *
-     * @return GetCity200Response|ErrorResponse|ErrorResponse|ErrorResponse|ErrorResponse
-     * @throws InvalidArgumentException
-     * @throws ApiException on non-2xx response
+     * @throws \OpenAPI\Client\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \OpenAPI\Client\Model\GetCity200Response|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse
      */
-    public function getCity(
-        $city_slug,
-        $x_api_partner_id = null,
-        string $contentType = self::contentTypes['getCity'][0]
-    ) {
+    public function getCity($city_slug, $x_api_partner_id = null, string $contentType = self::contentTypes['getCity'][0])
+    {
         list($response) = $this->getCityWithHttpInfo($city_slug, $x_api_partner_id, $contentType);
         return $response;
     }
@@ -555,19 +528,16 @@ class LocationsApi
      *
      * Get a specific city along with universities
      *
-     * @param  string  $city_slug  (required)
-     * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (optional)
-     * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getCity'] to see the possible values for this operation
+     * @param  string $city_slug (required)
+     * @param  string $x_api_partner_id Unique partner ID provided by Housemates (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getCity'] to see the possible values for this operation
      *
+     * @throws \OpenAPI\Client\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
      * @return array of \OpenAPI\Client\Model\GetCity200Response|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
-     * @throws InvalidArgumentException
-     * @throws ApiException on non-2xx response
      */
-    public function getCityWithHttpInfo(
-        $city_slug,
-        $x_api_partner_id = null,
-        string $contentType = self::contentTypes['getCity'][0]
-    ) {
+    public function getCityWithHttpInfo($city_slug, $x_api_partner_id = null, string $contentType = self::contentTypes['getCity'][0])
+    {
         $request = $this->getCityRequest($city_slug, $x_api_partner_id, $contentType);
 
         try {
@@ -605,7 +575,7 @@ class LocationsApi
                 );
             }
 
-            switch ($statusCode) {
+            switch($statusCode) {
                 case 200:
                     if ('\OpenAPI\Client\Model\GetCity200Response' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
@@ -747,126 +717,19 @@ class LocationsApi
     }
 
     /**
-     * Create request for operation 'getCity'
-     *
-     * @param  string  $city_slug  (required)
-     * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (optional)
-     * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getCity'] to see the possible values for this operation
-     *
-     * @return Request
-     * @throws InvalidArgumentException
-     */
-    public function getCityRequest(
-        $city_slug,
-        $x_api_partner_id = null,
-        string $contentType = self::contentTypes['getCity'][0]
-    ) {
-
-        // verify the required parameter 'city_slug' is set
-        if ($city_slug === null || (is_array($city_slug) && count($city_slug) === 0)) {
-            throw new InvalidArgumentException(
-                'Missing the required parameter $city_slug when calling getCity'
-            );
-        }
-
-
-        $resourcePath = '/api/cities/{city_slug}';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
-
-
-        // header params
-        if ($x_api_partner_id !== null) {
-            $headerParams['X-API-PARTNER-ID'] = ObjectSerializer::toHeaderValue($x_api_partner_id);
-        }
-
-        // path params
-        if ($city_slug !== null) {
-            $resourcePath = str_replace(
-                '{'.'city_slug'.'}',
-                ObjectSerializer::toPathValue($city_slug),
-                $resourcePath
-            );
-        }
-
-
-        $headers = $this->headerSelector->selectHeaders(
-            ['application/json',],
-            $contentType,
-            $multipart
-        );
-
-        // for model (json/xml)
-        if (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
-                    foreach ($formParamValueItems as $formParamValueItem) {
-                        $multipartContents[] = [
-                            'name' => $formParamName,
-                            'contents' => $formParamValueItem
-                        ];
-                    }
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = Utils::jsonEncode($formParams);
-            } else {
-                // for HTTP post (form)
-                $httpBody = ObjectSerializer::buildQuery($formParams);
-            }
-        }
-
-        // this endpoint requires Bearer (JWT) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
-            $headers['Authorization'] = 'Bearer '.$this->config->getAccessToken();
-        }
-
-        $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $headers
-        );
-
-        $operationHost = $this->config->getHost();
-        $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            'GET',
-            $operationHost.$resourcePath.($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
-    }
-
-    /**
      * Operation getCityAsync
      *
      * Get a specific city along with universities
      *
-     * @param  string  $city_slug  (required)
-     * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (optional)
-     * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getCity'] to see the possible values for this operation
+     * @param  string $city_slug (required)
+     * @param  string $x_api_partner_id Unique partner ID provided by Housemates (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getCity'] to see the possible values for this operation
      *
-     * @return PromiseInterface
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getCityAsync(
-        $city_slug,
-        $x_api_partner_id = null,
-        string $contentType = self::contentTypes['getCity'][0]
-    ) {
+    public function getCityAsync($city_slug, $x_api_partner_id = null, string $contentType = self::contentTypes['getCity'][0])
+    {
         return $this->getCityAsyncWithHttpInfo($city_slug, $x_api_partner_id, $contentType)
             ->then(
                 function ($response) {
@@ -880,18 +743,15 @@ class LocationsApi
      *
      * Get a specific city along with universities
      *
-     * @param  string  $city_slug  (required)
-     * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (optional)
-     * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getCity'] to see the possible values for this operation
+     * @param  string $city_slug (required)
+     * @param  string $x_api_partner_id Unique partner ID provided by Housemates (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getCity'] to see the possible values for this operation
      *
-     * @return PromiseInterface
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getCityAsyncWithHttpInfo(
-        $city_slug,
-        $x_api_partner_id = null,
-        string $contentType = self::contentTypes['getCity'][0]
-    ) {
+    public function getCityAsyncWithHttpInfo($city_slug, $x_api_partner_id = null, string $contentType = self::contentTypes['getCity'][0])
+    {
         $returnType = '\OpenAPI\Client\Model\GetCity200Response';
         $request = $this->getCityRequest($city_slug, $x_api_partner_id, $contentType);
 
@@ -932,16 +792,118 @@ class LocationsApi
     }
 
     /**
+     * Create request for operation 'getCity'
+     *
+     * @param  string $city_slug (required)
+     * @param  string $x_api_partner_id Unique partner ID provided by Housemates (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getCity'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function getCityRequest($city_slug, $x_api_partner_id = null, string $contentType = self::contentTypes['getCity'][0])
+    {
+
+        // verify the required parameter 'city_slug' is set
+        if ($city_slug === null || (is_array($city_slug) && count($city_slug) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $city_slug when calling getCity'
+            );
+        }
+
+
+
+        $resourcePath = '/api/cities/{city_slug}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+        // header params
+        if ($x_api_partner_id !== null) {
+            $headerParams['X-API-PARTNER-ID'] = ObjectSerializer::toHeaderValue($x_api_partner_id);
+        }
+
+        // path params
+        if ($city_slug !== null) {
+            $resourcePath = str_replace(
+                '{' . 'city_slug' . '}',
+                ObjectSerializer::toPathValue($city_slug),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires Bearer (JWT) authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation getUniversities
      *
      * List of universities
      *
-     * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
-     * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getUniversities'] to see the possible values for this operation
+     * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUniversities'] to see the possible values for this operation
      *
-     * @return GetUniversities200Response|ErrorResponse|ErrorResponse|ErrorResponse|ErrorResponse
-     * @throws InvalidArgumentException
-     * @throws ApiException on non-2xx response
+     * @throws \OpenAPI\Client\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \OpenAPI\Client\Model\GetUniversities200Response|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse
      */
     public function getUniversities($x_api_partner_id, string $contentType = self::contentTypes['getUniversities'][0])
     {
@@ -954,17 +916,15 @@ class LocationsApi
      *
      * List of universities
      *
-     * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
-     * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getUniversities'] to see the possible values for this operation
+     * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUniversities'] to see the possible values for this operation
      *
+     * @throws \OpenAPI\Client\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
      * @return array of \OpenAPI\Client\Model\GetUniversities200Response|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
-     * @throws InvalidArgumentException
-     * @throws ApiException on non-2xx response
      */
-    public function getUniversitiesWithHttpInfo(
-        $x_api_partner_id,
-        string $contentType = self::contentTypes['getUniversities'][0]
-    ) {
+    public function getUniversitiesWithHttpInfo($x_api_partner_id, string $contentType = self::contentTypes['getUniversities'][0])
+    {
         $request = $this->getUniversitiesRequest($x_api_partner_id, $contentType);
 
         try {
@@ -1002,7 +962,7 @@ class LocationsApi
                 );
             }
 
-            switch ($statusCode) {
+            switch($statusCode) {
                 case 200:
                     if ('\OpenAPI\Client\Model\GetUniversities200Response' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
@@ -1144,113 +1104,18 @@ class LocationsApi
     }
 
     /**
-     * Create request for operation 'getUniversities'
-     *
-     * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
-     * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getUniversities'] to see the possible values for this operation
-     *
-     * @return Request
-     * @throws InvalidArgumentException
-     */
-    public function getUniversitiesRequest(
-        $x_api_partner_id,
-        string $contentType = self::contentTypes['getUniversities'][0]
-    ) {
-
-        // verify the required parameter 'x_api_partner_id' is set
-        if ($x_api_partner_id === null || (is_array($x_api_partner_id) && count($x_api_partner_id) === 0)) {
-            throw new InvalidArgumentException(
-                'Missing the required parameter $x_api_partner_id when calling getUniversities'
-            );
-        }
-
-
-        $resourcePath = '/api/universities';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
-
-
-        // header params
-        if ($x_api_partner_id !== null) {
-            $headerParams['X-API-PARTNER-ID'] = ObjectSerializer::toHeaderValue($x_api_partner_id);
-        }
-
-
-        $headers = $this->headerSelector->selectHeaders(
-            ['application/json',],
-            $contentType,
-            $multipart
-        );
-
-        // for model (json/xml)
-        if (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
-                    foreach ($formParamValueItems as $formParamValueItem) {
-                        $multipartContents[] = [
-                            'name' => $formParamName,
-                            'contents' => $formParamValueItem
-                        ];
-                    }
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = Utils::jsonEncode($formParams);
-            } else {
-                // for HTTP post (form)
-                $httpBody = ObjectSerializer::buildQuery($formParams);
-            }
-        }
-
-        // this endpoint requires Bearer (JWT) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
-            $headers['Authorization'] = 'Bearer '.$this->config->getAccessToken();
-        }
-
-        $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $headers
-        );
-
-        $operationHost = $this->config->getHost();
-        $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            'GET',
-            $operationHost.$resourcePath.($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
-    }
-
-    /**
      * Operation getUniversitiesAsync
      *
      * List of universities
      *
-     * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
-     * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getUniversities'] to see the possible values for this operation
+     * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUniversities'] to see the possible values for this operation
      *
-     * @return PromiseInterface
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getUniversitiesAsync(
-        $x_api_partner_id,
-        string $contentType = self::contentTypes['getUniversities'][0]
-    ) {
+    public function getUniversitiesAsync($x_api_partner_id, string $contentType = self::contentTypes['getUniversities'][0])
+    {
         return $this->getUniversitiesAsyncWithHttpInfo($x_api_partner_id, $contentType)
             ->then(
                 function ($response) {
@@ -1264,16 +1129,14 @@ class LocationsApi
      *
      * List of universities
      *
-     * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
-     * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getUniversities'] to see the possible values for this operation
+     * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUniversities'] to see the possible values for this operation
      *
-     * @return PromiseInterface
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getUniversitiesAsyncWithHttpInfo(
-        $x_api_partner_id,
-        string $contentType = self::contentTypes['getUniversities'][0]
-    ) {
+    public function getUniversitiesAsyncWithHttpInfo($x_api_partner_id, string $contentType = self::contentTypes['getUniversities'][0])
+    {
         $returnType = '\OpenAPI\Client\Model\GetUniversities200Response';
         $request = $this->getUniversitiesRequest($x_api_partner_id, $contentType);
 
@@ -1311,5 +1174,116 @@ class LocationsApi
                     );
                 }
             );
+    }
+
+    /**
+     * Create request for operation 'getUniversities'
+     *
+     * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUniversities'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function getUniversitiesRequest($x_api_partner_id, string $contentType = self::contentTypes['getUniversities'][0])
+    {
+
+        // verify the required parameter 'x_api_partner_id' is set
+        if ($x_api_partner_id === null || (is_array($x_api_partner_id) && count($x_api_partner_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $x_api_partner_id when calling getUniversities'
+            );
+        }
+
+
+        $resourcePath = '/api/universities';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+        // header params
+        if ($x_api_partner_id !== null) {
+            $headerParams['X-API-PARTNER-ID'] = ObjectSerializer::toHeaderValue($x_api_partner_id);
+        }
+
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires Bearer (JWT) authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Create http client option
+     *
+     * @throws \RuntimeException on file opening failure
+     * @return array of http client options
+     */
+    protected function createHttpClientOption()
+    {
+        $options = [];
+        if ($this->config->getDebug()) {
+            $options[RequestOptions::DEBUG] = fopen($this->config->getDebugFile(), 'a');
+            if (!$options[RequestOptions::DEBUG]) {
+                throw new \RuntimeException('Failed to open the debug file: ' . $this->config->getDebugFile());
+            }
+        }
+
+        return $options;
     }
 }

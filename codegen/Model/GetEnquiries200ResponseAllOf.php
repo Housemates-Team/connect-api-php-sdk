@@ -29,11 +29,8 @@
 
 namespace OpenAPI\Client\Model;
 
-use ArrayAccess;
-use InvalidArgumentException;
-use JsonSerializable;
-use OpenAPI\Client\ObjectSerializer;
-use ReturnTypeWillChange;
+use \ArrayAccess;
+use \OpenAPI\Client\ObjectSerializer;
 
 /**
  * GetEnquiries200ResponseAllOf Class Doc Comment
@@ -42,24 +39,24 @@ use ReturnTypeWillChange;
  * @package  OpenAPI\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
- * @implements ArrayAccess<string, mixed>
+ * @implements \ArrayAccess<string, mixed>
  */
-class GetEnquiries200ResponseAllOf implements ModelInterface, ArrayAccess, JsonSerializable
+class GetEnquiries200ResponseAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
     /**
-     * The original name of the model.
-     *
-     * @var string
-     */
+      * The original name of the model.
+      *
+      * @var string
+      */
     protected static $openAPIModelName = 'getEnquiries_200_response_allOf';
 
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $openAPITypes = [
         'data' => '\OpenAPI\Client\Model\GetEnquiries200ResponseAllOfData',
         'meta' => '\OpenAPI\Client\Model\PaginationMeta',
@@ -67,12 +64,12 @@ class GetEnquiries200ResponseAllOf implements ModelInterface, ArrayAccess, JsonS
     ];
 
     /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @var string[]
-     * @phpstan-var array<string, string|null>
-     * @psalm-var array<string, string|null>
-     */
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      * @phpstan-var array<string, string|null>
+      * @psalm-var array<string, string|null>
+      */
     protected static $openAPIFormats = [
         'data' => null,
         'meta' => null,
@@ -80,111 +77,22 @@ class GetEnquiries200ResponseAllOf implements ModelInterface, ArrayAccess, JsonS
     ];
 
     /**
-     * Array of nullable properties. Used for (de)serialization
-     *
-     * @var boolean[]
-     */
+      * Array of nullable properties. Used for (de)serialization
+      *
+      * @var boolean[]
+      */
     protected static array $openAPINullables = [
         'data' => false,
-        'meta' => false,
-        'links' => false
+		'meta' => false,
+		'links' => false
     ];
+
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @var string[]
-     */
-    protected static $attributeMap = [
-        'data' => 'data',
-        'meta' => 'meta',
-        'links' => 'links'
-    ];
-    /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     *
-     * @var string[]
-     */
-    protected static $setters = [
-        'data' => 'setData',
-        'meta' => 'setMeta',
-        'links' => 'setLinks'
-    ];
-    /**
-     * Array of attributes to getter functions (for serialization of requests)
-     *
-     * @var string[]
-     */
-    protected static $getters = [
-        'data' => 'getData',
-        'meta' => 'getMeta',
-        'links' => 'getLinks'
-    ];
-    /**
-     * If a nullable field gets set to null, insert it here
-     *
-     * @var boolean[]
-     */
+      * If a nullable field gets set to null, insert it here
+      *
+      * @var boolean[]
+      */
     protected array $openAPINullablesSetToNull = [];
-    /**
-     * Associative array for storing property values
-     *
-     * @var mixed[]
-     */
-    protected $container = [];
-
-    /**
-     * Constructor
-     *
-     * @param  mixed[]  $data  Associated array of property values
-     *                      initializing the model
-     */
-    public function __construct(array $data = null)
-    {
-        $this->setIfExists('data', $data ?? [], null);
-        $this->setIfExists('meta', $data ?? [], null);
-        $this->setIfExists('links', $data ?? [], null);
-    }
-
-    /**
-     * Sets $this->container[$variableName] to the given data or to the given default Value; if $variableName
-     * is nullable and its value is set to null in the $fields array, then mark it as "set to null" in the
-     * $this->openAPINullablesSetToNull array
-     *
-     * @param  string  $variableName
-     * @param  array  $fields
-     * @param  mixed  $defaultValue
-     */
-    private function setIfExists(string $variableName, array $fields, $defaultValue): void
-    {
-        if (self::isNullable($variableName) && array_key_exists($variableName,
-                $fields) && is_null($fields[$variableName])) {
-            $this->openAPINullablesSetToNull[] = $variableName;
-        }
-
-        $this->container[$variableName] = $fields[$variableName] ?? $defaultValue;
-    }
-
-    /**
-     * Checks if a property is nullable
-     *
-     * @param  string  $property
-     * @return bool
-     */
-    public static function isNullable(string $property): bool
-    {
-        return self::openAPINullables()[$property] ?? false;
-    }
-
-    /**
-     * Array of nullable properties
-     *
-     * @return array
-     */
-    protected static function openAPINullables(): array
-    {
-        return self::$openAPINullables;
-    }
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -205,6 +113,92 @@ class GetEnquiries200ResponseAllOf implements ModelInterface, ArrayAccess, JsonS
     {
         return self::$openAPIFormats;
     }
+
+    /**
+     * Array of nullable properties
+     *
+     * @return array
+     */
+    protected static function openAPINullables(): array
+    {
+        return self::$openAPINullables;
+    }
+
+    /**
+     * Array of nullable field names deliberately set to null
+     *
+     * @return boolean[]
+     */
+    private function getOpenAPINullablesSetToNull(): array
+    {
+        return $this->openAPINullablesSetToNull;
+    }
+
+    /**
+     * Setter - Array of nullable field names deliberately set to null
+     *
+     * @param boolean[] $openAPINullablesSetToNull
+     */
+    private function setOpenAPINullablesSetToNull(array $openAPINullablesSetToNull): void
+    {
+        $this->openAPINullablesSetToNull = $openAPINullablesSetToNull;
+    }
+
+    /**
+     * Checks if a property is nullable
+     *
+     * @param string $property
+     * @return bool
+     */
+    public static function isNullable(string $property): bool
+    {
+        return self::openAPINullables()[$property] ?? false;
+    }
+
+    /**
+     * Checks if a nullable property is set to null.
+     *
+     * @param string $property
+     * @return bool
+     */
+    public function isNullableSetToNull(string $property): bool
+    {
+        return in_array($property, $this->getOpenAPINullablesSetToNull(), true);
+    }
+
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @var string[]
+     */
+    protected static $attributeMap = [
+        'data' => 'data',
+        'meta' => 'meta',
+        'links' => 'links'
+    ];
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @var string[]
+     */
+    protected static $setters = [
+        'data' => 'setData',
+        'meta' => 'setMeta',
+        'links' => 'setLinks'
+    ];
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @var string[]
+     */
+    protected static $getters = [
+        'data' => 'getData',
+        'meta' => 'getMeta',
+        'links' => 'getLinks'
+    ];
 
     /**
      * Array of attributes where the key is the local name,
@@ -238,27 +232,6 @@ class GetEnquiries200ResponseAllOf implements ModelInterface, ArrayAccess, JsonS
     }
 
     /**
-     * Checks if a nullable property is set to null.
-     *
-     * @param  string  $property
-     * @return bool
-     */
-    public function isNullableSetToNull(string $property): bool
-    {
-        return in_array($property, $this->getOpenAPINullablesSetToNull(), true);
-    }
-
-    /**
-     * Array of nullable field names deliberately set to null
-     *
-     * @return boolean[]
-     */
-    private function getOpenAPINullablesSetToNull(): array
-    {
-        return $this->openAPINullablesSetToNull;
-    }
-
-    /**
      * The original name of the model.
      *
      * @return string
@@ -268,15 +241,43 @@ class GetEnquiries200ResponseAllOf implements ModelInterface, ArrayAccess, JsonS
         return self::$openAPIModelName;
     }
 
+
     /**
-     * Validate all the properties in the model
-     * return true if all passed
+     * Associative array for storing property values
      *
-     * @return bool True if all properties are valid
+     * @var mixed[]
      */
-    public function valid()
+    protected $container = [];
+
+    /**
+     * Constructor
+     *
+     * @param mixed[] $data Associated array of property values
+     *                      initializing the model
+     */
+    public function __construct(array $data = null)
     {
-        return count($this->listInvalidProperties()) === 0;
+        $this->setIfExists('data', $data ?? [], null);
+        $this->setIfExists('meta', $data ?? [], null);
+        $this->setIfExists('links', $data ?? [], null);
+    }
+
+    /**
+    * Sets $this->container[$variableName] to the given data or to the given default Value; if $variableName
+    * is nullable and its value is set to null in the $fields array, then mark it as "set to null" in the
+    * $this->openAPINullablesSetToNull array
+    *
+    * @param string $variableName
+    * @param array  $fields
+    * @param mixed  $defaultValue
+    */
+    private function setIfExists(string $variableName, array $fields, $defaultValue): void
+    {
+        if (self::isNullable($variableName) && array_key_exists($variableName, $fields) && is_null($fields[$variableName])) {
+            $this->openAPINullablesSetToNull[] = $variableName;
+        }
+
+        $this->container[$variableName] = $fields[$variableName] ?? $defaultValue;
     }
 
     /**
@@ -292,9 +293,21 @@ class GetEnquiries200ResponseAllOf implements ModelInterface, ArrayAccess, JsonS
     }
 
     /**
+     * Validate all the properties in the model
+     * return true if all passed
+     *
+     * @return bool True if all properties are valid
+     */
+    public function valid()
+    {
+        return count($this->listInvalidProperties()) === 0;
+    }
+
+
+    /**
      * Gets data
      *
-     * @return GetEnquiries200ResponseAllOfData|null
+     * @return \OpenAPI\Client\Model\GetEnquiries200ResponseAllOfData|null
      */
     public function getData()
     {
@@ -304,14 +317,14 @@ class GetEnquiries200ResponseAllOf implements ModelInterface, ArrayAccess, JsonS
     /**
      * Sets data
      *
-     * @param  GetEnquiries200ResponseAllOfData|null  $data  data
+     * @param \OpenAPI\Client\Model\GetEnquiries200ResponseAllOfData|null $data data
      *
      * @return self
      */
     public function setData($data)
     {
         if (is_null($data)) {
-            throw new InvalidArgumentException('non-nullable data cannot be null');
+            throw new \InvalidArgumentException('non-nullable data cannot be null');
         }
         $this->container['data'] = $data;
 
@@ -321,7 +334,7 @@ class GetEnquiries200ResponseAllOf implements ModelInterface, ArrayAccess, JsonS
     /**
      * Gets meta
      *
-     * @return PaginationMeta|null
+     * @return \OpenAPI\Client\Model\PaginationMeta|null
      */
     public function getMeta()
     {
@@ -331,14 +344,14 @@ class GetEnquiries200ResponseAllOf implements ModelInterface, ArrayAccess, JsonS
     /**
      * Sets meta
      *
-     * @param  PaginationMeta|null  $meta  meta
+     * @param \OpenAPI\Client\Model\PaginationMeta|null $meta meta
      *
      * @return self
      */
     public function setMeta($meta)
     {
         if (is_null($meta)) {
-            throw new InvalidArgumentException('non-nullable meta cannot be null');
+            throw new \InvalidArgumentException('non-nullable meta cannot be null');
         }
         $this->container['meta'] = $meta;
 
@@ -348,7 +361,7 @@ class GetEnquiries200ResponseAllOf implements ModelInterface, ArrayAccess, JsonS
     /**
      * Gets links
      *
-     * @return PaginationLinks|null
+     * @return \OpenAPI\Client\Model\PaginationLinks|null
      */
     public function getLinks()
     {
@@ -358,24 +371,23 @@ class GetEnquiries200ResponseAllOf implements ModelInterface, ArrayAccess, JsonS
     /**
      * Sets links
      *
-     * @param  PaginationLinks|null  $links  links
+     * @param \OpenAPI\Client\Model\PaginationLinks|null $links links
      *
      * @return self
      */
     public function setLinks($links)
     {
         if (is_null($links)) {
-            throw new InvalidArgumentException('non-nullable links cannot be null');
+            throw new \InvalidArgumentException('non-nullable links cannot be null');
         }
         $this->container['links'] = $links;
 
         return $this;
     }
-
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param  integer  $offset  Offset
+     * @param integer $offset Offset
      *
      * @return boolean
      */
@@ -387,11 +399,11 @@ class GetEnquiries200ResponseAllOf implements ModelInterface, ArrayAccess, JsonS
     /**
      * Gets offset.
      *
-     * @param  integer  $offset  Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
-    #[ReturnTypeWillChange]
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->container[$offset] ?? null;
@@ -400,8 +412,8 @@ class GetEnquiries200ResponseAllOf implements ModelInterface, ArrayAccess, JsonS
     /**
      * Sets value based on offset.
      *
-     * @param  int|null  $offset  Offset
-     * @param  mixed  $value  Value to be set
+     * @param int|null $offset Offset
+     * @param mixed    $value  Value to be set
      *
      * @return void
      */
@@ -417,7 +429,7 @@ class GetEnquiries200ResponseAllOf implements ModelInterface, ArrayAccess, JsonS
     /**
      * Unsets offset.
      *
-     * @param  integer  $offset  Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -433,10 +445,10 @@ class GetEnquiries200ResponseAllOf implements ModelInterface, ArrayAccess, JsonS
      * @return mixed Returns data which can be serialized by json_encode(), which is a value
      * of any type other than a resource.
      */
-    #[ReturnTypeWillChange]
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
-        return ObjectSerializer::sanitizeForSerialization($this);
+       return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -460,16 +472,6 @@ class GetEnquiries200ResponseAllOf implements ModelInterface, ArrayAccess, JsonS
     public function toHeaderValue()
     {
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
-    }
-
-    /**
-     * Setter - Array of nullable field names deliberately set to null
-     *
-     * @param  boolean[]  $openAPINullablesSetToNull
-     */
-    private function setOpenAPINullablesSetToNull(array $openAPINullablesSetToNull): void
-    {
-        $this->openAPINullablesSetToNull = $openAPINullablesSetToNull;
     }
 }
 

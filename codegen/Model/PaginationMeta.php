@@ -29,11 +29,8 @@
 
 namespace OpenAPI\Client\Model;
 
-use ArrayAccess;
-use InvalidArgumentException;
-use JsonSerializable;
-use OpenAPI\Client\ObjectSerializer;
-use ReturnTypeWillChange;
+use \ArrayAccess;
+use \OpenAPI\Client\ObjectSerializer;
 
 /**
  * PaginationMeta Class Doc Comment
@@ -42,24 +39,24 @@ use ReturnTypeWillChange;
  * @package  OpenAPI\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
- * @implements ArrayAccess<string, mixed>
+ * @implements \ArrayAccess<string, mixed>
  */
-class PaginationMeta implements ModelInterface, ArrayAccess, JsonSerializable
+class PaginationMeta implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
     /**
-     * The original name of the model.
-     *
-     * @var string
-     */
+      * The original name of the model.
+      *
+      * @var string
+      */
     protected static $openAPIModelName = 'PaginationMeta';
 
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $openAPITypes = [
         'total' => 'int',
         'count' => 'int',
@@ -70,12 +67,12 @@ class PaginationMeta implements ModelInterface, ArrayAccess, JsonSerializable
     ];
 
     /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @var string[]
-     * @phpstan-var array<string, string|null>
-     * @psalm-var array<string, string|null>
-     */
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      * @phpstan-var array<string, string|null>
+      * @psalm-var array<string, string|null>
+      */
     protected static $openAPIFormats = [
         'total' => null,
         'count' => null,
@@ -86,126 +83,25 @@ class PaginationMeta implements ModelInterface, ArrayAccess, JsonSerializable
     ];
 
     /**
-     * Array of nullable properties. Used for (de)serialization
-     *
-     * @var boolean[]
-     */
+      * Array of nullable properties. Used for (de)serialization
+      *
+      * @var boolean[]
+      */
     protected static array $openAPINullables = [
         'total' => false,
-        'count' => false,
-        'per_page' => false,
-        'current_page' => false,
-        'total_pages' => false,
-        'links' => false
+		'count' => false,
+		'per_page' => false,
+		'current_page' => false,
+		'total_pages' => false,
+		'links' => false
     ];
+
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @var string[]
-     */
-    protected static $attributeMap = [
-        'total' => 'total',
-        'count' => 'count',
-        'per_page' => 'per_page',
-        'current_page' => 'current_page',
-        'total_pages' => 'total_pages',
-        'links' => 'links'
-    ];
-    /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     *
-     * @var string[]
-     */
-    protected static $setters = [
-        'total' => 'setTotal',
-        'count' => 'setCount',
-        'per_page' => 'setPerPage',
-        'current_page' => 'setCurrentPage',
-        'total_pages' => 'setTotalPages',
-        'links' => 'setLinks'
-    ];
-    /**
-     * Array of attributes to getter functions (for serialization of requests)
-     *
-     * @var string[]
-     */
-    protected static $getters = [
-        'total' => 'getTotal',
-        'count' => 'getCount',
-        'per_page' => 'getPerPage',
-        'current_page' => 'getCurrentPage',
-        'total_pages' => 'getTotalPages',
-        'links' => 'getLinks'
-    ];
-    /**
-     * If a nullable field gets set to null, insert it here
-     *
-     * @var boolean[]
-     */
+      * If a nullable field gets set to null, insert it here
+      *
+      * @var boolean[]
+      */
     protected array $openAPINullablesSetToNull = [];
-    /**
-     * Associative array for storing property values
-     *
-     * @var mixed[]
-     */
-    protected $container = [];
-
-    /**
-     * Constructor
-     *
-     * @param  mixed[]  $data  Associated array of property values
-     *                      initializing the model
-     */
-    public function __construct(array $data = null)
-    {
-        $this->setIfExists('total', $data ?? [], null);
-        $this->setIfExists('count', $data ?? [], null);
-        $this->setIfExists('per_page', $data ?? [], null);
-        $this->setIfExists('current_page', $data ?? [], null);
-        $this->setIfExists('total_pages', $data ?? [], null);
-        $this->setIfExists('links', $data ?? [], null);
-    }
-
-    /**
-     * Sets $this->container[$variableName] to the given data or to the given default Value; if $variableName
-     * is nullable and its value is set to null in the $fields array, then mark it as "set to null" in the
-     * $this->openAPINullablesSetToNull array
-     *
-     * @param  string  $variableName
-     * @param  array  $fields
-     * @param  mixed  $defaultValue
-     */
-    private function setIfExists(string $variableName, array $fields, $defaultValue): void
-    {
-        if (self::isNullable($variableName) && array_key_exists($variableName,
-                $fields) && is_null($fields[$variableName])) {
-            $this->openAPINullablesSetToNull[] = $variableName;
-        }
-
-        $this->container[$variableName] = $fields[$variableName] ?? $defaultValue;
-    }
-
-    /**
-     * Checks if a property is nullable
-     *
-     * @param  string  $property
-     * @return bool
-     */
-    public static function isNullable(string $property): bool
-    {
-        return self::openAPINullables()[$property] ?? false;
-    }
-
-    /**
-     * Array of nullable properties
-     *
-     * @return array
-     */
-    protected static function openAPINullables(): array
-    {
-        return self::$openAPINullables;
-    }
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -226,6 +122,101 @@ class PaginationMeta implements ModelInterface, ArrayAccess, JsonSerializable
     {
         return self::$openAPIFormats;
     }
+
+    /**
+     * Array of nullable properties
+     *
+     * @return array
+     */
+    protected static function openAPINullables(): array
+    {
+        return self::$openAPINullables;
+    }
+
+    /**
+     * Array of nullable field names deliberately set to null
+     *
+     * @return boolean[]
+     */
+    private function getOpenAPINullablesSetToNull(): array
+    {
+        return $this->openAPINullablesSetToNull;
+    }
+
+    /**
+     * Setter - Array of nullable field names deliberately set to null
+     *
+     * @param boolean[] $openAPINullablesSetToNull
+     */
+    private function setOpenAPINullablesSetToNull(array $openAPINullablesSetToNull): void
+    {
+        $this->openAPINullablesSetToNull = $openAPINullablesSetToNull;
+    }
+
+    /**
+     * Checks if a property is nullable
+     *
+     * @param string $property
+     * @return bool
+     */
+    public static function isNullable(string $property): bool
+    {
+        return self::openAPINullables()[$property] ?? false;
+    }
+
+    /**
+     * Checks if a nullable property is set to null.
+     *
+     * @param string $property
+     * @return bool
+     */
+    public function isNullableSetToNull(string $property): bool
+    {
+        return in_array($property, $this->getOpenAPINullablesSetToNull(), true);
+    }
+
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @var string[]
+     */
+    protected static $attributeMap = [
+        'total' => 'total',
+        'count' => 'count',
+        'per_page' => 'per_page',
+        'current_page' => 'current_page',
+        'total_pages' => 'total_pages',
+        'links' => 'links'
+    ];
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @var string[]
+     */
+    protected static $setters = [
+        'total' => 'setTotal',
+        'count' => 'setCount',
+        'per_page' => 'setPerPage',
+        'current_page' => 'setCurrentPage',
+        'total_pages' => 'setTotalPages',
+        'links' => 'setLinks'
+    ];
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @var string[]
+     */
+    protected static $getters = [
+        'total' => 'getTotal',
+        'count' => 'getCount',
+        'per_page' => 'getPerPage',
+        'current_page' => 'getCurrentPage',
+        'total_pages' => 'getTotalPages',
+        'links' => 'getLinks'
+    ];
 
     /**
      * Array of attributes where the key is the local name,
@@ -259,27 +250,6 @@ class PaginationMeta implements ModelInterface, ArrayAccess, JsonSerializable
     }
 
     /**
-     * Checks if a nullable property is set to null.
-     *
-     * @param  string  $property
-     * @return bool
-     */
-    public function isNullableSetToNull(string $property): bool
-    {
-        return in_array($property, $this->getOpenAPINullablesSetToNull(), true);
-    }
-
-    /**
-     * Array of nullable field names deliberately set to null
-     *
-     * @return boolean[]
-     */
-    private function getOpenAPINullablesSetToNull(): array
-    {
-        return $this->openAPINullablesSetToNull;
-    }
-
-    /**
      * The original name of the model.
      *
      * @return string
@@ -289,15 +259,46 @@ class PaginationMeta implements ModelInterface, ArrayAccess, JsonSerializable
         return self::$openAPIModelName;
     }
 
+
     /**
-     * Validate all the properties in the model
-     * return true if all passed
+     * Associative array for storing property values
      *
-     * @return bool True if all properties are valid
+     * @var mixed[]
      */
-    public function valid()
+    protected $container = [];
+
+    /**
+     * Constructor
+     *
+     * @param mixed[] $data Associated array of property values
+     *                      initializing the model
+     */
+    public function __construct(array $data = null)
     {
-        return count($this->listInvalidProperties()) === 0;
+        $this->setIfExists('total', $data ?? [], null);
+        $this->setIfExists('count', $data ?? [], null);
+        $this->setIfExists('per_page', $data ?? [], null);
+        $this->setIfExists('current_page', $data ?? [], null);
+        $this->setIfExists('total_pages', $data ?? [], null);
+        $this->setIfExists('links', $data ?? [], null);
+    }
+
+    /**
+    * Sets $this->container[$variableName] to the given data or to the given default Value; if $variableName
+    * is nullable and its value is set to null in the $fields array, then mark it as "set to null" in the
+    * $this->openAPINullablesSetToNull array
+    *
+    * @param string $variableName
+    * @param array  $fields
+    * @param mixed  $defaultValue
+    */
+    private function setIfExists(string $variableName, array $fields, $defaultValue): void
+    {
+        if (self::isNullable($variableName) && array_key_exists($variableName, $fields) && is_null($fields[$variableName])) {
+            $this->openAPINullablesSetToNull[] = $variableName;
+        }
+
+        $this->container[$variableName] = $fields[$variableName] ?? $defaultValue;
     }
 
     /**
@@ -313,6 +314,18 @@ class PaginationMeta implements ModelInterface, ArrayAccess, JsonSerializable
     }
 
     /**
+     * Validate all the properties in the model
+     * return true if all passed
+     *
+     * @return bool True if all properties are valid
+     */
+    public function valid()
+    {
+        return count($this->listInvalidProperties()) === 0;
+    }
+
+
+    /**
      * Gets total
      *
      * @return int|null
@@ -325,14 +338,14 @@ class PaginationMeta implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Sets total
      *
-     * @param  int|null  $total  total
+     * @param int|null $total total
      *
      * @return self
      */
     public function setTotal($total)
     {
         if (is_null($total)) {
-            throw new InvalidArgumentException('non-nullable total cannot be null');
+            throw new \InvalidArgumentException('non-nullable total cannot be null');
         }
         $this->container['total'] = $total;
 
@@ -352,14 +365,14 @@ class PaginationMeta implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Sets count
      *
-     * @param  int|null  $count  count
+     * @param int|null $count count
      *
      * @return self
      */
     public function setCount($count)
     {
         if (is_null($count)) {
-            throw new InvalidArgumentException('non-nullable count cannot be null');
+            throw new \InvalidArgumentException('non-nullable count cannot be null');
         }
         $this->container['count'] = $count;
 
@@ -379,14 +392,14 @@ class PaginationMeta implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Sets per_page
      *
-     * @param  int|null  $per_page  per_page
+     * @param int|null $per_page per_page
      *
      * @return self
      */
     public function setPerPage($per_page)
     {
         if (is_null($per_page)) {
-            throw new InvalidArgumentException('non-nullable per_page cannot be null');
+            throw new \InvalidArgumentException('non-nullable per_page cannot be null');
         }
         $this->container['per_page'] = $per_page;
 
@@ -406,14 +419,14 @@ class PaginationMeta implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Sets current_page
      *
-     * @param  int|null  $current_page  current_page
+     * @param int|null $current_page current_page
      *
      * @return self
      */
     public function setCurrentPage($current_page)
     {
         if (is_null($current_page)) {
-            throw new InvalidArgumentException('non-nullable current_page cannot be null');
+            throw new \InvalidArgumentException('non-nullable current_page cannot be null');
         }
         $this->container['current_page'] = $current_page;
 
@@ -433,14 +446,14 @@ class PaginationMeta implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Sets total_pages
      *
-     * @param  int|null  $total_pages  total_pages
+     * @param int|null $total_pages total_pages
      *
      * @return self
      */
     public function setTotalPages($total_pages)
     {
         if (is_null($total_pages)) {
-            throw new InvalidArgumentException('non-nullable total_pages cannot be null');
+            throw new \InvalidArgumentException('non-nullable total_pages cannot be null');
         }
         $this->container['total_pages'] = $total_pages;
 
@@ -450,7 +463,7 @@ class PaginationMeta implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets links
      *
-     * @return PaginationMetaLinksInner[]|null
+     * @return \OpenAPI\Client\Model\PaginationMetaLinksInner[]|null
      */
     public function getLinks()
     {
@@ -460,24 +473,23 @@ class PaginationMeta implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Sets links
      *
-     * @param  PaginationMetaLinksInner[]|null  $links  links
+     * @param \OpenAPI\Client\Model\PaginationMetaLinksInner[]|null $links links
      *
      * @return self
      */
     public function setLinks($links)
     {
         if (is_null($links)) {
-            throw new InvalidArgumentException('non-nullable links cannot be null');
+            throw new \InvalidArgumentException('non-nullable links cannot be null');
         }
         $this->container['links'] = $links;
 
         return $this;
     }
-
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param  integer  $offset  Offset
+     * @param integer $offset Offset
      *
      * @return boolean
      */
@@ -489,11 +501,11 @@ class PaginationMeta implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets offset.
      *
-     * @param  integer  $offset  Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
-    #[ReturnTypeWillChange]
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->container[$offset] ?? null;
@@ -502,8 +514,8 @@ class PaginationMeta implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Sets value based on offset.
      *
-     * @param  int|null  $offset  Offset
-     * @param  mixed  $value  Value to be set
+     * @param int|null $offset Offset
+     * @param mixed    $value  Value to be set
      *
      * @return void
      */
@@ -519,7 +531,7 @@ class PaginationMeta implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Unsets offset.
      *
-     * @param  integer  $offset  Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -535,10 +547,10 @@ class PaginationMeta implements ModelInterface, ArrayAccess, JsonSerializable
      * @return mixed Returns data which can be serialized by json_encode(), which is a value
      * of any type other than a resource.
      */
-    #[ReturnTypeWillChange]
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
-        return ObjectSerializer::sanitizeForSerialization($this);
+       return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -562,16 +574,6 @@ class PaginationMeta implements ModelInterface, ArrayAccess, JsonSerializable
     public function toHeaderValue()
     {
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
-    }
-
-    /**
-     * Setter - Array of nullable field names deliberately set to null
-     *
-     * @param  boolean[]  $openAPINullablesSetToNull
-     */
-    private function setOpenAPINullablesSetToNull(array $openAPINullablesSetToNull): void
-    {
-        $this->openAPINullablesSetToNull = $openAPINullablesSetToNull;
     }
 }
 

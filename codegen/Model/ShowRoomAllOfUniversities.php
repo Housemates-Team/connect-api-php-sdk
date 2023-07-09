@@ -29,11 +29,8 @@
 
 namespace OpenAPI\Client\Model;
 
-use ArrayAccess;
-use InvalidArgumentException;
-use JsonSerializable;
-use OpenAPI\Client\ObjectSerializer;
-use ReturnTypeWillChange;
+use \ArrayAccess;
+use \OpenAPI\Client\ObjectSerializer;
 
 /**
  * ShowRoomAllOfUniversities Class Doc Comment
@@ -42,24 +39,24 @@ use ReturnTypeWillChange;
  * @package  OpenAPI\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
- * @implements ArrayAccess<string, mixed>
+ * @implements \ArrayAccess<string, mixed>
  */
-class ShowRoomAllOfUniversities implements ModelInterface, ArrayAccess, JsonSerializable
+class ShowRoomAllOfUniversities implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
     /**
-     * The original name of the model.
-     *
-     * @var string
-     */
+      * The original name of the model.
+      *
+      * @var string
+      */
     protected static $openAPIModelName = 'ShowRoom_allOf_universities';
 
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $openAPITypes = [
         'name' => 'string',
         'distance' => 'float',
@@ -70,12 +67,12 @@ class ShowRoomAllOfUniversities implements ModelInterface, ArrayAccess, JsonSeri
     ];
 
     /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @var string[]
-     * @phpstan-var array<string, string|null>
-     * @psalm-var array<string, string|null>
-     */
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      * @phpstan-var array<string, string|null>
+      * @psalm-var array<string, string|null>
+      */
     protected static $openAPIFormats = [
         'name' => null,
         'distance' => null,
@@ -86,126 +83,25 @@ class ShowRoomAllOfUniversities implements ModelInterface, ArrayAccess, JsonSeri
     ];
 
     /**
-     * Array of nullable properties. Used for (de)serialization
-     *
-     * @var boolean[]
-     */
+      * Array of nullable properties. Used for (de)serialization
+      *
+      * @var boolean[]
+      */
     protected static array $openAPINullables = [
         'name' => false,
-        'distance' => false,
-        'walk' => false,
-        'drive' => false,
-        'metric_unit' => false,
-        'coordinates' => false
+		'distance' => false,
+		'walk' => false,
+		'drive' => false,
+		'metric_unit' => false,
+		'coordinates' => false
     ];
+
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @var string[]
-     */
-    protected static $attributeMap = [
-        'name' => 'name',
-        'distance' => 'distance',
-        'walk' => 'walk',
-        'drive' => 'drive',
-        'metric_unit' => 'metric_unit',
-        'coordinates' => 'coordinates'
-    ];
-    /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     *
-     * @var string[]
-     */
-    protected static $setters = [
-        'name' => 'setName',
-        'distance' => 'setDistance',
-        'walk' => 'setWalk',
-        'drive' => 'setDrive',
-        'metric_unit' => 'setMetricUnit',
-        'coordinates' => 'setCoordinates'
-    ];
-    /**
-     * Array of attributes to getter functions (for serialization of requests)
-     *
-     * @var string[]
-     */
-    protected static $getters = [
-        'name' => 'getName',
-        'distance' => 'getDistance',
-        'walk' => 'getWalk',
-        'drive' => 'getDrive',
-        'metric_unit' => 'getMetricUnit',
-        'coordinates' => 'getCoordinates'
-    ];
-    /**
-     * If a nullable field gets set to null, insert it here
-     *
-     * @var boolean[]
-     */
+      * If a nullable field gets set to null, insert it here
+      *
+      * @var boolean[]
+      */
     protected array $openAPINullablesSetToNull = [];
-    /**
-     * Associative array for storing property values
-     *
-     * @var mixed[]
-     */
-    protected $container = [];
-
-    /**
-     * Constructor
-     *
-     * @param  mixed[]  $data  Associated array of property values
-     *                      initializing the model
-     */
-    public function __construct(array $data = null)
-    {
-        $this->setIfExists('name', $data ?? [], null);
-        $this->setIfExists('distance', $data ?? [], null);
-        $this->setIfExists('walk', $data ?? [], null);
-        $this->setIfExists('drive', $data ?? [], null);
-        $this->setIfExists('metric_unit', $data ?? [], null);
-        $this->setIfExists('coordinates', $data ?? [], null);
-    }
-
-    /**
-     * Sets $this->container[$variableName] to the given data or to the given default Value; if $variableName
-     * is nullable and its value is set to null in the $fields array, then mark it as "set to null" in the
-     * $this->openAPINullablesSetToNull array
-     *
-     * @param  string  $variableName
-     * @param  array  $fields
-     * @param  mixed  $defaultValue
-     */
-    private function setIfExists(string $variableName, array $fields, $defaultValue): void
-    {
-        if (self::isNullable($variableName) && array_key_exists($variableName,
-                $fields) && is_null($fields[$variableName])) {
-            $this->openAPINullablesSetToNull[] = $variableName;
-        }
-
-        $this->container[$variableName] = $fields[$variableName] ?? $defaultValue;
-    }
-
-    /**
-     * Checks if a property is nullable
-     *
-     * @param  string  $property
-     * @return bool
-     */
-    public static function isNullable(string $property): bool
-    {
-        return self::openAPINullables()[$property] ?? false;
-    }
-
-    /**
-     * Array of nullable properties
-     *
-     * @return array
-     */
-    protected static function openAPINullables(): array
-    {
-        return self::$openAPINullables;
-    }
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -226,6 +122,101 @@ class ShowRoomAllOfUniversities implements ModelInterface, ArrayAccess, JsonSeri
     {
         return self::$openAPIFormats;
     }
+
+    /**
+     * Array of nullable properties
+     *
+     * @return array
+     */
+    protected static function openAPINullables(): array
+    {
+        return self::$openAPINullables;
+    }
+
+    /**
+     * Array of nullable field names deliberately set to null
+     *
+     * @return boolean[]
+     */
+    private function getOpenAPINullablesSetToNull(): array
+    {
+        return $this->openAPINullablesSetToNull;
+    }
+
+    /**
+     * Setter - Array of nullable field names deliberately set to null
+     *
+     * @param boolean[] $openAPINullablesSetToNull
+     */
+    private function setOpenAPINullablesSetToNull(array $openAPINullablesSetToNull): void
+    {
+        $this->openAPINullablesSetToNull = $openAPINullablesSetToNull;
+    }
+
+    /**
+     * Checks if a property is nullable
+     *
+     * @param string $property
+     * @return bool
+     */
+    public static function isNullable(string $property): bool
+    {
+        return self::openAPINullables()[$property] ?? false;
+    }
+
+    /**
+     * Checks if a nullable property is set to null.
+     *
+     * @param string $property
+     * @return bool
+     */
+    public function isNullableSetToNull(string $property): bool
+    {
+        return in_array($property, $this->getOpenAPINullablesSetToNull(), true);
+    }
+
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @var string[]
+     */
+    protected static $attributeMap = [
+        'name' => 'name',
+        'distance' => 'distance',
+        'walk' => 'walk',
+        'drive' => 'drive',
+        'metric_unit' => 'metric_unit',
+        'coordinates' => 'coordinates'
+    ];
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @var string[]
+     */
+    protected static $setters = [
+        'name' => 'setName',
+        'distance' => 'setDistance',
+        'walk' => 'setWalk',
+        'drive' => 'setDrive',
+        'metric_unit' => 'setMetricUnit',
+        'coordinates' => 'setCoordinates'
+    ];
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @var string[]
+     */
+    protected static $getters = [
+        'name' => 'getName',
+        'distance' => 'getDistance',
+        'walk' => 'getWalk',
+        'drive' => 'getDrive',
+        'metric_unit' => 'getMetricUnit',
+        'coordinates' => 'getCoordinates'
+    ];
 
     /**
      * Array of attributes where the key is the local name,
@@ -259,27 +250,6 @@ class ShowRoomAllOfUniversities implements ModelInterface, ArrayAccess, JsonSeri
     }
 
     /**
-     * Checks if a nullable property is set to null.
-     *
-     * @param  string  $property
-     * @return bool
-     */
-    public function isNullableSetToNull(string $property): bool
-    {
-        return in_array($property, $this->getOpenAPINullablesSetToNull(), true);
-    }
-
-    /**
-     * Array of nullable field names deliberately set to null
-     *
-     * @return boolean[]
-     */
-    private function getOpenAPINullablesSetToNull(): array
-    {
-        return $this->openAPINullablesSetToNull;
-    }
-
-    /**
      * The original name of the model.
      *
      * @return string
@@ -289,15 +259,46 @@ class ShowRoomAllOfUniversities implements ModelInterface, ArrayAccess, JsonSeri
         return self::$openAPIModelName;
     }
 
+
     /**
-     * Validate all the properties in the model
-     * return true if all passed
+     * Associative array for storing property values
      *
-     * @return bool True if all properties are valid
+     * @var mixed[]
      */
-    public function valid()
+    protected $container = [];
+
+    /**
+     * Constructor
+     *
+     * @param mixed[] $data Associated array of property values
+     *                      initializing the model
+     */
+    public function __construct(array $data = null)
     {
-        return count($this->listInvalidProperties()) === 0;
+        $this->setIfExists('name', $data ?? [], null);
+        $this->setIfExists('distance', $data ?? [], null);
+        $this->setIfExists('walk', $data ?? [], null);
+        $this->setIfExists('drive', $data ?? [], null);
+        $this->setIfExists('metric_unit', $data ?? [], null);
+        $this->setIfExists('coordinates', $data ?? [], null);
+    }
+
+    /**
+    * Sets $this->container[$variableName] to the given data or to the given default Value; if $variableName
+    * is nullable and its value is set to null in the $fields array, then mark it as "set to null" in the
+    * $this->openAPINullablesSetToNull array
+    *
+    * @param string $variableName
+    * @param array  $fields
+    * @param mixed  $defaultValue
+    */
+    private function setIfExists(string $variableName, array $fields, $defaultValue): void
+    {
+        if (self::isNullable($variableName) && array_key_exists($variableName, $fields) && is_null($fields[$variableName])) {
+            $this->openAPINullablesSetToNull[] = $variableName;
+        }
+
+        $this->container[$variableName] = $fields[$variableName] ?? $defaultValue;
     }
 
     /**
@@ -313,6 +314,18 @@ class ShowRoomAllOfUniversities implements ModelInterface, ArrayAccess, JsonSeri
     }
 
     /**
+     * Validate all the properties in the model
+     * return true if all passed
+     *
+     * @return bool True if all properties are valid
+     */
+    public function valid()
+    {
+        return count($this->listInvalidProperties()) === 0;
+    }
+
+
+    /**
      * Gets name
      *
      * @return string|null
@@ -325,14 +338,14 @@ class ShowRoomAllOfUniversities implements ModelInterface, ArrayAccess, JsonSeri
     /**
      * Sets name
      *
-     * @param  string|null  $name  name
+     * @param string|null $name name
      *
      * @return self
      */
     public function setName($name)
     {
         if (is_null($name)) {
-            throw new InvalidArgumentException('non-nullable name cannot be null');
+            throw new \InvalidArgumentException('non-nullable name cannot be null');
         }
         $this->container['name'] = $name;
 
@@ -352,14 +365,14 @@ class ShowRoomAllOfUniversities implements ModelInterface, ArrayAccess, JsonSeri
     /**
      * Sets distance
      *
-     * @param  float|null  $distance  distance
+     * @param float|null $distance distance
      *
      * @return self
      */
     public function setDistance($distance)
     {
         if (is_null($distance)) {
-            throw new InvalidArgumentException('non-nullable distance cannot be null');
+            throw new \InvalidArgumentException('non-nullable distance cannot be null');
         }
         $this->container['distance'] = $distance;
 
@@ -379,14 +392,14 @@ class ShowRoomAllOfUniversities implements ModelInterface, ArrayAccess, JsonSeri
     /**
      * Sets walk
      *
-     * @param  string|null  $walk  walk
+     * @param string|null $walk walk
      *
      * @return self
      */
     public function setWalk($walk)
     {
         if (is_null($walk)) {
-            throw new InvalidArgumentException('non-nullable walk cannot be null');
+            throw new \InvalidArgumentException('non-nullable walk cannot be null');
         }
         $this->container['walk'] = $walk;
 
@@ -406,14 +419,14 @@ class ShowRoomAllOfUniversities implements ModelInterface, ArrayAccess, JsonSeri
     /**
      * Sets drive
      *
-     * @param  string|null  $drive  drive
+     * @param string|null $drive drive
      *
      * @return self
      */
     public function setDrive($drive)
     {
         if (is_null($drive)) {
-            throw new InvalidArgumentException('non-nullable drive cannot be null');
+            throw new \InvalidArgumentException('non-nullable drive cannot be null');
         }
         $this->container['drive'] = $drive;
 
@@ -433,14 +446,14 @@ class ShowRoomAllOfUniversities implements ModelInterface, ArrayAccess, JsonSeri
     /**
      * Sets metric_unit
      *
-     * @param  string|null  $metric_unit  metric_unit
+     * @param string|null $metric_unit metric_unit
      *
      * @return self
      */
     public function setMetricUnit($metric_unit)
     {
         if (is_null($metric_unit)) {
-            throw new InvalidArgumentException('non-nullable metric_unit cannot be null');
+            throw new \InvalidArgumentException('non-nullable metric_unit cannot be null');
         }
         $this->container['metric_unit'] = $metric_unit;
 
@@ -450,7 +463,7 @@ class ShowRoomAllOfUniversities implements ModelInterface, ArrayAccess, JsonSeri
     /**
      * Gets coordinates
      *
-     * @return ShowRoomAllOfCoordinates|null
+     * @return \OpenAPI\Client\Model\ShowRoomAllOfCoordinates|null
      */
     public function getCoordinates()
     {
@@ -460,24 +473,23 @@ class ShowRoomAllOfUniversities implements ModelInterface, ArrayAccess, JsonSeri
     /**
      * Sets coordinates
      *
-     * @param  ShowRoomAllOfCoordinates|null  $coordinates  coordinates
+     * @param \OpenAPI\Client\Model\ShowRoomAllOfCoordinates|null $coordinates coordinates
      *
      * @return self
      */
     public function setCoordinates($coordinates)
     {
         if (is_null($coordinates)) {
-            throw new InvalidArgumentException('non-nullable coordinates cannot be null');
+            throw new \InvalidArgumentException('non-nullable coordinates cannot be null');
         }
         $this->container['coordinates'] = $coordinates;
 
         return $this;
     }
-
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param  integer  $offset  Offset
+     * @param integer $offset Offset
      *
      * @return boolean
      */
@@ -489,11 +501,11 @@ class ShowRoomAllOfUniversities implements ModelInterface, ArrayAccess, JsonSeri
     /**
      * Gets offset.
      *
-     * @param  integer  $offset  Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
-    #[ReturnTypeWillChange]
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->container[$offset] ?? null;
@@ -502,8 +514,8 @@ class ShowRoomAllOfUniversities implements ModelInterface, ArrayAccess, JsonSeri
     /**
      * Sets value based on offset.
      *
-     * @param  int|null  $offset  Offset
-     * @param  mixed  $value  Value to be set
+     * @param int|null $offset Offset
+     * @param mixed    $value  Value to be set
      *
      * @return void
      */
@@ -519,7 +531,7 @@ class ShowRoomAllOfUniversities implements ModelInterface, ArrayAccess, JsonSeri
     /**
      * Unsets offset.
      *
-     * @param  integer  $offset  Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -535,10 +547,10 @@ class ShowRoomAllOfUniversities implements ModelInterface, ArrayAccess, JsonSeri
      * @return mixed Returns data which can be serialized by json_encode(), which is a value
      * of any type other than a resource.
      */
-    #[ReturnTypeWillChange]
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
-        return ObjectSerializer::sanitizeForSerialization($this);
+       return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -562,16 +574,6 @@ class ShowRoomAllOfUniversities implements ModelInterface, ArrayAccess, JsonSeri
     public function toHeaderValue()
     {
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
-    }
-
-    /**
-     * Setter - Array of nullable field names deliberately set to null
-     *
-     * @param  boolean[]  $openAPINullablesSetToNull
-     */
-    private function setOpenAPINullablesSetToNull(array $openAPINullablesSetToNull): void
-    {
-        $this->openAPINullablesSetToNull = $openAPINullablesSetToNull;
     }
 }
 

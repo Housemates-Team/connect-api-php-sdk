@@ -29,11 +29,8 @@
 
 namespace OpenAPI\Client\Model;
 
-use ArrayAccess;
-use InvalidArgumentException;
-use JsonSerializable;
-use OpenAPI\Client\ObjectSerializer;
-use ReturnTypeWillChange;
+use \ArrayAccess;
+use \OpenAPI\Client\ObjectSerializer;
 
 /**
  * CheckoutCompleteRequest Class Doc Comment
@@ -42,24 +39,24 @@ use ReturnTypeWillChange;
  * @package  OpenAPI\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
- * @implements ArrayAccess<string, mixed>
+ * @implements \ArrayAccess<string, mixed>
  */
-class CheckoutCompleteRequest implements ModelInterface, ArrayAccess, JsonSerializable
+class CheckoutCompleteRequest implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
     /**
-     * The original name of the model.
-     *
-     * @var string
-     */
+      * The original name of the model.
+      *
+      * @var string
+      */
     protected static $openAPIModelName = 'checkoutComplete_request';
 
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $openAPITypes = [
         'session_token' => 'string',
         'paying_in_instalments' => 'bool',
@@ -72,12 +69,12 @@ class CheckoutCompleteRequest implements ModelInterface, ArrayAccess, JsonSerial
     ];
 
     /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @var string[]
-     * @phpstan-var array<string, string|null>
-     * @psalm-var array<string, string|null>
-     */
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      * @phpstan-var array<string, string|null>
+      * @psalm-var array<string, string|null>
+      */
     protected static $openAPIFormats = [
         'session_token' => null,
         'paying_in_instalments' => null,
@@ -90,136 +87,27 @@ class CheckoutCompleteRequest implements ModelInterface, ArrayAccess, JsonSerial
     ];
 
     /**
-     * Array of nullable properties. Used for (de)serialization
-     *
-     * @var boolean[]
-     */
+      * Array of nullable properties. Used for (de)serialization
+      *
+      * @var boolean[]
+      */
     protected static array $openAPINullables = [
         'session_token' => false,
-        'paying_in_instalments' => false,
-        'has_uk_based_guarantor' => false,
-        'is_using_housing_hand' => false,
-        'resident_details' => false,
-        'supporting_contact_details' => false,
-        'course_details' => false,
-        'special_request' => true
+		'paying_in_instalments' => false,
+		'has_uk_based_guarantor' => false,
+		'is_using_housing_hand' => false,
+		'resident_details' => false,
+		'supporting_contact_details' => false,
+		'course_details' => false,
+		'special_request' => true
     ];
+
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @var string[]
-     */
-    protected static $attributeMap = [
-        'session_token' => 'session_token',
-        'paying_in_instalments' => 'paying_in_instalments',
-        'has_uk_based_guarantor' => 'has_uk_based_guarantor',
-        'is_using_housing_hand' => 'is_using_housing_hand',
-        'resident_details' => 'resident_details',
-        'supporting_contact_details' => 'supporting_contact_details',
-        'course_details' => 'course_details',
-        'special_request' => 'special_request'
-    ];
-    /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     *
-     * @var string[]
-     */
-    protected static $setters = [
-        'session_token' => 'setSessionToken',
-        'paying_in_instalments' => 'setPayingInInstalments',
-        'has_uk_based_guarantor' => 'setHasUkBasedGuarantor',
-        'is_using_housing_hand' => 'setIsUsingHousingHand',
-        'resident_details' => 'setResidentDetails',
-        'supporting_contact_details' => 'setSupportingContactDetails',
-        'course_details' => 'setCourseDetails',
-        'special_request' => 'setSpecialRequest'
-    ];
-    /**
-     * Array of attributes to getter functions (for serialization of requests)
-     *
-     * @var string[]
-     */
-    protected static $getters = [
-        'session_token' => 'getSessionToken',
-        'paying_in_instalments' => 'getPayingInInstalments',
-        'has_uk_based_guarantor' => 'getHasUkBasedGuarantor',
-        'is_using_housing_hand' => 'getIsUsingHousingHand',
-        'resident_details' => 'getResidentDetails',
-        'supporting_contact_details' => 'getSupportingContactDetails',
-        'course_details' => 'getCourseDetails',
-        'special_request' => 'getSpecialRequest'
-    ];
-    /**
-     * If a nullable field gets set to null, insert it here
-     *
-     * @var boolean[]
-     */
+      * If a nullable field gets set to null, insert it here
+      *
+      * @var boolean[]
+      */
     protected array $openAPINullablesSetToNull = [];
-    /**
-     * Associative array for storing property values
-     *
-     * @var mixed[]
-     */
-    protected $container = [];
-
-    /**
-     * Constructor
-     *
-     * @param  mixed[]  $data  Associated array of property values
-     *                      initializing the model
-     */
-    public function __construct(array $data = null)
-    {
-        $this->setIfExists('session_token', $data ?? [], null);
-        $this->setIfExists('paying_in_instalments', $data ?? [], null);
-        $this->setIfExists('has_uk_based_guarantor', $data ?? [], null);
-        $this->setIfExists('is_using_housing_hand', $data ?? [], null);
-        $this->setIfExists('resident_details', $data ?? [], null);
-        $this->setIfExists('supporting_contact_details', $data ?? [], null);
-        $this->setIfExists('course_details', $data ?? [], null);
-        $this->setIfExists('special_request', $data ?? [], null);
-    }
-
-    /**
-     * Sets $this->container[$variableName] to the given data or to the given default Value; if $variableName
-     * is nullable and its value is set to null in the $fields array, then mark it as "set to null" in the
-     * $this->openAPINullablesSetToNull array
-     *
-     * @param  string  $variableName
-     * @param  array  $fields
-     * @param  mixed  $defaultValue
-     */
-    private function setIfExists(string $variableName, array $fields, $defaultValue): void
-    {
-        if (self::isNullable($variableName) && array_key_exists($variableName,
-                $fields) && is_null($fields[$variableName])) {
-            $this->openAPINullablesSetToNull[] = $variableName;
-        }
-
-        $this->container[$variableName] = $fields[$variableName] ?? $defaultValue;
-    }
-
-    /**
-     * Checks if a property is nullable
-     *
-     * @param  string  $property
-     * @return bool
-     */
-    public static function isNullable(string $property): bool
-    {
-        return self::openAPINullables()[$property] ?? false;
-    }
-
-    /**
-     * Array of nullable properties
-     *
-     * @return array
-     */
-    protected static function openAPINullables(): array
-    {
-        return self::$openAPINullables;
-    }
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -240,6 +128,107 @@ class CheckoutCompleteRequest implements ModelInterface, ArrayAccess, JsonSerial
     {
         return self::$openAPIFormats;
     }
+
+    /**
+     * Array of nullable properties
+     *
+     * @return array
+     */
+    protected static function openAPINullables(): array
+    {
+        return self::$openAPINullables;
+    }
+
+    /**
+     * Array of nullable field names deliberately set to null
+     *
+     * @return boolean[]
+     */
+    private function getOpenAPINullablesSetToNull(): array
+    {
+        return $this->openAPINullablesSetToNull;
+    }
+
+    /**
+     * Setter - Array of nullable field names deliberately set to null
+     *
+     * @param boolean[] $openAPINullablesSetToNull
+     */
+    private function setOpenAPINullablesSetToNull(array $openAPINullablesSetToNull): void
+    {
+        $this->openAPINullablesSetToNull = $openAPINullablesSetToNull;
+    }
+
+    /**
+     * Checks if a property is nullable
+     *
+     * @param string $property
+     * @return bool
+     */
+    public static function isNullable(string $property): bool
+    {
+        return self::openAPINullables()[$property] ?? false;
+    }
+
+    /**
+     * Checks if a nullable property is set to null.
+     *
+     * @param string $property
+     * @return bool
+     */
+    public function isNullableSetToNull(string $property): bool
+    {
+        return in_array($property, $this->getOpenAPINullablesSetToNull(), true);
+    }
+
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @var string[]
+     */
+    protected static $attributeMap = [
+        'session_token' => 'session_token',
+        'paying_in_instalments' => 'paying_in_instalments',
+        'has_uk_based_guarantor' => 'has_uk_based_guarantor',
+        'is_using_housing_hand' => 'is_using_housing_hand',
+        'resident_details' => 'resident_details',
+        'supporting_contact_details' => 'supporting_contact_details',
+        'course_details' => 'course_details',
+        'special_request' => 'special_request'
+    ];
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @var string[]
+     */
+    protected static $setters = [
+        'session_token' => 'setSessionToken',
+        'paying_in_instalments' => 'setPayingInInstalments',
+        'has_uk_based_guarantor' => 'setHasUkBasedGuarantor',
+        'is_using_housing_hand' => 'setIsUsingHousingHand',
+        'resident_details' => 'setResidentDetails',
+        'supporting_contact_details' => 'setSupportingContactDetails',
+        'course_details' => 'setCourseDetails',
+        'special_request' => 'setSpecialRequest'
+    ];
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @var string[]
+     */
+    protected static $getters = [
+        'session_token' => 'getSessionToken',
+        'paying_in_instalments' => 'getPayingInInstalments',
+        'has_uk_based_guarantor' => 'getHasUkBasedGuarantor',
+        'is_using_housing_hand' => 'getIsUsingHousingHand',
+        'resident_details' => 'getResidentDetails',
+        'supporting_contact_details' => 'getSupportingContactDetails',
+        'course_details' => 'getCourseDetails',
+        'special_request' => 'getSpecialRequest'
+    ];
 
     /**
      * Array of attributes where the key is the local name,
@@ -273,27 +262,6 @@ class CheckoutCompleteRequest implements ModelInterface, ArrayAccess, JsonSerial
     }
 
     /**
-     * Checks if a nullable property is set to null.
-     *
-     * @param  string  $property
-     * @return bool
-     */
-    public function isNullableSetToNull(string $property): bool
-    {
-        return in_array($property, $this->getOpenAPINullablesSetToNull(), true);
-    }
-
-    /**
-     * Array of nullable field names deliberately set to null
-     *
-     * @return boolean[]
-     */
-    private function getOpenAPINullablesSetToNull(): array
-    {
-        return $this->openAPINullablesSetToNull;
-    }
-
-    /**
      * The original name of the model.
      *
      * @return string
@@ -303,15 +271,48 @@ class CheckoutCompleteRequest implements ModelInterface, ArrayAccess, JsonSerial
         return self::$openAPIModelName;
     }
 
+
     /**
-     * Validate all the properties in the model
-     * return true if all passed
+     * Associative array for storing property values
      *
-     * @return bool True if all properties are valid
+     * @var mixed[]
      */
-    public function valid()
+    protected $container = [];
+
+    /**
+     * Constructor
+     *
+     * @param mixed[] $data Associated array of property values
+     *                      initializing the model
+     */
+    public function __construct(array $data = null)
     {
-        return count($this->listInvalidProperties()) === 0;
+        $this->setIfExists('session_token', $data ?? [], null);
+        $this->setIfExists('paying_in_instalments', $data ?? [], null);
+        $this->setIfExists('has_uk_based_guarantor', $data ?? [], null);
+        $this->setIfExists('is_using_housing_hand', $data ?? [], null);
+        $this->setIfExists('resident_details', $data ?? [], null);
+        $this->setIfExists('supporting_contact_details', $data ?? [], null);
+        $this->setIfExists('course_details', $data ?? [], null);
+        $this->setIfExists('special_request', $data ?? [], null);
+    }
+
+    /**
+    * Sets $this->container[$variableName] to the given data or to the given default Value; if $variableName
+    * is nullable and its value is set to null in the $fields array, then mark it as "set to null" in the
+    * $this->openAPINullablesSetToNull array
+    *
+    * @param string $variableName
+    * @param array  $fields
+    * @param mixed  $defaultValue
+    */
+    private function setIfExists(string $variableName, array $fields, $defaultValue): void
+    {
+        if (self::isNullable($variableName) && array_key_exists($variableName, $fields) && is_null($fields[$variableName])) {
+            $this->openAPINullablesSetToNull[] = $variableName;
+        }
+
+        $this->container[$variableName] = $fields[$variableName] ?? $defaultValue;
     }
 
     /**
@@ -345,6 +346,18 @@ class CheckoutCompleteRequest implements ModelInterface, ArrayAccess, JsonSerial
     }
 
     /**
+     * Validate all the properties in the model
+     * return true if all passed
+     *
+     * @return bool True if all properties are valid
+     */
+    public function valid()
+    {
+        return count($this->listInvalidProperties()) === 0;
+    }
+
+
+    /**
      * Gets session_token
      *
      * @return string
@@ -357,14 +370,14 @@ class CheckoutCompleteRequest implements ModelInterface, ArrayAccess, JsonSerial
     /**
      * Sets session_token
      *
-     * @param  string  $session_token  session_token
+     * @param string $session_token session_token
      *
      * @return self
      */
     public function setSessionToken($session_token)
     {
         if (is_null($session_token)) {
-            throw new InvalidArgumentException('non-nullable session_token cannot be null');
+            throw new \InvalidArgumentException('non-nullable session_token cannot be null');
         }
         $this->container['session_token'] = $session_token;
 
@@ -384,14 +397,14 @@ class CheckoutCompleteRequest implements ModelInterface, ArrayAccess, JsonSerial
     /**
      * Sets paying_in_instalments
      *
-     * @param  bool  $paying_in_instalments  paying_in_instalments
+     * @param bool $paying_in_instalments paying_in_instalments
      *
      * @return self
      */
     public function setPayingInInstalments($paying_in_instalments)
     {
         if (is_null($paying_in_instalments)) {
-            throw new InvalidArgumentException('non-nullable paying_in_instalments cannot be null');
+            throw new \InvalidArgumentException('non-nullable paying_in_instalments cannot be null');
         }
         $this->container['paying_in_instalments'] = $paying_in_instalments;
 
@@ -411,14 +424,14 @@ class CheckoutCompleteRequest implements ModelInterface, ArrayAccess, JsonSerial
     /**
      * Sets has_uk_based_guarantor
      *
-     * @param  bool  $has_uk_based_guarantor  has_uk_based_guarantor
+     * @param bool $has_uk_based_guarantor has_uk_based_guarantor
      *
      * @return self
      */
     public function setHasUkBasedGuarantor($has_uk_based_guarantor)
     {
         if (is_null($has_uk_based_guarantor)) {
-            throw new InvalidArgumentException('non-nullable has_uk_based_guarantor cannot be null');
+            throw new \InvalidArgumentException('non-nullable has_uk_based_guarantor cannot be null');
         }
         $this->container['has_uk_based_guarantor'] = $has_uk_based_guarantor;
 
@@ -438,14 +451,14 @@ class CheckoutCompleteRequest implements ModelInterface, ArrayAccess, JsonSerial
     /**
      * Sets is_using_housing_hand
      *
-     * @param  bool  $is_using_housing_hand  is_using_housing_hand
+     * @param bool $is_using_housing_hand is_using_housing_hand
      *
      * @return self
      */
     public function setIsUsingHousingHand($is_using_housing_hand)
     {
         if (is_null($is_using_housing_hand)) {
-            throw new InvalidArgumentException('non-nullable is_using_housing_hand cannot be null');
+            throw new \InvalidArgumentException('non-nullable is_using_housing_hand cannot be null');
         }
         $this->container['is_using_housing_hand'] = $is_using_housing_hand;
 
@@ -455,7 +468,7 @@ class CheckoutCompleteRequest implements ModelInterface, ArrayAccess, JsonSerial
     /**
      * Gets resident_details
      *
-     * @return CheckoutCompleteRequestResidentDetails
+     * @return \OpenAPI\Client\Model\CheckoutCompleteRequestResidentDetails
      */
     public function getResidentDetails()
     {
@@ -465,14 +478,14 @@ class CheckoutCompleteRequest implements ModelInterface, ArrayAccess, JsonSerial
     /**
      * Sets resident_details
      *
-     * @param  CheckoutCompleteRequestResidentDetails  $resident_details  resident_details
+     * @param \OpenAPI\Client\Model\CheckoutCompleteRequestResidentDetails $resident_details resident_details
      *
      * @return self
      */
     public function setResidentDetails($resident_details)
     {
         if (is_null($resident_details)) {
-            throw new InvalidArgumentException('non-nullable resident_details cannot be null');
+            throw new \InvalidArgumentException('non-nullable resident_details cannot be null');
         }
         $this->container['resident_details'] = $resident_details;
 
@@ -482,7 +495,7 @@ class CheckoutCompleteRequest implements ModelInterface, ArrayAccess, JsonSerial
     /**
      * Gets supporting_contact_details
      *
-     * @return CheckoutCompleteRequestSupportingContactDetails|null
+     * @return \OpenAPI\Client\Model\CheckoutCompleteRequestSupportingContactDetails|null
      */
     public function getSupportingContactDetails()
     {
@@ -492,14 +505,14 @@ class CheckoutCompleteRequest implements ModelInterface, ArrayAccess, JsonSerial
     /**
      * Sets supporting_contact_details
      *
-     * @param  CheckoutCompleteRequestSupportingContactDetails|null  $supporting_contact_details  supporting_contact_details
+     * @param \OpenAPI\Client\Model\CheckoutCompleteRequestSupportingContactDetails|null $supporting_contact_details supporting_contact_details
      *
      * @return self
      */
     public function setSupportingContactDetails($supporting_contact_details)
     {
         if (is_null($supporting_contact_details)) {
-            throw new InvalidArgumentException('non-nullable supporting_contact_details cannot be null');
+            throw new \InvalidArgumentException('non-nullable supporting_contact_details cannot be null');
         }
         $this->container['supporting_contact_details'] = $supporting_contact_details;
 
@@ -509,7 +522,7 @@ class CheckoutCompleteRequest implements ModelInterface, ArrayAccess, JsonSerial
     /**
      * Gets course_details
      *
-     * @return CheckoutCompleteRequestCourseDetails
+     * @return \OpenAPI\Client\Model\CheckoutCompleteRequestCourseDetails
      */
     public function getCourseDetails()
     {
@@ -519,14 +532,14 @@ class CheckoutCompleteRequest implements ModelInterface, ArrayAccess, JsonSerial
     /**
      * Sets course_details
      *
-     * @param  CheckoutCompleteRequestCourseDetails  $course_details  course_details
+     * @param \OpenAPI\Client\Model\CheckoutCompleteRequestCourseDetails $course_details course_details
      *
      * @return self
      */
     public function setCourseDetails($course_details)
     {
         if (is_null($course_details)) {
-            throw new InvalidArgumentException('non-nullable course_details cannot be null');
+            throw new \InvalidArgumentException('non-nullable course_details cannot be null');
         }
         $this->container['course_details'] = $course_details;
 
@@ -546,7 +559,7 @@ class CheckoutCompleteRequest implements ModelInterface, ArrayAccess, JsonSerial
     /**
      * Sets special_request
      *
-     * @param  string|null  $special_request  special_request
+     * @param string|null $special_request special_request
      *
      * @return self
      */
@@ -557,7 +570,7 @@ class CheckoutCompleteRequest implements ModelInterface, ArrayAccess, JsonSerial
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
             $index = array_search('special_request', $nullablesSetToNull);
-            if ($index !== false) {
+            if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
@@ -566,21 +579,10 @@ class CheckoutCompleteRequest implements ModelInterface, ArrayAccess, JsonSerial
 
         return $this;
     }
-
-    /**
-     * Setter - Array of nullable field names deliberately set to null
-     *
-     * @param  boolean[]  $openAPINullablesSetToNull
-     */
-    private function setOpenAPINullablesSetToNull(array $openAPINullablesSetToNull): void
-    {
-        $this->openAPINullablesSetToNull = $openAPINullablesSetToNull;
-    }
-
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param  integer  $offset  Offset
+     * @param integer $offset Offset
      *
      * @return boolean
      */
@@ -592,11 +594,11 @@ class CheckoutCompleteRequest implements ModelInterface, ArrayAccess, JsonSerial
     /**
      * Gets offset.
      *
-     * @param  integer  $offset  Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
-    #[ReturnTypeWillChange]
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->container[$offset] ?? null;
@@ -605,8 +607,8 @@ class CheckoutCompleteRequest implements ModelInterface, ArrayAccess, JsonSerial
     /**
      * Sets value based on offset.
      *
-     * @param  int|null  $offset  Offset
-     * @param  mixed  $value  Value to be set
+     * @param int|null $offset Offset
+     * @param mixed    $value  Value to be set
      *
      * @return void
      */
@@ -622,7 +624,7 @@ class CheckoutCompleteRequest implements ModelInterface, ArrayAccess, JsonSerial
     /**
      * Unsets offset.
      *
-     * @param  integer  $offset  Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -638,10 +640,10 @@ class CheckoutCompleteRequest implements ModelInterface, ArrayAccess, JsonSerial
      * @return mixed Returns data which can be serialized by json_encode(), which is a value
      * of any type other than a resource.
      */
-    #[ReturnTypeWillChange]
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
-        return ObjectSerializer::sanitizeForSerialization($this);
+       return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**

@@ -32,22 +32,13 @@ use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\RequestException;
-use GuzzleHttp\Promise\PromiseInterface;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
-use GuzzleHttp\Utils;
-use InvalidArgumentException;
 use OpenAPI\Client\ApiException;
 use OpenAPI\Client\Configuration;
 use OpenAPI\Client\HeaderSelector;
-use OpenAPI\Client\Model\CheckoutComplete201Response;
-use OpenAPI\Client\Model\ErrorResponse;
-use OpenAPI\Client\Model\GetEnquiries200Response;
-use OpenAPI\Client\Model\GetEnquiry200Response;
-use OpenAPI\Client\Model\UnauthenticatedErrorResponse;
 use OpenAPI\Client\ObjectSerializer;
-use RuntimeException;
 
 /**
  * EnquiriesApi Class Doc Comment
@@ -59,7 +50,27 @@ use RuntimeException;
  */
 class EnquiriesApi
 {
-    /** @var string[] $contentTypes * */
+    /**
+     * @var ClientInterface
+     */
+    protected $client;
+
+    /**
+     * @var Configuration
+     */
+    protected $config;
+
+    /**
+     * @var HeaderSelector
+     */
+    protected $headerSelector;
+
+    /**
+     * @var int Host index
+     */
+    protected $hostIndex;
+
+    /** @var string[] $contentTypes **/
     public const contentTypes = [
         'createEnquiry' => [
             'application/x-www-form-urlencoded',
@@ -71,28 +82,12 @@ class EnquiriesApi
             'application/json',
         ],
     ];
-    /**
-     * @var ClientInterface
-     */
-    protected $client;
-    /**
-     * @var Configuration
-     */
-    protected $config;
-    /**
-     * @var HeaderSelector
-     */
-    protected $headerSelector;
-    /**
-     * @var int Host index
-     */
-    protected $hostIndex;
 
-    /**
-     * @param  ClientInterface  $client
-     * @param  Configuration  $config
-     * @param  HeaderSelector  $selector
-     * @param  int  $hostIndex  (Optional) host index to select the list of hosts if defined in the OpenAPI spec
+/**
+     * @param ClientInterface $client
+     * @param Configuration   $config
+     * @param HeaderSelector  $selector
+     * @param int             $hostIndex (Optional) host index to select the list of hosts if defined in the OpenAPI spec
      */
     public function __construct(
         ClientInterface $client = null,
@@ -107,6 +102,16 @@ class EnquiriesApi
     }
 
     /**
+     * Set the host index
+     *
+     * @param int $hostIndex Host index (required)
+     */
+    public function setHostIndex($hostIndex): void
+    {
+        $this->hostIndex = $hostIndex;
+    }
+
+    /**
      * Get the host index
      *
      * @return int Host index
@@ -114,16 +119,6 @@ class EnquiriesApi
     public function getHostIndex()
     {
         return $this->hostIndex;
-    }
-
-    /**
-     * Set the host index
-     *
-     * @param  int  $hostIndex  Host index (required)
-     */
-    public function setHostIndex($hostIndex): void
-    {
-        $this->hostIndex = $hostIndex;
     }
 
     /**
@@ -139,35 +134,24 @@ class EnquiriesApi
      *
      * Create a new enquiry
      *
-     * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
-     * @param  string  $operator_id  operator_id (required)
-     * @param  string  $property_id  property_id (required)
-     * @param  string  $room_id  room_id (required)
-     * @param  string  $first_name  First name of the student (required)
-     * @param  string  $last_name  Last name of the student (required)
-     * @param  string  $email  Emil of the student (required)
-     * @param  string  $message  message (required)
-     * @param  string  $contact_number  contact_number (optional)
-     * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['createEnquiry'] to see the possible values for this operation
+     * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
+     * @param  string $operator_id operator_id (required)
+     * @param  string $property_id property_id (required)
+     * @param  string $room_id room_id (required)
+     * @param  string $first_name First name of the student (required)
+     * @param  string $last_name Last name of the student (required)
+     * @param  string $email Emil of the student (required)
+     * @param  string $message message (required)
+     * @param  string $contact_number contact_number (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createEnquiry'] to see the possible values for this operation
      *
-     * @return CheckoutComplete201Response|ErrorResponse|ErrorResponse|ErrorResponse|ErrorResponse|UnauthenticatedErrorResponse
-     * @throws ApiException on non-2xx response
-     * @throws InvalidArgumentException
+     * @throws \OpenAPI\Client\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \OpenAPI\Client\Model\CheckoutComplete201Response|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\UnauthenticatedErrorResponse
      */
-    public function createEnquiry(
-        $x_api_partner_id,
-        $operator_id,
-        $property_id,
-        $room_id,
-        $first_name,
-        $last_name,
-        $email,
-        $message,
-        $contact_number = null,
-        string $contentType = self::contentTypes['createEnquiry'][0]
-    ) {
-        list($response) = $this->createEnquiryWithHttpInfo($x_api_partner_id, $operator_id, $property_id, $room_id,
-            $first_name, $last_name, $email, $message, $contact_number, $contentType);
+    public function createEnquiry($x_api_partner_id, $operator_id, $property_id, $room_id, $first_name, $last_name, $email, $message, $contact_number = null, string $contentType = self::contentTypes['createEnquiry'][0])
+    {
+        list($response) = $this->createEnquiryWithHttpInfo($x_api_partner_id, $operator_id, $property_id, $room_id, $first_name, $last_name, $email, $message, $contact_number, $contentType);
         return $response;
     }
 
@@ -176,35 +160,24 @@ class EnquiriesApi
      *
      * Create a new enquiry
      *
-     * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
-     * @param  string  $operator_id  (required)
-     * @param  string  $property_id  (required)
-     * @param  string  $room_id  (required)
-     * @param  string  $first_name  First name of the student (required)
-     * @param  string  $last_name  Last name of the student (required)
-     * @param  string  $email  Emil of the student (required)
-     * @param  string  $message  (required)
-     * @param  string  $contact_number  (optional)
-     * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['createEnquiry'] to see the possible values for this operation
+     * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
+     * @param  string $operator_id (required)
+     * @param  string $property_id (required)
+     * @param  string $room_id (required)
+     * @param  string $first_name First name of the student (required)
+     * @param  string $last_name Last name of the student (required)
+     * @param  string $email Emil of the student (required)
+     * @param  string $message (required)
+     * @param  string $contact_number (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createEnquiry'] to see the possible values for this operation
      *
+     * @throws \OpenAPI\Client\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
      * @return array of \OpenAPI\Client\Model\CheckoutComplete201Response|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\UnauthenticatedErrorResponse, HTTP status code, HTTP response headers (array of strings)
-     * @throws ApiException on non-2xx response
-     * @throws InvalidArgumentException
      */
-    public function createEnquiryWithHttpInfo(
-        $x_api_partner_id,
-        $operator_id,
-        $property_id,
-        $room_id,
-        $first_name,
-        $last_name,
-        $email,
-        $message,
-        $contact_number = null,
-        string $contentType = self::contentTypes['createEnquiry'][0]
-    ) {
-        $request = $this->createEnquiryRequest($x_api_partner_id, $operator_id, $property_id, $room_id, $first_name,
-            $last_name, $email, $message, $contact_number, $contentType);
+    public function createEnquiryWithHttpInfo($x_api_partner_id, $operator_id, $property_id, $room_id, $first_name, $last_name, $email, $message, $contact_number = null, string $contentType = self::contentTypes['createEnquiry'][0])
+    {
+        $request = $this->createEnquiryRequest($x_api_partner_id, $operator_id, $property_id, $room_id, $first_name, $last_name, $email, $message, $contact_number, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -241,7 +214,7 @@ class EnquiriesApi
                 );
             }
 
-            switch ($statusCode) {
+            switch($statusCode) {
                 case 201:
                     if ('\OpenAPI\Client\Model\CheckoutComplete201Response' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
@@ -253,8 +226,7 @@ class EnquiriesApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\CheckoutComplete201Response',
-                            []),
+                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\CheckoutComplete201Response', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -329,8 +301,7 @@ class EnquiriesApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\UnauthenticatedErrorResponse',
-                            []),
+                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\UnauthenticatedErrorResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -408,90 +379,170 @@ class EnquiriesApi
     }
 
     /**
+     * Operation createEnquiryAsync
+     *
+     * Create a new enquiry
+     *
+     * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
+     * @param  string $operator_id (required)
+     * @param  string $property_id (required)
+     * @param  string $room_id (required)
+     * @param  string $first_name First name of the student (required)
+     * @param  string $last_name Last name of the student (required)
+     * @param  string $email Emil of the student (required)
+     * @param  string $message (required)
+     * @param  string $contact_number (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createEnquiry'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function createEnquiryAsync($x_api_partner_id, $operator_id, $property_id, $room_id, $first_name, $last_name, $email, $message, $contact_number = null, string $contentType = self::contentTypes['createEnquiry'][0])
+    {
+        return $this->createEnquiryAsyncWithHttpInfo($x_api_partner_id, $operator_id, $property_id, $room_id, $first_name, $last_name, $email, $message, $contact_number, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation createEnquiryAsyncWithHttpInfo
+     *
+     * Create a new enquiry
+     *
+     * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
+     * @param  string $operator_id (required)
+     * @param  string $property_id (required)
+     * @param  string $room_id (required)
+     * @param  string $first_name First name of the student (required)
+     * @param  string $last_name Last name of the student (required)
+     * @param  string $email Emil of the student (required)
+     * @param  string $message (required)
+     * @param  string $contact_number (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createEnquiry'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function createEnquiryAsyncWithHttpInfo($x_api_partner_id, $operator_id, $property_id, $room_id, $first_name, $last_name, $email, $message, $contact_number = null, string $contentType = self::contentTypes['createEnquiry'][0])
+    {
+        $returnType = '\OpenAPI\Client\Model\CheckoutComplete201Response';
+        $request = $this->createEnquiryRequest($x_api_partner_id, $operator_id, $property_id, $room_id, $first_name, $last_name, $email, $message, $contact_number, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
      * Create request for operation 'createEnquiry'
      *
-     * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
-     * @param  string  $operator_id  (required)
-     * @param  string  $property_id  (required)
-     * @param  string  $room_id  (required)
-     * @param  string  $first_name  First name of the student (required)
-     * @param  string  $last_name  Last name of the student (required)
-     * @param  string  $email  Emil of the student (required)
-     * @param  string  $message  (required)
-     * @param  string  $contact_number  (optional)
-     * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['createEnquiry'] to see the possible values for this operation
+     * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
+     * @param  string $operator_id (required)
+     * @param  string $property_id (required)
+     * @param  string $room_id (required)
+     * @param  string $first_name First name of the student (required)
+     * @param  string $last_name Last name of the student (required)
+     * @param  string $email Emil of the student (required)
+     * @param  string $message (required)
+     * @param  string $contact_number (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createEnquiry'] to see the possible values for this operation
      *
-     * @return Request
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
      */
-    public function createEnquiryRequest(
-        $x_api_partner_id,
-        $operator_id,
-        $property_id,
-        $room_id,
-        $first_name,
-        $last_name,
-        $email,
-        $message,
-        $contact_number = null,
-        string $contentType = self::contentTypes['createEnquiry'][0]
-    ) {
+    public function createEnquiryRequest($x_api_partner_id, $operator_id, $property_id, $room_id, $first_name, $last_name, $email, $message, $contact_number = null, string $contentType = self::contentTypes['createEnquiry'][0])
+    {
 
         // verify the required parameter 'x_api_partner_id' is set
         if ($x_api_partner_id === null || (is_array($x_api_partner_id) && count($x_api_partner_id) === 0)) {
-            throw new InvalidArgumentException(
+            throw new \InvalidArgumentException(
                 'Missing the required parameter $x_api_partner_id when calling createEnquiry'
             );
         }
 
         // verify the required parameter 'operator_id' is set
         if ($operator_id === null || (is_array($operator_id) && count($operator_id) === 0)) {
-            throw new InvalidArgumentException(
+            throw new \InvalidArgumentException(
                 'Missing the required parameter $operator_id when calling createEnquiry'
             );
         }
 
         // verify the required parameter 'property_id' is set
         if ($property_id === null || (is_array($property_id) && count($property_id) === 0)) {
-            throw new InvalidArgumentException(
+            throw new \InvalidArgumentException(
                 'Missing the required parameter $property_id when calling createEnquiry'
             );
         }
 
         // verify the required parameter 'room_id' is set
         if ($room_id === null || (is_array($room_id) && count($room_id) === 0)) {
-            throw new InvalidArgumentException(
+            throw new \InvalidArgumentException(
                 'Missing the required parameter $room_id when calling createEnquiry'
             );
         }
 
         // verify the required parameter 'first_name' is set
         if ($first_name === null || (is_array($first_name) && count($first_name) === 0)) {
-            throw new InvalidArgumentException(
+            throw new \InvalidArgumentException(
                 'Missing the required parameter $first_name when calling createEnquiry'
             );
         }
 
         // verify the required parameter 'last_name' is set
         if ($last_name === null || (is_array($last_name) && count($last_name) === 0)) {
-            throw new InvalidArgumentException(
+            throw new \InvalidArgumentException(
                 'Missing the required parameter $last_name when calling createEnquiry'
             );
         }
 
         // verify the required parameter 'email' is set
         if ($email === null || (is_array($email) && count($email) === 0)) {
-            throw new InvalidArgumentException(
+            throw new \InvalidArgumentException(
                 'Missing the required parameter $email when calling createEnquiry'
             );
         }
 
         // verify the required parameter 'message' is set
         if ($message === null || (is_array($message) && count($message) === 0)) {
-            throw new InvalidArgumentException(
+            throw new \InvalidArgumentException(
                 'Missing the required parameter $message when calling createEnquiry'
             );
         }
+
 
 
         $resourcePath = '/api/enquiries';
@@ -542,7 +593,7 @@ class EnquiriesApi
         }
 
         $headers = $this->headerSelector->selectHeaders(
-            ['application/json',],
+            ['application/json', ],
             $contentType,
             $multipart
         );
@@ -565,7 +616,7 @@ class EnquiriesApi
 
             } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = Utils::jsonEncode($formParams);
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
             } else {
                 // for HTTP post (form)
                 $httpBody = ObjectSerializer::buildQuery($formParams);
@@ -574,7 +625,7 @@ class EnquiriesApi
 
         // this endpoint requires Bearer (JWT) authentication (access token)
         if (!empty($this->config->getAccessToken())) {
-            $headers['Authorization'] = 'Bearer '.$this->config->getAccessToken();
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
         $defaultHeaders = [];
@@ -592,140 +643,10 @@ class EnquiriesApi
         $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'POST',
-            $operationHost.$resourcePath.($query ? "?{$query}" : ''),
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
         );
-    }
-
-    /**
-     * Create http client option
-     *
-     * @return array of http client options
-     * @throws RuntimeException on file opening failure
-     */
-    protected function createHttpClientOption()
-    {
-        $options = [];
-        if ($this->config->getDebug()) {
-            $options[RequestOptions::DEBUG] = fopen($this->config->getDebugFile(), 'a');
-            if (!$options[RequestOptions::DEBUG]) {
-                throw new RuntimeException('Failed to open the debug file: '.$this->config->getDebugFile());
-            }
-        }
-
-        return $options;
-    }
-
-    /**
-     * Operation createEnquiryAsync
-     *
-     * Create a new enquiry
-     *
-     * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
-     * @param  string  $operator_id  (required)
-     * @param  string  $property_id  (required)
-     * @param  string  $room_id  (required)
-     * @param  string  $first_name  First name of the student (required)
-     * @param  string  $last_name  Last name of the student (required)
-     * @param  string  $email  Emil of the student (required)
-     * @param  string  $message  (required)
-     * @param  string  $contact_number  (optional)
-     * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['createEnquiry'] to see the possible values for this operation
-     *
-     * @return PromiseInterface
-     * @throws InvalidArgumentException
-     */
-    public function createEnquiryAsync(
-        $x_api_partner_id,
-        $operator_id,
-        $property_id,
-        $room_id,
-        $first_name,
-        $last_name,
-        $email,
-        $message,
-        $contact_number = null,
-        string $contentType = self::contentTypes['createEnquiry'][0]
-    ) {
-        return $this->createEnquiryAsyncWithHttpInfo($x_api_partner_id, $operator_id, $property_id, $room_id,
-            $first_name, $last_name, $email, $message, $contact_number, $contentType)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /**
-     * Operation createEnquiryAsyncWithHttpInfo
-     *
-     * Create a new enquiry
-     *
-     * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
-     * @param  string  $operator_id  (required)
-     * @param  string  $property_id  (required)
-     * @param  string  $room_id  (required)
-     * @param  string  $first_name  First name of the student (required)
-     * @param  string  $last_name  Last name of the student (required)
-     * @param  string  $email  Emil of the student (required)
-     * @param  string  $message  (required)
-     * @param  string  $contact_number  (optional)
-     * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['createEnquiry'] to see the possible values for this operation
-     *
-     * @return PromiseInterface
-     * @throws InvalidArgumentException
-     */
-    public function createEnquiryAsyncWithHttpInfo(
-        $x_api_partner_id,
-        $operator_id,
-        $property_id,
-        $room_id,
-        $first_name,
-        $last_name,
-        $email,
-        $message,
-        $contact_number = null,
-        string $contentType = self::contentTypes['createEnquiry'][0]
-    ) {
-        $returnType = '\OpenAPI\Client\Model\CheckoutComplete201Response';
-        $request = $this->createEnquiryRequest($x_api_partner_id, $operator_id, $property_id, $room_id, $first_name,
-            $last_name, $email, $message, $contact_number, $contentType);
-
-        return $this->client
-            ->sendAsync($request, $this->createHttpClientOption())
-            ->then(
-                function ($response) use ($returnType) {
-                    if ($returnType === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ($returnType !== 'string') {
-                            $content = json_decode($content);
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                },
-                function ($exception) {
-                    $response = $exception->getResponse();
-                    $statusCode = $response->getStatusCode();
-                    throw new ApiException(
-                        sprintf(
-                            '[%d] Error connecting to the API (%s)',
-                            $statusCode,
-                            $exception->getRequest()->getUri()
-                        ),
-                        $statusCode,
-                        $response->getHeaders(),
-                        (string) $response->getBody()
-                    );
-                }
-            );
     }
 
     /**
@@ -733,12 +654,12 @@ class EnquiriesApi
      *
      * Retrieve list of enquiries
      *
-     * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
-     * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getEnquiries'] to see the possible values for this operation
+     * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getEnquiries'] to see the possible values for this operation
      *
-     * @return GetEnquiries200Response|ErrorResponse|ErrorResponse|ErrorResponse|ErrorResponse
-     * @throws InvalidArgumentException
-     * @throws ApiException on non-2xx response
+     * @throws \OpenAPI\Client\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \OpenAPI\Client\Model\GetEnquiries200Response|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse
      */
     public function getEnquiries($x_api_partner_id, string $contentType = self::contentTypes['getEnquiries'][0])
     {
@@ -751,17 +672,15 @@ class EnquiriesApi
      *
      * Retrieve list of enquiries
      *
-     * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
-     * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getEnquiries'] to see the possible values for this operation
+     * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getEnquiries'] to see the possible values for this operation
      *
+     * @throws \OpenAPI\Client\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
      * @return array of \OpenAPI\Client\Model\GetEnquiries200Response|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
-     * @throws InvalidArgumentException
-     * @throws ApiException on non-2xx response
      */
-    public function getEnquiriesWithHttpInfo(
-        $x_api_partner_id,
-        string $contentType = self::contentTypes['getEnquiries'][0]
-    ) {
+    public function getEnquiriesWithHttpInfo($x_api_partner_id, string $contentType = self::contentTypes['getEnquiries'][0])
+    {
         $request = $this->getEnquiriesRequest($x_api_partner_id, $contentType);
 
         try {
@@ -799,7 +718,7 @@ class EnquiriesApi
                 );
             }
 
-            switch ($statusCode) {
+            switch($statusCode) {
                 case 200:
                     if ('\OpenAPI\Client\Model\GetEnquiries200Response' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
@@ -941,106 +860,15 @@ class EnquiriesApi
     }
 
     /**
-     * Create request for operation 'getEnquiries'
-     *
-     * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
-     * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getEnquiries'] to see the possible values for this operation
-     *
-     * @return Request
-     * @throws InvalidArgumentException
-     */
-    public function getEnquiriesRequest($x_api_partner_id, string $contentType = self::contentTypes['getEnquiries'][0])
-    {
-
-        // verify the required parameter 'x_api_partner_id' is set
-        if ($x_api_partner_id === null || (is_array($x_api_partner_id) && count($x_api_partner_id) === 0)) {
-            throw new InvalidArgumentException(
-                'Missing the required parameter $x_api_partner_id when calling getEnquiries'
-            );
-        }
-
-
-        $resourcePath = '/api/enquiries';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
-
-
-        // header params
-        if ($x_api_partner_id !== null) {
-            $headerParams['X-API-PARTNER-ID'] = ObjectSerializer::toHeaderValue($x_api_partner_id);
-        }
-
-
-        $headers = $this->headerSelector->selectHeaders(
-            ['application/json',],
-            $contentType,
-            $multipart
-        );
-
-        // for model (json/xml)
-        if (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
-                    foreach ($formParamValueItems as $formParamValueItem) {
-                        $multipartContents[] = [
-                            'name' => $formParamName,
-                            'contents' => $formParamValueItem
-                        ];
-                    }
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = Utils::jsonEncode($formParams);
-            } else {
-                // for HTTP post (form)
-                $httpBody = ObjectSerializer::buildQuery($formParams);
-            }
-        }
-
-        // this endpoint requires Bearer (JWT) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
-            $headers['Authorization'] = 'Bearer '.$this->config->getAccessToken();
-        }
-
-        $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $headers
-        );
-
-        $operationHost = $this->config->getHost();
-        $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            'GET',
-            $operationHost.$resourcePath.($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
-    }
-
-    /**
      * Operation getEnquiriesAsync
      *
      * Retrieve list of enquiries
      *
-     * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
-     * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getEnquiries'] to see the possible values for this operation
+     * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getEnquiries'] to see the possible values for this operation
      *
-     * @return PromiseInterface
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
      */
     public function getEnquiriesAsync($x_api_partner_id, string $contentType = self::contentTypes['getEnquiries'][0])
     {
@@ -1057,16 +885,14 @@ class EnquiriesApi
      *
      * Retrieve list of enquiries
      *
-     * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
-     * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getEnquiries'] to see the possible values for this operation
+     * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getEnquiries'] to see the possible values for this operation
      *
-     * @return PromiseInterface
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getEnquiriesAsyncWithHttpInfo(
-        $x_api_partner_id,
-        string $contentType = self::contentTypes['getEnquiries'][0]
-    ) {
+    public function getEnquiriesAsyncWithHttpInfo($x_api_partner_id, string $contentType = self::contentTypes['getEnquiries'][0])
+    {
         $returnType = '\OpenAPI\Client\Model\GetEnquiries200Response';
         $request = $this->getEnquiriesRequest($x_api_partner_id, $contentType);
 
@@ -1107,23 +933,112 @@ class EnquiriesApi
     }
 
     /**
+     * Create request for operation 'getEnquiries'
+     *
+     * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getEnquiries'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function getEnquiriesRequest($x_api_partner_id, string $contentType = self::contentTypes['getEnquiries'][0])
+    {
+
+        // verify the required parameter 'x_api_partner_id' is set
+        if ($x_api_partner_id === null || (is_array($x_api_partner_id) && count($x_api_partner_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $x_api_partner_id when calling getEnquiries'
+            );
+        }
+
+
+        $resourcePath = '/api/enquiries';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+        // header params
+        if ($x_api_partner_id !== null) {
+            $headerParams['X-API-PARTNER-ID'] = ObjectSerializer::toHeaderValue($x_api_partner_id);
+        }
+
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires Bearer (JWT) authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation getEnquiry
      *
      * Retrieve a specific enquiry
      *
-     * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
-     * @param  string  $enquiry_id  enquiry_id (required)
-     * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getEnquiry'] to see the possible values for this operation
+     * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
+     * @param  string $enquiry_id enquiry_id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getEnquiry'] to see the possible values for this operation
      *
-     * @return GetEnquiry200Response|ErrorResponse|ErrorResponse|ErrorResponse|ErrorResponse
-     * @throws InvalidArgumentException
-     * @throws ApiException on non-2xx response
+     * @throws \OpenAPI\Client\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \OpenAPI\Client\Model\GetEnquiry200Response|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse
      */
-    public function getEnquiry(
-        $x_api_partner_id,
-        $enquiry_id,
-        string $contentType = self::contentTypes['getEnquiry'][0]
-    ) {
+    public function getEnquiry($x_api_partner_id, $enquiry_id, string $contentType = self::contentTypes['getEnquiry'][0])
+    {
         list($response) = $this->getEnquiryWithHttpInfo($x_api_partner_id, $enquiry_id, $contentType);
         return $response;
     }
@@ -1133,19 +1048,16 @@ class EnquiriesApi
      *
      * Retrieve a specific enquiry
      *
-     * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
-     * @param  string  $enquiry_id  (required)
-     * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getEnquiry'] to see the possible values for this operation
+     * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
+     * @param  string $enquiry_id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getEnquiry'] to see the possible values for this operation
      *
+     * @throws \OpenAPI\Client\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
      * @return array of \OpenAPI\Client\Model\GetEnquiry200Response|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
-     * @throws InvalidArgumentException
-     * @throws ApiException on non-2xx response
      */
-    public function getEnquiryWithHttpInfo(
-        $x_api_partner_id,
-        $enquiry_id,
-        string $contentType = self::contentTypes['getEnquiry'][0]
-    ) {
+    public function getEnquiryWithHttpInfo($x_api_partner_id, $enquiry_id, string $contentType = self::contentTypes['getEnquiry'][0])
+    {
         $request = $this->getEnquiryRequest($x_api_partner_id, $enquiry_id, $contentType);
 
         try {
@@ -1183,7 +1095,7 @@ class EnquiriesApi
                 );
             }
 
-            switch ($statusCode) {
+            switch($statusCode) {
                 case 200:
                     if ('\OpenAPI\Client\Model\GetEnquiry200Response' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
@@ -1325,133 +1237,19 @@ class EnquiriesApi
     }
 
     /**
-     * Create request for operation 'getEnquiry'
-     *
-     * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
-     * @param  string  $enquiry_id  (required)
-     * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getEnquiry'] to see the possible values for this operation
-     *
-     * @return Request
-     * @throws InvalidArgumentException
-     */
-    public function getEnquiryRequest(
-        $x_api_partner_id,
-        $enquiry_id,
-        string $contentType = self::contentTypes['getEnquiry'][0]
-    ) {
-
-        // verify the required parameter 'x_api_partner_id' is set
-        if ($x_api_partner_id === null || (is_array($x_api_partner_id) && count($x_api_partner_id) === 0)) {
-            throw new InvalidArgumentException(
-                'Missing the required parameter $x_api_partner_id when calling getEnquiry'
-            );
-        }
-
-        // verify the required parameter 'enquiry_id' is set
-        if ($enquiry_id === null || (is_array($enquiry_id) && count($enquiry_id) === 0)) {
-            throw new InvalidArgumentException(
-                'Missing the required parameter $enquiry_id when calling getEnquiry'
-            );
-        }
-
-
-        $resourcePath = '/api/enquiries/{enquiry_id}';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
-
-
-        // header params
-        if ($x_api_partner_id !== null) {
-            $headerParams['X-API-PARTNER-ID'] = ObjectSerializer::toHeaderValue($x_api_partner_id);
-        }
-
-        // path params
-        if ($enquiry_id !== null) {
-            $resourcePath = str_replace(
-                '{'.'enquiry_id'.'}',
-                ObjectSerializer::toPathValue($enquiry_id),
-                $resourcePath
-            );
-        }
-
-
-        $headers = $this->headerSelector->selectHeaders(
-            ['application/json',],
-            $contentType,
-            $multipart
-        );
-
-        // for model (json/xml)
-        if (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
-                    foreach ($formParamValueItems as $formParamValueItem) {
-                        $multipartContents[] = [
-                            'name' => $formParamName,
-                            'contents' => $formParamValueItem
-                        ];
-                    }
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = Utils::jsonEncode($formParams);
-            } else {
-                // for HTTP post (form)
-                $httpBody = ObjectSerializer::buildQuery($formParams);
-            }
-        }
-
-        // this endpoint requires Bearer (JWT) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
-            $headers['Authorization'] = 'Bearer '.$this->config->getAccessToken();
-        }
-
-        $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $headers
-        );
-
-        $operationHost = $this->config->getHost();
-        $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            'GET',
-            $operationHost.$resourcePath.($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
-    }
-
-    /**
      * Operation getEnquiryAsync
      *
      * Retrieve a specific enquiry
      *
-     * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
-     * @param  string  $enquiry_id  (required)
-     * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getEnquiry'] to see the possible values for this operation
+     * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
+     * @param  string $enquiry_id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getEnquiry'] to see the possible values for this operation
      *
-     * @return PromiseInterface
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getEnquiryAsync(
-        $x_api_partner_id,
-        $enquiry_id,
-        string $contentType = self::contentTypes['getEnquiry'][0]
-    ) {
+    public function getEnquiryAsync($x_api_partner_id, $enquiry_id, string $contentType = self::contentTypes['getEnquiry'][0])
+    {
         return $this->getEnquiryAsyncWithHttpInfo($x_api_partner_id, $enquiry_id, $contentType)
             ->then(
                 function ($response) {
@@ -1465,18 +1263,15 @@ class EnquiriesApi
      *
      * Retrieve a specific enquiry
      *
-     * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
-     * @param  string  $enquiry_id  (required)
-     * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['getEnquiry'] to see the possible values for this operation
+     * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
+     * @param  string $enquiry_id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getEnquiry'] to see the possible values for this operation
      *
-     * @return PromiseInterface
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getEnquiryAsyncWithHttpInfo(
-        $x_api_partner_id,
-        $enquiry_id,
-        string $contentType = self::contentTypes['getEnquiry'][0]
-    ) {
+    public function getEnquiryAsyncWithHttpInfo($x_api_partner_id, $enquiry_id, string $contentType = self::contentTypes['getEnquiry'][0])
+    {
         $returnType = '\OpenAPI\Client\Model\GetEnquiry200Response';
         $request = $this->getEnquiryRequest($x_api_partner_id, $enquiry_id, $contentType);
 
@@ -1514,5 +1309,132 @@ class EnquiriesApi
                     );
                 }
             );
+    }
+
+    /**
+     * Create request for operation 'getEnquiry'
+     *
+     * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
+     * @param  string $enquiry_id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getEnquiry'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function getEnquiryRequest($x_api_partner_id, $enquiry_id, string $contentType = self::contentTypes['getEnquiry'][0])
+    {
+
+        // verify the required parameter 'x_api_partner_id' is set
+        if ($x_api_partner_id === null || (is_array($x_api_partner_id) && count($x_api_partner_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $x_api_partner_id when calling getEnquiry'
+            );
+        }
+
+        // verify the required parameter 'enquiry_id' is set
+        if ($enquiry_id === null || (is_array($enquiry_id) && count($enquiry_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $enquiry_id when calling getEnquiry'
+            );
+        }
+
+
+        $resourcePath = '/api/enquiries/{enquiry_id}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+        // header params
+        if ($x_api_partner_id !== null) {
+            $headerParams['X-API-PARTNER-ID'] = ObjectSerializer::toHeaderValue($x_api_partner_id);
+        }
+
+        // path params
+        if ($enquiry_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'enquiry_id' . '}',
+                ObjectSerializer::toPathValue($enquiry_id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires Bearer (JWT) authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Create http client option
+     *
+     * @throws \RuntimeException on file opening failure
+     * @return array of http client options
+     */
+    protected function createHttpClientOption()
+    {
+        $options = [];
+        if ($this->config->getDebug()) {
+            $options[RequestOptions::DEBUG] = fopen($this->config->getDebugFile(), 'a');
+            if (!$options[RequestOptions::DEBUG]) {
+                throw new \RuntimeException('Failed to open the debug file: ' . $this->config->getDebugFile());
+            }
+        }
+
+        return $options;
     }
 }

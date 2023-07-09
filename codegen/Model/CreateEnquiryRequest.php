@@ -29,11 +29,8 @@
 
 namespace OpenAPI\Client\Model;
 
-use ArrayAccess;
-use InvalidArgumentException;
-use JsonSerializable;
-use OpenAPI\Client\ObjectSerializer;
-use ReturnTypeWillChange;
+use \ArrayAccess;
+use \OpenAPI\Client\ObjectSerializer;
 
 /**
  * CreateEnquiryRequest Class Doc Comment
@@ -42,24 +39,24 @@ use ReturnTypeWillChange;
  * @package  OpenAPI\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
- * @implements ArrayAccess<string, mixed>
+ * @implements \ArrayAccess<string, mixed>
  */
-class CreateEnquiryRequest implements ModelInterface, ArrayAccess, JsonSerializable
+class CreateEnquiryRequest implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
     /**
-     * The original name of the model.
-     *
-     * @var string
-     */
+      * The original name of the model.
+      *
+      * @var string
+      */
     protected static $openAPIModelName = 'createEnquiry_request';
 
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $openAPITypes = [
         'operator_id' => 'string',
         'property_id' => 'string',
@@ -72,12 +69,12 @@ class CreateEnquiryRequest implements ModelInterface, ArrayAccess, JsonSerializa
     ];
 
     /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @var string[]
-     * @phpstan-var array<string, string|null>
-     * @psalm-var array<string, string|null>
-     */
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      * @phpstan-var array<string, string|null>
+      * @psalm-var array<string, string|null>
+      */
     protected static $openAPIFormats = [
         'operator_id' => null,
         'property_id' => null,
@@ -90,136 +87,27 @@ class CreateEnquiryRequest implements ModelInterface, ArrayAccess, JsonSerializa
     ];
 
     /**
-     * Array of nullable properties. Used for (de)serialization
-     *
-     * @var boolean[]
-     */
+      * Array of nullable properties. Used for (de)serialization
+      *
+      * @var boolean[]
+      */
     protected static array $openAPINullables = [
         'operator_id' => false,
-        'property_id' => false,
-        'room_id' => false,
-        'first_name' => false,
-        'last_name' => false,
-        'email' => false,
-        'contact_number' => false,
-        'message' => false
+		'property_id' => false,
+		'room_id' => false,
+		'first_name' => false,
+		'last_name' => false,
+		'email' => false,
+		'contact_number' => false,
+		'message' => false
     ];
+
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @var string[]
-     */
-    protected static $attributeMap = [
-        'operator_id' => 'operator_id',
-        'property_id' => 'property_id',
-        'room_id' => 'room_id',
-        'first_name' => 'first_name',
-        'last_name' => 'last_name',
-        'email' => 'email',
-        'contact_number' => 'contact_number',
-        'message' => 'message'
-    ];
-    /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     *
-     * @var string[]
-     */
-    protected static $setters = [
-        'operator_id' => 'setOperatorId',
-        'property_id' => 'setPropertyId',
-        'room_id' => 'setRoomId',
-        'first_name' => 'setFirstName',
-        'last_name' => 'setLastName',
-        'email' => 'setEmail',
-        'contact_number' => 'setContactNumber',
-        'message' => 'setMessage'
-    ];
-    /**
-     * Array of attributes to getter functions (for serialization of requests)
-     *
-     * @var string[]
-     */
-    protected static $getters = [
-        'operator_id' => 'getOperatorId',
-        'property_id' => 'getPropertyId',
-        'room_id' => 'getRoomId',
-        'first_name' => 'getFirstName',
-        'last_name' => 'getLastName',
-        'email' => 'getEmail',
-        'contact_number' => 'getContactNumber',
-        'message' => 'getMessage'
-    ];
-    /**
-     * If a nullable field gets set to null, insert it here
-     *
-     * @var boolean[]
-     */
+      * If a nullable field gets set to null, insert it here
+      *
+      * @var boolean[]
+      */
     protected array $openAPINullablesSetToNull = [];
-    /**
-     * Associative array for storing property values
-     *
-     * @var mixed[]
-     */
-    protected $container = [];
-
-    /**
-     * Constructor
-     *
-     * @param  mixed[]  $data  Associated array of property values
-     *                      initializing the model
-     */
-    public function __construct(array $data = null)
-    {
-        $this->setIfExists('operator_id', $data ?? [], null);
-        $this->setIfExists('property_id', $data ?? [], null);
-        $this->setIfExists('room_id', $data ?? [], null);
-        $this->setIfExists('first_name', $data ?? [], null);
-        $this->setIfExists('last_name', $data ?? [], null);
-        $this->setIfExists('email', $data ?? [], null);
-        $this->setIfExists('contact_number', $data ?? [], null);
-        $this->setIfExists('message', $data ?? [], null);
-    }
-
-    /**
-     * Sets $this->container[$variableName] to the given data or to the given default Value; if $variableName
-     * is nullable and its value is set to null in the $fields array, then mark it as "set to null" in the
-     * $this->openAPINullablesSetToNull array
-     *
-     * @param  string  $variableName
-     * @param  array  $fields
-     * @param  mixed  $defaultValue
-     */
-    private function setIfExists(string $variableName, array $fields, $defaultValue): void
-    {
-        if (self::isNullable($variableName) && array_key_exists($variableName,
-                $fields) && is_null($fields[$variableName])) {
-            $this->openAPINullablesSetToNull[] = $variableName;
-        }
-
-        $this->container[$variableName] = $fields[$variableName] ?? $defaultValue;
-    }
-
-    /**
-     * Checks if a property is nullable
-     *
-     * @param  string  $property
-     * @return bool
-     */
-    public static function isNullable(string $property): bool
-    {
-        return self::openAPINullables()[$property] ?? false;
-    }
-
-    /**
-     * Array of nullable properties
-     *
-     * @return array
-     */
-    protected static function openAPINullables(): array
-    {
-        return self::$openAPINullables;
-    }
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -240,6 +128,107 @@ class CreateEnquiryRequest implements ModelInterface, ArrayAccess, JsonSerializa
     {
         return self::$openAPIFormats;
     }
+
+    /**
+     * Array of nullable properties
+     *
+     * @return array
+     */
+    protected static function openAPINullables(): array
+    {
+        return self::$openAPINullables;
+    }
+
+    /**
+     * Array of nullable field names deliberately set to null
+     *
+     * @return boolean[]
+     */
+    private function getOpenAPINullablesSetToNull(): array
+    {
+        return $this->openAPINullablesSetToNull;
+    }
+
+    /**
+     * Setter - Array of nullable field names deliberately set to null
+     *
+     * @param boolean[] $openAPINullablesSetToNull
+     */
+    private function setOpenAPINullablesSetToNull(array $openAPINullablesSetToNull): void
+    {
+        $this->openAPINullablesSetToNull = $openAPINullablesSetToNull;
+    }
+
+    /**
+     * Checks if a property is nullable
+     *
+     * @param string $property
+     * @return bool
+     */
+    public static function isNullable(string $property): bool
+    {
+        return self::openAPINullables()[$property] ?? false;
+    }
+
+    /**
+     * Checks if a nullable property is set to null.
+     *
+     * @param string $property
+     * @return bool
+     */
+    public function isNullableSetToNull(string $property): bool
+    {
+        return in_array($property, $this->getOpenAPINullablesSetToNull(), true);
+    }
+
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @var string[]
+     */
+    protected static $attributeMap = [
+        'operator_id' => 'operator_id',
+        'property_id' => 'property_id',
+        'room_id' => 'room_id',
+        'first_name' => 'first_name',
+        'last_name' => 'last_name',
+        'email' => 'email',
+        'contact_number' => 'contact_number',
+        'message' => 'message'
+    ];
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @var string[]
+     */
+    protected static $setters = [
+        'operator_id' => 'setOperatorId',
+        'property_id' => 'setPropertyId',
+        'room_id' => 'setRoomId',
+        'first_name' => 'setFirstName',
+        'last_name' => 'setLastName',
+        'email' => 'setEmail',
+        'contact_number' => 'setContactNumber',
+        'message' => 'setMessage'
+    ];
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @var string[]
+     */
+    protected static $getters = [
+        'operator_id' => 'getOperatorId',
+        'property_id' => 'getPropertyId',
+        'room_id' => 'getRoomId',
+        'first_name' => 'getFirstName',
+        'last_name' => 'getLastName',
+        'email' => 'getEmail',
+        'contact_number' => 'getContactNumber',
+        'message' => 'getMessage'
+    ];
 
     /**
      * Array of attributes where the key is the local name,
@@ -273,27 +262,6 @@ class CreateEnquiryRequest implements ModelInterface, ArrayAccess, JsonSerializa
     }
 
     /**
-     * Checks if a nullable property is set to null.
-     *
-     * @param  string  $property
-     * @return bool
-     */
-    public function isNullableSetToNull(string $property): bool
-    {
-        return in_array($property, $this->getOpenAPINullablesSetToNull(), true);
-    }
-
-    /**
-     * Array of nullable field names deliberately set to null
-     *
-     * @return boolean[]
-     */
-    private function getOpenAPINullablesSetToNull(): array
-    {
-        return $this->openAPINullablesSetToNull;
-    }
-
-    /**
      * The original name of the model.
      *
      * @return string
@@ -303,15 +271,48 @@ class CreateEnquiryRequest implements ModelInterface, ArrayAccess, JsonSerializa
         return self::$openAPIModelName;
     }
 
+
     /**
-     * Validate all the properties in the model
-     * return true if all passed
+     * Associative array for storing property values
      *
-     * @return bool True if all properties are valid
+     * @var mixed[]
      */
-    public function valid()
+    protected $container = [];
+
+    /**
+     * Constructor
+     *
+     * @param mixed[] $data Associated array of property values
+     *                      initializing the model
+     */
+    public function __construct(array $data = null)
     {
-        return count($this->listInvalidProperties()) === 0;
+        $this->setIfExists('operator_id', $data ?? [], null);
+        $this->setIfExists('property_id', $data ?? [], null);
+        $this->setIfExists('room_id', $data ?? [], null);
+        $this->setIfExists('first_name', $data ?? [], null);
+        $this->setIfExists('last_name', $data ?? [], null);
+        $this->setIfExists('email', $data ?? [], null);
+        $this->setIfExists('contact_number', $data ?? [], null);
+        $this->setIfExists('message', $data ?? [], null);
+    }
+
+    /**
+    * Sets $this->container[$variableName] to the given data or to the given default Value; if $variableName
+    * is nullable and its value is set to null in the $fields array, then mark it as "set to null" in the
+    * $this->openAPINullablesSetToNull array
+    *
+    * @param string $variableName
+    * @param array  $fields
+    * @param mixed  $defaultValue
+    */
+    private function setIfExists(string $variableName, array $fields, $defaultValue): void
+    {
+        if (self::isNullable($variableName) && array_key_exists($variableName, $fields) && is_null($fields[$variableName])) {
+            $this->openAPINullablesSetToNull[] = $variableName;
+        }
+
+        $this->container[$variableName] = $fields[$variableName] ?? $defaultValue;
     }
 
     /**
@@ -348,6 +349,18 @@ class CreateEnquiryRequest implements ModelInterface, ArrayAccess, JsonSerializa
     }
 
     /**
+     * Validate all the properties in the model
+     * return true if all passed
+     *
+     * @return bool True if all properties are valid
+     */
+    public function valid()
+    {
+        return count($this->listInvalidProperties()) === 0;
+    }
+
+
+    /**
      * Gets operator_id
      *
      * @return string
@@ -360,14 +373,14 @@ class CreateEnquiryRequest implements ModelInterface, ArrayAccess, JsonSerializa
     /**
      * Sets operator_id
      *
-     * @param  string  $operator_id  operator_id
+     * @param string $operator_id operator_id
      *
      * @return self
      */
     public function setOperatorId($operator_id)
     {
         if (is_null($operator_id)) {
-            throw new InvalidArgumentException('non-nullable operator_id cannot be null');
+            throw new \InvalidArgumentException('non-nullable operator_id cannot be null');
         }
         $this->container['operator_id'] = $operator_id;
 
@@ -387,14 +400,14 @@ class CreateEnquiryRequest implements ModelInterface, ArrayAccess, JsonSerializa
     /**
      * Sets property_id
      *
-     * @param  string  $property_id  property_id
+     * @param string $property_id property_id
      *
      * @return self
      */
     public function setPropertyId($property_id)
     {
         if (is_null($property_id)) {
-            throw new InvalidArgumentException('non-nullable property_id cannot be null');
+            throw new \InvalidArgumentException('non-nullable property_id cannot be null');
         }
         $this->container['property_id'] = $property_id;
 
@@ -414,14 +427,14 @@ class CreateEnquiryRequest implements ModelInterface, ArrayAccess, JsonSerializa
     /**
      * Sets room_id
      *
-     * @param  string  $room_id  room_id
+     * @param string $room_id room_id
      *
      * @return self
      */
     public function setRoomId($room_id)
     {
         if (is_null($room_id)) {
-            throw new InvalidArgumentException('non-nullable room_id cannot be null');
+            throw new \InvalidArgumentException('non-nullable room_id cannot be null');
         }
         $this->container['room_id'] = $room_id;
 
@@ -441,14 +454,14 @@ class CreateEnquiryRequest implements ModelInterface, ArrayAccess, JsonSerializa
     /**
      * Sets first_name
      *
-     * @param  string  $first_name  First name of the student
+     * @param string $first_name First name of the student
      *
      * @return self
      */
     public function setFirstName($first_name)
     {
         if (is_null($first_name)) {
-            throw new InvalidArgumentException('non-nullable first_name cannot be null');
+            throw new \InvalidArgumentException('non-nullable first_name cannot be null');
         }
         $this->container['first_name'] = $first_name;
 
@@ -468,14 +481,14 @@ class CreateEnquiryRequest implements ModelInterface, ArrayAccess, JsonSerializa
     /**
      * Sets last_name
      *
-     * @param  string  $last_name  Last name of the student
+     * @param string $last_name Last name of the student
      *
      * @return self
      */
     public function setLastName($last_name)
     {
         if (is_null($last_name)) {
-            throw new InvalidArgumentException('non-nullable last_name cannot be null');
+            throw new \InvalidArgumentException('non-nullable last_name cannot be null');
         }
         $this->container['last_name'] = $last_name;
 
@@ -495,14 +508,14 @@ class CreateEnquiryRequest implements ModelInterface, ArrayAccess, JsonSerializa
     /**
      * Sets email
      *
-     * @param  string  $email  Emil of the student
+     * @param string $email Emil of the student
      *
      * @return self
      */
     public function setEmail($email)
     {
         if (is_null($email)) {
-            throw new InvalidArgumentException('non-nullable email cannot be null');
+            throw new \InvalidArgumentException('non-nullable email cannot be null');
         }
         $this->container['email'] = $email;
 
@@ -522,14 +535,14 @@ class CreateEnquiryRequest implements ModelInterface, ArrayAccess, JsonSerializa
     /**
      * Sets contact_number
      *
-     * @param  string|null  $contact_number  contact_number
+     * @param string|null $contact_number contact_number
      *
      * @return self
      */
     public function setContactNumber($contact_number)
     {
         if (is_null($contact_number)) {
-            throw new InvalidArgumentException('non-nullable contact_number cannot be null');
+            throw new \InvalidArgumentException('non-nullable contact_number cannot be null');
         }
         $this->container['contact_number'] = $contact_number;
 
@@ -549,24 +562,23 @@ class CreateEnquiryRequest implements ModelInterface, ArrayAccess, JsonSerializa
     /**
      * Sets message
      *
-     * @param  string  $message  message
+     * @param string $message message
      *
      * @return self
      */
     public function setMessage($message)
     {
         if (is_null($message)) {
-            throw new InvalidArgumentException('non-nullable message cannot be null');
+            throw new \InvalidArgumentException('non-nullable message cannot be null');
         }
         $this->container['message'] = $message;
 
         return $this;
     }
-
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param  integer  $offset  Offset
+     * @param integer $offset Offset
      *
      * @return boolean
      */
@@ -578,11 +590,11 @@ class CreateEnquiryRequest implements ModelInterface, ArrayAccess, JsonSerializa
     /**
      * Gets offset.
      *
-     * @param  integer  $offset  Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
-    #[ReturnTypeWillChange]
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->container[$offset] ?? null;
@@ -591,8 +603,8 @@ class CreateEnquiryRequest implements ModelInterface, ArrayAccess, JsonSerializa
     /**
      * Sets value based on offset.
      *
-     * @param  int|null  $offset  Offset
-     * @param  mixed  $value  Value to be set
+     * @param int|null $offset Offset
+     * @param mixed    $value  Value to be set
      *
      * @return void
      */
@@ -608,7 +620,7 @@ class CreateEnquiryRequest implements ModelInterface, ArrayAccess, JsonSerializa
     /**
      * Unsets offset.
      *
-     * @param  integer  $offset  Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -624,10 +636,10 @@ class CreateEnquiryRequest implements ModelInterface, ArrayAccess, JsonSerializa
      * @return mixed Returns data which can be serialized by json_encode(), which is a value
      * of any type other than a resource.
      */
-    #[ReturnTypeWillChange]
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
-        return ObjectSerializer::sanitizeForSerialization($this);
+       return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -651,16 +663,6 @@ class CreateEnquiryRequest implements ModelInterface, ArrayAccess, JsonSerializa
     public function toHeaderValue()
     {
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
-    }
-
-    /**
-     * Setter - Array of nullable field names deliberately set to null
-     *
-     * @param  boolean[]  $openAPINullablesSetToNull
-     */
-    private function setOpenAPINullablesSetToNull(array $openAPINullablesSetToNull): void
-    {
-        $this->openAPINullablesSetToNull = $openAPINullablesSetToNull;
     }
 }
 
