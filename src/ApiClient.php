@@ -4,6 +4,7 @@ namespace Housemates\ConnectApi;
 
 use Housemates\ConnectApi\Api\CheckoutApi;
 use Housemates\ConnectApi\Api\EnquiryApi;
+use Housemates\ConnectApi\Api\LocationApi;
 use Housemates\ConnectApi\Api\PropertyApi;
 use Housemates\ConnectApi\Api\RoomApi;
 use Housemates\ConnectApi\Exceptions\ApiException as HousematesApiException;
@@ -135,5 +136,29 @@ class ApiClient
             $this->config,
             $this->openApiConfig
         )->getEnquiry($enquiryId);
+    }
+
+    public function getCities()
+    {
+        return LocationApi::make(
+            $this->config,
+            $this->openApiConfig
+        )->getCities();
+    }
+
+    public function getUniversities()
+    {
+        return LocationApi::make(
+            $this->config,
+            $this->openApiConfig
+        )->getUniversities();
+    }
+
+    public function getCity(string $city_slug)
+    {
+        return LocationApi::make(
+            $this->config,
+            $this->openApiConfig
+        )->getCity($city_slug);
     }
 }

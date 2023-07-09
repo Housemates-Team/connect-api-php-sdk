@@ -11,6 +11,6 @@ interface EnquiryContract
 
     public function getEnquiries(): Response;
 
-    public function getEnquiry(string $enquiryId): Response;
+    public function getEnquiry(string $enquiry_id): Response;
 
 }
