@@ -42,7 +42,6 @@ use OpenAPI\Client\ApiException;
 use OpenAPI\Client\Configuration;
 use OpenAPI\Client\HeaderSelector;
 use OpenAPI\Client\Model\CheckoutComplete201Response;
-use OpenAPI\Client\Model\CreateEnquiryRequest;
 use OpenAPI\Client\Model\ErrorResponse;
 use OpenAPI\Client\Model\GetEnquiries200Response;
 use OpenAPI\Client\Model\GetEnquiry200Response;
@@ -63,7 +62,7 @@ class EnquiriesApi
     /** @var string[] $contentTypes * */
     public const contentTypes = [
         'createEnquiry' => [
-            'application/json',
+            'application/x-www-form-urlencoded',
         ],
         'getEnquiries' => [
             'application/json',
@@ -141,19 +140,34 @@ class EnquiriesApi
      * Create a new enquiry
      *
      * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
-     * @param  CreateEnquiryRequest  $create_enquiry  create_enquiry (required)
+     * @param  string  $operator_id  operator_id (required)
+     * @param  string  $property_id  property_id (required)
+     * @param  string  $room_id  room_id (required)
+     * @param  string  $first_name  First name of the student (required)
+     * @param  string  $last_name  Last name of the student (required)
+     * @param  string  $email  Emil of the student (required)
+     * @param  string  $message  message (required)
+     * @param  string  $contact_number  contact_number (optional)
      * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['createEnquiry'] to see the possible values for this operation
      *
      * @return CheckoutComplete201Response|ErrorResponse|ErrorResponse|ErrorResponse|ErrorResponse|UnauthenticatedErrorResponse
-     * @throws InvalidArgumentException
      * @throws ApiException on non-2xx response
+     * @throws InvalidArgumentException
      */
     public function createEnquiry(
         $x_api_partner_id,
-        $create_enquiry,
+        $operator_id,
+        $property_id,
+        $room_id,
+        $first_name,
+        $last_name,
+        $email,
+        $message,
+        $contact_number = null,
         string $contentType = self::contentTypes['createEnquiry'][0]
     ) {
-        list($response) = $this->createEnquiryWithHttpInfo($x_api_partner_id, $create_enquiry, $contentType);
+        list($response) = $this->createEnquiryWithHttpInfo($x_api_partner_id, $operator_id, $property_id, $room_id,
+            $first_name, $last_name, $email, $message, $contact_number, $contentType);
         return $response;
     }
 
@@ -163,19 +177,34 @@ class EnquiriesApi
      * Create a new enquiry
      *
      * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
-     * @param  CreateEnquiryRequest  $create_enquiry  (required)
+     * @param  string  $operator_id  (required)
+     * @param  string  $property_id  (required)
+     * @param  string  $room_id  (required)
+     * @param  string  $first_name  First name of the student (required)
+     * @param  string  $last_name  Last name of the student (required)
+     * @param  string  $email  Emil of the student (required)
+     * @param  string  $message  (required)
+     * @param  string  $contact_number  (optional)
      * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['createEnquiry'] to see the possible values for this operation
      *
      * @return array of \OpenAPI\Client\Model\CheckoutComplete201Response|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\UnauthenticatedErrorResponse, HTTP status code, HTTP response headers (array of strings)
-     * @throws InvalidArgumentException
      * @throws ApiException on non-2xx response
+     * @throws InvalidArgumentException
      */
     public function createEnquiryWithHttpInfo(
         $x_api_partner_id,
-        $create_enquiry,
+        $operator_id,
+        $property_id,
+        $room_id,
+        $first_name,
+        $last_name,
+        $email,
+        $message,
+        $contact_number = null,
         string $contentType = self::contentTypes['createEnquiry'][0]
     ) {
-        $request = $this->createEnquiryRequest($x_api_partner_id, $create_enquiry, $contentType);
+        $request = $this->createEnquiryRequest($x_api_partner_id, $operator_id, $property_id, $room_id, $first_name,
+            $last_name, $email, $message, $contact_number, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -382,7 +411,14 @@ class EnquiriesApi
      * Create request for operation 'createEnquiry'
      *
      * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
-     * @param  CreateEnquiryRequest  $create_enquiry  (required)
+     * @param  string  $operator_id  (required)
+     * @param  string  $property_id  (required)
+     * @param  string  $room_id  (required)
+     * @param  string  $first_name  First name of the student (required)
+     * @param  string  $last_name  Last name of the student (required)
+     * @param  string  $email  Emil of the student (required)
+     * @param  string  $message  (required)
+     * @param  string  $contact_number  (optional)
      * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['createEnquiry'] to see the possible values for this operation
      *
      * @return Request
@@ -390,7 +426,14 @@ class EnquiriesApi
      */
     public function createEnquiryRequest(
         $x_api_partner_id,
-        $create_enquiry,
+        $operator_id,
+        $property_id,
+        $room_id,
+        $first_name,
+        $last_name,
+        $email,
+        $message,
+        $contact_number = null,
         string $contentType = self::contentTypes['createEnquiry'][0]
     ) {
 
@@ -401,10 +444,52 @@ class EnquiriesApi
             );
         }
 
-        // verify the required parameter 'create_enquiry' is set
-        if ($create_enquiry === null || (is_array($create_enquiry) && count($create_enquiry) === 0)) {
+        // verify the required parameter 'operator_id' is set
+        if ($operator_id === null || (is_array($operator_id) && count($operator_id) === 0)) {
             throw new InvalidArgumentException(
-                'Missing the required parameter $create_enquiry when calling createEnquiry'
+                'Missing the required parameter $operator_id when calling createEnquiry'
+            );
+        }
+
+        // verify the required parameter 'property_id' is set
+        if ($property_id === null || (is_array($property_id) && count($property_id) === 0)) {
+            throw new InvalidArgumentException(
+                'Missing the required parameter $property_id when calling createEnquiry'
+            );
+        }
+
+        // verify the required parameter 'room_id' is set
+        if ($room_id === null || (is_array($room_id) && count($room_id) === 0)) {
+            throw new InvalidArgumentException(
+                'Missing the required parameter $room_id when calling createEnquiry'
+            );
+        }
+
+        // verify the required parameter 'first_name' is set
+        if ($first_name === null || (is_array($first_name) && count($first_name) === 0)) {
+            throw new InvalidArgumentException(
+                'Missing the required parameter $first_name when calling createEnquiry'
+            );
+        }
+
+        // verify the required parameter 'last_name' is set
+        if ($last_name === null || (is_array($last_name) && count($last_name) === 0)) {
+            throw new InvalidArgumentException(
+                'Missing the required parameter $last_name when calling createEnquiry'
+            );
+        }
+
+        // verify the required parameter 'email' is set
+        if ($email === null || (is_array($email) && count($email) === 0)) {
+            throw new InvalidArgumentException(
+                'Missing the required parameter $email when calling createEnquiry'
+            );
+        }
+
+        // verify the required parameter 'message' is set
+        if ($message === null || (is_array($message) && count($message) === 0)) {
+            throw new InvalidArgumentException(
+                'Missing the required parameter $message when calling createEnquiry'
             );
         }
 
@@ -423,6 +508,39 @@ class EnquiriesApi
         }
 
 
+        // form params
+        if ($operator_id !== null) {
+            $formParams['operator_id'] = ObjectSerializer::toFormValue($operator_id);
+        }
+        // form params
+        if ($property_id !== null) {
+            $formParams['property_id'] = ObjectSerializer::toFormValue($property_id);
+        }
+        // form params
+        if ($room_id !== null) {
+            $formParams['room_id'] = ObjectSerializer::toFormValue($room_id);
+        }
+        // form params
+        if ($first_name !== null) {
+            $formParams['first_name'] = ObjectSerializer::toFormValue($first_name);
+        }
+        // form params
+        if ($last_name !== null) {
+            $formParams['last_name'] = ObjectSerializer::toFormValue($last_name);
+        }
+        // form params
+        if ($email !== null) {
+            $formParams['email'] = ObjectSerializer::toFormValue($email);
+        }
+        // form params
+        if ($contact_number !== null) {
+            $formParams['contact_number'] = ObjectSerializer::toFormValue($contact_number);
+        }
+        // form params
+        if ($message !== null) {
+            $formParams['message'] = ObjectSerializer::toFormValue($message);
+        }
+
         $headers = $this->headerSelector->selectHeaders(
             ['application/json',],
             $contentType,
@@ -430,14 +548,7 @@ class EnquiriesApi
         );
 
         // for model (json/xml)
-        if (isset($create_enquiry)) {
-            if (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the body
-                $httpBody = Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($create_enquiry));
-            } else {
-                $httpBody = $create_enquiry;
-            }
-        } elseif (count($formParams) > 0) {
+        if (count($formParams) > 0) {
             if ($multipart) {
                 $multipartContents = [];
                 foreach ($formParams as $formParamName => $formParamValue) {
@@ -512,7 +623,14 @@ class EnquiriesApi
      * Create a new enquiry
      *
      * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
-     * @param  CreateEnquiryRequest  $create_enquiry  (required)
+     * @param  string  $operator_id  (required)
+     * @param  string  $property_id  (required)
+     * @param  string  $room_id  (required)
+     * @param  string  $first_name  First name of the student (required)
+     * @param  string  $last_name  Last name of the student (required)
+     * @param  string  $email  Emil of the student (required)
+     * @param  string  $message  (required)
+     * @param  string  $contact_number  (optional)
      * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['createEnquiry'] to see the possible values for this operation
      *
      * @return PromiseInterface
@@ -520,10 +638,18 @@ class EnquiriesApi
      */
     public function createEnquiryAsync(
         $x_api_partner_id,
-        $create_enquiry,
+        $operator_id,
+        $property_id,
+        $room_id,
+        $first_name,
+        $last_name,
+        $email,
+        $message,
+        $contact_number = null,
         string $contentType = self::contentTypes['createEnquiry'][0]
     ) {
-        return $this->createEnquiryAsyncWithHttpInfo($x_api_partner_id, $create_enquiry, $contentType)
+        return $this->createEnquiryAsyncWithHttpInfo($x_api_partner_id, $operator_id, $property_id, $room_id,
+            $first_name, $last_name, $email, $message, $contact_number, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -537,7 +663,14 @@ class EnquiriesApi
      * Create a new enquiry
      *
      * @param  string  $x_api_partner_id  Unique partner ID provided by Housemates (required)
-     * @param  CreateEnquiryRequest  $create_enquiry  (required)
+     * @param  string  $operator_id  (required)
+     * @param  string  $property_id  (required)
+     * @param  string  $room_id  (required)
+     * @param  string  $first_name  First name of the student (required)
+     * @param  string  $last_name  Last name of the student (required)
+     * @param  string  $email  Emil of the student (required)
+     * @param  string  $message  (required)
+     * @param  string  $contact_number  (optional)
      * @param  string  $contentType  The value for the Content-Type header. Check self::contentTypes['createEnquiry'] to see the possible values for this operation
      *
      * @return PromiseInterface
@@ -545,11 +678,19 @@ class EnquiriesApi
      */
     public function createEnquiryAsyncWithHttpInfo(
         $x_api_partner_id,
-        $create_enquiry,
+        $operator_id,
+        $property_id,
+        $room_id,
+        $first_name,
+        $last_name,
+        $email,
+        $message,
+        $contact_number = null,
         string $contentType = self::contentTypes['createEnquiry'][0]
     ) {
         $returnType = '\OpenAPI\Client\Model\CheckoutComplete201Response';
-        $request = $this->createEnquiryRequest($x_api_partner_id, $create_enquiry, $contentType);
+        $request = $this->createEnquiryRequest($x_api_partner_id, $operator_id, $property_id, $room_id, $first_name,
+            $last_name, $email, $message, $contact_number, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())

@@ -20,12 +20,12 @@ class Response implements Responsible
 
     public function getResponse(): array
     {
-       return [
-           'code' => $this->response->getCode(),
-           'message' => $this->response->getMessage(),
-           'data' => $this->response->getData(),
-           'locale' => $this->response->getLocale(),
-       ];
+        return [
+            'code' => $this->response->getCode(),
+            'message' => $this->response->getMessage(),
+            'data' => $this->response->getData(),
+            'locale' => $this->response->getLocale(),
+        ];
     }
 
     public function __call($name, $arguments)

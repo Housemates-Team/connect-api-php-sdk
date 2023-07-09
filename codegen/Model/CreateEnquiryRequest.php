@@ -323,6 +323,9 @@ class CreateEnquiryRequest implements ModelInterface, ArrayAccess, JsonSerializa
     {
         $invalidProperties = [];
 
+        if ($this->container['operator_id'] === null) {
+            $invalidProperties[] = "'operator_id' can't be null";
+        }
         if ($this->container['property_id'] === null) {
             $invalidProperties[] = "'property_id' can't be null";
         }
@@ -347,7 +350,7 @@ class CreateEnquiryRequest implements ModelInterface, ArrayAccess, JsonSerializa
     /**
      * Gets operator_id
      *
-     * @return string|null
+     * @return string
      */
     public function getOperatorId()
     {
@@ -357,7 +360,7 @@ class CreateEnquiryRequest implements ModelInterface, ArrayAccess, JsonSerializa
     /**
      * Sets operator_id
      *
-     * @param  string|null  $operator_id  operator_id
+     * @param  string  $operator_id  operator_id
      *
      * @return self
      */

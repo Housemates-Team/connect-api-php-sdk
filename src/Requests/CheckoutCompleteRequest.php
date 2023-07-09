@@ -115,7 +115,6 @@ class CheckoutCompleteRequest implements Arrayable
     }
 
 
-
     public function toArray(): array
     {
         return [

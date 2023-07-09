@@ -3,6 +3,7 @@
 namespace Housemates\ConnectApi\Api;
 
 use Exception;
+use Housemates\ConnectApi\Contracts\CheckoutContract;
 use Housemates\ConnectApi\Exceptions\ApiException as HousematesApiException;
 use Housemates\ConnectApi\Requests\CheckoutCompleteRequest;
 use Housemates\ConnectApi\Requests\CheckoutStartRequest;
@@ -15,7 +16,7 @@ use OpenAPI\Client\Model\CheckoutCompleteRequestSupportingContactDetails as Open
 use OpenAPI\Client\Model\CheckoutStartRequest as OpenApiCheckoutStartRequest;
 
 
-class CheckoutApi extends BaseApi
+class CheckoutApi extends BaseApi implements CheckoutContract
 {
     public function start(CheckoutStartRequest $checkoutStartRequest): Response
     {
@@ -46,6 +47,13 @@ class CheckoutApi extends BaseApi
             throw HousematesApiException::because($e->getMessage());
         }
 
+    }
+
+    protected function getApiInstance(): OpenApiCheckoutApi
+    {
+        return new OpenApiCheckoutApi(
+            $this->config->getClient(), $this->openApiConfig
+        );
     }
 
     public function complete(CheckoutCompleteRequest $checkoutCompleteRequest): Response
@@ -88,13 +96,6 @@ class CheckoutApi extends BaseApi
             throw HousematesApiException::because($e->getMessage());
         }
 
-    }
-
-    protected function getApiInstance(): OpenApiCheckoutApi
-    {
-        return new OpenApiCheckoutApi(
-            $this->config->getClient(), $this->openApiConfig
-        );
     }
 
     /**

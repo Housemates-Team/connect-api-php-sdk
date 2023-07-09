@@ -3,6 +3,7 @@
 namespace Housemates\ConnectApi;
 
 use Housemates\ConnectApi\Api\CheckoutApi;
+use Housemates\ConnectApi\Api\EnquiryApi;
 use Housemates\ConnectApi\Api\PropertyApi;
 use Housemates\ConnectApi\Api\RoomApi;
 use Housemates\ConnectApi\Exceptions\ApiException as HousematesApiException;
@@ -11,6 +12,7 @@ use Housemates\ConnectApi\Filters\PropertyFilter;
 use Housemates\ConnectApi\Filters\RoomFilter;
 use Housemates\ConnectApi\Requests\CheckoutCompleteRequest;
 use Housemates\ConnectApi\Requests\CheckoutStartRequest;
+use Housemates\ConnectApi\Requests\EnquiryRequest;
 use Housemates\ConnectApi\Sorts\RoomSort;
 use OpenAPI\Client\Configuration as OpenApiConfig;
 
@@ -109,5 +111,29 @@ class ApiClient
             $this->config,
             $this->openApiConfig
         )->complete($request);
+    }
+
+    public function createEnquiry(EnquiryRequest $request)
+    {
+        return EnquiryApi::make(
+            $this->config,
+            $this->openApiConfig
+        )->create($request);
+    }
+
+    public function getEnquiries()
+    {
+        return EnquiryApi::make(
+            $this->config,
+            $this->openApiConfig
+        )->getEnquiries();
+    }
+
+    public function getEnquiry(string $enquiryId)
+    {
+        return EnquiryApi::make(
+            $this->config,
+            $this->openApiConfig
+        )->getEnquiry($enquiryId);
     }
 }

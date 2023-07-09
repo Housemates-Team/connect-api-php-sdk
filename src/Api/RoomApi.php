@@ -3,6 +3,7 @@
 namespace Housemates\ConnectApi\Api;
 
 use Exception;
+use Housemates\ConnectApi\Contracts\RoomContract;
 use Housemates\ConnectApi\Exceptions\ApiException as HousematesApiException;
 use Housemates\ConnectApi\Filters\RoomFilter;
 use Housemates\ConnectApi\Response\Response;
@@ -10,7 +11,7 @@ use Housemates\ConnectApi\Sorts\RoomSort;
 use OpenAPI\Client\Api\RoomsApi;
 use OpenAPI\Client\ApiException;
 
-class RoomApi extends BaseApi
+class RoomApi extends BaseApi implements RoomContract
 {
     protected const DEFAULT_PER_PAGE = 10;
 

@@ -21,6 +21,7 @@
     "ext-json": "*"
   },
   "require-dev": {
+    "laravel/pint": "^1.10",
     "phpunit/phpunit": "^9.0"
   },
   "autoload": {
