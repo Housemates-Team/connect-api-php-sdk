@@ -8,7 +8,7 @@ use Housemates\ConnectApi\Exceptions\ApiException as HousematesApiException;
 use Housemates\ConnectApi\Filters\RoomFilter;
 use Housemates\ConnectApi\Response\Response;
 use Housemates\ConnectApi\Sorts\RoomSort;
-use OpenAPI\Client\Api\RoomsApi;
+use OpenAPI\Client\Api\RoomsApi as OpenApiRoomsApi;
 use OpenAPI\Client\ApiException;
 
 class RoomApi extends BaseApi implements RoomContract
@@ -48,9 +48,9 @@ class RoomApi extends BaseApi implements RoomContract
 
     }
 
-    protected function getApiInstance(): RoomsApi
+    protected function getApiInstance(): OpenApiRoomsApi
     {
-        return new RoomsApi(
+        return new OpenApiRoomsApi(
             $this->config->getClient(), $this->openApiConfig
         );
     }

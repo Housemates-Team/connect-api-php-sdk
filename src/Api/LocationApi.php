@@ -12,6 +12,9 @@ use OpenAPI\Client\ApiException;
 class LocationApi extends BaseApi implements LocationContract
 {
 
+    /**
+     * @throws HousematesApiException
+     */
     public function getCities(): Response
     {
         try {
@@ -32,6 +35,9 @@ class LocationApi extends BaseApi implements LocationContract
         }
     }
 
+    /**
+     * @throws HousematesApiException
+     */
     public function getUniversities(): Response
     {
         try {
@@ -52,6 +58,9 @@ class LocationApi extends BaseApi implements LocationContract
         }
     }
 
+    /**
+     * @throws HousematesApiException
+     */
     public function getCity(string $city_slug): Response
     {
         try {

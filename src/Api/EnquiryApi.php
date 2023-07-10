@@ -7,7 +7,7 @@ use Housemates\ConnectApi\Contracts\EnquiryContract;
 use Housemates\ConnectApi\Exceptions\ApiException as HousematesApiException;
 use Housemates\ConnectApi\Requests\EnquiryRequest;
 use Housemates\ConnectApi\Response\Response;
-use OpenAPI\Client\Api\EnquiriesApi;
+use OpenAPI\Client\Api\EnquiriesApi as OpenApiEnquiriesApi;
 use OpenAPI\Client\ApiException;
 
 class EnquiryApi extends BaseApi implements EnquiryContract
@@ -41,9 +41,9 @@ class EnquiryApi extends BaseApi implements EnquiryContract
         }
     }
 
-    protected function getApiInstance(): EnquiriesApi
+    protected function getApiInstance(): OpenApiEnquiriesApi
     {
-        return new EnquiriesApi(
+        return new OpenApiEnquiriesApi(
             $this->config->getClient(), $this->openApiConfig
         );
     }

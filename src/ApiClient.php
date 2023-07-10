@@ -2,6 +2,7 @@
 
 namespace Housemates\ConnectApi;
 
+use Housemates\ConnectApi\Api\AmenityApi;
 use Housemates\ConnectApi\Api\CheckoutApi;
 use Housemates\ConnectApi\Api\EnquiryApi;
 use Housemates\ConnectApi\Api\LocationApi;
@@ -9,6 +10,7 @@ use Housemates\ConnectApi\Api\PropertyApi;
 use Housemates\ConnectApi\Api\RoomApi;
 use Housemates\ConnectApi\Exceptions\ApiException as HousematesApiException;
 use Housemates\ConnectApi\Exceptions\ConfigurationException;
+use Housemates\ConnectApi\Filters\AmenityFilter;
 use Housemates\ConnectApi\Filters\PropertyFilter;
 use Housemates\ConnectApi\Filters\RoomFilter;
 use Housemates\ConnectApi\Requests\CheckoutCompleteRequest;
@@ -160,5 +162,13 @@ class ApiClient
             $this->config,
             $this->openApiConfig
         )->getCity($city_slug);
+    }
+
+    public function getAmenities(AmenityFilter $filter = null)
+    {
+        return AmenityApi::make(
+            $this->config,
+            $this->openApiConfig
+        )->get($filter);
     }
 }
