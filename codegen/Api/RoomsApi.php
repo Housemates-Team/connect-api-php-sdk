@@ -932,7 +932,7 @@ class RoomsApi
      * @param  string $filter_amenities Amenities to filter by. List of amenities can be retrieved from the /api/amenities?type&#x3D;room endpoint. (optional)
      * @param  string $sort_price sort rooms by price (optional)
      * @param  string $sort_max_rooms_left sort rooms by maximum rooms left (optional)
-     * @param  string $sort_is_available sort rooms by price (optional)
+     * @param  string $sort_is_available sort rooms by is_available status (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getRooms'] to see the possible values for this operation
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response
@@ -958,7 +958,7 @@ class RoomsApi
      * @param  string $filter_amenities Amenities to filter by. List of amenities can be retrieved from the /api/amenities?type&#x3D;room endpoint. (optional)
      * @param  string $sort_price sort rooms by price (optional)
      * @param  string $sort_max_rooms_left sort rooms by maximum rooms left (optional)
-     * @param  string $sort_is_available sort rooms by price (optional)
+     * @param  string $sort_is_available sort rooms by is_available status (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getRooms'] to see the possible values for this operation
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response
@@ -1158,7 +1158,7 @@ class RoomsApi
      * @param  string $filter_amenities Amenities to filter by. List of amenities can be retrieved from the /api/amenities?type&#x3D;room endpoint. (optional)
      * @param  string $sort_price sort rooms by price (optional)
      * @param  string $sort_max_rooms_left sort rooms by maximum rooms left (optional)
-     * @param  string $sort_is_available sort rooms by price (optional)
+     * @param  string $sort_is_available sort rooms by is_available status (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getRooms'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1187,7 +1187,7 @@ class RoomsApi
      * @param  string $filter_amenities Amenities to filter by. List of amenities can be retrieved from the /api/amenities?type&#x3D;room endpoint. (optional)
      * @param  string $sort_price sort rooms by price (optional)
      * @param  string $sort_max_rooms_left sort rooms by maximum rooms left (optional)
-     * @param  string $sort_is_available sort rooms by price (optional)
+     * @param  string $sort_is_available sort rooms by is_available status (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getRooms'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1245,7 +1245,7 @@ class RoomsApi
      * @param  string $filter_amenities Amenities to filter by. List of amenities can be retrieved from the /api/amenities?type&#x3D;room endpoint. (optional)
      * @param  string $sort_price sort rooms by price (optional)
      * @param  string $sort_max_rooms_left sort rooms by maximum rooms left (optional)
-     * @param  string $sort_is_available sort rooms by price (optional)
+     * @param  string $sort_is_available sort rooms by is_available status (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getRooms'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException

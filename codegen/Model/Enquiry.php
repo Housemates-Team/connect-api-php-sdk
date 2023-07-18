@@ -67,6 +67,8 @@ class Enquiry implements ModelInterface, ArrayAccess, \JsonSerializable
         'first_name' => 'string',
         'last_name' => 'string',
         'email' => 'string',
+        'message' => 'string',
+        'contact_number' => 'string',
         'status' => 'string'
     ];
 
@@ -87,6 +89,8 @@ class Enquiry implements ModelInterface, ArrayAccess, \JsonSerializable
         'first_name' => null,
         'last_name' => null,
         'email' => null,
+        'message' => null,
+        'contact_number' => null,
         'status' => null
     ];
 
@@ -105,6 +109,8 @@ class Enquiry implements ModelInterface, ArrayAccess, \JsonSerializable
 		'first_name' => false,
 		'last_name' => false,
 		'email' => false,
+		'message' => false,
+		'contact_number' => false,
 		'status' => false
     ];
 
@@ -203,6 +209,8 @@ class Enquiry implements ModelInterface, ArrayAccess, \JsonSerializable
         'first_name' => 'first_name',
         'last_name' => 'last_name',
         'email' => 'email',
+        'message' => 'message',
+        'contact_number' => 'contact_number',
         'status' => 'status'
     ];
 
@@ -221,6 +229,8 @@ class Enquiry implements ModelInterface, ArrayAccess, \JsonSerializable
         'first_name' => 'setFirstName',
         'last_name' => 'setLastName',
         'email' => 'setEmail',
+        'message' => 'setMessage',
+        'contact_number' => 'setContactNumber',
         'status' => 'setStatus'
     ];
 
@@ -239,6 +249,8 @@ class Enquiry implements ModelInterface, ArrayAccess, \JsonSerializable
         'first_name' => 'getFirstName',
         'last_name' => 'getLastName',
         'email' => 'getEmail',
+        'message' => 'getMessage',
+        'contact_number' => 'getContactNumber',
         'status' => 'getStatus'
     ];
 
@@ -308,6 +320,8 @@ class Enquiry implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('first_name', $data ?? [], null);
         $this->setIfExists('last_name', $data ?? [], null);
         $this->setIfExists('email', $data ?? [], null);
+        $this->setIfExists('message', $data ?? [], null);
+        $this->setIfExists('contact_number', $data ?? [], null);
         $this->setIfExists('status', $data ?? [], null);
     }
 
@@ -592,6 +606,60 @@ class Enquiry implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable email cannot be null');
         }
         $this->container['email'] = $email;
+
+        return $this;
+    }
+
+    /**
+     * Gets message
+     *
+     * @return string|null
+     */
+    public function getMessage()
+    {
+        return $this->container['message'];
+    }
+
+    /**
+     * Sets message
+     *
+     * @param string|null $message message
+     *
+     * @return self
+     */
+    public function setMessage($message)
+    {
+        if (is_null($message)) {
+            throw new \InvalidArgumentException('non-nullable message cannot be null');
+        }
+        $this->container['message'] = $message;
+
+        return $this;
+    }
+
+    /**
+     * Gets contact_number
+     *
+     * @return string|null
+     */
+    public function getContactNumber()
+    {
+        return $this->container['contact_number'];
+    }
+
+    /**
+     * Sets contact_number
+     *
+     * @param string|null $contact_number contact_number
+     *
+     * @return self
+     */
+    public function setContactNumber($contact_number)
+    {
+        if (is_null($contact_number)) {
+            throw new \InvalidArgumentException('non-nullable contact_number cannot be null');
+        }
+        $this->container['contact_number'] = $contact_number;
 
         return $this;
     }

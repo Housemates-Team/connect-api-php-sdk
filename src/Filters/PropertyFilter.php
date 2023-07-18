@@ -4,52 +4,52 @@ namespace Housemates\ConnectApi\Filters;
 
 class PropertyFilter
 {
-    protected ?string $cityFilter = null;
-    protected ?string $slugFilter = null;
-    protected ?string $amenitiesFilter = null;
-    protected int $perPage = 10;
+    protected ?string $city_filter = null;
+    protected ?string $slug_filter = null;
+    protected ?string $amenities_filter = null;
+    protected int $per_page = 10;
 
     public function getCityFilter(): ?string
     {
-        return $this->cityFilter;
+        return $this->city_filter;
     }
 
     public function setCityFilter(?string $cityFilter): PropertyFilter
     {
-        $this->cityFilter = $cityFilter;
+        $this->city_filter = $cityFilter;
         return $this;
     }
 
     public function getSlugFilter(): ?string
     {
-        return $this->slugFilter;
+        return $this->slug_filter;
     }
 
     public function setSlugFilter(?string $slugFilter): PropertyFilter
     {
-        $this->slugFilter = $slugFilter;
+        $this->slug_filter = $slugFilter;
         return $this;
     }
 
     public function getAmenitiesFilter(): ?string
     {
-        return $this->amenitiesFilter;
+        return $this->amenities_filter;
     }
 
     public function setAmenitiesFilter(?string $amenitiesFilter): PropertyFilter
     {
-        $this->amenitiesFilter = $amenitiesFilter;
+        $this->amenities_filter = $amenitiesFilter;
         return $this;
     }
 
     public function getPerPage(): int
     {
-        return $this->perPage;
+        return $this->per_page;
     }
 
     public function setPerPage(int $perPage): PropertyFilter
     {
-        $this->perPage = $perPage;
+        $this->per_page = $perPage;
         return $this;
     }
 

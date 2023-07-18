@@ -2,13 +2,13 @@
 
 namespace Housemates\ConnectApi\Contracts;
 
+use Housemates\ConnectApi\Filters\LocationFilter;
 use Housemates\ConnectApi\Response\Response;
 
 interface LocationContract
 {
-    public function getCities(): Response;
+    public function getCities(?LocationFilter $locationFilter): Response;
 
-    public function getUniversities(): Response;
+    public function getUniversities(?LocationFilter $locationFilter): Response;
 
-    public function getCity(string $city_slug): Response;
 }

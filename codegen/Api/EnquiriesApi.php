@@ -655,15 +655,17 @@ class EnquiriesApi
      * Retrieve list of enquiries
      *
      * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
+     * @param  int $per_page Number of items to return per page (optional)
+     * @param  string $filter_status Filter enquiries by status (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getEnquiries'] to see the possible values for this operation
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \OpenAPI\Client\Model\GetEnquiries200Response|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse
      */
-    public function getEnquiries($x_api_partner_id, string $contentType = self::contentTypes['getEnquiries'][0])
+    public function getEnquiries($x_api_partner_id, $per_page = null, $filter_status = null, string $contentType = self::contentTypes['getEnquiries'][0])
     {
-        list($response) = $this->getEnquiriesWithHttpInfo($x_api_partner_id, $contentType);
+        list($response) = $this->getEnquiriesWithHttpInfo($x_api_partner_id, $per_page, $filter_status, $contentType);
         return $response;
     }
 
@@ -673,15 +675,17 @@ class EnquiriesApi
      * Retrieve list of enquiries
      *
      * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
+     * @param  int $per_page Number of items to return per page (optional)
+     * @param  string $filter_status Filter enquiries by status (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getEnquiries'] to see the possible values for this operation
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \OpenAPI\Client\Model\GetEnquiries200Response|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getEnquiriesWithHttpInfo($x_api_partner_id, string $contentType = self::contentTypes['getEnquiries'][0])
+    public function getEnquiriesWithHttpInfo($x_api_partner_id, $per_page = null, $filter_status = null, string $contentType = self::contentTypes['getEnquiries'][0])
     {
-        $request = $this->getEnquiriesRequest($x_api_partner_id, $contentType);
+        $request = $this->getEnquiriesRequest($x_api_partner_id, $per_page, $filter_status, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -865,14 +869,16 @@ class EnquiriesApi
      * Retrieve list of enquiries
      *
      * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
+     * @param  int $per_page Number of items to return per page (optional)
+     * @param  string $filter_status Filter enquiries by status (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getEnquiries'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getEnquiriesAsync($x_api_partner_id, string $contentType = self::contentTypes['getEnquiries'][0])
+    public function getEnquiriesAsync($x_api_partner_id, $per_page = null, $filter_status = null, string $contentType = self::contentTypes['getEnquiries'][0])
     {
-        return $this->getEnquiriesAsyncWithHttpInfo($x_api_partner_id, $contentType)
+        return $this->getEnquiriesAsyncWithHttpInfo($x_api_partner_id, $per_page, $filter_status, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -886,15 +892,17 @@ class EnquiriesApi
      * Retrieve list of enquiries
      *
      * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
+     * @param  int $per_page Number of items to return per page (optional)
+     * @param  string $filter_status Filter enquiries by status (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getEnquiries'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getEnquiriesAsyncWithHttpInfo($x_api_partner_id, string $contentType = self::contentTypes['getEnquiries'][0])
+    public function getEnquiriesAsyncWithHttpInfo($x_api_partner_id, $per_page = null, $filter_status = null, string $contentType = self::contentTypes['getEnquiries'][0])
     {
         $returnType = '\OpenAPI\Client\Model\GetEnquiries200Response';
-        $request = $this->getEnquiriesRequest($x_api_partner_id, $contentType);
+        $request = $this->getEnquiriesRequest($x_api_partner_id, $per_page, $filter_status, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -936,12 +944,14 @@ class EnquiriesApi
      * Create request for operation 'getEnquiries'
      *
      * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
+     * @param  int $per_page Number of items to return per page (optional)
+     * @param  string $filter_status Filter enquiries by status (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getEnquiries'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function getEnquiriesRequest($x_api_partner_id, string $contentType = self::contentTypes['getEnquiries'][0])
+    public function getEnquiriesRequest($x_api_partner_id, $per_page = null, $filter_status = null, string $contentType = self::contentTypes['getEnquiries'][0])
     {
 
         // verify the required parameter 'x_api_partner_id' is set
@@ -952,6 +962,8 @@ class EnquiriesApi
         }
 
 
+
+
         $resourcePath = '/api/enquiries';
         $formParams = [];
         $queryParams = [];
@@ -959,6 +971,24 @@ class EnquiriesApi
         $httpBody = '';
         $multipart = false;
 
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $per_page,
+            'per_page', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $filter_status,
+            'filter[status]', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
 
         // header params
         if ($x_api_partner_id !== null) {

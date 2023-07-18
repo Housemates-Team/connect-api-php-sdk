@@ -5,6 +5,7 @@ namespace Housemates\ConnectApi\Api;
 use Exception;
 use Housemates\ConnectApi\Contracts\LocationContract;
 use Housemates\ConnectApi\Exceptions\ApiException as HousematesApiException;
+use Housemates\ConnectApi\Filters\LocationFilter;
 use Housemates\ConnectApi\Response\Response;
 use OpenAPI\Client\Api\LocationsApi as OpenApiLocationsApi;
 use OpenAPI\Client\ApiException;
@@ -15,11 +16,14 @@ class LocationApi extends BaseApi implements LocationContract
     /**
      * @throws HousematesApiException
      */
-    public function getCities(): Response
+    public function getCities(?LocationFilter $locationFilter): Response
     {
+        $cityFilter = optional($locationFilter)->getCityFilter();
+
         try {
             $response = $this->getApiInstance()->getCities(
-                $this->config->getApiPartnerId()
+                $this->config->getApiPartnerId(),
+                $cityFilter,
             );
             return Response::make($response);
         } catch (ApiException $e) {
@@ -38,35 +42,14 @@ class LocationApi extends BaseApi implements LocationContract
     /**
      * @throws HousematesApiException
      */
-    public function getUniversities(): Response
+    public function getUniversities(?LocationFilter $locationFilter): Response
     {
+        $universityFilter = optional($locationFilter)->getUniversityFilter();
+
         try {
             $response = $this->getApiInstance()->getUniversities(
-                $this->config->getApiPartnerId()
-            );
-            return Response::make($response);
-        } catch (ApiException $e) {
-            throw HousematesApiException::because(
-                sprintf(
-                    'ApiException: %s %s',
-                    $e->getCode(),
-                    $e->getMessage()
-                )
-            );
-        } catch (Exception $e) {
-            throw HousematesApiException::because($e->getMessage());
-        }
-    }
-
-    /**
-     * @throws HousematesApiException
-     */
-    public function getCity(string $city_slug): Response
-    {
-        try {
-            $response = $this->getApiInstance()->getCity(
-                $city_slug,
-                $this->config->getApiPartnerId()
+                $this->config->getApiPartnerId(),
+                $locationFilter->getUniversityFilter(),
             );
             return Response::make($response);
         } catch (ApiException $e) {
