@@ -60,7 +60,7 @@ class HateoasLink implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $openAPITypes = [
         'rel' => 'string',
         'type' => 'string',
-        'url' => 'string'
+        'href' => 'string'
     ];
 
     /**
@@ -73,7 +73,7 @@ class HateoasLink implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $openAPIFormats = [
         'rel' => null,
         'type' => null,
-        'url' => null
+        'href' => null
     ];
 
     /**
@@ -84,7 +84,7 @@ class HateoasLink implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static array $openAPINullables = [
         'rel' => false,
 		'type' => false,
-		'url' => false
+		'href' => false
     ];
 
     /**
@@ -175,7 +175,7 @@ class HateoasLink implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $attributeMap = [
         'rel' => 'rel',
         'type' => 'type',
-        'url' => 'url'
+        'href' => 'href'
     ];
 
     /**
@@ -186,7 +186,7 @@ class HateoasLink implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $setters = [
         'rel' => 'setRel',
         'type' => 'setType',
-        'url' => 'setUrl'
+        'href' => 'setHref'
     ];
 
     /**
@@ -197,7 +197,7 @@ class HateoasLink implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $getters = [
         'rel' => 'getRel',
         'type' => 'getType',
-        'url' => 'getUrl'
+        'href' => 'getHref'
     ];
 
     /**
@@ -259,7 +259,7 @@ class HateoasLink implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $this->setIfExists('rel', $data ?? [], null);
         $this->setIfExists('type', $data ?? [], null);
-        $this->setIfExists('url', $data ?? [], null);
+        $this->setIfExists('href', $data ?? [], null);
     }
 
     /**
@@ -359,28 +359,28 @@ class HateoasLink implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets url
+     * Gets href
      *
      * @return string|null
      */
-    public function getUrl()
+    public function getHref()
     {
-        return $this->container['url'];
+        return $this->container['href'];
     }
 
     /**
-     * Sets url
+     * Sets href
      *
-     * @param string|null $url url
+     * @param string|null $href href
      *
      * @return self
      */
-    public function setUrl($url)
+    public function setHref($href)
     {
-        if (is_null($url)) {
-            throw new \InvalidArgumentException('non-nullable url cannot be null');
+        if (is_null($href)) {
+            throw new \InvalidArgumentException('non-nullable href cannot be null');
         }
-        $this->container['url'] = $url;
+        $this->container['href'] = $href;
 
         return $this;
     }

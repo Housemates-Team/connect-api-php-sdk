@@ -58,7 +58,7 @@ class GetRoom200ResponseAllOfData implements ModelInterface, ArrayAccess, \JsonS
       * @var string[]
       */
     protected static $openAPITypes = [
-        'item' => '\OpenAPI\Client\Model\ShowRoom'
+        'item' => '\OpenAPI\Client\Model\Room'
     ];
 
     /**
@@ -293,7 +293,7 @@ class GetRoom200ResponseAllOfData implements ModelInterface, ArrayAccess, \JsonS
     /**
      * Gets item
      *
-     * @return \OpenAPI\Client\Model\ShowRoom|null
+     * @return \OpenAPI\Client\Model\Room|null
      */
     public function getItem()
     {
@@ -303,7 +303,7 @@ class GetRoom200ResponseAllOfData implements ModelInterface, ArrayAccess, \JsonS
     /**
      * Sets item
      *
-     * @param \OpenAPI\Client\Model\ShowRoom|null $item item
+     * @param \OpenAPI\Client\Model\Room|null $item item
      *
      * @return self
      */

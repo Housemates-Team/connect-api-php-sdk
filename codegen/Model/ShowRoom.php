@@ -75,6 +75,7 @@ class ShowRoom implements ModelInterface, ArrayAccess, \JsonSerializable
         'amenities' => '\OpenAPI\Client\Model\RoomAmenities',
         'currency' => 'string',
         'images' => '\OpenAPI\Client\Model\RoomImages[]',
+        'property' => '\OpenAPI\Client\Model\RoomProperty',
         'booking_periods' => '\OpenAPI\Client\Model\BookingPeriod[]',
         '_links' => '\OpenAPI\Client\Model\HateoasLink[]',
         'universities' => '\OpenAPI\Client\Model\ShowRoomAllOfUniversities[]'
@@ -105,6 +106,7 @@ class ShowRoom implements ModelInterface, ArrayAccess, \JsonSerializable
         'amenities' => null,
         'currency' => null,
         'images' => null,
+        'property' => null,
         'booking_periods' => null,
         '_links' => null,
         'universities' => null
@@ -133,6 +135,7 @@ class ShowRoom implements ModelInterface, ArrayAccess, \JsonSerializable
 		'amenities' => false,
 		'currency' => false,
 		'images' => false,
+		'property' => false,
 		'booking_periods' => false,
 		'_links' => false,
 		'universities' => false
@@ -241,6 +244,7 @@ class ShowRoom implements ModelInterface, ArrayAccess, \JsonSerializable
         'amenities' => 'amenities',
         'currency' => 'currency',
         'images' => 'images',
+        'property' => 'property',
         'booking_periods' => 'booking_periods',
         '_links' => '_links',
         'universities' => 'universities'
@@ -269,6 +273,7 @@ class ShowRoom implements ModelInterface, ArrayAccess, \JsonSerializable
         'amenities' => 'setAmenities',
         'currency' => 'setCurrency',
         'images' => 'setImages',
+        'property' => 'setProperty',
         'booking_periods' => 'setBookingPeriods',
         '_links' => 'setLinks',
         'universities' => 'setUniversities'
@@ -297,6 +302,7 @@ class ShowRoom implements ModelInterface, ArrayAccess, \JsonSerializable
         'amenities' => 'getAmenities',
         'currency' => 'getCurrency',
         'images' => 'getImages',
+        'property' => 'getProperty',
         'booking_periods' => 'getBookingPeriods',
         '_links' => 'getLinks',
         'universities' => 'getUniversities'
@@ -376,6 +382,7 @@ class ShowRoom implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('amenities', $data ?? [], null);
         $this->setIfExists('currency', $data ?? [], null);
         $this->setIfExists('images', $data ?? [], null);
+        $this->setIfExists('property', $data ?? [], null);
         $this->setIfExists('booking_periods', $data ?? [], null);
         $this->setIfExists('_links', $data ?? [], null);
         $this->setIfExists('universities', $data ?? [], null);
@@ -878,6 +885,33 @@ class ShowRoom implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable images cannot be null');
         }
         $this->container['images'] = $images;
+
+        return $this;
+    }
+
+    /**
+     * Gets property
+     *
+     * @return \OpenAPI\Client\Model\RoomProperty|null
+     */
+    public function getProperty()
+    {
+        return $this->container['property'];
+    }
+
+    /**
+     * Sets property
+     *
+     * @param \OpenAPI\Client\Model\RoomProperty|null $property property
+     *
+     * @return self
+     */
+    public function setProperty($property)
+    {
+        if (is_null($property)) {
+            throw new \InvalidArgumentException('non-nullable property cannot be null');
+        }
+        $this->container['property'] = $property;
 
         return $this;
     }

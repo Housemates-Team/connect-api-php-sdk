@@ -49,7 +49,7 @@ class LocationApi extends BaseApi implements LocationContract
         try {
             $response = $this->getApiInstance()->getUniversities(
                 $this->config->getApiPartnerId(),
-                $locationFilter->getUniversityFilter(),
+                $universityFilter,
             );
             return Response::make($response);
         } catch (ApiException $e) {

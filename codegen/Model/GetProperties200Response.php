@@ -62,9 +62,7 @@ class GetProperties200Response implements ModelInterface, ArrayAccess, \JsonSeri
         'code' => 'int',
         'locale' => 'string',
         'message' => 'string',
-        'data' => '\OpenAPI\Client\Model\PropertyList',
-        'meta' => '\OpenAPI\Client\Model\PaginationMeta',
-        'links' => '\OpenAPI\Client\Model\PaginationLinks'
+        'data' => '\OpenAPI\Client\Model\GetProperties200ResponseAllOfData'
     ];
 
     /**
@@ -79,9 +77,7 @@ class GetProperties200Response implements ModelInterface, ArrayAccess, \JsonSeri
         'code' => null,
         'locale' => null,
         'message' => null,
-        'data' => null,
-        'meta' => null,
-        'links' => null
+        'data' => null
     ];
 
     /**
@@ -94,9 +90,7 @@ class GetProperties200Response implements ModelInterface, ArrayAccess, \JsonSeri
 		'code' => false,
 		'locale' => false,
 		'message' => false,
-		'data' => false,
-		'meta' => false,
-		'links' => false
+		'data' => false
     ];
 
     /**
@@ -189,9 +183,7 @@ class GetProperties200Response implements ModelInterface, ArrayAccess, \JsonSeri
         'code' => 'code',
         'locale' => 'locale',
         'message' => 'message',
-        'data' => 'data',
-        'meta' => 'meta',
-        'links' => 'links'
+        'data' => 'data'
     ];
 
     /**
@@ -204,9 +196,7 @@ class GetProperties200Response implements ModelInterface, ArrayAccess, \JsonSeri
         'code' => 'setCode',
         'locale' => 'setLocale',
         'message' => 'setMessage',
-        'data' => 'setData',
-        'meta' => 'setMeta',
-        'links' => 'setLinks'
+        'data' => 'setData'
     ];
 
     /**
@@ -219,9 +209,7 @@ class GetProperties200Response implements ModelInterface, ArrayAccess, \JsonSeri
         'code' => 'getCode',
         'locale' => 'getLocale',
         'message' => 'getMessage',
-        'data' => 'getData',
-        'meta' => 'getMeta',
-        'links' => 'getLinks'
+        'data' => 'getData'
     ];
 
     /**
@@ -286,8 +274,6 @@ class GetProperties200Response implements ModelInterface, ArrayAccess, \JsonSeri
         $this->setIfExists('locale', $data ?? [], null);
         $this->setIfExists('message', $data ?? [], null);
         $this->setIfExists('data', $data ?? [], null);
-        $this->setIfExists('meta', $data ?? [], null);
-        $this->setIfExists('links', $data ?? [], null);
     }
 
     /**
@@ -443,7 +429,7 @@ class GetProperties200Response implements ModelInterface, ArrayAccess, \JsonSeri
     /**
      * Gets data
      *
-     * @return \OpenAPI\Client\Model\PropertyList|null
+     * @return \OpenAPI\Client\Model\GetProperties200ResponseAllOfData|null
      */
     public function getData()
     {
@@ -453,7 +439,7 @@ class GetProperties200Response implements ModelInterface, ArrayAccess, \JsonSeri
     /**
      * Sets data
      *
-     * @param \OpenAPI\Client\Model\PropertyList|null $data data
+     * @param \OpenAPI\Client\Model\GetProperties200ResponseAllOfData|null $data data
      *
      * @return self
      */
@@ -463,60 +449,6 @@ class GetProperties200Response implements ModelInterface, ArrayAccess, \JsonSeri
             throw new \InvalidArgumentException('non-nullable data cannot be null');
         }
         $this->container['data'] = $data;
-
-        return $this;
-    }
-
-    /**
-     * Gets meta
-     *
-     * @return \OpenAPI\Client\Model\PaginationMeta|null
-     */
-    public function getMeta()
-    {
-        return $this->container['meta'];
-    }
-
-    /**
-     * Sets meta
-     *
-     * @param \OpenAPI\Client\Model\PaginationMeta|null $meta meta
-     *
-     * @return self
-     */
-    public function setMeta($meta)
-    {
-        if (is_null($meta)) {
-            throw new \InvalidArgumentException('non-nullable meta cannot be null');
-        }
-        $this->container['meta'] = $meta;
-
-        return $this;
-    }
-
-    /**
-     * Gets links
-     *
-     * @return \OpenAPI\Client\Model\PaginationLinks|null
-     */
-    public function getLinks()
-    {
-        return $this->container['links'];
-    }
-
-    /**
-     * Sets links
-     *
-     * @param \OpenAPI\Client\Model\PaginationLinks|null $links links
-     *
-     * @return self
-     */
-    public function setLinks($links)
-    {
-        if (is_null($links)) {
-            throw new \InvalidArgumentException('non-nullable links cannot be null');
-        }
-        $this->container['links'] = $links;
 
         return $this;
     }

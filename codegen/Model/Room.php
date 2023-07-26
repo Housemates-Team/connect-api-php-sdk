@@ -75,7 +75,9 @@ class Room implements ModelInterface, ArrayAccess, \JsonSerializable
         'amenities' => '\OpenAPI\Client\Model\RoomAmenities',
         'currency' => 'string',
         'images' => '\OpenAPI\Client\Model\RoomImages[]',
+        'property' => '\OpenAPI\Client\Model\RoomProperty',
         'booking_periods' => '\OpenAPI\Client\Model\BookingPeriod[]',
+        'universities' => '\OpenAPI\Client\Model\RoomUniversitiesInner[]',
         '_links' => '\OpenAPI\Client\Model\HateoasLink[]'
     ];
 
@@ -104,7 +106,9 @@ class Room implements ModelInterface, ArrayAccess, \JsonSerializable
         'amenities' => null,
         'currency' => null,
         'images' => null,
+        'property' => null,
         'booking_periods' => null,
+        'universities' => null,
         '_links' => null
     ];
 
@@ -131,7 +135,9 @@ class Room implements ModelInterface, ArrayAccess, \JsonSerializable
 		'amenities' => false,
 		'currency' => false,
 		'images' => false,
+		'property' => false,
 		'booking_periods' => false,
+		'universities' => false,
 		'_links' => false
     ];
 
@@ -238,7 +244,9 @@ class Room implements ModelInterface, ArrayAccess, \JsonSerializable
         'amenities' => 'amenities',
         'currency' => 'currency',
         'images' => 'images',
+        'property' => 'property',
         'booking_periods' => 'booking_periods',
+        'universities' => 'universities',
         '_links' => '_links'
     ];
 
@@ -265,7 +273,9 @@ class Room implements ModelInterface, ArrayAccess, \JsonSerializable
         'amenities' => 'setAmenities',
         'currency' => 'setCurrency',
         'images' => 'setImages',
+        'property' => 'setProperty',
         'booking_periods' => 'setBookingPeriods',
+        'universities' => 'setUniversities',
         '_links' => 'setLinks'
     ];
 
@@ -292,7 +302,9 @@ class Room implements ModelInterface, ArrayAccess, \JsonSerializable
         'amenities' => 'getAmenities',
         'currency' => 'getCurrency',
         'images' => 'getImages',
+        'property' => 'getProperty',
         'booking_periods' => 'getBookingPeriods',
+        'universities' => 'getUniversities',
         '_links' => 'getLinks'
     ];
 
@@ -370,7 +382,9 @@ class Room implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('amenities', $data ?? [], null);
         $this->setIfExists('currency', $data ?? [], null);
         $this->setIfExists('images', $data ?? [], null);
+        $this->setIfExists('property', $data ?? [], null);
         $this->setIfExists('booking_periods', $data ?? [], null);
+        $this->setIfExists('universities', $data ?? [], null);
         $this->setIfExists('_links', $data ?? [], null);
     }
 
@@ -876,6 +890,33 @@ class Room implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
+     * Gets property
+     *
+     * @return \OpenAPI\Client\Model\RoomProperty|null
+     */
+    public function getProperty()
+    {
+        return $this->container['property'];
+    }
+
+    /**
+     * Sets property
+     *
+     * @param \OpenAPI\Client\Model\RoomProperty|null $property property
+     *
+     * @return self
+     */
+    public function setProperty($property)
+    {
+        if (is_null($property)) {
+            throw new \InvalidArgumentException('non-nullable property cannot be null');
+        }
+        $this->container['property'] = $property;
+
+        return $this;
+    }
+
+    /**
      * Gets booking_periods
      *
      * @return \OpenAPI\Client\Model\BookingPeriod[]|null
@@ -898,6 +939,33 @@ class Room implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable booking_periods cannot be null');
         }
         $this->container['booking_periods'] = $booking_periods;
+
+        return $this;
+    }
+
+    /**
+     * Gets universities
+     *
+     * @return \OpenAPI\Client\Model\RoomUniversitiesInner[]|null
+     */
+    public function getUniversities()
+    {
+        return $this->container['universities'];
+    }
+
+    /**
+     * Sets universities
+     *
+     * @param \OpenAPI\Client\Model\RoomUniversitiesInner[]|null $universities universities
+     *
+     * @return self
+     */
+    public function setUniversities($universities)
+    {
+        if (is_null($universities)) {
+            throw new \InvalidArgumentException('non-nullable universities cannot be null');
+        }
+        $this->container['universities'] = $universities;
 
         return $this;
     }

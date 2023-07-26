@@ -58,7 +58,9 @@ class GetUniversities200ResponseAllOfData implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPITypes = [
-        'items' => '\OpenAPI\Client\Model\UniversityWithCity[]'
+        'items' => '\OpenAPI\Client\Model\UniversityWithCity[]',
+        'meta' => '\OpenAPI\Client\Model\PaginationMeta',
+        'links' => '\OpenAPI\Client\Model\PaginationLinks'
     ];
 
     /**
@@ -69,7 +71,9 @@ class GetUniversities200ResponseAllOfData implements ModelInterface, ArrayAccess
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'items' => null
+        'items' => null,
+        'meta' => null,
+        'links' => null
     ];
 
     /**
@@ -78,7 +82,9 @@ class GetUniversities200ResponseAllOfData implements ModelInterface, ArrayAccess
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'items' => false
+        'items' => false,
+		'meta' => false,
+		'links' => false
     ];
 
     /**
@@ -167,7 +173,9 @@ class GetUniversities200ResponseAllOfData implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'items' => 'items'
+        'items' => 'items',
+        'meta' => 'meta',
+        'links' => 'links'
     ];
 
     /**
@@ -176,7 +184,9 @@ class GetUniversities200ResponseAllOfData implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'items' => 'setItems'
+        'items' => 'setItems',
+        'meta' => 'setMeta',
+        'links' => 'setLinks'
     ];
 
     /**
@@ -185,7 +195,9 @@ class GetUniversities200ResponseAllOfData implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'items' => 'getItems'
+        'items' => 'getItems',
+        'meta' => 'getMeta',
+        'links' => 'getLinks'
     ];
 
     /**
@@ -246,6 +258,8 @@ class GetUniversities200ResponseAllOfData implements ModelInterface, ArrayAccess
     public function __construct(array $data = null)
     {
         $this->setIfExists('items', $data ?? [], null);
+        $this->setIfExists('meta', $data ?? [], null);
+        $this->setIfExists('links', $data ?? [], null);
     }
 
     /**
@@ -313,6 +327,60 @@ class GetUniversities200ResponseAllOfData implements ModelInterface, ArrayAccess
             throw new \InvalidArgumentException('non-nullable items cannot be null');
         }
         $this->container['items'] = $items;
+
+        return $this;
+    }
+
+    /**
+     * Gets meta
+     *
+     * @return \OpenAPI\Client\Model\PaginationMeta|null
+     */
+    public function getMeta()
+    {
+        return $this->container['meta'];
+    }
+
+    /**
+     * Sets meta
+     *
+     * @param \OpenAPI\Client\Model\PaginationMeta|null $meta meta
+     *
+     * @return self
+     */
+    public function setMeta($meta)
+    {
+        if (is_null($meta)) {
+            throw new \InvalidArgumentException('non-nullable meta cannot be null');
+        }
+        $this->container['meta'] = $meta;
+
+        return $this;
+    }
+
+    /**
+     * Gets links
+     *
+     * @return \OpenAPI\Client\Model\PaginationLinks|null
+     */
+    public function getLinks()
+    {
+        return $this->container['links'];
+    }
+
+    /**
+     * Sets links
+     *
+     * @param \OpenAPI\Client\Model\PaginationLinks|null $links links
+     *
+     * @return self
+     */
+    public function setLinks($links)
+    {
+        if (is_null($links)) {
+            throw new \InvalidArgumentException('non-nullable links cannot be null');
+        }
+        $this->container['links'] = $links;
 
         return $this;
     }

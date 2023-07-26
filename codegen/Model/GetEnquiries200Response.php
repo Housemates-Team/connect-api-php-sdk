@@ -62,9 +62,7 @@ class GetEnquiries200Response implements ModelInterface, ArrayAccess, \JsonSeria
         'code' => 'int',
         'locale' => 'string',
         'message' => 'string',
-        'data' => '\OpenAPI\Client\Model\GetEnquiries200ResponseAllOfData',
-        'meta' => '\OpenAPI\Client\Model\PaginationMeta',
-        'links' => '\OpenAPI\Client\Model\PaginationLinks'
+        'data' => '\OpenAPI\Client\Model\GetEnquiries200ResponseAllOfData'
     ];
 
     /**
@@ -79,9 +77,7 @@ class GetEnquiries200Response implements ModelInterface, ArrayAccess, \JsonSeria
         'code' => null,
         'locale' => null,
         'message' => null,
-        'data' => null,
-        'meta' => null,
-        'links' => null
+        'data' => null
     ];
 
     /**
@@ -94,9 +90,7 @@ class GetEnquiries200Response implements ModelInterface, ArrayAccess, \JsonSeria
 		'code' => false,
 		'locale' => false,
 		'message' => false,
-		'data' => false,
-		'meta' => false,
-		'links' => false
+		'data' => false
     ];
 
     /**
@@ -189,9 +183,7 @@ class GetEnquiries200Response implements ModelInterface, ArrayAccess, \JsonSeria
         'code' => 'code',
         'locale' => 'locale',
         'message' => 'message',
-        'data' => 'data',
-        'meta' => 'meta',
-        'links' => 'links'
+        'data' => 'data'
     ];
 
     /**
@@ -204,9 +196,7 @@ class GetEnquiries200Response implements ModelInterface, ArrayAccess, \JsonSeria
         'code' => 'setCode',
         'locale' => 'setLocale',
         'message' => 'setMessage',
-        'data' => 'setData',
-        'meta' => 'setMeta',
-        'links' => 'setLinks'
+        'data' => 'setData'
     ];
 
     /**
@@ -219,9 +209,7 @@ class GetEnquiries200Response implements ModelInterface, ArrayAccess, \JsonSeria
         'code' => 'getCode',
         'locale' => 'getLocale',
         'message' => 'getMessage',
-        'data' => 'getData',
-        'meta' => 'getMeta',
-        'links' => 'getLinks'
+        'data' => 'getData'
     ];
 
     /**
@@ -286,8 +274,6 @@ class GetEnquiries200Response implements ModelInterface, ArrayAccess, \JsonSeria
         $this->setIfExists('locale', $data ?? [], null);
         $this->setIfExists('message', $data ?? [], null);
         $this->setIfExists('data', $data ?? [], null);
-        $this->setIfExists('meta', $data ?? [], null);
-        $this->setIfExists('links', $data ?? [], null);
     }
 
     /**
@@ -463,60 +449,6 @@ class GetEnquiries200Response implements ModelInterface, ArrayAccess, \JsonSeria
             throw new \InvalidArgumentException('non-nullable data cannot be null');
         }
         $this->container['data'] = $data;
-
-        return $this;
-    }
-
-    /**
-     * Gets meta
-     *
-     * @return \OpenAPI\Client\Model\PaginationMeta|null
-     */
-    public function getMeta()
-    {
-        return $this->container['meta'];
-    }
-
-    /**
-     * Sets meta
-     *
-     * @param \OpenAPI\Client\Model\PaginationMeta|null $meta meta
-     *
-     * @return self
-     */
-    public function setMeta($meta)
-    {
-        if (is_null($meta)) {
-            throw new \InvalidArgumentException('non-nullable meta cannot be null');
-        }
-        $this->container['meta'] = $meta;
-
-        return $this;
-    }
-
-    /**
-     * Gets links
-     *
-     * @return \OpenAPI\Client\Model\PaginationLinks|null
-     */
-    public function getLinks()
-    {
-        return $this->container['links'];
-    }
-
-    /**
-     * Sets links
-     *
-     * @param \OpenAPI\Client\Model\PaginationLinks|null $links links
-     *
-     * @return self
-     */
-    public function setLinks($links)
-    {
-        if (is_null($links)) {
-            throw new \InvalidArgumentException('non-nullable links cannot be null');
-        }
-        $this->container['links'] = $links;
 
         return $this;
     }

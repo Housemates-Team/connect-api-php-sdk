@@ -1,6 +1,6 @@
 <?php
 /**
- * GetRooms200Response
+ * GetRooms200ResponseAllOfData
  *
  * PHP version 7.4
  *
@@ -33,7 +33,7 @@ use \ArrayAccess;
 use \OpenAPI\Client\ObjectSerializer;
 
 /**
- * GetRooms200Response Class Doc Comment
+ * GetRooms200ResponseAllOfData Class Doc Comment
  *
  * @category Class
  * @package  OpenAPI\Client
@@ -41,7 +41,7 @@ use \OpenAPI\Client\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class GetRooms200Response implements ModelInterface, ArrayAccess, \JsonSerializable
+class GetRooms200ResponseAllOfData implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +50,7 @@ class GetRooms200Response implements ModelInterface, ArrayAccess, \JsonSerializa
       *
       * @var string
       */
-    protected static $openAPIModelName = 'getRooms_200_response';
+    protected static $openAPIModelName = 'getRooms_200_response_allOf_data';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,11 +58,9 @@ class GetRooms200Response implements ModelInterface, ArrayAccess, \JsonSerializa
       * @var string[]
       */
     protected static $openAPITypes = [
-        'success' => 'bool',
-        'code' => 'int',
-        'locale' => 'string',
-        'message' => 'string',
-        'data' => '\OpenAPI\Client\Model\GetRooms200ResponseAllOfData'
+        'items' => '\OpenAPI\Client\Model\Room[]',
+        'meta' => '\OpenAPI\Client\Model\PaginationMeta',
+        'links' => '\OpenAPI\Client\Model\PaginationLinks'
     ];
 
     /**
@@ -73,11 +71,9 @@ class GetRooms200Response implements ModelInterface, ArrayAccess, \JsonSerializa
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'success' => null,
-        'code' => null,
-        'locale' => null,
-        'message' => null,
-        'data' => null
+        'items' => null,
+        'meta' => null,
+        'links' => null
     ];
 
     /**
@@ -86,11 +82,9 @@ class GetRooms200Response implements ModelInterface, ArrayAccess, \JsonSerializa
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'success' => false,
-		'code' => false,
-		'locale' => false,
-		'message' => false,
-		'data' => false
+        'items' => false,
+		'meta' => false,
+		'links' => false
     ];
 
     /**
@@ -179,11 +173,9 @@ class GetRooms200Response implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $attributeMap = [
-        'success' => 'success',
-        'code' => 'code',
-        'locale' => 'locale',
-        'message' => 'message',
-        'data' => 'data'
+        'items' => 'items',
+        'meta' => 'meta',
+        'links' => 'links'
     ];
 
     /**
@@ -192,11 +184,9 @@ class GetRooms200Response implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $setters = [
-        'success' => 'setSuccess',
-        'code' => 'setCode',
-        'locale' => 'setLocale',
-        'message' => 'setMessage',
-        'data' => 'setData'
+        'items' => 'setItems',
+        'meta' => 'setMeta',
+        'links' => 'setLinks'
     ];
 
     /**
@@ -205,11 +195,9 @@ class GetRooms200Response implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $getters = [
-        'success' => 'getSuccess',
-        'code' => 'getCode',
-        'locale' => 'getLocale',
-        'message' => 'getMessage',
-        'data' => 'getData'
+        'items' => 'getItems',
+        'meta' => 'getMeta',
+        'links' => 'getLinks'
     ];
 
     /**
@@ -269,11 +257,9 @@ class GetRooms200Response implements ModelInterface, ArrayAccess, \JsonSerializa
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('success', $data ?? [], null);
-        $this->setIfExists('code', $data ?? [], null);
-        $this->setIfExists('locale', $data ?? [], null);
-        $this->setIfExists('message', $data ?? [], null);
-        $this->setIfExists('data', $data ?? [], null);
+        $this->setIfExists('items', $data ?? [], null);
+        $this->setIfExists('meta', $data ?? [], null);
+        $this->setIfExists('links', $data ?? [], null);
     }
 
     /**
@@ -319,136 +305,82 @@ class GetRooms200Response implements ModelInterface, ArrayAccess, \JsonSerializa
 
 
     /**
-     * Gets success
+     * Gets items
      *
-     * @return bool|null
+     * @return \OpenAPI\Client\Model\Room[]|null
      */
-    public function getSuccess()
+    public function getItems()
     {
-        return $this->container['success'];
+        return $this->container['items'];
     }
 
     /**
-     * Sets success
+     * Sets items
      *
-     * @param bool|null $success success
+     * @param \OpenAPI\Client\Model\Room[]|null $items items
      *
      * @return self
      */
-    public function setSuccess($success)
+    public function setItems($items)
     {
-        if (is_null($success)) {
-            throw new \InvalidArgumentException('non-nullable success cannot be null');
+        if (is_null($items)) {
+            throw new \InvalidArgumentException('non-nullable items cannot be null');
         }
-        $this->container['success'] = $success;
+        $this->container['items'] = $items;
 
         return $this;
     }
 
     /**
-     * Gets code
+     * Gets meta
      *
-     * @return int|null
+     * @return \OpenAPI\Client\Model\PaginationMeta|null
      */
-    public function getCode()
+    public function getMeta()
     {
-        return $this->container['code'];
+        return $this->container['meta'];
     }
 
     /**
-     * Sets code
+     * Sets meta
      *
-     * @param int|null $code code
+     * @param \OpenAPI\Client\Model\PaginationMeta|null $meta meta
      *
      * @return self
      */
-    public function setCode($code)
+    public function setMeta($meta)
     {
-        if (is_null($code)) {
-            throw new \InvalidArgumentException('non-nullable code cannot be null');
+        if (is_null($meta)) {
+            throw new \InvalidArgumentException('non-nullable meta cannot be null');
         }
-        $this->container['code'] = $code;
+        $this->container['meta'] = $meta;
 
         return $this;
     }
 
     /**
-     * Gets locale
+     * Gets links
      *
-     * @return string|null
+     * @return \OpenAPI\Client\Model\PaginationLinks|null
      */
-    public function getLocale()
+    public function getLinks()
     {
-        return $this->container['locale'];
+        return $this->container['links'];
     }
 
     /**
-     * Sets locale
+     * Sets links
      *
-     * @param string|null $locale locale
+     * @param \OpenAPI\Client\Model\PaginationLinks|null $links links
      *
      * @return self
      */
-    public function setLocale($locale)
+    public function setLinks($links)
     {
-        if (is_null($locale)) {
-            throw new \InvalidArgumentException('non-nullable locale cannot be null');
+        if (is_null($links)) {
+            throw new \InvalidArgumentException('non-nullable links cannot be null');
         }
-        $this->container['locale'] = $locale;
-
-        return $this;
-    }
-
-    /**
-     * Gets message
-     *
-     * @return string|null
-     */
-    public function getMessage()
-    {
-        return $this->container['message'];
-    }
-
-    /**
-     * Sets message
-     *
-     * @param string|null $message message
-     *
-     * @return self
-     */
-    public function setMessage($message)
-    {
-        if (is_null($message)) {
-            throw new \InvalidArgumentException('non-nullable message cannot be null');
-        }
-        $this->container['message'] = $message;
-
-        return $this;
-    }
-
-    /**
-     * Gets data
-     *
-     * @return \OpenAPI\Client\Model\GetRooms200ResponseAllOfData|null
-     */
-    public function getData()
-    {
-        return $this->container['data'];
-    }
-
-    /**
-     * Sets data
-     *
-     * @param \OpenAPI\Client\Model\GetRooms200ResponseAllOfData|null $data data
-     *
-     * @return self
-     */
-    public function setData($data)
-    {
-        if (is_null($data)) {
-            throw new \InvalidArgumentException('non-nullable data cannot be null');
-        }
-        $this->container['data'] = $data;
+        $this->container['links'] = $links;
 
         return $this;
     }

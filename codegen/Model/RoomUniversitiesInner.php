@@ -1,6 +1,6 @@
 <?php
 /**
- * GetRooms200Response
+ * RoomUniversitiesInner
  *
  * PHP version 7.4
  *
@@ -33,7 +33,7 @@ use \ArrayAccess;
 use \OpenAPI\Client\ObjectSerializer;
 
 /**
- * GetRooms200Response Class Doc Comment
+ * RoomUniversitiesInner Class Doc Comment
  *
  * @category Class
  * @package  OpenAPI\Client
@@ -41,7 +41,7 @@ use \OpenAPI\Client\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class GetRooms200Response implements ModelInterface, ArrayAccess, \JsonSerializable
+class RoomUniversitiesInner implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +50,7 @@ class GetRooms200Response implements ModelInterface, ArrayAccess, \JsonSerializa
       *
       * @var string
       */
-    protected static $openAPIModelName = 'getRooms_200_response';
+    protected static $openAPIModelName = 'Room_universities_inner';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,11 +58,12 @@ class GetRooms200Response implements ModelInterface, ArrayAccess, \JsonSerializa
       * @var string[]
       */
     protected static $openAPITypes = [
-        'success' => 'bool',
-        'code' => 'int',
-        'locale' => 'string',
-        'message' => 'string',
-        'data' => '\OpenAPI\Client\Model\GetRooms200ResponseAllOfData'
+        'name' => 'string',
+        'distance' => 'float',
+        'walk' => 'string',
+        'drive' => 'string',
+        'metric_unit' => 'string',
+        'coordinates' => '\OpenAPI\Client\Model\RoomCoordinates'
     ];
 
     /**
@@ -73,11 +74,12 @@ class GetRooms200Response implements ModelInterface, ArrayAccess, \JsonSerializa
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'success' => null,
-        'code' => null,
-        'locale' => null,
-        'message' => null,
-        'data' => null
+        'name' => null,
+        'distance' => null,
+        'walk' => null,
+        'drive' => null,
+        'metric_unit' => null,
+        'coordinates' => null
     ];
 
     /**
@@ -86,11 +88,12 @@ class GetRooms200Response implements ModelInterface, ArrayAccess, \JsonSerializa
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'success' => false,
-		'code' => false,
-		'locale' => false,
-		'message' => false,
-		'data' => false
+        'name' => false,
+		'distance' => false,
+		'walk' => false,
+		'drive' => false,
+		'metric_unit' => false,
+		'coordinates' => false
     ];
 
     /**
@@ -179,11 +182,12 @@ class GetRooms200Response implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $attributeMap = [
-        'success' => 'success',
-        'code' => 'code',
-        'locale' => 'locale',
-        'message' => 'message',
-        'data' => 'data'
+        'name' => 'name',
+        'distance' => 'distance',
+        'walk' => 'walk',
+        'drive' => 'drive',
+        'metric_unit' => 'metric_unit',
+        'coordinates' => 'coordinates'
     ];
 
     /**
@@ -192,11 +196,12 @@ class GetRooms200Response implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $setters = [
-        'success' => 'setSuccess',
-        'code' => 'setCode',
-        'locale' => 'setLocale',
-        'message' => 'setMessage',
-        'data' => 'setData'
+        'name' => 'setName',
+        'distance' => 'setDistance',
+        'walk' => 'setWalk',
+        'drive' => 'setDrive',
+        'metric_unit' => 'setMetricUnit',
+        'coordinates' => 'setCoordinates'
     ];
 
     /**
@@ -205,11 +210,12 @@ class GetRooms200Response implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $getters = [
-        'success' => 'getSuccess',
-        'code' => 'getCode',
-        'locale' => 'getLocale',
-        'message' => 'getMessage',
-        'data' => 'getData'
+        'name' => 'getName',
+        'distance' => 'getDistance',
+        'walk' => 'getWalk',
+        'drive' => 'getDrive',
+        'metric_unit' => 'getMetricUnit',
+        'coordinates' => 'getCoordinates'
     ];
 
     /**
@@ -269,11 +275,12 @@ class GetRooms200Response implements ModelInterface, ArrayAccess, \JsonSerializa
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('success', $data ?? [], null);
-        $this->setIfExists('code', $data ?? [], null);
-        $this->setIfExists('locale', $data ?? [], null);
-        $this->setIfExists('message', $data ?? [], null);
-        $this->setIfExists('data', $data ?? [], null);
+        $this->setIfExists('name', $data ?? [], null);
+        $this->setIfExists('distance', $data ?? [], null);
+        $this->setIfExists('walk', $data ?? [], null);
+        $this->setIfExists('drive', $data ?? [], null);
+        $this->setIfExists('metric_unit', $data ?? [], null);
+        $this->setIfExists('coordinates', $data ?? [], null);
     }
 
     /**
@@ -319,136 +326,163 @@ class GetRooms200Response implements ModelInterface, ArrayAccess, \JsonSerializa
 
 
     /**
-     * Gets success
-     *
-     * @return bool|null
-     */
-    public function getSuccess()
-    {
-        return $this->container['success'];
-    }
-
-    /**
-     * Sets success
-     *
-     * @param bool|null $success success
-     *
-     * @return self
-     */
-    public function setSuccess($success)
-    {
-        if (is_null($success)) {
-            throw new \InvalidArgumentException('non-nullable success cannot be null');
-        }
-        $this->container['success'] = $success;
-
-        return $this;
-    }
-
-    /**
-     * Gets code
-     *
-     * @return int|null
-     */
-    public function getCode()
-    {
-        return $this->container['code'];
-    }
-
-    /**
-     * Sets code
-     *
-     * @param int|null $code code
-     *
-     * @return self
-     */
-    public function setCode($code)
-    {
-        if (is_null($code)) {
-            throw new \InvalidArgumentException('non-nullable code cannot be null');
-        }
-        $this->container['code'] = $code;
-
-        return $this;
-    }
-
-    /**
-     * Gets locale
+     * Gets name
      *
      * @return string|null
      */
-    public function getLocale()
+    public function getName()
     {
-        return $this->container['locale'];
+        return $this->container['name'];
     }
 
     /**
-     * Sets locale
+     * Sets name
      *
-     * @param string|null $locale locale
+     * @param string|null $name name
      *
      * @return self
      */
-    public function setLocale($locale)
+    public function setName($name)
     {
-        if (is_null($locale)) {
-            throw new \InvalidArgumentException('non-nullable locale cannot be null');
+        if (is_null($name)) {
+            throw new \InvalidArgumentException('non-nullable name cannot be null');
         }
-        $this->container['locale'] = $locale;
+        $this->container['name'] = $name;
 
         return $this;
     }
 
     /**
-     * Gets message
+     * Gets distance
+     *
+     * @return float|null
+     */
+    public function getDistance()
+    {
+        return $this->container['distance'];
+    }
+
+    /**
+     * Sets distance
+     *
+     * @param float|null $distance distance
+     *
+     * @return self
+     */
+    public function setDistance($distance)
+    {
+        if (is_null($distance)) {
+            throw new \InvalidArgumentException('non-nullable distance cannot be null');
+        }
+        $this->container['distance'] = $distance;
+
+        return $this;
+    }
+
+    /**
+     * Gets walk
      *
      * @return string|null
      */
-    public function getMessage()
+    public function getWalk()
     {
-        return $this->container['message'];
+        return $this->container['walk'];
     }
 
     /**
-     * Sets message
+     * Sets walk
      *
-     * @param string|null $message message
+     * @param string|null $walk walk
      *
      * @return self
      */
-    public function setMessage($message)
+    public function setWalk($walk)
     {
-        if (is_null($message)) {
-            throw new \InvalidArgumentException('non-nullable message cannot be null');
+        if (is_null($walk)) {
+            throw new \InvalidArgumentException('non-nullable walk cannot be null');
         }
-        $this->container['message'] = $message;
+        $this->container['walk'] = $walk;
 
         return $this;
     }
 
     /**
-     * Gets data
+     * Gets drive
      *
-     * @return \OpenAPI\Client\Model\GetRooms200ResponseAllOfData|null
+     * @return string|null
      */
-    public function getData()
+    public function getDrive()
     {
-        return $this->container['data'];
+        return $this->container['drive'];
     }
 
     /**
-     * Sets data
+     * Sets drive
      *
-     * @param \OpenAPI\Client\Model\GetRooms200ResponseAllOfData|null $data data
+     * @param string|null $drive drive
      *
      * @return self
      */
-    public function setData($data)
+    public function setDrive($drive)
     {
-        if (is_null($data)) {
-            throw new \InvalidArgumentException('non-nullable data cannot be null');
+        if (is_null($drive)) {
+            throw new \InvalidArgumentException('non-nullable drive cannot be null');
         }
-        $this->container['data'] = $data;
+        $this->container['drive'] = $drive;
+
+        return $this;
+    }
+
+    /**
+     * Gets metric_unit
+     *
+     * @return string|null
+     */
+    public function getMetricUnit()
+    {
+        return $this->container['metric_unit'];
+    }
+
+    /**
+     * Sets metric_unit
+     *
+     * @param string|null $metric_unit metric_unit
+     *
+     * @return self
+     */
+    public function setMetricUnit($metric_unit)
+    {
+        if (is_null($metric_unit)) {
+            throw new \InvalidArgumentException('non-nullable metric_unit cannot be null');
+        }
+        $this->container['metric_unit'] = $metric_unit;
+
+        return $this;
+    }
+
+    /**
+     * Gets coordinates
+     *
+     * @return \OpenAPI\Client\Model\RoomCoordinates|null
+     */
+    public function getCoordinates()
+    {
+        return $this->container['coordinates'];
+    }
+
+    /**
+     * Sets coordinates
+     *
+     * @param \OpenAPI\Client\Model\RoomCoordinates|null $coordinates coordinates
+     *
+     * @return self
+     */
+    public function setCoordinates($coordinates)
+    {
+        if (is_null($coordinates)) {
+            throw new \InvalidArgumentException('non-nullable coordinates cannot be null');
+        }
+        $this->container['coordinates'] = $coordinates;
 
         return $this;
     }

@@ -1,6 +1,6 @@
 <?php
 /**
- * GetRooms200Response
+ * RoomProperty
  *
  * PHP version 7.4
  *
@@ -33,7 +33,7 @@ use \ArrayAccess;
 use \OpenAPI\Client\ObjectSerializer;
 
 /**
- * GetRooms200Response Class Doc Comment
+ * RoomProperty Class Doc Comment
  *
  * @category Class
  * @package  OpenAPI\Client
@@ -41,7 +41,7 @@ use \OpenAPI\Client\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class GetRooms200Response implements ModelInterface, ArrayAccess, \JsonSerializable
+class RoomProperty implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +50,7 @@ class GetRooms200Response implements ModelInterface, ArrayAccess, \JsonSerializa
       *
       * @var string
       */
-    protected static $openAPIModelName = 'getRooms_200_response';
+    protected static $openAPIModelName = 'Room_property';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,11 +58,9 @@ class GetRooms200Response implements ModelInterface, ArrayAccess, \JsonSerializa
       * @var string[]
       */
     protected static $openAPITypes = [
-        'success' => 'bool',
-        'code' => 'int',
-        'locale' => 'string',
-        'message' => 'string',
-        'data' => '\OpenAPI\Client\Model\GetRooms200ResponseAllOfData'
+        'id' => 'string',
+        'name' => 'string',
+        'slug' => 'string'
     ];
 
     /**
@@ -73,11 +71,9 @@ class GetRooms200Response implements ModelInterface, ArrayAccess, \JsonSerializa
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'success' => null,
-        'code' => null,
-        'locale' => null,
-        'message' => null,
-        'data' => null
+        'id' => null,
+        'name' => null,
+        'slug' => null
     ];
 
     /**
@@ -86,11 +82,9 @@ class GetRooms200Response implements ModelInterface, ArrayAccess, \JsonSerializa
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'success' => false,
-		'code' => false,
-		'locale' => false,
-		'message' => false,
-		'data' => false
+        'id' => false,
+		'name' => false,
+		'slug' => false
     ];
 
     /**
@@ -179,11 +173,9 @@ class GetRooms200Response implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $attributeMap = [
-        'success' => 'success',
-        'code' => 'code',
-        'locale' => 'locale',
-        'message' => 'message',
-        'data' => 'data'
+        'id' => 'id',
+        'name' => 'name',
+        'slug' => 'slug'
     ];
 
     /**
@@ -192,11 +184,9 @@ class GetRooms200Response implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $setters = [
-        'success' => 'setSuccess',
-        'code' => 'setCode',
-        'locale' => 'setLocale',
-        'message' => 'setMessage',
-        'data' => 'setData'
+        'id' => 'setId',
+        'name' => 'setName',
+        'slug' => 'setSlug'
     ];
 
     /**
@@ -205,11 +195,9 @@ class GetRooms200Response implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $getters = [
-        'success' => 'getSuccess',
-        'code' => 'getCode',
-        'locale' => 'getLocale',
-        'message' => 'getMessage',
-        'data' => 'getData'
+        'id' => 'getId',
+        'name' => 'getName',
+        'slug' => 'getSlug'
     ];
 
     /**
@@ -269,11 +257,9 @@ class GetRooms200Response implements ModelInterface, ArrayAccess, \JsonSerializa
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('success', $data ?? [], null);
-        $this->setIfExists('code', $data ?? [], null);
-        $this->setIfExists('locale', $data ?? [], null);
-        $this->setIfExists('message', $data ?? [], null);
-        $this->setIfExists('data', $data ?? [], null);
+        $this->setIfExists('id', $data ?? [], null);
+        $this->setIfExists('name', $data ?? [], null);
+        $this->setIfExists('slug', $data ?? [], null);
     }
 
     /**
@@ -319,136 +305,82 @@ class GetRooms200Response implements ModelInterface, ArrayAccess, \JsonSerializa
 
 
     /**
-     * Gets success
-     *
-     * @return bool|null
-     */
-    public function getSuccess()
-    {
-        return $this->container['success'];
-    }
-
-    /**
-     * Sets success
-     *
-     * @param bool|null $success success
-     *
-     * @return self
-     */
-    public function setSuccess($success)
-    {
-        if (is_null($success)) {
-            throw new \InvalidArgumentException('non-nullable success cannot be null');
-        }
-        $this->container['success'] = $success;
-
-        return $this;
-    }
-
-    /**
-     * Gets code
-     *
-     * @return int|null
-     */
-    public function getCode()
-    {
-        return $this->container['code'];
-    }
-
-    /**
-     * Sets code
-     *
-     * @param int|null $code code
-     *
-     * @return self
-     */
-    public function setCode($code)
-    {
-        if (is_null($code)) {
-            throw new \InvalidArgumentException('non-nullable code cannot be null');
-        }
-        $this->container['code'] = $code;
-
-        return $this;
-    }
-
-    /**
-     * Gets locale
+     * Gets id
      *
      * @return string|null
      */
-    public function getLocale()
+    public function getId()
     {
-        return $this->container['locale'];
+        return $this->container['id'];
     }
 
     /**
-     * Sets locale
+     * Sets id
      *
-     * @param string|null $locale locale
+     * @param string|null $id id
      *
      * @return self
      */
-    public function setLocale($locale)
+    public function setId($id)
     {
-        if (is_null($locale)) {
-            throw new \InvalidArgumentException('non-nullable locale cannot be null');
+        if (is_null($id)) {
+            throw new \InvalidArgumentException('non-nullable id cannot be null');
         }
-        $this->container['locale'] = $locale;
+        $this->container['id'] = $id;
 
         return $this;
     }
 
     /**
-     * Gets message
+     * Gets name
      *
      * @return string|null
      */
-    public function getMessage()
+    public function getName()
     {
-        return $this->container['message'];
+        return $this->container['name'];
     }
 
     /**
-     * Sets message
+     * Sets name
      *
-     * @param string|null $message message
+     * @param string|null $name name
      *
      * @return self
      */
-    public function setMessage($message)
+    public function setName($name)
     {
-        if (is_null($message)) {
-            throw new \InvalidArgumentException('non-nullable message cannot be null');
+        if (is_null($name)) {
+            throw new \InvalidArgumentException('non-nullable name cannot be null');
         }
-        $this->container['message'] = $message;
+        $this->container['name'] = $name;
 
         return $this;
     }
 
     /**
-     * Gets data
+     * Gets slug
      *
-     * @return \OpenAPI\Client\Model\GetRooms200ResponseAllOfData|null
+     * @return string|null
      */
-    public function getData()
+    public function getSlug()
     {
-        return $this->container['data'];
+        return $this->container['slug'];
     }
 
     /**
-     * Sets data
+     * Sets slug
      *
-     * @param \OpenAPI\Client\Model\GetRooms200ResponseAllOfData|null $data data
+     * @param string|null $slug slug
      *
      * @return self
      */
-    public function setData($data)
+    public function setSlug($slug)
     {
-        if (is_null($data)) {
-            throw new \InvalidArgumentException('non-nullable data cannot be null');
+        if (is_null($slug)) {
+            throw new \InvalidArgumentException('non-nullable slug cannot be null');
         }
-        $this->container['data'] = $data;
+        $this->container['slug'] = $slug;
 
         return $this;
     }
