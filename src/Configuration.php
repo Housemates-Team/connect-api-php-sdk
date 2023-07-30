@@ -13,7 +13,7 @@ final class Configuration implements Configurable
 
     protected ?string $access_token = null;
 
-    protected ?string $host = null;
+    protected string $host = 'https://api.housemates.io';
 
     protected ?string $api_partner_id = null;
 
@@ -44,14 +44,16 @@ final class Configuration implements Configurable
         return $this;
     }
 
-    public function getHost(): ?string
+    public function getHost(): string
     {
         return $this->host;
     }
 
-    public function setHost(string $host): Configuration
+    public function setHost(?string $host): Configuration
     {
-        $this->host = $host;
+        if (null !== $host) {
+            $this->host = $host;
+        }
         return $this;
     }
 

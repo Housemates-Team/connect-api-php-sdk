@@ -25,7 +25,6 @@ You can install the package via composer:
 
 - At least PHP 7.4 installed on your system.
 - Housemates Connect API credentials:
-    - **Host**: `http://localhost:8060`
     - **Access Token**: `b2fcrSRUV8OsN6Yn79UKGIiGDCLUJtGqEL3m2aO4`
     - **API Partner ID**: `01H0N04529EXND84J5AN2ZH7CX`
 
@@ -42,7 +41,7 @@ so as follows;
 
 ```php
 $configuration = new \Housemates\ConnectApi\Configuration();
-$configuration->setHost('http://localhost:8060')
+$configuration
     ->setAccessToken('b2fcrSRUV8OsN6Yn79UKGIiGDCLUJtGqEL3m2aO4')
     ->setApiPartnerId('01H0N04529EXND84J5AN2ZH7CX');
 
