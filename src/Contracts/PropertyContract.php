@@ -7,7 +7,7 @@ use Housemates\ConnectApi\Response\Response;
 
 interface PropertyContract
 {
-    public function getProperties(PropertyFilter $filters = null): Response;
+    public function getProperties(?PropertyFilter $filters): Response;
 
     public function getProperty(string $propertyId): Response;
 

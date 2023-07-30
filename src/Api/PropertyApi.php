@@ -30,7 +30,8 @@ class PropertyApi extends BaseApi implements PropertyContract
                 $filters->getCityFilter(),
                 $filters->getSlugFilter(),
                 $filters->getAmenitiesFilter(),
-                $filters->getPerPage(),
+                $filters->getPerPageFilter(),
+                $filters->getPageFilter()
             ];
 
             $response = $apiInstance->getProperties(...$args);

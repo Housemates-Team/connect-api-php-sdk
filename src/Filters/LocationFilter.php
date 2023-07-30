@@ -10,6 +10,8 @@ class LocationFilter
 
     protected ?int $per_page_filter = 10;
 
+    protected int $page_filter = 1;
+
     /**
      * @return string|null
      */
@@ -64,4 +66,22 @@ class LocationFilter
         return $this;
     }
 
+    /**
+     * @return int
+     */
+    public function getPageFilter(): int
+    {
+        return $this->page_filter;
+    }
+
+    /**
+     * @param  int  $page_filter
+     * @return LocationFilter
+     */
+    public function setPageFilter(int $page_filter): LocationFilter
+    {
+        $this->page_filter = $page_filter;
+        return $this;
+    }
+    
 }

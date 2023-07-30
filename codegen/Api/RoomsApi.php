@@ -926,6 +926,7 @@ class RoomsApi
      *
      * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
      * @param  int $per_page Number of rooms per page (optional)
+     * @param  int $page Page number to return (optional)
      * @param  string $filter_move_in_date Move-in date to filter by in the format \&quot;MM-YYYY\&quot;. (optional)
      * @param  string $filter_geo_fence Geographical coordinates and radius for filtering rooms. (optional)
      * @param  string $filter_price_range Price range for filtering rooms. (optional)
@@ -939,9 +940,9 @@ class RoomsApi
      * @throws \InvalidArgumentException
      * @return \OpenAPI\Client\Model\GetRooms200Response|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse
      */
-    public function getRooms($x_api_partner_id, $per_page = null, $filter_move_in_date = null, $filter_geo_fence = null, $filter_price_range = null, $filter_amenities = null, $sort_price = null, $sort_max_rooms_left = null, $sort_is_available = null, string $contentType = self::contentTypes['getRooms'][0])
+    public function getRooms($x_api_partner_id, $per_page = null, $page = null, $filter_move_in_date = null, $filter_geo_fence = null, $filter_price_range = null, $filter_amenities = null, $sort_price = null, $sort_max_rooms_left = null, $sort_is_available = null, string $contentType = self::contentTypes['getRooms'][0])
     {
-        list($response) = $this->getRoomsWithHttpInfo($x_api_partner_id, $per_page, $filter_move_in_date, $filter_geo_fence, $filter_price_range, $filter_amenities, $sort_price, $sort_max_rooms_left, $sort_is_available, $contentType);
+        list($response) = $this->getRoomsWithHttpInfo($x_api_partner_id, $per_page, $page, $filter_move_in_date, $filter_geo_fence, $filter_price_range, $filter_amenities, $sort_price, $sort_max_rooms_left, $sort_is_available, $contentType);
         return $response;
     }
 
@@ -952,6 +953,7 @@ class RoomsApi
      *
      * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
      * @param  int $per_page Number of rooms per page (optional)
+     * @param  int $page Page number to return (optional)
      * @param  string $filter_move_in_date Move-in date to filter by in the format \&quot;MM-YYYY\&quot;. (optional)
      * @param  string $filter_geo_fence Geographical coordinates and radius for filtering rooms. (optional)
      * @param  string $filter_price_range Price range for filtering rooms. (optional)
@@ -965,9 +967,9 @@ class RoomsApi
      * @throws \InvalidArgumentException
      * @return array of \OpenAPI\Client\Model\GetRooms200Response|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getRoomsWithHttpInfo($x_api_partner_id, $per_page = null, $filter_move_in_date = null, $filter_geo_fence = null, $filter_price_range = null, $filter_amenities = null, $sort_price = null, $sort_max_rooms_left = null, $sort_is_available = null, string $contentType = self::contentTypes['getRooms'][0])
+    public function getRoomsWithHttpInfo($x_api_partner_id, $per_page = null, $page = null, $filter_move_in_date = null, $filter_geo_fence = null, $filter_price_range = null, $filter_amenities = null, $sort_price = null, $sort_max_rooms_left = null, $sort_is_available = null, string $contentType = self::contentTypes['getRooms'][0])
     {
-        $request = $this->getRoomsRequest($x_api_partner_id, $per_page, $filter_move_in_date, $filter_geo_fence, $filter_price_range, $filter_amenities, $sort_price, $sort_max_rooms_left, $sort_is_available, $contentType);
+        $request = $this->getRoomsRequest($x_api_partner_id, $per_page, $page, $filter_move_in_date, $filter_geo_fence, $filter_price_range, $filter_amenities, $sort_price, $sort_max_rooms_left, $sort_is_available, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1152,6 +1154,7 @@ class RoomsApi
      *
      * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
      * @param  int $per_page Number of rooms per page (optional)
+     * @param  int $page Page number to return (optional)
      * @param  string $filter_move_in_date Move-in date to filter by in the format \&quot;MM-YYYY\&quot;. (optional)
      * @param  string $filter_geo_fence Geographical coordinates and radius for filtering rooms. (optional)
      * @param  string $filter_price_range Price range for filtering rooms. (optional)
@@ -1164,9 +1167,9 @@ class RoomsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getRoomsAsync($x_api_partner_id, $per_page = null, $filter_move_in_date = null, $filter_geo_fence = null, $filter_price_range = null, $filter_amenities = null, $sort_price = null, $sort_max_rooms_left = null, $sort_is_available = null, string $contentType = self::contentTypes['getRooms'][0])
+    public function getRoomsAsync($x_api_partner_id, $per_page = null, $page = null, $filter_move_in_date = null, $filter_geo_fence = null, $filter_price_range = null, $filter_amenities = null, $sort_price = null, $sort_max_rooms_left = null, $sort_is_available = null, string $contentType = self::contentTypes['getRooms'][0])
     {
-        return $this->getRoomsAsyncWithHttpInfo($x_api_partner_id, $per_page, $filter_move_in_date, $filter_geo_fence, $filter_price_range, $filter_amenities, $sort_price, $sort_max_rooms_left, $sort_is_available, $contentType)
+        return $this->getRoomsAsyncWithHttpInfo($x_api_partner_id, $per_page, $page, $filter_move_in_date, $filter_geo_fence, $filter_price_range, $filter_amenities, $sort_price, $sort_max_rooms_left, $sort_is_available, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1181,6 +1184,7 @@ class RoomsApi
      *
      * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
      * @param  int $per_page Number of rooms per page (optional)
+     * @param  int $page Page number to return (optional)
      * @param  string $filter_move_in_date Move-in date to filter by in the format \&quot;MM-YYYY\&quot;. (optional)
      * @param  string $filter_geo_fence Geographical coordinates and radius for filtering rooms. (optional)
      * @param  string $filter_price_range Price range for filtering rooms. (optional)
@@ -1193,10 +1197,10 @@ class RoomsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getRoomsAsyncWithHttpInfo($x_api_partner_id, $per_page = null, $filter_move_in_date = null, $filter_geo_fence = null, $filter_price_range = null, $filter_amenities = null, $sort_price = null, $sort_max_rooms_left = null, $sort_is_available = null, string $contentType = self::contentTypes['getRooms'][0])
+    public function getRoomsAsyncWithHttpInfo($x_api_partner_id, $per_page = null, $page = null, $filter_move_in_date = null, $filter_geo_fence = null, $filter_price_range = null, $filter_amenities = null, $sort_price = null, $sort_max_rooms_left = null, $sort_is_available = null, string $contentType = self::contentTypes['getRooms'][0])
     {
         $returnType = '\OpenAPI\Client\Model\GetRooms200Response';
-        $request = $this->getRoomsRequest($x_api_partner_id, $per_page, $filter_move_in_date, $filter_geo_fence, $filter_price_range, $filter_amenities, $sort_price, $sort_max_rooms_left, $sort_is_available, $contentType);
+        $request = $this->getRoomsRequest($x_api_partner_id, $per_page, $page, $filter_move_in_date, $filter_geo_fence, $filter_price_range, $filter_amenities, $sort_price, $sort_max_rooms_left, $sort_is_available, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1239,6 +1243,7 @@ class RoomsApi
      *
      * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
      * @param  int $per_page Number of rooms per page (optional)
+     * @param  int $page Page number to return (optional)
      * @param  string $filter_move_in_date Move-in date to filter by in the format \&quot;MM-YYYY\&quot;. (optional)
      * @param  string $filter_geo_fence Geographical coordinates and radius for filtering rooms. (optional)
      * @param  string $filter_price_range Price range for filtering rooms. (optional)
@@ -1251,7 +1256,7 @@ class RoomsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function getRoomsRequest($x_api_partner_id, $per_page = null, $filter_move_in_date = null, $filter_geo_fence = null, $filter_price_range = null, $filter_amenities = null, $sort_price = null, $sort_max_rooms_left = null, $sort_is_available = null, string $contentType = self::contentTypes['getRooms'][0])
+    public function getRoomsRequest($x_api_partner_id, $per_page = null, $page = null, $filter_move_in_date = null, $filter_geo_fence = null, $filter_price_range = null, $filter_amenities = null, $sort_price = null, $sort_max_rooms_left = null, $sort_is_available = null, string $contentType = self::contentTypes['getRooms'][0])
     {
 
         // verify the required parameter 'x_api_partner_id' is set
@@ -1260,6 +1265,7 @@ class RoomsApi
                 'Missing the required parameter $x_api_partner_id when calling getRooms'
             );
         }
+
 
 
         if ($filter_move_in_date !== null && !preg_match("/^(0[1-9]|1[0-2])-(20[2-9][0-9]|30[0-9][0-9]|31[0-2][0-9])$/", $filter_move_in_date)) {
@@ -1284,6 +1290,15 @@ class RoomsApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $per_page,
             'per_page', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $page,
+            'page', // param base name
             'integer', // openApiType
             'form', // style
             true, // explode

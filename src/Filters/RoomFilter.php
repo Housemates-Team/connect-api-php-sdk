@@ -6,6 +6,8 @@ class RoomFilter
 {
     protected int $per_page_filter = 10;
 
+    protected int $page_filter = 1;
+
     protected ?string $move_in_date_filter = null;
 
     protected ?string $geo_fence_filter = null;
@@ -101,6 +103,24 @@ class RoomFilter
     public function setPriceRangeFilter(?string $price_range_filter): RoomFilter
     {
         $this->price_range_filter = $price_range_filter;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPageFilter(): int
+    {
+        return $this->page_filter;
+    }
+
+    /**
+     * @param  int  $page_filter
+     * @return RoomFilter
+     */
+    public function setPageFilter(int $page_filter): RoomFilter
+    {
+        $this->page_filter = $page_filter;
         return $this;
     }
 

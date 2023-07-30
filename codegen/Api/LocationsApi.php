@@ -132,6 +132,7 @@ class LocationsApi
      * List of cities
      *
      * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
+     * @param  int $page Page number to return (optional)
      * @param  string $filter_city Filter cities by a specific city (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getCities'] to see the possible values for this operation
      *
@@ -139,9 +140,9 @@ class LocationsApi
      * @throws \InvalidArgumentException
      * @return \OpenAPI\Client\Model\GetCities200Response|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse
      */
-    public function getCities($x_api_partner_id, $filter_city = null, string $contentType = self::contentTypes['getCities'][0])
+    public function getCities($x_api_partner_id, $page = null, $filter_city = null, string $contentType = self::contentTypes['getCities'][0])
     {
-        list($response) = $this->getCitiesWithHttpInfo($x_api_partner_id, $filter_city, $contentType);
+        list($response) = $this->getCitiesWithHttpInfo($x_api_partner_id, $page, $filter_city, $contentType);
         return $response;
     }
 
@@ -151,6 +152,7 @@ class LocationsApi
      * List of cities
      *
      * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
+     * @param  int $page Page number to return (optional)
      * @param  string $filter_city Filter cities by a specific city (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getCities'] to see the possible values for this operation
      *
@@ -158,9 +160,9 @@ class LocationsApi
      * @throws \InvalidArgumentException
      * @return array of \OpenAPI\Client\Model\GetCities200Response|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getCitiesWithHttpInfo($x_api_partner_id, $filter_city = null, string $contentType = self::contentTypes['getCities'][0])
+    public function getCitiesWithHttpInfo($x_api_partner_id, $page = null, $filter_city = null, string $contentType = self::contentTypes['getCities'][0])
     {
-        $request = $this->getCitiesRequest($x_api_partner_id, $filter_city, $contentType);
+        $request = $this->getCitiesRequest($x_api_partner_id, $page, $filter_city, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -344,15 +346,16 @@ class LocationsApi
      * List of cities
      *
      * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
+     * @param  int $page Page number to return (optional)
      * @param  string $filter_city Filter cities by a specific city (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getCities'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getCitiesAsync($x_api_partner_id, $filter_city = null, string $contentType = self::contentTypes['getCities'][0])
+    public function getCitiesAsync($x_api_partner_id, $page = null, $filter_city = null, string $contentType = self::contentTypes['getCities'][0])
     {
-        return $this->getCitiesAsyncWithHttpInfo($x_api_partner_id, $filter_city, $contentType)
+        return $this->getCitiesAsyncWithHttpInfo($x_api_partner_id, $page, $filter_city, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -366,16 +369,17 @@ class LocationsApi
      * List of cities
      *
      * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
+     * @param  int $page Page number to return (optional)
      * @param  string $filter_city Filter cities by a specific city (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getCities'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getCitiesAsyncWithHttpInfo($x_api_partner_id, $filter_city = null, string $contentType = self::contentTypes['getCities'][0])
+    public function getCitiesAsyncWithHttpInfo($x_api_partner_id, $page = null, $filter_city = null, string $contentType = self::contentTypes['getCities'][0])
     {
         $returnType = '\OpenAPI\Client\Model\GetCities200Response';
-        $request = $this->getCitiesRequest($x_api_partner_id, $filter_city, $contentType);
+        $request = $this->getCitiesRequest($x_api_partner_id, $page, $filter_city, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -417,13 +421,14 @@ class LocationsApi
      * Create request for operation 'getCities'
      *
      * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
+     * @param  int $page Page number to return (optional)
      * @param  string $filter_city Filter cities by a specific city (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getCities'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function getCitiesRequest($x_api_partner_id, $filter_city = null, string $contentType = self::contentTypes['getCities'][0])
+    public function getCitiesRequest($x_api_partner_id, $page = null, $filter_city = null, string $contentType = self::contentTypes['getCities'][0])
     {
 
         // verify the required parameter 'x_api_partner_id' is set
@@ -435,6 +440,7 @@ class LocationsApi
 
 
 
+
         $resourcePath = '/api/cities';
         $formParams = [];
         $queryParams = [];
@@ -442,6 +448,15 @@ class LocationsApi
         $httpBody = '';
         $multipart = false;
 
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $page,
+            'page', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $filter_city,
@@ -522,6 +537,7 @@ class LocationsApi
      * List of universities
      *
      * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
+     * @param  int $page Page number to return (optional)
      * @param  string $filter_university Filter universities by a specific university (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUniversities'] to see the possible values for this operation
      *
@@ -529,9 +545,9 @@ class LocationsApi
      * @throws \InvalidArgumentException
      * @return \OpenAPI\Client\Model\GetUniversities200Response|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse
      */
-    public function getUniversities($x_api_partner_id, $filter_university = null, string $contentType = self::contentTypes['getUniversities'][0])
+    public function getUniversities($x_api_partner_id, $page = null, $filter_university = null, string $contentType = self::contentTypes['getUniversities'][0])
     {
-        list($response) = $this->getUniversitiesWithHttpInfo($x_api_partner_id, $filter_university, $contentType);
+        list($response) = $this->getUniversitiesWithHttpInfo($x_api_partner_id, $page, $filter_university, $contentType);
         return $response;
     }
 
@@ -541,6 +557,7 @@ class LocationsApi
      * List of universities
      *
      * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
+     * @param  int $page Page number to return (optional)
      * @param  string $filter_university Filter universities by a specific university (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUniversities'] to see the possible values for this operation
      *
@@ -548,9 +565,9 @@ class LocationsApi
      * @throws \InvalidArgumentException
      * @return array of \OpenAPI\Client\Model\GetUniversities200Response|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getUniversitiesWithHttpInfo($x_api_partner_id, $filter_university = null, string $contentType = self::contentTypes['getUniversities'][0])
+    public function getUniversitiesWithHttpInfo($x_api_partner_id, $page = null, $filter_university = null, string $contentType = self::contentTypes['getUniversities'][0])
     {
-        $request = $this->getUniversitiesRequest($x_api_partner_id, $filter_university, $contentType);
+        $request = $this->getUniversitiesRequest($x_api_partner_id, $page, $filter_university, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -734,15 +751,16 @@ class LocationsApi
      * List of universities
      *
      * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
+     * @param  int $page Page number to return (optional)
      * @param  string $filter_university Filter universities by a specific university (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUniversities'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getUniversitiesAsync($x_api_partner_id, $filter_university = null, string $contentType = self::contentTypes['getUniversities'][0])
+    public function getUniversitiesAsync($x_api_partner_id, $page = null, $filter_university = null, string $contentType = self::contentTypes['getUniversities'][0])
     {
-        return $this->getUniversitiesAsyncWithHttpInfo($x_api_partner_id, $filter_university, $contentType)
+        return $this->getUniversitiesAsyncWithHttpInfo($x_api_partner_id, $page, $filter_university, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -756,16 +774,17 @@ class LocationsApi
      * List of universities
      *
      * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
+     * @param  int $page Page number to return (optional)
      * @param  string $filter_university Filter universities by a specific university (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUniversities'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getUniversitiesAsyncWithHttpInfo($x_api_partner_id, $filter_university = null, string $contentType = self::contentTypes['getUniversities'][0])
+    public function getUniversitiesAsyncWithHttpInfo($x_api_partner_id, $page = null, $filter_university = null, string $contentType = self::contentTypes['getUniversities'][0])
     {
         $returnType = '\OpenAPI\Client\Model\GetUniversities200Response';
-        $request = $this->getUniversitiesRequest($x_api_partner_id, $filter_university, $contentType);
+        $request = $this->getUniversitiesRequest($x_api_partner_id, $page, $filter_university, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -807,13 +826,14 @@ class LocationsApi
      * Create request for operation 'getUniversities'
      *
      * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
+     * @param  int $page Page number to return (optional)
      * @param  string $filter_university Filter universities by a specific university (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUniversities'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function getUniversitiesRequest($x_api_partner_id, $filter_university = null, string $contentType = self::contentTypes['getUniversities'][0])
+    public function getUniversitiesRequest($x_api_partner_id, $page = null, $filter_university = null, string $contentType = self::contentTypes['getUniversities'][0])
     {
 
         // verify the required parameter 'x_api_partner_id' is set
@@ -825,6 +845,7 @@ class LocationsApi
 
 
 
+
         $resourcePath = '/api/universities';
         $formParams = [];
         $queryParams = [];
@@ -832,6 +853,15 @@ class LocationsApi
         $httpBody = '';
         $multipart = false;
 
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $page,
+            'page', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $filter_university,
