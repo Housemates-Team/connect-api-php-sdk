@@ -19,10 +19,12 @@ class LocationApi extends BaseApi implements LocationContract
     public function getCities(?LocationFilter $locationFilter): Response
     {
         $cityFilter = optional($locationFilter)->getCityFilter();
+        $pageFilter = optional($locationFilter)->getPageFilter();
 
         try {
             $response = $this->getApiInstance()->getCities(
                 $this->config->getApiPartnerId(),
+                $pageFilter,
                 $cityFilter,
             );
             return Response::make($response);
