@@ -16,6 +16,9 @@ class RoomFilter
 
     protected ?string $price_range_filter = null;
 
+    protected ?string $city_filter = null;
+
+
     /**
      * @return int
      */
@@ -123,5 +126,17 @@ class RoomFilter
         $this->page_filter = $page_filter;
         return $this;
     }
+
+    public function getCityFilter(): ?string
+    {
+        return $this->city_filter;
+    }
+
+    public function setCityFilter(?string $city_filter): RoomFilter
+    {
+        $this->city_filter = $city_filter;
+        return $this;
+    }
+
 
 }

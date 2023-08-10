@@ -133,7 +133,7 @@ class LocationsApi
      *
      * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
      * @param  int $page Page number to return (optional)
-     * @param  string $filter_city Filter cities by a specific city (optional)
+     * @param  string $filter_city Filter cities by a specific city using its slug (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getCities'] to see the possible values for this operation
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response
@@ -153,7 +153,7 @@ class LocationsApi
      *
      * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
      * @param  int $page Page number to return (optional)
-     * @param  string $filter_city Filter cities by a specific city (optional)
+     * @param  string $filter_city Filter cities by a specific city using its slug (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getCities'] to see the possible values for this operation
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response
@@ -347,7 +347,7 @@ class LocationsApi
      *
      * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
      * @param  int $page Page number to return (optional)
-     * @param  string $filter_city Filter cities by a specific city (optional)
+     * @param  string $filter_city Filter cities by a specific city using its slug (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getCities'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -370,7 +370,7 @@ class LocationsApi
      *
      * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
      * @param  int $page Page number to return (optional)
-     * @param  string $filter_city Filter cities by a specific city (optional)
+     * @param  string $filter_city Filter cities by a specific city using its slug (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getCities'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -422,7 +422,7 @@ class LocationsApi
      *
      * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
      * @param  int $page Page number to return (optional)
-     * @param  string $filter_city Filter cities by a specific city (optional)
+     * @param  string $filter_city Filter cities by a specific city using its slug (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getCities'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException

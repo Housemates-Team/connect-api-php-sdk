@@ -27,6 +27,7 @@ class RoomApi extends BaseApi implements RoomContract
 
             $args[] = optional($filters)->getPerPageFilter() ?? self::DEFAULT_PER_PAGE;
             $args[] = optional($filters)->getPageFilter();
+            $args[] = optional($filters)->getCityFilter();
             $args[] = optional($filters)->getMoveInDateFilter();
             $args[] = optional($filters)->getGeoFenceFilter();
             $args[] = optional($filters)->getPriceRangeFilter();
