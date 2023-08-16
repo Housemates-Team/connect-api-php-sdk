@@ -25,15 +25,7 @@ class AmenityApi extends BaseApi implements AmenityContract
             );
             return Response::make($response);
         } catch (ApiException $e) {
-            throw HousematesApiException::because(
-                sprintf(
-                    'ApiException: %s %s',
-                    $e->getCode(),
-                    $e->getMessage()
-                )
-            );
-        } catch (Exception $e) {
-            throw HousematesApiException::because($e->getMessage());
+            throw $this->apiException($e);
         }
     }
 

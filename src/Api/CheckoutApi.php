@@ -18,6 +18,9 @@ use OpenAPI\Client\Model\CheckoutStartRequest as OpenApiCheckoutStartRequest;
 
 class CheckoutApi extends BaseApi implements CheckoutContract
 {
+    /**
+     * @throws HousematesApiException
+     */
     public function start(CheckoutStartRequest $checkoutStartRequest): Response
     {
         $open_api_checkout_request = new OpenApiCheckoutStartRequest;
@@ -36,15 +39,7 @@ class CheckoutApi extends BaseApi implements CheckoutContract
             return Response::make($response);
 
         } catch (ApiException $e) {
-            throw HousematesApiException::because(
-                sprintf(
-                    'ApiException: %s %s',
-                    $e->getCode(),
-                    $e->getMessage()
-                )
-            );
-        } catch (Exception $e) {
-            throw HousematesApiException::because($e->getMessage());
+            throw $this->apiException($e);
         }
 
     }
@@ -56,6 +51,9 @@ class CheckoutApi extends BaseApi implements CheckoutContract
         );
     }
 
+    /**
+     * @throws HousematesApiException
+     */
     public function complete(CheckoutCompleteRequest $checkoutCompleteRequest): Response
     {
         $checkoutCompleteRequest = $checkoutCompleteRequest->toArray();
@@ -85,15 +83,7 @@ class CheckoutApi extends BaseApi implements CheckoutContract
             return new Response($results);
 
         } catch (ApiException $e) {
-            throw HousematesApiException::because(
-                sprintf(
-                    'ApiException: %s %s',
-                    $e->getCode(),
-                    $e->getMessage()
-                )
-            );
-        } catch (Exception $e) {
-            throw HousematesApiException::because($e->getMessage());
+            throw $this->apiException($e);
         }
 
     }

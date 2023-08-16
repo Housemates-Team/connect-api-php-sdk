@@ -41,11 +41,7 @@ class RoomApi extends BaseApi implements RoomContract
 
             return Response::make($apiInstance->getRooms(...$args));
         } catch (ApiException $e) {
-            throw HousematesApiException::because(
-                sprintf('ApiException: %s %s', $e->getCode(), $e->getMessage())
-            );
-        } catch (Exception $e) {
-            throw HousematesApiException::because($e->getMessage());
+            throw $this->apiException($e);
         }
 
     }
@@ -57,6 +53,9 @@ class RoomApi extends BaseApi implements RoomContract
         );
     }
 
+    /**
+     * @throws HousematesApiException
+     */
     public function getRoom(string $roomId): Response
     {
         try {
@@ -65,14 +64,13 @@ class RoomApi extends BaseApi implements RoomContract
 
             return Response::make($apiInstance->getRoom($apiPartnerId, $roomId));
         } catch (ApiException $e) {
-            throw HousematesApiException::because(
-                sprintf('ApiException: %s %s', $e->getCode(), $e->getMessage())
-            );
-        } catch (Exception $e) {
-            throw HousematesApiException::because($e->getMessage());
+           throw $this->apiException($e);
         }
     }
 
+    /**
+     * @throws HousematesApiException
+     */
     public function getRoomBookingPeriods(string $roomId): Response
     {
         try {
@@ -81,11 +79,7 @@ class RoomApi extends BaseApi implements RoomContract
 
             return Response::make($apiInstance->getRoomBookingPeriods($apiPartnerId, $roomId));
         } catch (ApiException $e) {
-            throw HousematesApiException::because(
-                sprintf('ApiException: %s %s', $e->getCode(), $e->getMessage())
-            );
-        } catch (Exception $e) {
-            throw HousematesApiException::because($e->getMessage());
+            throw $this->apiException($e);
         }
     }
 }

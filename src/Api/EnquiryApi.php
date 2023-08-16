@@ -14,6 +14,9 @@ use OpenAPI\Client\ApiException;
 class EnquiryApi extends BaseApi implements EnquiryContract
 {
 
+    /**
+     * @throws HousematesApiException
+     */
     public function create(EnquiryRequest $enquiryRequest): Response
     {
         try {
@@ -30,15 +33,7 @@ class EnquiryApi extends BaseApi implements EnquiryContract
             );
             return Response::make($response);
         } catch (ApiException $e) {
-            throw HousematesApiException::because(
-                sprintf(
-                    'ApiException: %s %s',
-                    $e->getCode(),
-                    $e->getMessage()
-                )
-            );
-        } catch (Exception $e) {
-            throw HousematesApiException::because($e->getMessage());
+            throw $this->apiException($e);
         }
     }
 
@@ -49,6 +44,9 @@ class EnquiryApi extends BaseApi implements EnquiryContract
         );
     }
 
+    /**
+     * @throws HousematesApiException
+     */
     public function getEnquiries(?EnquiryFilter $filter): Response
     {
         $apiInstance = $this->getApiInstance();
@@ -71,18 +69,13 @@ class EnquiryApi extends BaseApi implements EnquiryContract
             );
             return Response::make($response);
         } catch (ApiException $e) {
-            throw HousematesApiException::because(
-                sprintf(
-                    'ApiException: %s %s',
-                    $e->getCode(),
-                    $e->getMessage()
-                )
-            );
-        } catch (Exception $e) {
-            throw HousematesApiException::because($e->getMessage());
+            throw $this->apiException($e);
         }
     }
 
+    /**
+     * @throws HousematesApiException
+     */
     public function getEnquiry(string $enquiry_id): Response
     {
         try {
@@ -92,15 +85,7 @@ class EnquiryApi extends BaseApi implements EnquiryContract
             );
             return Response::make($response);
         } catch (ApiException $e) {
-            throw HousematesApiException::because(
-                sprintf(
-                    'ApiException: %s %s',
-                    $e->getCode(),
-                    $e->getMessage()
-                )
-            );
-        } catch (Exception $e) {
-            throw HousematesApiException::because($e->getMessage());
+            throw $this->apiException($e);
         }
     }
 
