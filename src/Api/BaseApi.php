@@ -3,6 +3,8 @@
 namespace Housemates\ConnectApi\Api;
 
 use Housemates\ConnectApi\Configuration;
+use Housemates\ConnectApi\Exceptions\ApiException as HousematesApiException;
+use OpenAPI\Client\ApiException;
 use OpenAPI\Client\Configuration as OpenApiConfig;
 
 abstract class BaseApi
@@ -27,4 +29,16 @@ abstract class BaseApi
     }
 
     abstract protected function getApiInstance();
+
+    public function apiException(ApiException $e): HousematesApiException
+    {
+        $exception = new HousematesApiException(
+            $e->getMessage(),
+            $e->getCode(),
+            $e->getResponseHeaders(),
+            $e->getResponseBody()
+        );
+        $exception->setResponseObject($e->getResponseObject());
+        return $exception;
+    }
 }

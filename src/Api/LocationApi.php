@@ -15,58 +15,44 @@ class LocationApi extends BaseApi implements LocationContract
 
     /**
      * @throws HousematesApiException
+     * @throws ApiException
      */
     public function getCities(?LocationFilter $locationFilter): Response
     {
         $cityFilter = optional($locationFilter)->getCityFilter();
         $pageFilter = optional($locationFilter)->getPageFilter();
 
-        try {
+         try {
             $response = $this->getApiInstance()->getCities(
                 $this->config->getApiPartnerId(),
                 $pageFilter,
                 $cityFilter,
             );
             return Response::make($response);
-        } catch (ApiException $e) {
-            throw HousematesApiException::because(
-                sprintf(
-                    'ApiException: %s %s',
-                    $e->getCode(),
-                    $e->getMessage()
-                )
-            );
-        } catch (Exception $e) {
-            throw HousematesApiException::because($e->getMessage());
-        }
+         } catch (ApiException $e) {
+            throw $this->apiException($e);
+         }
     }
 
     /**
      * @throws HousematesApiException
+     * @throws ApiException
      */
     public function getUniversities(?LocationFilter $locationFilter): Response
     {
         $universityFilter = optional($locationFilter)->getUniversityFilter();
         $pageFilter = optional($locationFilter)->getPageFilter();
 
-        try {
+         try {
             $response = $this->getApiInstance()->getUniversities(
                 $this->config->getApiPartnerId(),
                 $pageFilter,
                 $universityFilter,
             );
             return Response::make($response);
-        } catch (ApiException $e) {
-            throw HousematesApiException::because(
-                sprintf(
-                    'ApiException: %s %s',
-                    $e->getCode(),
-                    $e->getMessage()
-                )
-            );
-        } catch (Exception $e) {
-            throw HousematesApiException::because($e->getMessage());
-        }
+         } catch (ApiException $e) {
+             throw $this->apiException($e);
+         }
     }
 
     protected function getApiInstance(): OpenApiLocationsApi

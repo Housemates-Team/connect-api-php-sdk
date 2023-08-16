@@ -2,12 +2,9 @@
 
 namespace Housemates\ConnectApi\Exceptions;
 
-use Exception;
+use OpenAPI\Client\ApiException as ClientApiException;
 
-class ApiException extends Exception
+class ApiException extends ClientApiException
 {
-    public static function because($message): ApiException
-    {
-        return new self($message);
-    }
+
 }
