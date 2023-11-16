@@ -59,7 +59,8 @@ class CheckoutStart201ResponseAllOfData implements ModelInterface, ArrayAccess, 
       */
     protected static $openAPITypes = [
         'stripe' => '\OpenAPI\Client\Model\CheckoutStart201ResponseAllOfDataStripe',
-        'session_token' => 'string'
+        'session_token' => 'string',
+        'checkout_url' => 'string'
     ];
 
     /**
@@ -71,7 +72,8 @@ class CheckoutStart201ResponseAllOfData implements ModelInterface, ArrayAccess, 
       */
     protected static $openAPIFormats = [
         'stripe' => null,
-        'session_token' => null
+        'session_token' => null,
+        'checkout_url' => null
     ];
 
     /**
@@ -81,7 +83,8 @@ class CheckoutStart201ResponseAllOfData implements ModelInterface, ArrayAccess, 
       */
     protected static array $openAPINullables = [
         'stripe' => false,
-		'session_token' => false
+		'session_token' => false,
+		'checkout_url' => true
     ];
 
     /**
@@ -171,7 +174,8 @@ class CheckoutStart201ResponseAllOfData implements ModelInterface, ArrayAccess, 
      */
     protected static $attributeMap = [
         'stripe' => 'stripe',
-        'session_token' => 'session_token'
+        'session_token' => 'session_token',
+        'checkout_url' => 'checkout_url'
     ];
 
     /**
@@ -181,7 +185,8 @@ class CheckoutStart201ResponseAllOfData implements ModelInterface, ArrayAccess, 
      */
     protected static $setters = [
         'stripe' => 'setStripe',
-        'session_token' => 'setSessionToken'
+        'session_token' => 'setSessionToken',
+        'checkout_url' => 'setCheckoutUrl'
     ];
 
     /**
@@ -191,7 +196,8 @@ class CheckoutStart201ResponseAllOfData implements ModelInterface, ArrayAccess, 
      */
     protected static $getters = [
         'stripe' => 'getStripe',
-        'session_token' => 'getSessionToken'
+        'session_token' => 'getSessionToken',
+        'checkout_url' => 'getCheckoutUrl'
     ];
 
     /**
@@ -253,6 +259,7 @@ class CheckoutStart201ResponseAllOfData implements ModelInterface, ArrayAccess, 
     {
         $this->setIfExists('stripe', $data ?? [], null);
         $this->setIfExists('session_token', $data ?? [], null);
+        $this->setIfExists('checkout_url', $data ?? [], null);
     }
 
     /**
@@ -347,6 +354,40 @@ class CheckoutStart201ResponseAllOfData implements ModelInterface, ArrayAccess, 
             throw new \InvalidArgumentException('non-nullable session_token cannot be null');
         }
         $this->container['session_token'] = $session_token;
+
+        return $this;
+    }
+
+    /**
+     * Gets checkout_url
+     *
+     * @return string|null
+     */
+    public function getCheckoutUrl()
+    {
+        return $this->container['checkout_url'];
+    }
+
+    /**
+     * Sets checkout_url
+     *
+     * @param string|null $checkout_url checkout_url
+     *
+     * @return self
+     */
+    public function setCheckoutUrl($checkout_url)
+    {
+        if (is_null($checkout_url)) {
+            array_push($this->openAPINullablesSetToNull, 'checkout_url');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('checkout_url', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['checkout_url'] = $checkout_url;
 
         return $this;
     }
