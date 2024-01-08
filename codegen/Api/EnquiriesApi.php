@@ -75,6 +75,9 @@ class EnquiriesApi
         'createEnquiry' => [
             'application/x-www-form-urlencoded',
         ],
+        'createGeneralEnquiry' => [
+            'application/x-www-form-urlencoded',
+        ],
         'getEnquiries' => [
             'application/json',
         ],
@@ -590,6 +593,488 @@ class EnquiriesApi
         // form params
         if ($message !== null) {
             $formParams['message'] = ObjectSerializer::toFormValue($message);
+        }
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires Bearer (JWT) authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'POST',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation createGeneralEnquiry
+     *
+     * Create a new general enquiry
+     *
+     * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
+     * @param  string $first_name First name of the student (required)
+     * @param  string $last_name Last name of the student (required)
+     * @param  string $email Emil of the student (required)
+     * @param  string $message message (required)
+     * @param  string $contact_number contact_number (optional)
+     * @param  string $metadata key value pair of metadata as a valid json string to be returned in the response (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createGeneralEnquiry'] to see the possible values for this operation
+     *
+     * @throws \OpenAPI\Client\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \OpenAPI\Client\Model\CheckoutComplete201Response|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\UnauthenticatedErrorResponse
+     */
+    public function createGeneralEnquiry($x_api_partner_id, $first_name, $last_name, $email, $message, $contact_number = null, $metadata = null, string $contentType = self::contentTypes['createGeneralEnquiry'][0])
+    {
+        list($response) = $this->createGeneralEnquiryWithHttpInfo($x_api_partner_id, $first_name, $last_name, $email, $message, $contact_number, $metadata, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation createGeneralEnquiryWithHttpInfo
+     *
+     * Create a new general enquiry
+     *
+     * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
+     * @param  string $first_name First name of the student (required)
+     * @param  string $last_name Last name of the student (required)
+     * @param  string $email Emil of the student (required)
+     * @param  string $message (required)
+     * @param  string $contact_number (optional)
+     * @param  string $metadata key value pair of metadata as a valid json string to be returned in the response (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createGeneralEnquiry'] to see the possible values for this operation
+     *
+     * @throws \OpenAPI\Client\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \OpenAPI\Client\Model\CheckoutComplete201Response|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\UnauthenticatedErrorResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function createGeneralEnquiryWithHttpInfo($x_api_partner_id, $first_name, $last_name, $email, $message, $contact_number = null, $metadata = null, string $contentType = self::contentTypes['createGeneralEnquiry'][0])
+    {
+        $request = $this->createGeneralEnquiryRequest($x_api_partner_id, $first_name, $last_name, $email, $message, $contact_number, $metadata, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            switch($statusCode) {
+                case 201:
+                    if ('\OpenAPI\Client\Model\CheckoutComplete201Response' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\OpenAPI\Client\Model\CheckoutComplete201Response' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\CheckoutComplete201Response', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 400:
+                    if ('\OpenAPI\Client\Model\ErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\OpenAPI\Client\Model\ErrorResponse' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\ErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 401:
+                    if ('\OpenAPI\Client\Model\ErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\OpenAPI\Client\Model\ErrorResponse' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\ErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 404:
+                    if ('\OpenAPI\Client\Model\ErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\OpenAPI\Client\Model\ErrorResponse' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\ErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 406:
+                    if ('\OpenAPI\Client\Model\ErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\OpenAPI\Client\Model\ErrorResponse' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\ErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 422:
+                    if ('\OpenAPI\Client\Model\UnauthenticatedErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\OpenAPI\Client\Model\UnauthenticatedErrorResponse' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\UnauthenticatedErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\OpenAPI\Client\Model\CheckoutComplete201Response';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 201:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\OpenAPI\Client\Model\CheckoutComplete201Response',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\OpenAPI\Client\Model\ErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 401:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\OpenAPI\Client\Model\ErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 404:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\OpenAPI\Client\Model\ErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 406:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\OpenAPI\Client\Model\ErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 422:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\OpenAPI\Client\Model\UnauthenticatedErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation createGeneralEnquiryAsync
+     *
+     * Create a new general enquiry
+     *
+     * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
+     * @param  string $first_name First name of the student (required)
+     * @param  string $last_name Last name of the student (required)
+     * @param  string $email Emil of the student (required)
+     * @param  string $message (required)
+     * @param  string $contact_number (optional)
+     * @param  string $metadata key value pair of metadata as a valid json string to be returned in the response (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createGeneralEnquiry'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function createGeneralEnquiryAsync($x_api_partner_id, $first_name, $last_name, $email, $message, $contact_number = null, $metadata = null, string $contentType = self::contentTypes['createGeneralEnquiry'][0])
+    {
+        return $this->createGeneralEnquiryAsyncWithHttpInfo($x_api_partner_id, $first_name, $last_name, $email, $message, $contact_number, $metadata, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation createGeneralEnquiryAsyncWithHttpInfo
+     *
+     * Create a new general enquiry
+     *
+     * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
+     * @param  string $first_name First name of the student (required)
+     * @param  string $last_name Last name of the student (required)
+     * @param  string $email Emil of the student (required)
+     * @param  string $message (required)
+     * @param  string $contact_number (optional)
+     * @param  string $metadata key value pair of metadata as a valid json string to be returned in the response (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createGeneralEnquiry'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function createGeneralEnquiryAsyncWithHttpInfo($x_api_partner_id, $first_name, $last_name, $email, $message, $contact_number = null, $metadata = null, string $contentType = self::contentTypes['createGeneralEnquiry'][0])
+    {
+        $returnType = '\OpenAPI\Client\Model\CheckoutComplete201Response';
+        $request = $this->createGeneralEnquiryRequest($x_api_partner_id, $first_name, $last_name, $email, $message, $contact_number, $metadata, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'createGeneralEnquiry'
+     *
+     * @param  string $x_api_partner_id Unique partner ID provided by Housemates (required)
+     * @param  string $first_name First name of the student (required)
+     * @param  string $last_name Last name of the student (required)
+     * @param  string $email Emil of the student (required)
+     * @param  string $message (required)
+     * @param  string $contact_number (optional)
+     * @param  string $metadata key value pair of metadata as a valid json string to be returned in the response (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createGeneralEnquiry'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function createGeneralEnquiryRequest($x_api_partner_id, $first_name, $last_name, $email, $message, $contact_number = null, $metadata = null, string $contentType = self::contentTypes['createGeneralEnquiry'][0])
+    {
+
+        // verify the required parameter 'x_api_partner_id' is set
+        if ($x_api_partner_id === null || (is_array($x_api_partner_id) && count($x_api_partner_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $x_api_partner_id when calling createGeneralEnquiry'
+            );
+        }
+
+        // verify the required parameter 'first_name' is set
+        if ($first_name === null || (is_array($first_name) && count($first_name) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $first_name when calling createGeneralEnquiry'
+            );
+        }
+
+        // verify the required parameter 'last_name' is set
+        if ($last_name === null || (is_array($last_name) && count($last_name) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $last_name when calling createGeneralEnquiry'
+            );
+        }
+
+        // verify the required parameter 'email' is set
+        if ($email === null || (is_array($email) && count($email) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $email when calling createGeneralEnquiry'
+            );
+        }
+
+        // verify the required parameter 'message' is set
+        if ($message === null || (is_array($message) && count($message) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $message when calling createGeneralEnquiry'
+            );
+        }
+
+
+
+
+        $resourcePath = '/api/enquiries/general';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+        // header params
+        if ($x_api_partner_id !== null) {
+            $headerParams['X-API-PARTNER-ID'] = ObjectSerializer::toHeaderValue($x_api_partner_id);
+        }
+
+
+        // form params
+        if ($first_name !== null) {
+            $formParams['first_name'] = ObjectSerializer::toFormValue($first_name);
+        }
+        // form params
+        if ($last_name !== null) {
+            $formParams['last_name'] = ObjectSerializer::toFormValue($last_name);
+        }
+        // form params
+        if ($email !== null) {
+            $formParams['email'] = ObjectSerializer::toFormValue($email);
+        }
+        // form params
+        if ($contact_number !== null) {
+            $formParams['contact_number'] = ObjectSerializer::toFormValue($contact_number);
+        }
+        // form params
+        if ($message !== null) {
+            $formParams['message'] = ObjectSerializer::toFormValue($message);
+        }
+        // form params
+        if ($metadata !== null) {
+            $formParams['metadata'] = ObjectSerializer::toFormValue($metadata);
         }
 
         $headers = $this->headerSelector->selectHeaders(

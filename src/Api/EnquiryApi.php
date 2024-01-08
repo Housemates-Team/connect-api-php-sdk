@@ -2,7 +2,6 @@
 
 namespace Housemates\ConnectApi\Api;
 
-use Exception;
 use Housemates\ConnectApi\Contracts\EnquiryContract;
 use Housemates\ConnectApi\Exceptions\ApiException as HousematesApiException;
 use Housemates\ConnectApi\Filters\EnquiryFilter;
@@ -30,6 +29,24 @@ class EnquiryApi extends BaseApi implements EnquiryContract
                 $enquiryRequest->getEmail(),
                 $enquiryRequest->getMessage(),
                 $enquiryRequest->getContactNumber()
+            );
+            return Response::make($response);
+        } catch (ApiException $e) {
+            throw $this->apiException($e);
+        }
+    }
+
+    public function createGeneral(EnquiryRequest $enquiryRequest): Response
+    {
+        try {
+            $response = $this->getApiInstance()->createGeneralEnquiry(
+                $this->config->getApiPartnerId(),
+                $enquiryRequest->getFirstName(),
+                $enquiryRequest->getLastName(),
+                $enquiryRequest->getEmail(),
+                $enquiryRequest->getMessage(),
+                $enquiryRequest->getContactNumber(),
+                $enquiryRequest->metadata()
             );
             return Response::make($response);
         } catch (ApiException $e) {

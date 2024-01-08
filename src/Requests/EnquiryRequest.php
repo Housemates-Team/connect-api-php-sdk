@@ -20,6 +20,7 @@ final class EnquiryRequest implements Arrayable
     protected ?string $contactNumber;
 
     protected string $message;
+    protected string $metadata;
 
     /**
      * @return string
@@ -163,6 +164,17 @@ final class EnquiryRequest implements Arrayable
     {
         $this->message = $message;
         return $this;
+    }
+
+    public function setMetadata(string $metadata): EnquiryRequest
+    {
+        $this->metadata = $metadata;
+        return $this;
+    }
+
+    public function metadata(): string
+    {
+        return $this->metadata;
     }
 
 
