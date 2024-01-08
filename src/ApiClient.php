@@ -125,6 +125,14 @@ class ApiClient
         )->create($request);
     }
 
+    public function createGeneralEnquiry(EnquiryRequest $request)
+    {
+        return EnquiryApi::make(
+            $this->config,
+            $this->openApiConfig
+        )->createGeneral($request);
+    }
+
     public function getEnquiries()
     {
         return EnquiryApi::make(

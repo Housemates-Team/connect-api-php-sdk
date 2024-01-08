@@ -9,4 +9,4 @@ openapi-generator-cli generate -i ~/Code/housemates-connect-api/housemates-conne
 cp -r ./openapi_generated_connect/lib/* ./codegen/
 
 # Delete openapi_generated_connect folder
-rm -rf ./openapi_generated_connect
+# rm -rf ./openapi_generated_connect
