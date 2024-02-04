@@ -150,7 +150,7 @@ class EnquiriesApi
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \OpenAPI\Client\Model\CheckoutComplete201Response|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\UnauthenticatedErrorResponse
+     * @return \OpenAPI\Client\Model\CreateEnquiry201Response|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\UnauthenticatedErrorResponse
      */
     public function createEnquiry($x_api_partner_id, $operator_id, $property_id, $room_id, $first_name, $last_name, $email, $message, $contact_number = null, string $contentType = self::contentTypes['createEnquiry'][0])
     {
@@ -176,7 +176,7 @@ class EnquiriesApi
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \OpenAPI\Client\Model\CheckoutComplete201Response|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\UnauthenticatedErrorResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \OpenAPI\Client\Model\CreateEnquiry201Response|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\UnauthenticatedErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function createEnquiryWithHttpInfo($x_api_partner_id, $operator_id, $property_id, $room_id, $first_name, $last_name, $email, $message, $contact_number = null, string $contentType = self::contentTypes['createEnquiry'][0])
     {
@@ -219,17 +219,17 @@ class EnquiriesApi
 
             switch($statusCode) {
                 case 201:
-                    if ('\OpenAPI\Client\Model\CheckoutComplete201Response' === '\SplFileObject') {
+                    if ('\OpenAPI\Client\Model\CreateEnquiry201Response' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\OpenAPI\Client\Model\CheckoutComplete201Response' !== 'string') {
+                        if ('\OpenAPI\Client\Model\CreateEnquiry201Response' !== 'string') {
                             $content = json_decode($content);
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\CheckoutComplete201Response', []),
+                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\CreateEnquiry201Response', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -310,7 +310,7 @@ class EnquiriesApi
                     ];
             }
 
-            $returnType = '\OpenAPI\Client\Model\CheckoutComplete201Response';
+            $returnType = '\OpenAPI\Client\Model\CreateEnquiry201Response';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -331,7 +331,7 @@ class EnquiriesApi
                 case 201:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\OpenAPI\Client\Model\CheckoutComplete201Response',
+                        '\OpenAPI\Client\Model\CreateEnquiry201Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -431,7 +431,7 @@ class EnquiriesApi
      */
     public function createEnquiryAsyncWithHttpInfo($x_api_partner_id, $operator_id, $property_id, $room_id, $first_name, $last_name, $email, $message, $contact_number = null, string $contentType = self::contentTypes['createEnquiry'][0])
     {
-        $returnType = '\OpenAPI\Client\Model\CheckoutComplete201Response';
+        $returnType = '\OpenAPI\Client\Model\CreateEnquiry201Response';
         $request = $this->createEnquiryRequest($x_api_partner_id, $operator_id, $property_id, $room_id, $first_name, $last_name, $email, $message, $contact_number, $contentType);
 
         return $this->client
@@ -668,7 +668,7 @@ class EnquiriesApi
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \OpenAPI\Client\Model\CheckoutComplete201Response|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\UnauthenticatedErrorResponse
+     * @return \OpenAPI\Client\Model\CreateEnquiry201Response|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\UnauthenticatedErrorResponse
      */
     public function createGeneralEnquiry($x_api_partner_id, $first_name, $last_name, $email, $message, $contact_number = null, $metadata = null, string $contentType = self::contentTypes['createGeneralEnquiry'][0])
     {
@@ -692,7 +692,7 @@ class EnquiriesApi
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \OpenAPI\Client\Model\CheckoutComplete201Response|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\UnauthenticatedErrorResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \OpenAPI\Client\Model\CreateEnquiry201Response|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\UnauthenticatedErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function createGeneralEnquiryWithHttpInfo($x_api_partner_id, $first_name, $last_name, $email, $message, $contact_number = null, $metadata = null, string $contentType = self::contentTypes['createGeneralEnquiry'][0])
     {
@@ -735,17 +735,17 @@ class EnquiriesApi
 
             switch($statusCode) {
                 case 201:
-                    if ('\OpenAPI\Client\Model\CheckoutComplete201Response' === '\SplFileObject') {
+                    if ('\OpenAPI\Client\Model\CreateEnquiry201Response' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\OpenAPI\Client\Model\CheckoutComplete201Response' !== 'string') {
+                        if ('\OpenAPI\Client\Model\CreateEnquiry201Response' !== 'string') {
                             $content = json_decode($content);
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\CheckoutComplete201Response', []),
+                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\CreateEnquiry201Response', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -826,7 +826,7 @@ class EnquiriesApi
                     ];
             }
 
-            $returnType = '\OpenAPI\Client\Model\CheckoutComplete201Response';
+            $returnType = '\OpenAPI\Client\Model\CreateEnquiry201Response';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -847,7 +847,7 @@ class EnquiriesApi
                 case 201:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\OpenAPI\Client\Model\CheckoutComplete201Response',
+                        '\OpenAPI\Client\Model\CreateEnquiry201Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -943,7 +943,7 @@ class EnquiriesApi
      */
     public function createGeneralEnquiryAsyncWithHttpInfo($x_api_partner_id, $first_name, $last_name, $email, $message, $contact_number = null, $metadata = null, string $contentType = self::contentTypes['createGeneralEnquiry'][0])
     {
-        $returnType = '\OpenAPI\Client\Model\CheckoutComplete201Response';
+        $returnType = '\OpenAPI\Client\Model\CreateEnquiry201Response';
         $request = $this->createGeneralEnquiryRequest($x_api_partner_id, $first_name, $last_name, $email, $message, $contact_number, $metadata, $contentType);
 
         return $this->client

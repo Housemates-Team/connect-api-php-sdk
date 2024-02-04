@@ -58,7 +58,7 @@ class CheckoutComplete201ResponseAllOf implements ModelInterface, ArrayAccess, \
       * @var string[]
       */
     protected static $openAPITypes = [
-        'data' => 'string'
+        'data' => '\OpenAPI\Client\Model\CheckoutComplete201ResponseAllOfData'
     ];
 
     /**
@@ -293,7 +293,7 @@ class CheckoutComplete201ResponseAllOf implements ModelInterface, ArrayAccess, \
     /**
      * Gets data
      *
-     * @return string|null
+     * @return \OpenAPI\Client\Model\CheckoutComplete201ResponseAllOfData|null
      */
     public function getData()
     {
@@ -303,7 +303,7 @@ class CheckoutComplete201ResponseAllOf implements ModelInterface, ArrayAccess, \
     /**
      * Sets data
      *
-     * @param string|null $data data
+     * @param \OpenAPI\Client\Model\CheckoutComplete201ResponseAllOfData|null $data data
      *
      * @return self
      */
