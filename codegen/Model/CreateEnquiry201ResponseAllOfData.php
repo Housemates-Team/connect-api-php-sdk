@@ -1,6 +1,6 @@
 <?php
 /**
- * CheckoutComplete201Response
+ * CreateEnquiry201ResponseAllOfData
  *
  * PHP version 7.4
  *
@@ -33,7 +33,7 @@ use \ArrayAccess;
 use \OpenAPI\Client\ObjectSerializer;
 
 /**
- * CheckoutComplete201Response Class Doc Comment
+ * CreateEnquiry201ResponseAllOfData Class Doc Comment
  *
  * @category Class
  * @package  OpenAPI\Client
@@ -41,7 +41,7 @@ use \OpenAPI\Client\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class CheckoutComplete201Response implements ModelInterface, ArrayAccess, \JsonSerializable
+class CreateEnquiry201ResponseAllOfData implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +50,7 @@ class CheckoutComplete201Response implements ModelInterface, ArrayAccess, \JsonS
       *
       * @var string
       */
-    protected static $openAPIModelName = 'checkoutComplete_201_response';
+    protected static $openAPIModelName = 'createEnquiry_201_response_allOf_data';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,11 +58,7 @@ class CheckoutComplete201Response implements ModelInterface, ArrayAccess, \JsonS
       * @var string[]
       */
     protected static $openAPITypes = [
-        'success' => 'bool',
-        'code' => 'int',
-        'locale' => 'string',
-        'message' => 'string',
-        'data' => '\OpenAPI\Client\Model\CheckoutComplete201ResponseAllOfData'
+        'enquiry_id' => 'string'
     ];
 
     /**
@@ -73,11 +69,7 @@ class CheckoutComplete201Response implements ModelInterface, ArrayAccess, \JsonS
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'success' => null,
-        'code' => null,
-        'locale' => null,
-        'message' => null,
-        'data' => null
+        'enquiry_id' => null
     ];
 
     /**
@@ -86,11 +78,7 @@ class CheckoutComplete201Response implements ModelInterface, ArrayAccess, \JsonS
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'success' => false,
-		'code' => false,
-		'locale' => false,
-		'message' => false,
-		'data' => false
+        'enquiry_id' => false
     ];
 
     /**
@@ -179,11 +167,7 @@ class CheckoutComplete201Response implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $attributeMap = [
-        'success' => 'success',
-        'code' => 'code',
-        'locale' => 'locale',
-        'message' => 'message',
-        'data' => 'data'
+        'enquiry_id' => 'enquiry_id'
     ];
 
     /**
@@ -192,11 +176,7 @@ class CheckoutComplete201Response implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $setters = [
-        'success' => 'setSuccess',
-        'code' => 'setCode',
-        'locale' => 'setLocale',
-        'message' => 'setMessage',
-        'data' => 'setData'
+        'enquiry_id' => 'setEnquiryId'
     ];
 
     /**
@@ -205,11 +185,7 @@ class CheckoutComplete201Response implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $getters = [
-        'success' => 'getSuccess',
-        'code' => 'getCode',
-        'locale' => 'getLocale',
-        'message' => 'getMessage',
-        'data' => 'getData'
+        'enquiry_id' => 'getEnquiryId'
     ];
 
     /**
@@ -269,11 +245,7 @@ class CheckoutComplete201Response implements ModelInterface, ArrayAccess, \JsonS
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('success', $data ?? [], null);
-        $this->setIfExists('code', $data ?? [], null);
-        $this->setIfExists('locale', $data ?? [], null);
-        $this->setIfExists('message', $data ?? [], null);
-        $this->setIfExists('data', $data ?? [], null);
+        $this->setIfExists('enquiry_id', $data ?? [], null);
     }
 
     /**
@@ -319,136 +291,28 @@ class CheckoutComplete201Response implements ModelInterface, ArrayAccess, \JsonS
 
 
     /**
-     * Gets success
-     *
-     * @return bool|null
-     */
-    public function getSuccess()
-    {
-        return $this->container['success'];
-    }
-
-    /**
-     * Sets success
-     *
-     * @param bool|null $success success
-     *
-     * @return self
-     */
-    public function setSuccess($success)
-    {
-        if (is_null($success)) {
-            throw new \InvalidArgumentException('non-nullable success cannot be null');
-        }
-        $this->container['success'] = $success;
-
-        return $this;
-    }
-
-    /**
-     * Gets code
-     *
-     * @return int|null
-     */
-    public function getCode()
-    {
-        return $this->container['code'];
-    }
-
-    /**
-     * Sets code
-     *
-     * @param int|null $code code
-     *
-     * @return self
-     */
-    public function setCode($code)
-    {
-        if (is_null($code)) {
-            throw new \InvalidArgumentException('non-nullable code cannot be null');
-        }
-        $this->container['code'] = $code;
-
-        return $this;
-    }
-
-    /**
-     * Gets locale
+     * Gets enquiry_id
      *
      * @return string|null
      */
-    public function getLocale()
+    public function getEnquiryId()
     {
-        return $this->container['locale'];
+        return $this->container['enquiry_id'];
     }
 
     /**
-     * Sets locale
+     * Sets enquiry_id
      *
-     * @param string|null $locale locale
+     * @param string|null $enquiry_id enquiry_id
      *
      * @return self
      */
-    public function setLocale($locale)
+    public function setEnquiryId($enquiry_id)
     {
-        if (is_null($locale)) {
-            throw new \InvalidArgumentException('non-nullable locale cannot be null');
+        if (is_null($enquiry_id)) {
+            throw new \InvalidArgumentException('non-nullable enquiry_id cannot be null');
         }
-        $this->container['locale'] = $locale;
-
-        return $this;
-    }
-
-    /**
-     * Gets message
-     *
-     * @return string|null
-     */
-    public function getMessage()
-    {
-        return $this->container['message'];
-    }
-
-    /**
-     * Sets message
-     *
-     * @param string|null $message message
-     *
-     * @return self
-     */
-    public function setMessage($message)
-    {
-        if (is_null($message)) {
-            throw new \InvalidArgumentException('non-nullable message cannot be null');
-        }
-        $this->container['message'] = $message;
-
-        return $this;
-    }
-
-    /**
-     * Gets data
-     *
-     * @return \OpenAPI\Client\Model\CheckoutComplete201ResponseAllOfData|null
-     */
-    public function getData()
-    {
-        return $this->container['data'];
-    }
-
-    /**
-     * Sets data
-     *
-     * @param \OpenAPI\Client\Model\CheckoutComplete201ResponseAllOfData|null $data data
-     *
-     * @return self
-     */
-    public function setData($data)
-    {
-        if (is_null($data)) {
-            throw new \InvalidArgumentException('non-nullable data cannot be null');
-        }
-        $this->container['data'] = $data;
+        $this->container['enquiry_id'] = $enquiry_id;
 
         return $this;
     }

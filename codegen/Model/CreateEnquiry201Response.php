@@ -1,6 +1,6 @@
 <?php
 /**
- * CheckoutComplete201Response
+ * CreateEnquiry201Response
  *
  * PHP version 7.4
  *
@@ -33,7 +33,7 @@ use \ArrayAccess;
 use \OpenAPI\Client\ObjectSerializer;
 
 /**
- * CheckoutComplete201Response Class Doc Comment
+ * CreateEnquiry201Response Class Doc Comment
  *
  * @category Class
  * @package  OpenAPI\Client
@@ -41,7 +41,7 @@ use \OpenAPI\Client\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class CheckoutComplete201Response implements ModelInterface, ArrayAccess, \JsonSerializable
+class CreateEnquiry201Response implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +50,7 @@ class CheckoutComplete201Response implements ModelInterface, ArrayAccess, \JsonS
       *
       * @var string
       */
-    protected static $openAPIModelName = 'checkoutComplete_201_response';
+    protected static $openAPIModelName = 'createEnquiry_201_response';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -62,7 +62,7 @@ class CheckoutComplete201Response implements ModelInterface, ArrayAccess, \JsonS
         'code' => 'int',
         'locale' => 'string',
         'message' => 'string',
-        'data' => '\OpenAPI\Client\Model\CheckoutComplete201ResponseAllOfData'
+        'data' => '\OpenAPI\Client\Model\CreateEnquiry201ResponseAllOfData'
     ];
 
     /**
@@ -429,7 +429,7 @@ class CheckoutComplete201Response implements ModelInterface, ArrayAccess, \JsonS
     /**
      * Gets data
      *
-     * @return \OpenAPI\Client\Model\CheckoutComplete201ResponseAllOfData|null
+     * @return \OpenAPI\Client\Model\CreateEnquiry201ResponseAllOfData|null
      */
     public function getData()
     {
@@ -439,7 +439,7 @@ class CheckoutComplete201Response implements ModelInterface, ArrayAccess, \JsonS
     /**
      * Sets data
      *
-     * @param \OpenAPI\Client\Model\CheckoutComplete201ResponseAllOfData|null $data data
+     * @param \OpenAPI\Client\Model\CreateEnquiry201ResponseAllOfData|null $data data
      *
      * @return self
      */

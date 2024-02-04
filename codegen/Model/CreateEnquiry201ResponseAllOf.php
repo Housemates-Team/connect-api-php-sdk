@@ -1,6 +1,6 @@
 <?php
 /**
- * CheckoutComplete201Response
+ * CreateEnquiry201ResponseAllOf
  *
  * PHP version 7.4
  *
@@ -33,7 +33,7 @@ use \ArrayAccess;
 use \OpenAPI\Client\ObjectSerializer;
 
 /**
- * CheckoutComplete201Response Class Doc Comment
+ * CreateEnquiry201ResponseAllOf Class Doc Comment
  *
  * @category Class
  * @package  OpenAPI\Client
@@ -41,7 +41,7 @@ use \OpenAPI\Client\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class CheckoutComplete201Response implements ModelInterface, ArrayAccess, \JsonSerializable
+class CreateEnquiry201ResponseAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +50,7 @@ class CheckoutComplete201Response implements ModelInterface, ArrayAccess, \JsonS
       *
       * @var string
       */
-    protected static $openAPIModelName = 'checkoutComplete_201_response';
+    protected static $openAPIModelName = 'createEnquiry_201_response_allOf';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,11 +58,7 @@ class CheckoutComplete201Response implements ModelInterface, ArrayAccess, \JsonS
       * @var string[]
       */
     protected static $openAPITypes = [
-        'success' => 'bool',
-        'code' => 'int',
-        'locale' => 'string',
-        'message' => 'string',
-        'data' => '\OpenAPI\Client\Model\CheckoutComplete201ResponseAllOfData'
+        'data' => '\OpenAPI\Client\Model\CreateEnquiry201ResponseAllOfData'
     ];
 
     /**
@@ -73,10 +69,6 @@ class CheckoutComplete201Response implements ModelInterface, ArrayAccess, \JsonS
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'success' => null,
-        'code' => null,
-        'locale' => null,
-        'message' => null,
         'data' => null
     ];
 
@@ -86,11 +78,7 @@ class CheckoutComplete201Response implements ModelInterface, ArrayAccess, \JsonS
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'success' => false,
-		'code' => false,
-		'locale' => false,
-		'message' => false,
-		'data' => false
+        'data' => false
     ];
 
     /**
@@ -179,10 +167,6 @@ class CheckoutComplete201Response implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $attributeMap = [
-        'success' => 'success',
-        'code' => 'code',
-        'locale' => 'locale',
-        'message' => 'message',
         'data' => 'data'
     ];
 
@@ -192,10 +176,6 @@ class CheckoutComplete201Response implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $setters = [
-        'success' => 'setSuccess',
-        'code' => 'setCode',
-        'locale' => 'setLocale',
-        'message' => 'setMessage',
         'data' => 'setData'
     ];
 
@@ -205,10 +185,6 @@ class CheckoutComplete201Response implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $getters = [
-        'success' => 'getSuccess',
-        'code' => 'getCode',
-        'locale' => 'getLocale',
-        'message' => 'getMessage',
         'data' => 'getData'
     ];
 
@@ -269,10 +245,6 @@ class CheckoutComplete201Response implements ModelInterface, ArrayAccess, \JsonS
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('success', $data ?? [], null);
-        $this->setIfExists('code', $data ?? [], null);
-        $this->setIfExists('locale', $data ?? [], null);
-        $this->setIfExists('message', $data ?? [], null);
         $this->setIfExists('data', $data ?? [], null);
     }
 
@@ -319,117 +291,9 @@ class CheckoutComplete201Response implements ModelInterface, ArrayAccess, \JsonS
 
 
     /**
-     * Gets success
-     *
-     * @return bool|null
-     */
-    public function getSuccess()
-    {
-        return $this->container['success'];
-    }
-
-    /**
-     * Sets success
-     *
-     * @param bool|null $success success
-     *
-     * @return self
-     */
-    public function setSuccess($success)
-    {
-        if (is_null($success)) {
-            throw new \InvalidArgumentException('non-nullable success cannot be null');
-        }
-        $this->container['success'] = $success;
-
-        return $this;
-    }
-
-    /**
-     * Gets code
-     *
-     * @return int|null
-     */
-    public function getCode()
-    {
-        return $this->container['code'];
-    }
-
-    /**
-     * Sets code
-     *
-     * @param int|null $code code
-     *
-     * @return self
-     */
-    public function setCode($code)
-    {
-        if (is_null($code)) {
-            throw new \InvalidArgumentException('non-nullable code cannot be null');
-        }
-        $this->container['code'] = $code;
-
-        return $this;
-    }
-
-    /**
-     * Gets locale
-     *
-     * @return string|null
-     */
-    public function getLocale()
-    {
-        return $this->container['locale'];
-    }
-
-    /**
-     * Sets locale
-     *
-     * @param string|null $locale locale
-     *
-     * @return self
-     */
-    public function setLocale($locale)
-    {
-        if (is_null($locale)) {
-            throw new \InvalidArgumentException('non-nullable locale cannot be null');
-        }
-        $this->container['locale'] = $locale;
-
-        return $this;
-    }
-
-    /**
-     * Gets message
-     *
-     * @return string|null
-     */
-    public function getMessage()
-    {
-        return $this->container['message'];
-    }
-
-    /**
-     * Sets message
-     *
-     * @param string|null $message message
-     *
-     * @return self
-     */
-    public function setMessage($message)
-    {
-        if (is_null($message)) {
-            throw new \InvalidArgumentException('non-nullable message cannot be null');
-        }
-        $this->container['message'] = $message;
-
-        return $this;
-    }
-
-    /**
      * Gets data
      *
-     * @return \OpenAPI\Client\Model\CheckoutComplete201ResponseAllOfData|null
+     * @return \OpenAPI\Client\Model\CreateEnquiry201ResponseAllOfData|null
      */
     public function getData()
     {
@@ -439,7 +303,7 @@ class CheckoutComplete201Response implements ModelInterface, ArrayAccess, \JsonS
     /**
      * Sets data
      *
-     * @param \OpenAPI\Client\Model\CheckoutComplete201ResponseAllOfData|null $data data
+     * @param \OpenAPI\Client\Model\CreateEnquiry201ResponseAllOfData|null $data data
      *
      * @return self
      */
