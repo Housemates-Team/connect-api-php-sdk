@@ -64,6 +64,7 @@ class Room implements ModelInterface, ArrayAccess, \JsonSerializable
         'max_rooms_left' => 'int',
         'is_available' => 'bool',
         'price' => 'string',
+        'total_price' => 'string',
         'is_estimated_price' => 'bool',
         'cancellation' => '\OpenAPI\Client\Model\RoomCancellation',
         'price_range' => '\OpenAPI\Client\Model\RoomPriceRange',
@@ -78,6 +79,7 @@ class Room implements ModelInterface, ArrayAccess, \JsonSerializable
         'property' => '\OpenAPI\Client\Model\RoomProperty',
         'booking_periods' => '\OpenAPI\Client\Model\BookingPeriod[]',
         'universities' => '\OpenAPI\Client\Model\RoomUniversitiesInner[]',
+        'group_exclusive' => '\OpenAPI\Client\Model\RoomGroupExclusive',
         '_links' => '\OpenAPI\Client\Model\HateoasLink[]'
     ];
 
@@ -95,6 +97,7 @@ class Room implements ModelInterface, ArrayAccess, \JsonSerializable
         'max_rooms_left' => null,
         'is_available' => null,
         'price' => null,
+        'total_price' => null,
         'is_estimated_price' => null,
         'cancellation' => null,
         'price_range' => null,
@@ -109,6 +112,7 @@ class Room implements ModelInterface, ArrayAccess, \JsonSerializable
         'property' => null,
         'booking_periods' => null,
         'universities' => null,
+        'group_exclusive' => null,
         '_links' => null
     ];
 
@@ -124,6 +128,7 @@ class Room implements ModelInterface, ArrayAccess, \JsonSerializable
 		'max_rooms_left' => false,
 		'is_available' => false,
 		'price' => false,
+		'total_price' => false,
 		'is_estimated_price' => false,
 		'cancellation' => false,
 		'price_range' => false,
@@ -138,6 +143,7 @@ class Room implements ModelInterface, ArrayAccess, \JsonSerializable
 		'property' => false,
 		'booking_periods' => false,
 		'universities' => false,
+		'group_exclusive' => false,
 		'_links' => false
     ];
 
@@ -233,6 +239,7 @@ class Room implements ModelInterface, ArrayAccess, \JsonSerializable
         'max_rooms_left' => 'max_rooms_left',
         'is_available' => 'is_available',
         'price' => 'price',
+        'total_price' => 'total_price',
         'is_estimated_price' => 'is_estimated_price',
         'cancellation' => 'cancellation',
         'price_range' => 'price_range',
@@ -247,6 +254,7 @@ class Room implements ModelInterface, ArrayAccess, \JsonSerializable
         'property' => 'property',
         'booking_periods' => 'booking_periods',
         'universities' => 'universities',
+        'group_exclusive' => 'group_exclusive',
         '_links' => '_links'
     ];
 
@@ -262,6 +270,7 @@ class Room implements ModelInterface, ArrayAccess, \JsonSerializable
         'max_rooms_left' => 'setMaxRoomsLeft',
         'is_available' => 'setIsAvailable',
         'price' => 'setPrice',
+        'total_price' => 'setTotalPrice',
         'is_estimated_price' => 'setIsEstimatedPrice',
         'cancellation' => 'setCancellation',
         'price_range' => 'setPriceRange',
@@ -276,6 +285,7 @@ class Room implements ModelInterface, ArrayAccess, \JsonSerializable
         'property' => 'setProperty',
         'booking_periods' => 'setBookingPeriods',
         'universities' => 'setUniversities',
+        'group_exclusive' => 'setGroupExclusive',
         '_links' => 'setLinks'
     ];
 
@@ -291,6 +301,7 @@ class Room implements ModelInterface, ArrayAccess, \JsonSerializable
         'max_rooms_left' => 'getMaxRoomsLeft',
         'is_available' => 'getIsAvailable',
         'price' => 'getPrice',
+        'total_price' => 'getTotalPrice',
         'is_estimated_price' => 'getIsEstimatedPrice',
         'cancellation' => 'getCancellation',
         'price_range' => 'getPriceRange',
@@ -305,6 +316,7 @@ class Room implements ModelInterface, ArrayAccess, \JsonSerializable
         'property' => 'getProperty',
         'booking_periods' => 'getBookingPeriods',
         'universities' => 'getUniversities',
+        'group_exclusive' => 'getGroupExclusive',
         '_links' => 'getLinks'
     ];
 
@@ -371,6 +383,7 @@ class Room implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('max_rooms_left', $data ?? [], null);
         $this->setIfExists('is_available', $data ?? [], null);
         $this->setIfExists('price', $data ?? [], null);
+        $this->setIfExists('total_price', $data ?? [], null);
         $this->setIfExists('is_estimated_price', $data ?? [], null);
         $this->setIfExists('cancellation', $data ?? [], null);
         $this->setIfExists('price_range', $data ?? [], null);
@@ -385,6 +398,7 @@ class Room implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('property', $data ?? [], null);
         $this->setIfExists('booking_periods', $data ?? [], null);
         $this->setIfExists('universities', $data ?? [], null);
+        $this->setIfExists('group_exclusive', $data ?? [], null);
         $this->setIfExists('_links', $data ?? [], null);
     }
 
@@ -588,6 +602,33 @@ class Room implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable price cannot be null');
         }
         $this->container['price'] = $price;
+
+        return $this;
+    }
+
+    /**
+     * Gets total_price
+     *
+     * @return string|null
+     */
+    public function getTotalPrice()
+    {
+        return $this->container['total_price'];
+    }
+
+    /**
+     * Sets total_price
+     *
+     * @param string|null $total_price total_price
+     *
+     * @return self
+     */
+    public function setTotalPrice($total_price)
+    {
+        if (is_null($total_price)) {
+            throw new \InvalidArgumentException('non-nullable total_price cannot be null');
+        }
+        $this->container['total_price'] = $total_price;
 
         return $this;
     }
@@ -966,6 +1007,33 @@ class Room implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable universities cannot be null');
         }
         $this->container['universities'] = $universities;
+
+        return $this;
+    }
+
+    /**
+     * Gets group_exclusive
+     *
+     * @return \OpenAPI\Client\Model\RoomGroupExclusive|null
+     */
+    public function getGroupExclusive()
+    {
+        return $this->container['group_exclusive'];
+    }
+
+    /**
+     * Sets group_exclusive
+     *
+     * @param \OpenAPI\Client\Model\RoomGroupExclusive|null $group_exclusive group_exclusive
+     *
+     * @return self
+     */
+    public function setGroupExclusive($group_exclusive)
+    {
+        if (is_null($group_exclusive)) {
+            throw new \InvalidArgumentException('non-nullable group_exclusive cannot be null');
+        }
+        $this->container['group_exclusive'] = $group_exclusive;
 
         return $this;
     }
