@@ -664,15 +664,16 @@ class EnquiriesApi
      * @param  string $message message (required)
      * @param  string $contact_number contact_number (optional)
      * @param  string $metadata key value pair of metadata as a valid json string to be returned in the response (optional)
+     * @param  string $additional_fields key value pair of additional fields as a valid json string (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createGeneralEnquiry'] to see the possible values for this operation
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \OpenAPI\Client\Model\CreateEnquiry201Response|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\UnauthenticatedErrorResponse
      */
-    public function createGeneralEnquiry($x_api_partner_id, $first_name, $last_name, $email, $message, $contact_number = null, $metadata = null, string $contentType = self::contentTypes['createGeneralEnquiry'][0])
+    public function createGeneralEnquiry($x_api_partner_id, $first_name, $last_name, $email, $message, $contact_number = null, $metadata = null, $additional_fields = null, string $contentType = self::contentTypes['createGeneralEnquiry'][0])
     {
-        list($response) = $this->createGeneralEnquiryWithHttpInfo($x_api_partner_id, $first_name, $last_name, $email, $message, $contact_number, $metadata, $contentType);
+        list($response) = $this->createGeneralEnquiryWithHttpInfo($x_api_partner_id, $first_name, $last_name, $email, $message, $contact_number, $metadata, $additional_fields, $contentType);
         return $response;
     }
 
@@ -688,15 +689,16 @@ class EnquiriesApi
      * @param  string $message (required)
      * @param  string $contact_number (optional)
      * @param  string $metadata key value pair of metadata as a valid json string to be returned in the response (optional)
+     * @param  string $additional_fields key value pair of additional fields as a valid json string (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createGeneralEnquiry'] to see the possible values for this operation
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \OpenAPI\Client\Model\CreateEnquiry201Response|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\UnauthenticatedErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function createGeneralEnquiryWithHttpInfo($x_api_partner_id, $first_name, $last_name, $email, $message, $contact_number = null, $metadata = null, string $contentType = self::contentTypes['createGeneralEnquiry'][0])
+    public function createGeneralEnquiryWithHttpInfo($x_api_partner_id, $first_name, $last_name, $email, $message, $contact_number = null, $metadata = null, $additional_fields = null, string $contentType = self::contentTypes['createGeneralEnquiry'][0])
     {
-        $request = $this->createGeneralEnquiryRequest($x_api_partner_id, $first_name, $last_name, $email, $message, $contact_number, $metadata, $contentType);
+        $request = $this->createGeneralEnquiryRequest($x_api_partner_id, $first_name, $last_name, $email, $message, $contact_number, $metadata, $additional_fields, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -909,14 +911,15 @@ class EnquiriesApi
      * @param  string $message (required)
      * @param  string $contact_number (optional)
      * @param  string $metadata key value pair of metadata as a valid json string to be returned in the response (optional)
+     * @param  string $additional_fields key value pair of additional fields as a valid json string (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createGeneralEnquiry'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function createGeneralEnquiryAsync($x_api_partner_id, $first_name, $last_name, $email, $message, $contact_number = null, $metadata = null, string $contentType = self::contentTypes['createGeneralEnquiry'][0])
+    public function createGeneralEnquiryAsync($x_api_partner_id, $first_name, $last_name, $email, $message, $contact_number = null, $metadata = null, $additional_fields = null, string $contentType = self::contentTypes['createGeneralEnquiry'][0])
     {
-        return $this->createGeneralEnquiryAsyncWithHttpInfo($x_api_partner_id, $first_name, $last_name, $email, $message, $contact_number, $metadata, $contentType)
+        return $this->createGeneralEnquiryAsyncWithHttpInfo($x_api_partner_id, $first_name, $last_name, $email, $message, $contact_number, $metadata, $additional_fields, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -936,15 +939,16 @@ class EnquiriesApi
      * @param  string $message (required)
      * @param  string $contact_number (optional)
      * @param  string $metadata key value pair of metadata as a valid json string to be returned in the response (optional)
+     * @param  string $additional_fields key value pair of additional fields as a valid json string (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createGeneralEnquiry'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function createGeneralEnquiryAsyncWithHttpInfo($x_api_partner_id, $first_name, $last_name, $email, $message, $contact_number = null, $metadata = null, string $contentType = self::contentTypes['createGeneralEnquiry'][0])
+    public function createGeneralEnquiryAsyncWithHttpInfo($x_api_partner_id, $first_name, $last_name, $email, $message, $contact_number = null, $metadata = null, $additional_fields = null, string $contentType = self::contentTypes['createGeneralEnquiry'][0])
     {
         $returnType = '\OpenAPI\Client\Model\CreateEnquiry201Response';
-        $request = $this->createGeneralEnquiryRequest($x_api_partner_id, $first_name, $last_name, $email, $message, $contact_number, $metadata, $contentType);
+        $request = $this->createGeneralEnquiryRequest($x_api_partner_id, $first_name, $last_name, $email, $message, $contact_number, $metadata, $additional_fields, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -992,12 +996,13 @@ class EnquiriesApi
      * @param  string $message (required)
      * @param  string $contact_number (optional)
      * @param  string $metadata key value pair of metadata as a valid json string to be returned in the response (optional)
+     * @param  string $additional_fields key value pair of additional fields as a valid json string (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createGeneralEnquiry'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function createGeneralEnquiryRequest($x_api_partner_id, $first_name, $last_name, $email, $message, $contact_number = null, $metadata = null, string $contentType = self::contentTypes['createGeneralEnquiry'][0])
+    public function createGeneralEnquiryRequest($x_api_partner_id, $first_name, $last_name, $email, $message, $contact_number = null, $metadata = null, $additional_fields = null, string $contentType = self::contentTypes['createGeneralEnquiry'][0])
     {
 
         // verify the required parameter 'x_api_partner_id' is set
@@ -1034,6 +1039,7 @@ class EnquiriesApi
                 'Missing the required parameter $message when calling createGeneralEnquiry'
             );
         }
+
 
 
 
@@ -1075,6 +1081,10 @@ class EnquiriesApi
         // form params
         if ($metadata !== null) {
             $formParams['metadata'] = ObjectSerializer::toFormValue($metadata);
+        }
+        // form params
+        if ($additional_fields !== null) {
+            $formParams['additional_fields'] = ObjectSerializer::toFormValue($additional_fields);
         }
 
         $headers = $this->headerSelector->selectHeaders(

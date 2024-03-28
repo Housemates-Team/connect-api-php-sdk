@@ -1,6 +1,6 @@
 <?php
 /**
- * CreateGeneralEnquiryRequest
+ * RoomGroupExclusive
  *
  * PHP version 7.4
  *
@@ -33,7 +33,7 @@ use \ArrayAccess;
 use \OpenAPI\Client\ObjectSerializer;
 
 /**
- * CreateGeneralEnquiryRequest Class Doc Comment
+ * RoomGroupExclusive Class Doc Comment
  *
  * @category Class
  * @package  OpenAPI\Client
@@ -41,7 +41,7 @@ use \OpenAPI\Client\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class CreateGeneralEnquiryRequest implements ModelInterface, ArrayAccess, \JsonSerializable
+class RoomGroupExclusive implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +50,7 @@ class CreateGeneralEnquiryRequest implements ModelInterface, ArrayAccess, \JsonS
       *
       * @var string
       */
-    protected static $openAPIModelName = 'createGeneralEnquiry_request';
+    protected static $openAPIModelName = 'Room_group_exclusive';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,13 +58,8 @@ class CreateGeneralEnquiryRequest implements ModelInterface, ArrayAccess, \JsonS
       * @var string[]
       */
     protected static $openAPITypes = [
-        'first_name' => 'string',
-        'last_name' => 'string',
-        'email' => 'string',
-        'contact_number' => 'string',
-        'message' => 'string',
-        'metadata' => 'string',
-        'additional_fields' => 'string'
+        'status' => 'bool',
+        'size' => 'int'
     ];
 
     /**
@@ -75,13 +70,8 @@ class CreateGeneralEnquiryRequest implements ModelInterface, ArrayAccess, \JsonS
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'first_name' => null,
-        'last_name' => null,
-        'email' => null,
-        'contact_number' => null,
-        'message' => null,
-        'metadata' => null,
-        'additional_fields' => null
+        'status' => null,
+        'size' => null
     ];
 
     /**
@@ -90,13 +80,8 @@ class CreateGeneralEnquiryRequest implements ModelInterface, ArrayAccess, \JsonS
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'first_name' => false,
-		'last_name' => false,
-		'email' => false,
-		'contact_number' => false,
-		'message' => false,
-		'metadata' => false,
-		'additional_fields' => false
+        'status' => false,
+		'size' => false
     ];
 
     /**
@@ -185,13 +170,8 @@ class CreateGeneralEnquiryRequest implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $attributeMap = [
-        'first_name' => 'first_name',
-        'last_name' => 'last_name',
-        'email' => 'email',
-        'contact_number' => 'contact_number',
-        'message' => 'message',
-        'metadata' => 'metadata',
-        'additional_fields' => 'additional_fields'
+        'status' => 'status',
+        'size' => 'size'
     ];
 
     /**
@@ -200,13 +180,8 @@ class CreateGeneralEnquiryRequest implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $setters = [
-        'first_name' => 'setFirstName',
-        'last_name' => 'setLastName',
-        'email' => 'setEmail',
-        'contact_number' => 'setContactNumber',
-        'message' => 'setMessage',
-        'metadata' => 'setMetadata',
-        'additional_fields' => 'setAdditionalFields'
+        'status' => 'setStatus',
+        'size' => 'setSize'
     ];
 
     /**
@@ -215,13 +190,8 @@ class CreateGeneralEnquiryRequest implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $getters = [
-        'first_name' => 'getFirstName',
-        'last_name' => 'getLastName',
-        'email' => 'getEmail',
-        'contact_number' => 'getContactNumber',
-        'message' => 'getMessage',
-        'metadata' => 'getMetadata',
-        'additional_fields' => 'getAdditionalFields'
+        'status' => 'getStatus',
+        'size' => 'getSize'
     ];
 
     /**
@@ -281,13 +251,8 @@ class CreateGeneralEnquiryRequest implements ModelInterface, ArrayAccess, \JsonS
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('first_name', $data ?? [], null);
-        $this->setIfExists('last_name', $data ?? [], null);
-        $this->setIfExists('email', $data ?? [], null);
-        $this->setIfExists('contact_number', $data ?? [], null);
-        $this->setIfExists('message', $data ?? [], null);
-        $this->setIfExists('metadata', $data ?? [], null);
-        $this->setIfExists('additional_fields', $data ?? [], null);
+        $this->setIfExists('status', $data ?? [], null);
+        $this->setIfExists('size', $data ?? [], null);
     }
 
     /**
@@ -317,18 +282,6 @@ class CreateGeneralEnquiryRequest implements ModelInterface, ArrayAccess, \JsonS
     {
         $invalidProperties = [];
 
-        if ($this->container['first_name'] === null) {
-            $invalidProperties[] = "'first_name' can't be null";
-        }
-        if ($this->container['last_name'] === null) {
-            $invalidProperties[] = "'last_name' can't be null";
-        }
-        if ($this->container['email'] === null) {
-            $invalidProperties[] = "'email' can't be null";
-        }
-        if ($this->container['message'] === null) {
-            $invalidProperties[] = "'message' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -345,190 +298,55 @@ class CreateGeneralEnquiryRequest implements ModelInterface, ArrayAccess, \JsonS
 
 
     /**
-     * Gets first_name
+     * Gets status
      *
-     * @return string
+     * @return bool|null
      */
-    public function getFirstName()
+    public function getStatus()
     {
-        return $this->container['first_name'];
+        return $this->container['status'];
     }
 
     /**
-     * Sets first_name
+     * Sets status
      *
-     * @param string $first_name First name of the student
+     * @param bool|null $status status
      *
      * @return self
      */
-    public function setFirstName($first_name)
+    public function setStatus($status)
     {
-        if (is_null($first_name)) {
-            throw new \InvalidArgumentException('non-nullable first_name cannot be null');
+        if (is_null($status)) {
+            throw new \InvalidArgumentException('non-nullable status cannot be null');
         }
-        $this->container['first_name'] = $first_name;
+        $this->container['status'] = $status;
 
         return $this;
     }
 
     /**
-     * Gets last_name
+     * Gets size
      *
-     * @return string
+     * @return int|null
      */
-    public function getLastName()
+    public function getSize()
     {
-        return $this->container['last_name'];
+        return $this->container['size'];
     }
 
     /**
-     * Sets last_name
+     * Sets size
      *
-     * @param string $last_name Last name of the student
+     * @param int|null $size size
      *
      * @return self
      */
-    public function setLastName($last_name)
+    public function setSize($size)
     {
-        if (is_null($last_name)) {
-            throw new \InvalidArgumentException('non-nullable last_name cannot be null');
+        if (is_null($size)) {
+            throw new \InvalidArgumentException('non-nullable size cannot be null');
         }
-        $this->container['last_name'] = $last_name;
-
-        return $this;
-    }
-
-    /**
-     * Gets email
-     *
-     * @return string
-     */
-    public function getEmail()
-    {
-        return $this->container['email'];
-    }
-
-    /**
-     * Sets email
-     *
-     * @param string $email Emil of the student
-     *
-     * @return self
-     */
-    public function setEmail($email)
-    {
-        if (is_null($email)) {
-            throw new \InvalidArgumentException('non-nullable email cannot be null');
-        }
-        $this->container['email'] = $email;
-
-        return $this;
-    }
-
-    /**
-     * Gets contact_number
-     *
-     * @return string|null
-     */
-    public function getContactNumber()
-    {
-        return $this->container['contact_number'];
-    }
-
-    /**
-     * Sets contact_number
-     *
-     * @param string|null $contact_number contact_number
-     *
-     * @return self
-     */
-    public function setContactNumber($contact_number)
-    {
-        if (is_null($contact_number)) {
-            throw new \InvalidArgumentException('non-nullable contact_number cannot be null');
-        }
-        $this->container['contact_number'] = $contact_number;
-
-        return $this;
-    }
-
-    /**
-     * Gets message
-     *
-     * @return string
-     */
-    public function getMessage()
-    {
-        return $this->container['message'];
-    }
-
-    /**
-     * Sets message
-     *
-     * @param string $message message
-     *
-     * @return self
-     */
-    public function setMessage($message)
-    {
-        if (is_null($message)) {
-            throw new \InvalidArgumentException('non-nullable message cannot be null');
-        }
-        $this->container['message'] = $message;
-
-        return $this;
-    }
-
-    /**
-     * Gets metadata
-     *
-     * @return string|null
-     */
-    public function getMetadata()
-    {
-        return $this->container['metadata'];
-    }
-
-    /**
-     * Sets metadata
-     *
-     * @param string|null $metadata key value pair of metadata as a valid json string to be returned in the response
-     *
-     * @return self
-     */
-    public function setMetadata($metadata)
-    {
-        if (is_null($metadata)) {
-            throw new \InvalidArgumentException('non-nullable metadata cannot be null');
-        }
-        $this->container['metadata'] = $metadata;
-
-        return $this;
-    }
-
-    /**
-     * Gets additional_fields
-     *
-     * @return string|null
-     */
-    public function getAdditionalFields()
-    {
-        return $this->container['additional_fields'];
-    }
-
-    /**
-     * Sets additional_fields
-     *
-     * @param string|null $additional_fields key value pair of additional fields as a valid json string
-     *
-     * @return self
-     */
-    public function setAdditionalFields($additional_fields)
-    {
-        if (is_null($additional_fields)) {
-            throw new \InvalidArgumentException('non-nullable additional_fields cannot be null');
-        }
-        $this->container['additional_fields'] = $additional_fields;
+        $this->container['size'] = $size;
 
         return $this;
     }
