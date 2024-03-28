@@ -21,6 +21,7 @@ final class EnquiryRequest implements Arrayable
 
     protected string $message;
     protected string $metadata;
+    protected string $additionalFields;
 
     /**
      * @return string
@@ -172,9 +173,20 @@ final class EnquiryRequest implements Arrayable
         return $this;
     }
 
+    public function setAdditionalFields(string $additionalFields): EnquiryRequest
+    {
+        $this->additionalFields = $additionalFields;
+        return $this;
+    }
+
     public function metadata(): string
     {
         return $this->metadata;
+    }
+
+    public function additionalFields(): string
+    {
+        return $this->additionalFields;
     }
 
 

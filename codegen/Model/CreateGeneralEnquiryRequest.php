@@ -63,7 +63,8 @@ class CreateGeneralEnquiryRequest implements ModelInterface, ArrayAccess, \JsonS
         'email' => 'string',
         'contact_number' => 'string',
         'message' => 'string',
-        'metadata' => 'string'
+        'metadata' => 'string',
+        'additional_fields' => 'string'
     ];
 
     /**
@@ -79,7 +80,8 @@ class CreateGeneralEnquiryRequest implements ModelInterface, ArrayAccess, \JsonS
         'email' => null,
         'contact_number' => null,
         'message' => null,
-        'metadata' => null
+        'metadata' => null,
+        'additional_fields' => null
     ];
 
     /**
@@ -93,7 +95,8 @@ class CreateGeneralEnquiryRequest implements ModelInterface, ArrayAccess, \JsonS
 		'email' => false,
 		'contact_number' => false,
 		'message' => false,
-		'metadata' => false
+		'metadata' => false,
+		'additional_fields' => false
     ];
 
     /**
@@ -187,7 +190,8 @@ class CreateGeneralEnquiryRequest implements ModelInterface, ArrayAccess, \JsonS
         'email' => 'email',
         'contact_number' => 'contact_number',
         'message' => 'message',
-        'metadata' => 'metadata'
+        'metadata' => 'metadata',
+        'additional_fields' => 'additional_fields'
     ];
 
     /**
@@ -201,7 +205,8 @@ class CreateGeneralEnquiryRequest implements ModelInterface, ArrayAccess, \JsonS
         'email' => 'setEmail',
         'contact_number' => 'setContactNumber',
         'message' => 'setMessage',
-        'metadata' => 'setMetadata'
+        'metadata' => 'setMetadata',
+        'additional_fields' => 'setAdditionalFields'
     ];
 
     /**
@@ -215,7 +220,8 @@ class CreateGeneralEnquiryRequest implements ModelInterface, ArrayAccess, \JsonS
         'email' => 'getEmail',
         'contact_number' => 'getContactNumber',
         'message' => 'getMessage',
-        'metadata' => 'getMetadata'
+        'metadata' => 'getMetadata',
+        'additional_fields' => 'getAdditionalFields'
     ];
 
     /**
@@ -281,6 +287,7 @@ class CreateGeneralEnquiryRequest implements ModelInterface, ArrayAccess, \JsonS
         $this->setIfExists('contact_number', $data ?? [], null);
         $this->setIfExists('message', $data ?? [], null);
         $this->setIfExists('metadata', $data ?? [], null);
+        $this->setIfExists('additional_fields', $data ?? [], null);
     }
 
     /**
@@ -495,6 +502,33 @@ class CreateGeneralEnquiryRequest implements ModelInterface, ArrayAccess, \JsonS
             throw new \InvalidArgumentException('non-nullable metadata cannot be null');
         }
         $this->container['metadata'] = $metadata;
+
+        return $this;
+    }
+
+    /**
+     * Gets additional_fields
+     *
+     * @return string|null
+     */
+    public function getAdditionalFields()
+    {
+        return $this->container['additional_fields'];
+    }
+
+    /**
+     * Sets additional_fields
+     *
+     * @param string|null $additional_fields key value pair of additional fields as a valid json string
+     *
+     * @return self
+     */
+    public function setAdditionalFields($additional_fields)
+    {
+        if (is_null($additional_fields)) {
+            throw new \InvalidArgumentException('non-nullable additional_fields cannot be null');
+        }
+        $this->container['additional_fields'] = $additional_fields;
 
         return $this;
     }
